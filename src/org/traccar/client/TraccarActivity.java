@@ -83,6 +83,10 @@ public class TraccarActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        // DO SOMETHING WITH IT
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         // Bind elements
         editAddress = (EditText) findViewById(R.id.edit_address);
         editPort = (EditText) findViewById(R.id.edit_port);
