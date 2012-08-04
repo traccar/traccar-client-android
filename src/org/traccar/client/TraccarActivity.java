@@ -24,6 +24,7 @@ import android.text.method.*;
 import android.text.util.*;
 import android.view.*;
 import android.widget.*;
+import android.telephony.TelephonyManager;
 
 /**
  * Global parameters
@@ -63,6 +64,7 @@ public class TraccarActivity extends Activity {
 	private EditText editAddress;
     private EditText editPort;
     private EditText editPeriod;
+    private EditText editDevice;
     private EditText editService;
     private EditText editConnection;
     private ToggleButton button;
@@ -84,16 +86,24 @@ public class TraccarActivity extends Activity {
         setContentView(R.layout.main);
 
         // DO SOMETHING WITH IT
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        try {
+        	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        	StrictMode.setThreadPolicy(policy);
+        } catch(Throwable e) {
+        }
 
         // Bind elements
         editAddress = (EditText) findViewById(R.id.edit_address);
         editPort = (EditText) findViewById(R.id.edit_port);
         editPeriod = (EditText) findViewById(R.id.edit_period);
+        editDevice = (EditText) findViewById(R.id.edit_device);
         editService = (EditText) findViewById(R.id.edit_service);
         editConnection = (EditText) findViewById(R.id.edit_connection);
         button = (ToggleButton) findViewById(R.id.button);
+        
+        // Set device identifier
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        editDevice.setText(telephonyManager.getDeviceId());
 
         editService.setText(Traccar.STATUS_STOPPED);
         editConnection.setText(Traccar.STATUS_DISCONNECTED);

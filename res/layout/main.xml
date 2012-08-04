@@ -57,6 +57,23 @@
 <TextView
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:text="Device identifier"
+    />
+<EditText
+    android:id="@+id/edit_device"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:inputType="none"
+    android:editable="false"
+    android:focusable="false"
+    />
+<View
+    android:layout_width="fill_parent"
+    android:layout_height="10sp"
+    />
+<TextView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     android:text="Service status"
     />
 <EditText
