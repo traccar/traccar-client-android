@@ -16,6 +16,7 @@
 package org.traccar.client;
 
 import java.util.Formatter;
+import java.util.Locale;
 import android.location.Location;
 
 /**
@@ -28,7 +29,7 @@ public class Protocol {
      */
     public static String createId(String id) {
         StringBuilder s = new StringBuilder("$PGID,");
-        Formatter f = new Formatter(s);
+        Formatter f = new Formatter(s, Locale.ENGLISH);
 
         s.append(id);
 
@@ -46,7 +47,7 @@ public class Protocol {
      */
     public static String createNmea(Location l) {
         StringBuilder s = new StringBuilder("$GPRMC,");
-        Formatter f = new Formatter(s);
+        Formatter f = new Formatter(s, Locale.ENGLISH); // Should use DecimalFormat instead
 
         f.format("%1$tH%1$tM%1$tS.%1$tL,A,", l.getTime());
 
