@@ -124,12 +124,12 @@ public class TraccarService extends Service implements LocationListener {
     @Override
     public void onDestroy() {
     	// Close connection
-    	if (connection) {
+    	if (connection != null) {
     		connection.close();
     	}
     	
     	// Stop location updates
-    	if (locationManager) {
+    	if (locationManager != null) {
     		locationManager.removeUpdates(this);
     	}
 
