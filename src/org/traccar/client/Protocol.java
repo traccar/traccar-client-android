@@ -17,11 +17,12 @@ package org.traccar.client;
 
 import java.util.Formatter;
 import java.util.Locale;
+
 import android.location.Location;
 
 /**
-  * Protocol formatting
-  */
+ * Protocol formatting
+ */
 public class Protocol {
 
     /**
@@ -38,6 +39,7 @@ public class Protocol {
             checksum ^= b;
         }
         f.format("*%02x\r\n", (int) checksum);
+        f.close();
 
         return s.toString();
     }
@@ -64,6 +66,7 @@ public class Protocol {
             checksum ^= b;
         }
         f.format("*%02x\r\n", (int) checksum);
+        f.close();
 
         return s.toString();
     }

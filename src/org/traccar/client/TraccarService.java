@@ -15,23 +15,25 @@
  */
 package org.traccar.client;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
 import android.app.Service;
-import android.content.*;
-import android.location.*;
-import android.os.*;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.os.IBinder;
 import android.telephony.TelephonyManager;
-import android.widget.Toast;
 
 /**
  * Background service
  */
 public class TraccarService extends Service implements LocationListener {
 
-	private int period;
-	private String deviceId;
+    private int period;
+    private String deviceId;
     private Connection connection;
     private LocationManager locationManager;
 
@@ -57,61 +59,62 @@ public class TraccarService extends Service implements LocationListener {
     }
 
     /*
-     * Status methods 
+     * Status methods
      */
 
     private String status;
-    
+
     private void setStatus(String status) {
-    	if (!status.equals(this.status)) {
-	    	this.status = status;
-    		Intent intent = new Intent(Traccar.MSG_SERVICE_STATUS);
-    		intent.putExtra(Traccar.EXTRA_STATUS, status);
-    		sendBroadcast(intent);
-    	}
+        if (!status.equals(this.status)) {
+            this.status = status;
+            Intent intent = new Intent(Traccar.MSG_SERVICE_STATUS);
+            intent.putExtra(Traccar.EXTRA_STATUS, status);
+            sendBroadcast(intent);
+        }
     }
 
     private BroadcastReceiver updateReceiver = new BroadcastReceiver() {
-    	public void onReceive(Context context, Intent intent) {
-    		// Send config
-    		intent = new Intent(Traccar.MSG_SERVICE_CONFIG);
-    		intent.putExtra(Traccar.EXTRA_ADDRESS, connection.getAddress());
-    		intent.putExtra(Traccar.EXTRA_PORT, connection.getPort());
-    		intent.putExtra(Traccar.EXTRA_PERIOD, period);
-    		sendBroadcast(intent);
-    		
-    		// Send service status
-    		intent = new Intent(Traccar.MSG_SERVICE_STATUS);
-    		intent.putExtra(Traccar.EXTRA_STATUS, status);
-    		sendBroadcast(intent);
-    		
-    		// Send connection status
-    		intent = new Intent(Traccar.MSG_CONNECTION_STATUS);
-    		intent.putExtra(Traccar.EXTRA_STATUS, connection.getStatus());
-    		sendBroadcast(intent);
-    	}
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Send config
+            intent = new Intent(Traccar.MSG_SERVICE_CONFIG);
+            intent.putExtra(Traccar.EXTRA_ADDRESS, connection.getAddress());
+            intent.putExtra(Traccar.EXTRA_PORT, connection.getPort());
+            intent.putExtra(Traccar.EXTRA_PERIOD, period);
+            sendBroadcast(intent);
+
+            // Send service status
+            intent = new Intent(Traccar.MSG_SERVICE_STATUS);
+            intent.putExtra(Traccar.EXTRA_STATUS, status);
+            sendBroadcast(intent);
+
+            // Send connection status
+            intent = new Intent(Traccar.MSG_CONNECTION_STATUS);
+            intent.putExtra(Traccar.EXTRA_STATUS, connection.getStatus());
+            sendBroadcast(intent);
+        }
     };
 
     /*
      * Service methods
      */
-    
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-    	// Read device id
-    	TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        // Read device id
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         deviceId = telephonyManager.getDeviceId();
 
-    	// Create connection
-    	connection = new Connection(
-    			intent.getStringExtra(Traccar.EXTRA_ADDRESS),
-    			intent.getIntExtra(Traccar.EXTRA_PORT, 0),
-    			Protocol.createId(deviceId));
-    	connection.setContext(this);
-    	connection.connect();
+        // Create connection
+        connection = new Connection(
+                intent.getStringExtra(Traccar.EXTRA_ADDRESS),
+                intent.getIntExtra(Traccar.EXTRA_PORT, 0),
+                Protocol.createId(deviceId));
+        connection.setContext(this);
+        connection.connect();
 
-    	// Request location updates
-    	locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // Request location updates
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         period = intent.getIntExtra(Traccar.EXTRA_PERIOD, 0);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, period * 1000, 0, this);
 
@@ -123,15 +126,15 @@ public class TraccarService extends Service implements LocationListener {
 
     @Override
     public void onDestroy() {
-    	// Close connection
-    	if (connection != null) {
-    		connection.close();
-    	}
-    	
-    	// Stop location updates
-    	if (locationManager != null) {
-    		locationManager.removeUpdates(this);
-    	}
+        // Close connection
+        if (connection != null) {
+            connection.close();
+        }
+
+        // Stop location updates
+        if (locationManager != null) {
+            locationManager.removeUpdates(this);
+        }
 
         // Report status
         unregisterReceiver(updateReceiver);

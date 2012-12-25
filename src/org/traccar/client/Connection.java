@@ -15,12 +15,12 @@
  */
 package org.traccar.client;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
-import android.os.Handler;
-import 	android.content.Intent;
+import java.io.OutputStream;
+import java.net.Socket;
+
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 
 /**
  * Connection with autoreconnect
@@ -29,9 +29,9 @@ public class Connection {
 
     private String address;
     private int port;
-    
+
     private String connectMessage;
-	
+
     private Socket socket;
     private OutputStream socketStream;
 
@@ -43,54 +43,54 @@ public class Connection {
      * Initialize connection parameters
      */
     public Connection(String address, int port, String message) {
-    	this.address = address;
-    	this.port = port;
-    	connectMessage = message;
-    	setStatus(Traccar.STATUS_DISCONNECTED);
+        this.address = address;
+        this.port = port;
+        connectMessage = message;
+        setStatus(Traccar.STATUS_DISCONNECTED);
     }
-    
+
     /**
      * Get address
      */
     public String getAddress() {
-    	return address;
+        return address;
     }
-    
+
     /**
      * Get port
      */
     public int getPort() {
-    	return port;
+        return port;
     }
 
     /**
      * Set context
      */
     public void setContext(Context context) {
-    	this.context = context;
+        this.context = context;
     }
-    
+
     /**
      * Set connection status
      */
     private void setStatus(String status) {
-    	if (!status.equals(this.status)) {
-	    	this.status = status;
-	    	if (context != null) {
-	    		Intent intent = new Intent(Traccar.MSG_CONNECTION_STATUS);
-	    		intent.putExtra(Traccar.EXTRA_STATUS, status);
-	    		context.sendBroadcast(intent);
-	    	}
-    	}
+        if (!status.equals(this.status)) {
+            this.status = status;
+            if (context != null) {
+                Intent intent = new Intent(Traccar.MSG_CONNECTION_STATUS);
+                intent.putExtra(Traccar.EXTRA_STATUS, status);
+                context.sendBroadcast(intent);
+            }
+        }
     }
-    
+
     /**
      * Get connection status
      */
     public String getStatus() {
-    	return status;
+        return status;
     }
-    
+
     /**
      * Establish connection
      */
@@ -105,7 +105,7 @@ public class Connection {
             reconnect();
         }
     }
-    
+
     /**
      * Send message
      */
@@ -124,7 +124,7 @@ public class Connection {
      * Close connection
      */
     public void close() {
-    	handler.removeCallbacks(task);
+        handler.removeCallbacks(task);
         if (socket != null) {
             try {
                 socket.close();
@@ -137,10 +137,10 @@ public class Connection {
     }
 
     private void reconnect() {
-    	close();
+        close();
         handler.postDelayed(task, Traccar.RECONNECT_DELAY);
     }
-    
+
     private Handler handler = new Handler();
     private ReconnectTask task = new ReconnectTask();
 
