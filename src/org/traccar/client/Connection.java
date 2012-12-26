@@ -15,139 +15,119 @@
  */
 package org.traccar.client;
 
+import java.io.Closeable;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
+import android.os.AsyncTask;
+import android.util.Log;
 
 /**
- * Connection with autoreconnect
+ * Asynchronous connection
+ * 
+ * All methods should be called from UI thread only.
  */
-public class Connection {
+public class Connection implements Closeable {
 
-    private String address;
-    private int port;
+    public static final String LOG_TAG = "Traccar.Connection";
+    public static final int SOCKET_TIMEOUT = 10 * 1000;
 
-    private String connectMessage;
+    /**
+     * Callback interface
+     */
+    public interface ConnectionHandler {
+        void onConnected(boolean result);
+        void onSent(boolean result);
+    }
+
+    private ConnectionHandler handler;
 
     private Socket socket;
     private OutputStream socketStream;
 
-    private String status;
-
-    private Context context;
-
-    /**
-     * Initialize connection parameters
-     */
-    public Connection(String address, int port, String message) {
-        this.address = address;
-        this.port = port;
-        connectMessage = message;
-        setStatus(Traccar.STATUS_DISCONNECTED);
+    public Connection(ConnectionHandler handler) {
+        this.handler = handler;
     }
 
-    /**
-     * Get address
-     */
-    public String getAddress() {
-        return address;
-    }
+    public void connect(String address, int port) {
 
-    /**
-     * Get port
-     */
-    public int getPort() {
-        return port;
-    }
+        new AsyncTask<SocketAddress, Void, Boolean>() {
 
-    /**
-     * Set context
-     */
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
-    /**
-     * Set connection status
-     */
-    private void setStatus(String status) {
-        if (!status.equals(this.status)) {
-            this.status = status;
-            if (context != null) {
-                Intent intent = new Intent(Traccar.MSG_CONNECTION_STATUS);
-                intent.putExtra(Traccar.EXTRA_STATUS, status);
-                context.sendBroadcast(intent);
+            @Override
+            protected Boolean doInBackground(SocketAddress... params) {
+                try {
+                    socket = new Socket();
+                    socket.connect(params[0]);
+                    socket.setSoTimeout(SOCKET_TIMEOUT);
+                    socketStream = socket.getOutputStream();
+                    handler.onConnected(true);
+                } catch (Exception e) {
+                    close();
+                    return false;
+                }
+                return true;
             }
-        }
+
+            @Override
+            protected void onCancelled(Boolean result) {
+                handler.onConnected(false);
+            }
+
+            @Override
+            protected void onPostExecute(Boolean result) {
+                handler.onConnected(result);
+            }
+
+        }.execute(InetSocketAddress.createUnresolved(address, port));
+
     }
 
-    /**
-     * Get connection status
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * Establish connection
-     */
-    public void connect() {
-        try {
-            socket = new Socket(address, port);
-            socket.setSoTimeout(Traccar.SOCKET_TIMEOUT);
-            socketStream = socket.getOutputStream();
-            setStatus(Traccar.STATUS_CONNECTED);
-            send(connectMessage);
-        } catch (Exception e) {
-            reconnect();
-        }
-    }
-
-    /**
-     * Send message
-     */
     public void send(String message) {
+
+        new AsyncTask<String, Void, Boolean>() {
+
+            @Override
+            protected Boolean doInBackground(String... params) {
+                try {
+                    socketStream.write(params[0].getBytes());
+                    socketStream.flush();
+                } catch (Exception e) {
+                    close();
+                    return false;
+                }
+                return true;
+            }
+
+            @Override
+            protected void onCancelled(Boolean result) {
+                handler.onSent(false);
+            }
+
+            @Override
+            protected void onPostExecute(Boolean result) {
+                handler.onSent(result);
+            }
+
+        }.execute(message);
+
+    }
+
+    @Override
+    public void close() {
         try {
             if (socketStream != null) {
-                socketStream.write(message.getBytes());
-                socketStream.flush();
+                socketStream.close();
+                socketStream = null;
+            }
+            if (socket != null) {
+                socket.close();
+                socket = null;
             }
         } catch (Exception e) {
-            reconnect();
+            Log.e(LOG_TAG, e.getMessage());
         }
     }
 
-    /**
-     * Close connection
-     */
-    public void close() {
-        handler.removeCallbacks(task);
-        if (socket != null) {
-            try {
-                socket.close();
-            } catch (Exception e) {
-            }
-            socket = null;
-        }
-        socketStream = null;
-        setStatus(Traccar.STATUS_DISCONNECTED);
-    }
-
-    private void reconnect() {
-        close();
-        handler.postDelayed(task, Traccar.RECONNECT_DELAY);
-    }
-
-    private Handler handler = new Handler();
-    private ReconnectTask task = new ReconnectTask();
-
-    class ReconnectTask implements Runnable {
-        @Override
-        public void run() {
-            connect();
-        }
-    }
 }

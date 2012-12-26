@@ -28,7 +28,7 @@ public class Protocol {
     /**
      * Format device id message
      */
-    public static String createId(String id) {
+    public static String createLoginMessage(String id) {
         StringBuilder s = new StringBuilder("$PGID,");
         Formatter f = new Formatter(s, Locale.ENGLISH);
 
@@ -47,9 +47,9 @@ public class Protocol {
     /**
      * Format location message
      */
-    public static String createNmea(Location l) {
+    public static String createLocationMessage(Location l) {
         StringBuilder s = new StringBuilder("$GPRMC,");
-        Formatter f = new Formatter(s, Locale.ENGLISH); // Should use DecimalFormat instead
+        Formatter f = new Formatter(s, Locale.ENGLISH);
 
         f.format("%1$tH%1$tM%1$tS.%1$tL,A,", l.getTime());
 

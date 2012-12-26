@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<EditTextPreference
+        android:key="id"
+        android:title="@string/settings_id_title"
+        android:enabled="false" />
+    
+	<EditTextPreference
+        android:key="address"
+        android:title="@string/settings_address_title"
+        android:summary="@string/settings_address_summary"
+        android:defaultValue="193.193.165.166" />
+
+	<EditTextPreference
+        android:key="port"
+        android:title="@string/settings_port_title"
+        android:summary="@string/settings_port_summary"
+        android:numeric="integer"
+        android:defaultValue="20100" />
+	
+	<EditTextPreference
+        android:key="interval"
+        android:title="@string/settings_interval_title"
+        android:summary="@string/settings_interval_summary"
+        android:numeric="integer"
+        android:defaultValue="60" />
+
+    <CheckBoxPreference
+        android:key="debug"
+        android:title="@string/settings_debug_title"
+        android:summary="@string/settings_debug_summary"
+        android:defaultValue="true"
+        android:enabled="false" />
+
+    <SwitchPreference
+        android:key="status"
+        android:title="@string/settings_status_title"
+        android:summaryOff="@string/settings_status_off_summary" 
+		android:summaryOn="@string/settings_status_on_summary" 
+		android:switchTextOff="@string/settings_status_off" 
+		android:switchTextOn="@string/settings_status_on"
+        android:defaultValue="false" />
+
+</PreferenceScreen>

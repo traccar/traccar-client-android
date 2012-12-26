@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/about"
-      android:title="@string/about_option"
-      android:showAsAction="ifRoom" />
-</menu>
 
+    <item
+        android:id="@+id/status"
+        android:title="@string/menu_status"
+        android:showAsAction="always" />
+
+    <item
+        android:id="@+id/about"
+        android:title="@string/menu_about"
+        android:showAsAction="ifRoom" />
+
+</menu>

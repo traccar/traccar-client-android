@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Traccar Client</string>
-    <string name="error_input">Invalid input parameters.</string>
-    <string name="about_option">About</string>
-    <string name="about_text">Android software GPS tracker. For more information visit:\n\nhttp://www.traccar.org</string>
-    <string name="about_close">Close</string>
+    <string name="app_logo">Traccar</string>
+
+    <string name="settings_id_title">Device identifier</string>
+    <string name="settings_address_title">Server address</string>
+    <string name="settings_address_summary">Domain name or IP address</string>
+    <string name="settings_port_title">Server port</string>
+    <string name="settings_port_summary">Tracking server TCP port</string>
+    <string name="settings_interval_title">Frequency</string>
+    <string name="settings_interval_summary">Messages interval in seconds</string>
+    <string name="settings_debug_title">Debug mode</string>
+    <string name="settings_debug_summary">Additional status messages</string>
+    <string name="settings_status_title">Service status</string>
+    <string name="settings_status_off">Start</string>
+    <string name="settings_status_on">Stop</string>
+    <string name="settings_status_off_summary">Service stopped</string>
+    <string name="settings_status_on_summary">Service running</string>
+
+    <string name="menu_status">Status</string>
+    <string name="menu_about">About</string>
+    <string name="menu_clear">Clear</string>
+    
+    <string name="about_description">Real time GPS tracker for Android devices. Compatible with Traccar Server and other tracking systems.</string>
+    <string name="about_license">This application is free and open source, source code is licensed under Apache License Version 2.0 and available on GitHub.</string>
+    <string name="about_web">For more information visit\nwww.traccar.org/client</string>
+
+    <string name="status_service_create">Service created</string>
+    <string name="status_service_start">Service started</string>
+    <string name="status_service_destroy">Service destroyed</string>
+    <string name="status_connection_success">Connection succeeded</string>
+    <string name="status_connection_fail">Connection failed</string>
+    <string name="status_send_fail">Send failed</string>
+    <string name="status_location_update">Location update</string>
+    <string name="status_preference_update">Preference update</string>
+
 </resources>
