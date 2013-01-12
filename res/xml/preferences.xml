@@ -10,14 +10,14 @@
         android:key="address"
         android:title="@string/settings_address_title"
         android:summary="@string/settings_address_summary"
-        android:defaultValue="193.193.165.166" />
+        android:defaultValue="demo.traccar.org" />
 
 	<EditTextPreference
         android:key="port"
         android:title="@string/settings_port_title"
         android:summary="@string/settings_port_summary"
         android:numeric="integer"
-        android:defaultValue="20100" />
+        android:defaultValue="5005" />
 	
 	<EditTextPreference
         android:key="interval"
