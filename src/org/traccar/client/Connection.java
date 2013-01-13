@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2013 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ import java.io.Closeable;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -47,44 +46,64 @@ public class Connection implements Closeable {
     private Socket socket;
     private OutputStream socketStream;
 
-    public Connection(ConnectionHandler handler) {
-        this.handler = handler;
+    private boolean closed;
+    private boolean busy;
+
+    public boolean isClosed() {
+        return closed;
     }
 
-    public void connect(String address, int port) {
+    public boolean isBusy() {
+        return busy;
+    }
 
-        new AsyncTask<SocketAddress, Void, Boolean>() {
+    public Connection(ConnectionHandler handler) {
+        this.handler = handler;
+        closed = false;
+        busy = false;
+    }
+
+    public void connect(final String address, final int port) {
+        busy = true;
+
+        new AsyncTask<Void, Void, Boolean>() {
 
             @Override
-            protected Boolean doInBackground(SocketAddress... params) {
+            protected Boolean doInBackground(Void... params) {
                 try {
                     socket = new Socket();
-                    socket.connect(params[0]);
+                    socket.connect(new InetSocketAddress(address, port));
                     socket.setSoTimeout(SOCKET_TIMEOUT);
                     socketStream = socket.getOutputStream();
-                    handler.onConnected(true);
+                    return true;
                 } catch (Exception e) {
-                    close();
+                    Log.w(LOG_TAG, e.getMessage());
                     return false;
                 }
-                return true;
             }
 
             @Override
             protected void onCancelled(Boolean result) {
-                handler.onConnected(false);
+                if (!closed) {
+                    busy = false;
+                    handler.onConnected(false);
+                }
             }
 
             @Override
             protected void onPostExecute(Boolean result) {
-                handler.onConnected(result);
+                if (!closed) {
+                    busy = false;
+                    handler.onConnected(result);
+                }
             }
 
-        }.execute(InetSocketAddress.createUnresolved(address, port));
+        }.execute();
 
     }
 
     public void send(String message) {
+        busy = true;
 
         new AsyncTask<String, Void, Boolean>() {
 
@@ -93,21 +112,27 @@ public class Connection implements Closeable {
                 try {
                     socketStream.write(params[0].getBytes());
                     socketStream.flush();
+                    return true;
                 } catch (Exception e) {
-                    close();
+                    Log.w(LOG_TAG, e.getMessage());
                     return false;
                 }
-                return true;
             }
 
             @Override
             protected void onCancelled(Boolean result) {
-                handler.onSent(false);
+                if (!closed) {
+                    busy = false;
+                    handler.onSent(false);
+                }
             }
 
             @Override
             protected void onPostExecute(Boolean result) {
-                handler.onSent(result);
+                if (!closed) {
+                    busy = false;
+                    handler.onSent(result);
+                }
             }
 
         }.execute(message);
@@ -116,14 +141,13 @@ public class Connection implements Closeable {
 
     @Override
     public void close() {
+        closed = true;
         try {
             if (socketStream != null) {
                 socketStream.close();
-                socketStream = null;
             }
             if (socket != null) {
                 socket.close();
-                socket = null;
             }
         } catch (Exception e) {
             Log.e(LOG_TAG, e.getMessage());

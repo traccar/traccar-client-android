@@ -33,11 +33,13 @@
         android:defaultValue="true"
         android:enabled="false" />
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="status"
         android:title="@string/settings_status_title"
-        android:summaryOff="@string/settings_status_off" 
-		android:summaryOn="@string/settings_status_on" 
+        android:summaryOff="@string/settings_status_off_summary" 
+		android:summaryOn="@string/settings_status_on_summary" 
+		android:switchTextOff="@string/settings_status_off" 
+		android:switchTextOn="@string/settings_status_on"
         android:defaultValue="false" />
 
 </PreferenceScreen>

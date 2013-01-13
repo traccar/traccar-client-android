@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2013 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 
@@ -33,44 +32,38 @@ import android.preference.PreferenceManager;
  */
 public class TraccarService extends Service {
 
-    public static final long RECONNECT_DELAY = 10 * 1000;
-
     private String id;
     private String address;
     private int port;
     private int interval;
 
-    private Handler handler;
-    private Connection connection;
-    LocationManager locationManager;
-
-    private void statusMessage(int message) {
-        StatusActivity.addMessage(getString(message));
-    }
+    private SharedPreferences sharedPreferences;
+    private ClientController clientController;
+    private LocationManager locationManager;
 
     @Override
     public void onCreate() {
-        statusMessage(R.string.status_service_create);
-
-        handler = new Handler();
-        connection = new Connection(connectionHandler);
+        StatusActivity.addMessage(getString((R.string.status_service_create)));
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        statusMessage(R.string.status_service_start);
+        StatusActivity.addMessage(getString((R.string.status_service_start)));
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
-        updateServerPreferences(sharedPreferences);
-        updateIntervalPreferences(sharedPreferences);
-        updateOtherPreferences(sharedPreferences);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        connection.close();
-        connection.connect(address, port);
+        address = sharedPreferences.getString(TraccarActivity.KEY_ADDRESS, null);
+        port = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_PORT, null));
+        interval = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_INTERVAL, null));
+        id = sharedPreferences.getString(TraccarActivity.KEY_ID, null);
+
+        clientController = new ClientController(this, address, port, Protocol.createLoginMessage(id));
+        clientController.start();
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, interval * 1000, 0, locationListener);
+
+        sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
 
         return START_STICKY;
     }
@@ -82,92 +75,21 @@ public class TraccarService extends Service {
 
     @Override
     public void onDestroy() {
-        statusMessage(R.string.status_service_destroy);
+        StatusActivity.addMessage(getString((R.string.status_service_destroy)));
+
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
 
         locationManager.removeUpdates(locationListener);
 
-        handler.removeCallbacksAndMessages(null);
-        connection.close();
-        connection = null;
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        sharedPreferences.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
+        clientController.stop();
     }
-
-    private boolean updateServerPreferences(SharedPreferences sharedPreferences) {
-        boolean changed = false;
-
-        String address = sharedPreferences.getString(TraccarActivity.KEY_ADDRESS, null);
-        if (!address.equals(this.address)) {
-            this.address = address;
-            changed = true;
-        }
-
-        int port = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_PORT, null));
-        if (port != this.port) {
-            this.port = port;
-            changed = true;
-        }
-
-        return changed;
-    }
-
-    private boolean updateIntervalPreferences(SharedPreferences sharedPreferences) {
-        boolean changed = false;
-
-        int interval = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_INTERVAL, null));
-        if (interval != this.interval) {
-            this.interval = interval;
-            changed = true;
-        }
-
-        return changed;
-    }
-
-    private boolean updateOtherPreferences(SharedPreferences sharedPreferences) {
-        id = sharedPreferences.getString(TraccarActivity.KEY_ID, null);
-        return false;
-    }
-
-    private void reconnect() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                connection.close();
-                connection.connect(address, port);
-            }
-        }, RECONNECT_DELAY);
-    }
-
-    private Connection.ConnectionHandler connectionHandler = new Connection.ConnectionHandler() {
-
-        @Override
-        public void onConnected(boolean result) {
-            if (result) {
-                statusMessage(R.string.status_connection_success);
-                connection.send(Protocol.createLoginMessage(id));
-            } else {
-                statusMessage(R.string.status_connection_fail);
-                reconnect();
-            }
-        }
-
-        @Override
-        public void onSent(boolean result) {
-            if (!result) {
-                statusMessage(R.string.status_send_fail);
-                reconnect();
-            }
-        }
-
-    };
 
     private LocationListener locationListener = new LocationListener() {
 
         @Override
         public void onLocationChanged(Location location) {
-            statusMessage(R.string.status_location_update);
-            connection.send(Protocol.createLocationMessage(location));
+            StatusActivity.addMessage(getString((R.string.status_location_update)));
+            clientController.setNewLocation(Protocol.createLocationMessage(location));
         }
 
         @Override
@@ -188,19 +110,34 @@ public class TraccarService extends Service {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            statusMessage(R.string.status_preference_update);
+            StatusActivity.addMessage(getString((R.string.status_preference_update)));
 
-            if (updateServerPreferences(sharedPreferences)) {
-                connection.close();
-                connection.connect(address, port);
+            boolean serverChanged = false;
+
+            if (key.equals(TraccarActivity.KEY_ADDRESS)) {
+                address = sharedPreferences.getString(TraccarActivity.KEY_ADDRESS, null);
+                serverChanged = true;
             }
 
-            if (updateIntervalPreferences(sharedPreferences)) {
+            if (key.equals(TraccarActivity.KEY_PORT)) {
+                port = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_PORT, null));
+                serverChanged = true;
+            }
+
+            if (serverChanged) {
+                clientController.setNewServer(address, port);
+            }
+
+            if (key.equals(TraccarActivity.KEY_INTERVAL)) {
+                interval = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_INTERVAL, null));
                 locationManager.removeUpdates(locationListener);
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, interval * 1000, 0, locationListener);
             }
 
-            updateOtherPreferences(sharedPreferences);
+            if (key.equals(TraccarActivity.KEY_ID)) {
+                id = sharedPreferences.getString(TraccarActivity.KEY_ID, null);
+                clientController.setNewLogin(Protocol.createLoginMessage(id));
+            }
         }
 
     };
