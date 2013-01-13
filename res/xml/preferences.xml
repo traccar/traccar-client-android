@@ -36,8 +36,8 @@
     <CheckBoxPreference
         android:key="status"
         android:title="@string/settings_status_title"
-        android:summaryOff="@string/settings_status_off" 
-		android:summaryOn="@string/settings_status_on" 
+        android:summaryOff="@string/settings_status_off_summary"
+		android:summaryOn="@string/settings_status_on_summary"
         android:defaultValue="false" />
 
 </PreferenceScreen>

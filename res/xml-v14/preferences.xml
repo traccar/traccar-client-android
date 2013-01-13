@@ -36,9 +36,9 @@
     <SwitchPreference
         android:key="status"
         android:title="@string/settings_status_title"
-        android:summaryOff="@string/settings_status_off_summary" 
-		android:summaryOn="@string/settings_status_on_summary" 
-		android:switchTextOff="@string/settings_status_off" 
+        android:summaryOff="@string/settings_status_off_summary"
+		android:summaryOn="@string/settings_status_on_summary"
+		android:switchTextOff="@string/settings_status_off"
 		android:switchTextOn="@string/settings_status_on"
         android:defaultValue="false" />
 
