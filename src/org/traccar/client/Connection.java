@@ -83,7 +83,7 @@ public class Connection implements Closeable {
             }
 
             @Override
-            protected void onCancelled(Boolean result) {
+            protected void onCancelled() {
                 if (!closed) {
                     busy = false;
                     handler.onConnected(false);
@@ -120,7 +120,7 @@ public class Connection implements Closeable {
             }
 
             @Override
-            protected void onCancelled(Boolean result) {
+            protected void onCancelled() {
                 if (!closed) {
                     busy = false;
                     handler.onSent(false);
