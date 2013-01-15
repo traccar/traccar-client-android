@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2013 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +58,8 @@ public class Protocol {
         f.format("%02d%07.4f,%c,", (int) Math.abs(lat), Math.abs(lat) % 1 * 60, lat < 0 ? 'S' : 'N' );
         f.format("%03d%07.4f,%c,", (int) Math.abs(lon), Math.abs(lon) % 1 * 60, lon < 0 ? 'W' : 'E' );
 
-        f.format("%.2f,%.2f,", l.getSpeed(), l.getBearing());
+        double speed = l.getSpeed() * 1.943844; // speed in knots
+        f.format("%.2f,%.2f,", speed, l.getBearing());
         f.format("%1$td%1$tm%1$ty,,", l.getTime());
 
         byte checksum = 0;
