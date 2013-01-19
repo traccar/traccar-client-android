@@ -15,8 +15,10 @@
  */
 package org.traccar.client;
 
+import java.util.Calendar;
 import java.util.Formatter;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import android.location.Location;
 
@@ -50,8 +52,10 @@ public class Protocol {
     public static String createLocationMessage(Location l) {
         StringBuilder s = new StringBuilder("$GPRMC,");
         Formatter f = new Formatter(s, Locale.ENGLISH);
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"), Locale.ENGLISH);
+        calendar.setTimeInMillis(l.getTime());
 
-        f.format("%1$tH%1$tM%1$tS.%1$tL,A,", l.getTime());
+        f.format("%1$tH%1$tM%1$tS.%1$tL,A,", calendar);
 
         double lat = l.getLatitude();
         double lon = l.getLongitude();
@@ -60,7 +64,7 @@ public class Protocol {
 
         double speed = l.getSpeed() * 1.943844; // speed in knots
         f.format("%.2f,%.2f,", speed, l.getBearing());
-        f.format("%1$td%1$tm%1$ty,,", l.getTime());
+        f.format("%1$td%1$tm%1$ty,,", calendar);
 
         byte checksum = 0;
         for (byte b : s.substring(1).getBytes()) {
