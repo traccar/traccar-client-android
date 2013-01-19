@@ -26,6 +26,14 @@
         android:numeric="integer"
         android:defaultValue="60" />
 
+	<ListPreference
+        android:key="provider"
+        android:title="@string/settings_provider_title"
+        android:summary="@string/settings_provider_summary"
+        android:entries="@array/settings_provider_names"
+        android:entryValues="@array/settings_provider_values"
+        android:defaultValue="gps" />
+	
     <CheckBoxPreference
         android:key="debug"
         android:title="@string/settings_debug_title"

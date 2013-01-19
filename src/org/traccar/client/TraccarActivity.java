@@ -38,6 +38,7 @@ public class TraccarActivity extends PreferenceActivity {
     public static final String KEY_ADDRESS = "address";
     public static final String KEY_PORT = "port";
     public static final String KEY_INTERVAL = "interval";
+    public static final String KEY_PROVIDER = "provider";
     public static final String KEY_DEBUG = "debug";
     public static final String KEY_STATUS = "status";
 

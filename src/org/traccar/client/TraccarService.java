@@ -36,6 +36,7 @@ public class TraccarService extends Service {
     private String address;
     private int port;
     private int interval;
+    private String provider;
 
     private SharedPreferences sharedPreferences;
     private ClientController clientController;
@@ -52,16 +53,17 @@ public class TraccarService extends Service {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+        id = sharedPreferences.getString(TraccarActivity.KEY_ID, null);
         address = sharedPreferences.getString(TraccarActivity.KEY_ADDRESS, null);
         port = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_PORT, null));
         interval = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_INTERVAL, null));
-        id = sharedPreferences.getString(TraccarActivity.KEY_ID, null);
+        provider = sharedPreferences.getString(TraccarActivity.KEY_PROVIDER, null);
 
         clientController = new ClientController(this, address, port, Protocol.createLoginMessage(id));
         clientController.start();
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, interval * 1000, 0, locationListener);
+        locationManager.requestLocationUpdates(provider, interval * 1000, 0, locationListener);
 
         sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
 
@@ -111,32 +113,23 @@ public class TraccarService extends Service {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             StatusActivity.addMessage(getString((R.string.status_preference_update)));
-
-            boolean serverChanged = false;
-
             if (key.equals(TraccarActivity.KEY_ADDRESS)) {
                 address = sharedPreferences.getString(TraccarActivity.KEY_ADDRESS, null);
-                serverChanged = true;
-            }
-
-            if (key.equals(TraccarActivity.KEY_PORT)) {
-                port = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_PORT, null));
-                serverChanged = true;
-            }
-
-            if (serverChanged) {
                 clientController.setNewServer(address, port);
-            }
-
-            if (key.equals(TraccarActivity.KEY_INTERVAL)) {
+            } else if (key.equals(TraccarActivity.KEY_PORT)) {
+                port = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_PORT, null));
+                clientController.setNewServer(address, port);
+            } else if (key.equals(TraccarActivity.KEY_INTERVAL)) {
                 interval = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_INTERVAL, null));
                 locationManager.removeUpdates(locationListener);
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, interval * 1000, 0, locationListener);
-            }
-
-            if (key.equals(TraccarActivity.KEY_ID)) {
+                locationManager.requestLocationUpdates(provider, interval * 1000, 0, locationListener);
+            } else if (key.equals(TraccarActivity.KEY_ID)) {
                 id = sharedPreferences.getString(TraccarActivity.KEY_ID, null);
                 clientController.setNewLogin(Protocol.createLoginMessage(id));
+            } else if (key.equals(TraccarActivity.KEY_PROVIDER)) {
+                provider = sharedPreferences.getString(TraccarActivity.KEY_PROVIDER, null);
+                locationManager.removeUpdates(locationListener);
+                locationManager.requestLocationUpdates(provider, interval * 1000, 0, locationListener);
             }
         }
 
