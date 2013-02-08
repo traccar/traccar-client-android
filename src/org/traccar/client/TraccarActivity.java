@@ -34,6 +34,8 @@ import android.view.MenuItem;
 @SuppressWarnings("deprecation")
 public class TraccarActivity extends PreferenceActivity {
 
+    public static final String LOG_TAG = "traccar";
+	
     public static final String KEY_ID = "id";
     public static final String KEY_ADDRESS = "address";
     public static final String KEY_PORT = "port";
