@@ -44,6 +44,7 @@
     <string name="status_connection_fail">Ошибка установки соединения</string>
     <string name="status_send_fail">Ошибка отправки</string>
     <string name="status_location_update">Обновление местоположения</string>
+    <string name="status_location_status">Изменилось состояние провайдера</string>
     <string name="status_preference_update">Обновление настроек</string>
 
 </resources>

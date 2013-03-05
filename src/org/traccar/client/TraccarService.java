@@ -23,6 +23,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -44,12 +45,12 @@ public class TraccarService extends Service {
 
     @Override
     public void onCreate() {
-        StatusActivity.addMessage(getString((R.string.status_service_create)));
+        StatusActivity.addMessage(getString(R.string.status_service_create));
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        StatusActivity.addMessage(getString((R.string.status_service_start)));
+        StatusActivity.addMessage(getString(R.string.status_service_start));
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -77,7 +78,7 @@ public class TraccarService extends Service {
 
     @Override
     public void onDestroy() {
-        StatusActivity.addMessage(getString((R.string.status_service_destroy)));
+        StatusActivity.addMessage(getString(R.string.status_service_destroy));
 
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
 
@@ -90,7 +91,7 @@ public class TraccarService extends Service {
 
         @Override
         public void onLocationChanged(Location location) {
-            StatusActivity.addMessage(getString((R.string.status_location_update)));
+            StatusActivity.addMessage(getString(R.string.status_location_update));
             clientController.setNewLocation(Protocol.createLocationMessage(location));
         }
 
@@ -104,6 +105,13 @@ public class TraccarService extends Service {
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
+            StatusActivity.addMessage(getString(R.string.status_location_status));
+
+            if (status == LocationProvider.TEMPORARILY_UNAVAILABLE ||
+                    status == LocationProvider.OUT_OF_SERVICE) {
+                locationManager.removeUpdates(locationListener);
+                locationManager.requestLocationUpdates(provider, interval * 1000, 0, locationListener);
+            }
         }
 
     };
@@ -112,7 +120,7 @@ public class TraccarService extends Service {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            StatusActivity.addMessage(getString((R.string.status_preference_update)));
+            StatusActivity.addMessage(getString(R.string.status_preference_update));
             if (key.equals(TraccarActivity.KEY_ADDRESS)) {
                 address = sharedPreferences.getString(TraccarActivity.KEY_ADDRESS, null);
                 clientController.setNewServer(address, port);

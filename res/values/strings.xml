@@ -44,6 +44,7 @@
     <string name="status_connection_fail">Connection failed</string>
     <string name="status_send_fail">Send failed</string>
     <string name="status_location_update">Location update</string>
+    <string name="status_location_status">Provider status changed</string>
     <string name="status_preference_update">Preference update</string>
 
 </resources>
