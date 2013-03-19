@@ -3,8 +3,7 @@
 
 	<EditTextPreference
         android:key="id"
-        android:title="@string/settings_id_title"
-        android:enabled="false" />
+        android:title="@string/settings_id_title" />
     
 	<EditTextPreference
         android:key="address"

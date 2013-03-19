@@ -35,7 +35,7 @@ import android.view.MenuItem;
 public class TraccarActivity extends PreferenceActivity {
 
     public static final String LOG_TAG = "traccar";
-	
+
     public static final String KEY_ID = "id";
     public static final String KEY_ADDRESS = "address";
     public static final String KEY_PORT = "port";
@@ -74,6 +74,8 @@ public class TraccarActivity extends PreferenceActivity {
                 } else {
                     stopService(new Intent(TraccarActivity.this, TraccarService.class));
                 }
+            } else if (key.equals(KEY_ID)) {
+                findPreference(KEY_ID).setSummary(sharedPreferences.getString(KEY_ID, null));
             }
         }
     };
@@ -108,14 +110,15 @@ public class TraccarActivity extends PreferenceActivity {
     }
 
     private void initPreferences() {
-
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         String id = telephonyManager.getDeviceId();
 
         SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
 
-        sharedPreferences.edit().putString(KEY_ID, id).commit();
-        findPreference(KEY_ID).setSummary(id);
+        if (!sharedPreferences.contains(KEY_ID)) {
+            sharedPreferences.edit().putString(KEY_ID, id).commit();
+        }
+        findPreference(KEY_ID).setSummary(sharedPreferences.getString(KEY_ID, id));
 
         sharedPreferences.edit().putBoolean(KEY_STATUS, isServiceRunning()).commit();
     }
