@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-	<EditTextPreference
+    <EditTextPreference
         android:key="id"
         android:title="@string/settings_id_title" />
-    
-	<EditTextPreference
+
+    <EditTextPreference
+        android:defaultValue="demo.traccar.org"
         android:key="address"
-        android:title="@string/settings_address_title"
         android:summary="@string/settings_address_summary"
-        android:defaultValue="demo.traccar.org" />
+        android:title="@string/settings_address_title" />
 
-	<EditTextPreference
+    <EditTextPreference
+        android:defaultValue="5005"
         android:key="port"
-        android:title="@string/settings_port_title"
+        android:numeric="integer"
         android:summary="@string/settings_port_summary"
-        android:numeric="integer"
-        android:defaultValue="5005" />
-	
-	<EditTextPreference
-        android:key="interval"
-        android:title="@string/settings_interval_title"
-        android:summary="@string/settings_interval_summary"
-        android:numeric="integer"
-        android:defaultValue="60" />
+        android:title="@string/settings_port_title" />
 
-	<ListPreference
-        android:key="provider"
-        android:title="@string/settings_provider_title"
-        android:summary="@string/settings_provider_summary"
+    <EditTextPreference
+        android:defaultValue="60"
+        android:key="interval"
+        android:numeric="integer"
+        android:summary="@string/settings_interval_summary"
+        android:title="@string/settings_interval_title" />
+
+    <ListPreference
+        android:defaultValue="gps"
         android:entries="@array/settings_provider_names"
         android:entryValues="@array/settings_provider_values"
-        android:defaultValue="gps" />
-	
+        android:key="provider"
+        android:summary="@string/settings_provider_summary"
+        android:title="@string/settings_provider_title" />
+
     <CheckBoxPreference
-        android:key="debug"
-        android:title="@string/settings_debug_title"
-        android:summary="@string/settings_debug_summary"
         android:defaultValue="true"
-        android:enabled="false" />
+        android:enabled="false"
+        android:key="debug"
+        android:summary="@string/settings_debug_summary"
+        android:title="@string/settings_debug_title" />
 
     <SwitchPreference
+        android:defaultValue="false"
         android:key="status"
-        android:title="@string/settings_status_title"
         android:summaryOff="@string/settings_status_off_summary"
-		android:summaryOn="@string/settings_status_on_summary"
-		android:switchTextOff="@string/settings_status_off"
-		android:switchTextOn="@string/settings_status_on"
-        android:defaultValue="false" />
+        android:summaryOn="@string/settings_status_on_summary"
+        android:switchTextOff="@string/settings_status_off"
+        android:switchTextOn="@string/settings_status_on"
+        android:title="@string/settings_status_title" />
 
 </PreferenceScreen>

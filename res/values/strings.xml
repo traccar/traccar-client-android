@@ -23,12 +23,9 @@
     <string-array name="settings_provider_names">
         <item>GPS provider</item>
         <item>Network provider</item>
+        <item>Mixed provider</item>
     </string-array>
-    <string-array name="settings_provider_values">
-        <item>gps</item>
-        <item>network</item>
-    </string-array>
-
+    
     <string name="menu_status">Status</string>
     <string name="menu_about">About</string>
     <string name="menu_clear">Clear</string>
@@ -44,7 +41,6 @@
     <string name="status_connection_fail">Connection failed</string>
     <string name="status_send_fail">Send failed</string>
     <string name="status_location_update">Location update</string>
-    <string name="status_location_status">Provider status changed</string>
     <string name="status_preference_update">Preference update</string>
 
 </resources>

@@ -16,15 +16,10 @@
 package org.traccar.client;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.location.LocationProvider;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -44,7 +39,7 @@ public class TraccarService extends Service {
 
     private SharedPreferences sharedPreferences;
     private ClientController clientController;
-    private LocationManager locationManager;
+    private PositionProvider positionProvider;
 
     @Override
     public void onCreate() {
@@ -70,8 +65,8 @@ public class TraccarService extends Service {
         clientController = new ClientController(this, address, port, Protocol.createLoginMessage(id));
         clientController.start();
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(provider, interval * 1000, 0, locationListener);
+        positionProvider = new PositionProvider(this, provider, interval * 1000, positionListener);
+        positionProvider.startUpdates();
 
         sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
 
@@ -89,35 +84,18 @@ public class TraccarService extends Service {
 
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
 
-        locationManager.removeUpdates(locationListener);
+        positionProvider.stopUpdates();
 
         clientController.stop();
     }
 
-    private LocationListener locationListener = new LocationListener() {
+    private PositionProvider.PositionListener positionListener = new PositionProvider.PositionListener() {
 
         @Override
-        public void onLocationChanged(Location location) {
-            StatusActivity.addMessage(getString(R.string.status_location_update));
-            clientController.setNewLocation(Protocol.createLocationMessage(location));
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-            StatusActivity.addMessage(getString(R.string.status_location_status));
-
-            if (status == LocationProvider.TEMPORARILY_UNAVAILABLE ||
-                    status == LocationProvider.OUT_OF_SERVICE) {
-                locationManager.removeUpdates(locationListener);
-                locationManager.requestLocationUpdates(provider, interval * 1000, 0, locationListener);
+        public void onPositionUpdate(Location location) {
+            if (location != null) {
+                StatusActivity.addMessage(getString(R.string.status_location_update));
+                clientController.setNewLocation(Protocol.createLocationMessage(location));
             }
         }
 
@@ -130,22 +108,34 @@ public class TraccarService extends Service {
             StatusActivity.addMessage(getString(R.string.status_preference_update));
             try {
                 if (key.equals(TraccarActivity.KEY_ADDRESS)) {
+
                     address = sharedPreferences.getString(TraccarActivity.KEY_ADDRESS, null);
                     clientController.setNewServer(address, port);
+
                 } else if (key.equals(TraccarActivity.KEY_PORT)) {
+
                     port = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_PORT, null));
                     clientController.setNewServer(address, port);
+
                 } else if (key.equals(TraccarActivity.KEY_INTERVAL)) {
+
                     interval = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_INTERVAL, null));
-                    locationManager.removeUpdates(locationListener);
-                    locationManager.requestLocationUpdates(provider, interval * 1000, 0, locationListener);
+                    positionProvider.stopUpdates();
+                    positionProvider = new PositionProvider(TraccarService.this, provider, interval * 1000, positionListener);
+                    positionProvider.startUpdates();
+
                 } else if (key.equals(TraccarActivity.KEY_ID)) {
+
                     id = sharedPreferences.getString(TraccarActivity.KEY_ID, null);
                     clientController.setNewLogin(Protocol.createLoginMessage(id));
+
                 } else if (key.equals(TraccarActivity.KEY_PROVIDER)) {
+
                     provider = sharedPreferences.getString(TraccarActivity.KEY_PROVIDER, null);
-                    locationManager.removeUpdates(locationListener);
-                    locationManager.requestLocationUpdates(provider, interval * 1000, 0, locationListener);
+                    positionProvider.stopUpdates();
+                    positionProvider = new PositionProvider(TraccarService.this, provider, interval * 1000, positionListener);
+                    positionProvider.startUpdates();
+
                 }
             } catch (Exception error) {
                 Log.w(LOG_TAG, error);

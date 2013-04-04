@@ -23,10 +23,7 @@
     <string-array name="settings_provider_names">
         <item>GPS провайдер</item>
         <item>Сетевой провайдер</item>
-    </string-array>
-    <string-array name="settings_provider_values">
-        <item>gps</item>
-        <item>network</item>
+        <item>Смешанный провайдер</item>
     </string-array>
 
     <string name="menu_status">Состояние</string>
@@ -44,7 +41,6 @@
     <string name="status_connection_fail">Ошибка установки соединения</string>
     <string name="status_send_fail">Ошибка отправки</string>
     <string name="status_location_update">Обновление местоположения</string>
-    <string name="status_location_status">Изменилось состояние провайдера</string>
     <string name="status_preference_update">Обновление настроек</string>
 
 </resources>

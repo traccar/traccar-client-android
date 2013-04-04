@@ -23,11 +23,8 @@
     <string-array name="settings_provider_names">
         <item>Proveedor GPS</item>
         <item>Proveedor de red</item>
-    </string-array>
-    <string-array name="settings_provider_values">
-        <item>gps</item>
-        <item>red</item>
-    </string-array>
+        <item>Proveedor mixto</item>
+	</string-array>
 
     <string name="menu_status">Estado</string>
     <string name="menu_about">Acerca de&#8230;</string>
@@ -44,7 +41,6 @@
     <string name="status_connection_fail">Fallo en la conexión</string>
     <string name="status_send_fail">Erro en el envío</string>
     <string name="status_location_update">Posición actualizada</string>
-    <string name="status_location_status">Estado proveedor cambiado</string>
     <string name="status_preference_update">Preferencias actualizadas</string>
 
 </resources>	 

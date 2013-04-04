@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="settings_provider_values" translatable="false">
+        <item>gps</item>
+        <item>network</item>
+        <item>mixed</item>
+    </string-array>
+
+</resources>

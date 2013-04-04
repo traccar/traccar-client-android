@@ -23,6 +23,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -110,6 +111,8 @@ public class TraccarActivity extends PreferenceActivity {
     }
 
     private void initPreferences() {
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         String id = telephonyManager.getDeviceId();
 
