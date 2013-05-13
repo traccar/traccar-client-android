@@ -82,11 +82,17 @@ public class TraccarService extends Service {
     public void onDestroy() {
         StatusActivity.addMessage(getString(R.string.status_service_destroy));
 
-        sharedPreferences.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
+        if (sharedPreferences != null) {
+        	sharedPreferences.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
+        }
 
-        positionProvider.stopUpdates();
+        if (positionProvider != null) {
+        	positionProvider.stopUpdates();
+        }
 
-        clientController.stop();
+        if (clientController != null) {
+        	clientController.stop();
+        }
     }
 
     private PositionProvider.PositionListener positionListener = new PositionProvider.PositionListener() {
