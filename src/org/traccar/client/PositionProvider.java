@@ -34,6 +34,8 @@ public class PositionProvider {
     public interface PositionListener {
         public void onPositionUpdate(Location location);
     }
+    
+    private final Context context;
 
     private final Handler handler;
     private final LocationManager locationManager;
@@ -44,7 +46,8 @@ public class PositionProvider {
     private boolean useCoarse;
 
     public PositionProvider(Context context, String type, long period, PositionListener listener) {
-        handler = new Handler(context.getMainLooper());
+    	this.context = context; 
+        handler = new Handler(this.context.getMainLooper());
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         this.period = period;
         this.listener = listener;
@@ -80,7 +83,7 @@ public class PositionProvider {
 
         private boolean tryProvider(String provider) {
             Location location = locationManager.getLastKnownLocation(provider);
-
+            
             if (location != null && new Date().getTime() - location.getTime() <= period + PERIOD_DELTA) {
                 listener.onPositionUpdate(location);
                 return true;

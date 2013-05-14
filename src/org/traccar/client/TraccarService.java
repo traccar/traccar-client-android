@@ -45,9 +45,8 @@ public class TraccarService extends Service {
     public void onCreate() {
         StatusActivity.addMessage(getString(R.string.status_service_create));
     }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    
+    public void onStart(Intent intent, int startId) {
         StatusActivity.addMessage(getString(R.string.status_service_start));
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -69,7 +68,11 @@ public class TraccarService extends Service {
         positionProvider.startUpdates();
 
         sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
+    }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+    	onStart(intent, startId);
         return START_STICKY;
     }
 
