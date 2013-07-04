@@ -16,11 +16,14 @@
 package org.traccar.client;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.location.Location;
 import android.os.IBinder;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -40,10 +43,16 @@ public class TraccarService extends Service {
     private SharedPreferences sharedPreferences;
     private ClientController clientController;
     private PositionProvider positionProvider;
+    
+    private WakeLock wakeLock;
 
     @Override
     public void onCreate() {
         StatusActivity.addMessage(getString(R.string.status_service_create));
+
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
+        wakeLock.acquire();
     }
     
     public void onStart(Intent intent, int startId) {
@@ -96,6 +105,8 @@ public class TraccarService extends Service {
         if (clientController != null) {
         	clientController.stop();
         }
+
+        wakeLock.release();
     }
 
     private PositionProvider.PositionListener positionListener = new PositionProvider.PositionListener() {
