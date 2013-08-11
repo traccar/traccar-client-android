@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Traccar Client</string>
-    <string name="app_logo">Traccar</string>
+    <string name="app_name">Traccar Client</string>
+    <string name="app_logo">Traccar</string>
 
-    <string name="settings_id_title">Identifiant du périphérique</string>
-    <string name="settings_address_title">Adresse du serveur</string>
-    <string name="settings_address_summary">Nom de domaine ou adresse IP</string>
-    <string name="settings_port_title">Port de serveur</string>
-    <string name="settings_port_summary">Suivi de serveur port TCP</string>
-    <string name="settings_interval_title">Fréquence</string>
-    <string name="settings_interval_summary">Intervalle de messages en quelques secondes</string>
-    <string name="settings_debug_title">Mode de débogage</string>
-    <string name="settings_debug_summary">Etat des messages supplémentaires</string>
-    <string name="settings_status_title">Service de statut</string>
-    <string name="settings_status_off">Démarrer</string>
-    <string name="settings_status_on">Arrêter</string>
-    <string name="settings_status_off_summary">Service est arrêté</string>
-    <string name="settings_status_on_summary">Service s’exécutant </string>
-    <string name="settings_provider_title">Position de fournisseur</string>
-    <string name="settings_provider_summary">Source des données de localisation</string>
-    <string-array name="settings_provider_names">
-        <item>Fournisseur GPS</item>
-        <item>Réseau de fournisseur </item>
-        <item>Fournisseur mixte</item>
-    </string-array>
-    
-    <string name="menu_status">Situation</string>
-    <string name="menu_about">Au sujet de</string>
-    <string name="menu_clear">Effacer</string>
-    
-    <string name="about_description">Temps réel pour le suivi GPS des appareils Andriod. Compatible avec Traccar serveur et d’autres systèmes de suivi.</string>
-    <string name="about_license">Cette application est gratuit et open source, le code source est sous licence Apache License Version 2.0 et disponible sur GitHub.</string>
-    <string name="about_web">Pour plus d’information, visitez le site \nwww.traccar.org/client</string>
+    <string name="settings_id_title">Identifiant du périphérique</string>
+    <string name="settings_address_title">Adresse du serveur</string>
+    <string name="settings_address_summary">Nom de domaine ou adresse IP</string>
+    <string name="settings_port_title">Port de serveur</string>
+    <string name="settings_port_summary">Suivi de serveur port TCP</string>
+    <string name="settings_interval_title">Fréquence</string>
+    <string name="settings_interval_summary">Intervalle de messages en quelques secondes</string>
+    <string name="settings_debug_title">Mode de débogage</string>
+    <string name="settings_debug_summary">Etat des messages supplémentaires</string>
+    <string name="settings_status_title">Service de statut</string>
+    <string name="settings_status_off">Démarrer</string>
+    <string name="settings_status_on">Arrêter</string>
+    <string name="settings_status_off_summary">Service est arrêté</string>
+    <string name="settings_status_on_summary">Service s’exécutant </string>
+    <string name="settings_provider_title">Position de fournisseur</string>
+    <string name="settings_provider_summary">Source des données de localisation</string>
+    <string-array name="settings_provider_names">
+        <item>Fournisseur GPS</item>
+        <item>Réseau de fournisseur </item>
+        <item>Fournisseur mixte</item>
+    </string-array>
 
-    <string name="status_service_create">Service créé</string>
-    <string name="status_service_start">Service démarrer</string>
-    <string name="status_service_destroy">Service détruit</string>
-    <string name="status_connection_success">Connexion réussie</string>
-    <string name="status_connection_fail">Echec de la connexion</string>
-    <string name="status_send_fail">L’envoi a échoué</string>
-    <string name="status_location_update">Position à jour</string>
-    <string name="status_preference_update">Preference à jour</string>
+    <string name="menu_status">Situation</string>
+    <string name="menu_about">Au sujet de</string>
+    <string name="menu_clear">Effacer</string>
+
+    <string name="about_description">Temps réel pour le suivi GPS des appareils Andriod. Compatible avec Traccar serveur et d’autres systèmes de suivi.</string>
+    <string name="about_license">Cette application est gratuit et open source, le code source est sous licence Apache License Version 2.0 et disponible sur GitHub.</string>
+    <string name="about_web">Pour plus d’information, visitez le site \nwww.traccar.org/client</string>
+
+    <string name="status_service_create">Service créé</string>
+    <string name="status_service_start">Service démarrer</string>
+    <string name="status_service_destroy">Service détruit</string>
+    <string name="status_connection_success">Connexion réussie</string>
+    <string name="status_connection_fail">Echec de la connexion</string>
+    <string name="status_send_fail">L’envoi a échoué</string>
+    <string name="status_location_update">Position à jour</string>
+    <string name="status_preference_update">Preference à jour</string>
 
 </resources>
