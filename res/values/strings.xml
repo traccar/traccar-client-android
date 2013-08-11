@@ -11,8 +11,6 @@
     <string name="settings_port_summary">Tracking server TCP port</string>
     <string name="settings_interval_title">Frequency</string>
     <string name="settings_interval_summary">Messages interval in seconds</string>
-    <string name="settings_debug_title">Debug mode</string>
-    <string name="settings_debug_summary">Additional status messages</string>
     <string name="settings_status_title">Service status</string>
     <string name="settings_status_off">Start</string>
     <string name="settings_status_on">Stop</string>

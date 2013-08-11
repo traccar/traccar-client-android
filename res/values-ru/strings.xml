@@ -11,8 +11,6 @@
     <string name="settings_port_summary">TCP порт мониторингового сервера</string>
     <string name="settings_interval_title">Частота</string>
     <string name="settings_interval_summary">Интервал между сообщениями в секундах</string>
-    <string name="settings_debug_title">Отладочный режим</string>
-    <string name="settings_debug_summary">Дополнительные сообщения о состоянии</string>
     <string name="settings_status_title">Состояние сервиса</string>
     <string name="settings_status_off">Старт</string>
     <string name="settings_status_on">Стоп</string>

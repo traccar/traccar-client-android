@@ -11,8 +11,6 @@
     <string name="settings_port_summary">Suivi de serveur port TCP</string>
     <string name="settings_interval_title">Fréquence</string>
     <string name="settings_interval_summary">Intervalle de messages en quelques secondes</string>
-    <string name="settings_debug_title">Mode de débogage</string>
-    <string name="settings_debug_summary">Etat des messages supplémentaires</string>
     <string name="settings_status_title">Service de statut</string>
     <string name="settings_status_off">Démarrer</string>
     <string name="settings_status_on">Arrêter</string>

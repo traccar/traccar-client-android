@@ -11,8 +11,6 @@
     <string name="settings_port_summary">Porta TCP do servidor de rastreamento</string>
     <string name="settings_interval_title">Invervalo</string>
     <string name="settings_interval_summary">Intervalo entre as mensagens em segundos</string>
-    <string name="settings_debug_title">Modo Depuração</string>
-    <string name="settings_debug_summary">Mensagens adicionais de status</string>
     <string name="settings_status_title">Status do Serviço</string>
     <string name="settings_status_off">Iniciar</string>
     <string name="settings_status_on">Parar</string>

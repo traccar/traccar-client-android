@@ -11,8 +11,6 @@
     <string name="settings_port_summary">Puerto TCP del rastreador</string>
     <string name="settings_interval_title">Frecuencia de rastreo</string>
     <string name="settings_interval_summary">Intervalo de los mensajes, en segundos</string>
-    <string name="settings_debug_title">Modo depuración</string>
-    <string name="settings_debug_summary">Mensajes de estado adicionales</string>
     <string name="settings_status_title">Estado del servicio</string>
     <string name="settings_status_off">Activado</string>
     <string name="settings_status_on">Desactivado</string>
