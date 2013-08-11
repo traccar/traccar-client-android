@@ -34,13 +34,6 @@
         android:title="@string/settings_provider_title" />
 
     <CheckBoxPreference
-        android:defaultValue="true"
-        android:enabled="false"
-        android:key="debug"
-        android:summary="@string/settings_debug_summary"
-        android:title="@string/settings_debug_title" />
-
-    <CheckBoxPreference
         android:defaultValue="false"
         android:key="status"
         android:summaryOff="@string/settings_status_off_summary"
