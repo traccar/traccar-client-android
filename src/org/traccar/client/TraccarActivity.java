@@ -49,6 +49,9 @@ public class TraccarActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
+        SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
+        if (sharedPreferences.getBoolean(KEY_STATUS, false))
+            startService(new Intent(this, TraccarService.class));
     }
 
     @Override
@@ -121,8 +124,6 @@ public class TraccarActivity extends PreferenceActivity {
             sharedPreferences.edit().putString(KEY_ID, id).commit();
         }
         findPreference(KEY_ID).setSummary(sharedPreferences.getString(KEY_ID, id));
-
-        sharedPreferences.edit().putBoolean(KEY_STATUS, isServiceRunning()).commit();
     }
 
 }
