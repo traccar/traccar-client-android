@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Traccar Client</string>
+    <string name="app_name">Traccar</string>
     <string name="app_logo">Traccar</string>
 
     <string name="settings_id_title">Identifiant du périphérique</string>
     <string name="settings_address_title">Adresse du serveur</string>
     <string name="settings_address_summary">Nom de domaine ou adresse IP</string>
-    <string name="settings_port_title">Port de serveur</string>
-    <string name="settings_port_summary">Suivi de serveur port TCP</string>
+    <string name="settings_port_title">Port du serveur</string>
+    <string name="settings_port_summary">Port TCP du serveur</string>
     <string name="settings_interval_title">Fréquence</string>
-    <string name="settings_interval_summary">Intervalle de messages en quelques secondes</string>
-    <string name="settings_status_title">Service de statut</string>
+    <string name="settings_interval_summary">Fréquence d\'envoi de la localisation en secondes</string>
+    <string name="settings_status_title">Statut</string>
     <string name="settings_status_off">Démarrer</string>
     <string name="settings_status_on">Arrêter</string>
-    <string name="settings_status_off_summary">Service est arrêté</string>
-    <string name="settings_status_on_summary">Service s’exécutant </string>
-    <string name="settings_provider_title">Position de fournisseur</string>
-    <string name="settings_provider_summary">Source des données de localisation</string>
+    <string name="settings_status_off_summary">Arrêté</string>
+    <string name="settings_status_on_summary">En marche</string>
+    <string name="settings_provider_title">Source de localisation</string>
+    <string name="settings_provider_summary">Source utilisée par le système afin d\'obtenir la localisation de l\'appareil</string>
     <string-array name="settings_provider_names">
-        <item>Fournisseur GPS</item>
-        <item>Réseau de fournisseur </item>
-        <item>Fournisseur mixte</item>
+        <item>Mode GPS uniquement</item>
+        <item>Mode cellulaire uniquement</item>
+        <item>Mode hybride</item>
     </string-array>
 
-    <string name="menu_status">Situation</string>
-    <string name="menu_about">Au sujet de</string>
+    <string name="menu_status">Etat</string>
+    <string name="menu_about">A propos</string>
     <string name="menu_clear">Effacer</string>
 
-    <string name="about_description">Temps réel pour le suivi GPS des appareils Andriod. Compatible avec Traccar serveur et d’autres systèmes de suivi.</string>
-    <string name="about_license">Cette application est gratuit et open source, le code source est sous licence Apache License Version 2.0 et disponible sur GitHub.</string>
-    <string name="about_web">Pour plus d’information, visitez le site \nwww.traccar.org/client</string>
+    <string name="about_description">Suivi GPS en temps réels d\'appareils Android. Compatible avec le serveur Traccar ainsi que d\'autres plateformes de suivi.</string>
+    <string name="about_license">Cette application open source est gratuite. Le code source disponible sur GitHub est sous licence Apache Version 2.0.</string>
+    <string name="about_web">Pour plus d’information, visitez le site: \nwww.traccar.org/client</string>
 
     <string name="status_service_create">Service créé</string>
-    <string name="status_service_start">Service démarrer</string>
-    <string name="status_service_destroy">Service détruit</string>
-    <string name="status_connection_success">Connexion réussie</string>
-    <string name="status_connection_fail">Echec de la connexion</string>
-    <string name="status_send_fail">L’envoi a échoué</string>
-    <string name="status_location_update">Position à jour</string>
-    <string name="status_preference_update">Preference à jour</string>
+    <string name="status_service_start">Service démarré</string>
+    <string name="status_service_destroy">Service supprimé</string>
+    <string name="status_connection_success">Connexion établie avec le serveur</string>
+    <string name="status_connection_fail">Echec de la connexion au serveur</string>
+    <string name="status_send_fail">L’envoi de localisation a échoué</string>
+    <string name="status_location_update">Localisation mise à jour</string>
+    <string name="status_preference_update">Mise à jour des préférences</string>
 
 </resources>
