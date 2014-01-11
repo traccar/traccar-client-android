@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2013 - 2014 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,8 +35,6 @@ public class PositionProvider {
         public void onPositionUpdate(Location location);
     }
     
-    private final Context context;
-
     private final Handler handler;
     private final LocationManager locationManager;
     private final long period;
@@ -46,8 +44,7 @@ public class PositionProvider {
     private boolean useCoarse;
 
     public PositionProvider(Context context, String type, long period, PositionListener listener) {
-    	this.context = context; 
-        handler = new Handler(this.context.getMainLooper());
+        handler = new Handler(context.getMainLooper());
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         this.period = period;
         this.listener = listener;

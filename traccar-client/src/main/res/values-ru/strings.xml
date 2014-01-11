@@ -16,6 +16,8 @@
     <string name="settings_status_on">Стоп</string>
     <string name="settings_status_off_summary">Сервис остановлен</string>
     <string name="settings_status_on_summary">Сервис запущен</string>
+    <string name="settings_extended_title">Расширенный формат</string>
+    <string name="settings_extended_summary">Использовать новый формат сообщений</string>
     <string name="settings_provider_title">Провайдер местоположения</string>
     <string name="settings_provider_summary">Источник данных о местоположении</string>
     <string-array name="settings_provider_names">

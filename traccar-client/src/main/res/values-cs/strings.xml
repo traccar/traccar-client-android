@@ -16,6 +16,8 @@
     <string name="settings_status_on">Stop</string>
     <string name="settings_status_off_summary">Zastaveno</string>
     <string name="settings_status_on_summary">Spuštěno</string>
+    <string name="settings_extended_title">Rozšířené formát</string>
+    <string name="settings_extended_summary">Použijte nový formát zprávy</string>
     <string name="settings_provider_title">Poskytovatel zaměření</string>
     <string name="settings_provider_summary">Zdroj zaměřovacích dat</string>
     <string-array name="settings_provider_names">

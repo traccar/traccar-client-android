@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2014 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@ public class TraccarActivity extends PreferenceActivity {
     public static final String KEY_PORT = "port";
     public static final String KEY_INTERVAL = "interval";
     public static final String KEY_PROVIDER = "provider";
+    public static final String KEY_EXTENDED = "extended";
     public static final String KEY_STATUS = "status";
 
     @Override

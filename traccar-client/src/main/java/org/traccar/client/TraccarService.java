@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2013 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2014 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,16 @@
  */
 package org.traccar.client;
 
+import android.annotation.TargetApi;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.location.Location;
+import android.os.BatteryManager;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -39,6 +43,7 @@ public class TraccarService extends Service {
     private int port;
     private int interval;
     private String provider;
+    private boolean extended;
 
     private SharedPreferences sharedPreferences;
     private ClientController clientController;
@@ -66,6 +71,7 @@ public class TraccarService extends Service {
             provider = sharedPreferences.getString(TraccarActivity.KEY_PROVIDER, null);
             port = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_PORT, null));
             interval = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_INTERVAL, null));
+            extended = sharedPreferences.getBoolean(TraccarActivity.KEY_EXTENDED, false);
         } catch (Exception error) {
             Log.w(LOG_TAG, error);
         }
@@ -79,6 +85,7 @@ public class TraccarService extends Service {
         sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
     }
 
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
     	onStart(intent, startId);
@@ -109,13 +116,20 @@ public class TraccarService extends Service {
         wakeLock.release();
     }
 
+    public double getBatteryLevel() {
+        Intent batteryIntent = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+        int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1);
+        return (level * 100.0) / scale;
+    }
+
     private PositionProvider.PositionListener positionListener = new PositionProvider.PositionListener() {
 
         @Override
         public void onPositionUpdate(Location location) {
             if (location != null) {
                 StatusActivity.addMessage(getString(R.string.status_location_update));
-                clientController.setNewLocation(Protocol.createLocationMessage(location));
+                clientController.setNewLocation(Protocol.createLocationMessage(extended, location, getBatteryLevel()));
             }
         }
 
@@ -155,6 +169,10 @@ public class TraccarService extends Service {
                     positionProvider.stopUpdates();
                     positionProvider = new PositionProvider(TraccarService.this, provider, interval * 1000, positionListener);
                     positionProvider.startUpdates();
+
+                } else if (key.equals(TraccarActivity.KEY_EXTENDED)) {
+
+                    extended = sharedPreferences.getBoolean(TraccarActivity.KEY_EXTENDED, false);
 
                 }
             } catch (Exception error) {

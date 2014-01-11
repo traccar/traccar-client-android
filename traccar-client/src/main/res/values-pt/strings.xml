@@ -16,6 +16,8 @@
     <string name="settings_status_on">Parar</string>
     <string name="settings_status_off_summary">Serviço Parado</string>
     <string name="settings_status_on_summary">Serviço em execução</string>
+    <string name="settings_extended_title">Formato prolongado</string>
+    <string name="settings_extended_summary">Use o formato de mensagem nova</string>
     <string name="settings_provider_title">Provedor de localização</string>
     <string name="settings_provider_summary">Fonte dos dados de localização</string>
     <string-array name="settings_provider_names">

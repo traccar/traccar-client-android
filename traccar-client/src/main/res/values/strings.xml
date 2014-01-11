@@ -16,6 +16,8 @@
     <string name="settings_status_on">Stop</string>
     <string name="settings_status_off_summary">Service stopped</string>
     <string name="settings_status_on_summary">Service running</string>
+    <string name="settings_extended_title">Extended format</string>
+    <string name="settings_extended_summary">Use new message format</string>
     <string name="settings_provider_title">Location provider</string>
     <string name="settings_provider_summary">Source of location data</string>
     <string-array name="settings_provider_names">
