@@ -1,25 +1,35 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.6.+'
-    }
-}
 apply plugin: 'android'
 
-repositories {
-    mavenCentral()
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.1"
+
+    signingConfigs {
+        release {
+            storeFile file('/home/user/Documents/android.keystore')
+            keyAlias "tananaev"
+        }
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
+        }
+    }
 }
 
-android {
-    compileSdkVersion 17
-    buildToolsVersion "17.0.0"
-
-    defaultConfig {
-        minSdkVersion 3
-        targetSdkVersion 18
+tasks.whenTaskAdded { task ->
+    if (task.name == 'validateReleaseSigning') {
+        task.dependsOn keystoreInfo
     }
+}
+
+task keystoreInfo << {
+    def password = System.console().readPassword('\n\nKeystore password: ')
+    android.signingConfigs.release.storePassword = new String(password)
+    android.signingConfigs.release.keyPassword = new String(password)
 }
 
 dependencies {
