@@ -4,6 +4,13 @@ android {
     compileSdkVersion 19
     buildToolsVersion "19.0.1"
 
+    defaultConfig {
+        minSdkVersion 3
+        targetSdkVersion 19
+        versionCode 16
+        versionName "2.9"
+    }
+
     signingConfigs {
         release {
             storeFile file('/home/user/Documents/android.keystore')
