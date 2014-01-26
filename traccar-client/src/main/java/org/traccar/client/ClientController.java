@@ -18,8 +18,13 @@ package org.traccar.client;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Handler;
+import android.util.Log;
 
 
 public class ClientController implements Connection.ConnectionHandler {
@@ -45,13 +50,30 @@ public class ClientController implements Connection.ConnectionHandler {
         this.loginMessage = loginMessage;
     }
 
+    private BroadcastReceiver connectivityListener = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false)) {
+                handler.removeCallbacksAndMessages(null);
+            } else {
+                reconnect();
+            }
+        }
+    };
+
     public void start() {
         handler = new Handler();
         connection = new Connection(this);
         connection.connect(address, port);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        context.registerReceiver(connectivityListener, filter);
     }
 
     public void stop() {
+        context.unregisterReceiver(connectivityListener);
+
         connection.close();
         handler.removeCallbacksAndMessages(null);
     }
