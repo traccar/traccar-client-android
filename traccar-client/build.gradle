@@ -27,17 +27,5 @@ android {
     }
 }
 
-tasks.whenTaskAdded { task ->
-    if (task.name == 'validateReleaseSigning') {
-        task.dependsOn keystoreInfo
-    }
-}
-
-task keystoreInfo << {
-    def password = System.console().readPassword('\n\nKeystore password: ')
-    android.signingConfigs.release.storePassword = new String(password)
-    android.signingConfigs.release.keyPassword = new String(password)
-}
-
 dependencies {
 }
