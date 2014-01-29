@@ -42,5 +42,6 @@
     <string name="status_send_fail">L’envoi de localisation a échoué</string>
     <string name="status_location_update">Localisation mise à jour</string>
     <string name="status_preference_update">Mise à jour des préférences</string>
+    <string name="status_connectivity_change">Changement de connectivité</string>
 
 </resources>

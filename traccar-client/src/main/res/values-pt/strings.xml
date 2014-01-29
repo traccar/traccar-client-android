@@ -42,5 +42,6 @@
     <string name="status_send_fail">Falha no envio</string>
     <string name="status_location_update">Localização atualizada</string>
     <string name="status_preference_update">Preferências atualizadas</string>
+    <string name="status_connectivity_change">Mudança de conectividade</string>
 
 </resources>

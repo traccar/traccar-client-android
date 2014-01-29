@@ -42,5 +42,6 @@
     <string name="status_send_fail">Ошибка отправки</string>
     <string name="status_location_update">Обновление местоположения</string>
     <string name="status_preference_update">Обновление настроек</string>
+    <string name="status_connectivity_change">Изменение подключения</string>
 
 </resources>

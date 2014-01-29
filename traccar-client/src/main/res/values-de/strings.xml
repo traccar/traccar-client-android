@@ -42,5 +42,6 @@
     <string name="status_send_fail">Übertragung fehlerhaft</string>
     <string name="status_location_update">Positionsupdate</string>
     <string name="status_preference_update">Prioritätsupdate</string>
+    <string name="status_connectivity_change">Anschlusswechsel</string>
 
 </resources>

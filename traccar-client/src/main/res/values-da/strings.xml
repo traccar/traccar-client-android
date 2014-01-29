@@ -42,5 +42,6 @@
     <string name="status_send_fail">Send fejl</string>
     <string name="status_location_update">Placering opdateret</string>
     <string name="status_preference_update">Oplysninger opdateret</string>
+    <string name="status_connectivity_change">Connectivity forandring</string>
 
 </resources>
