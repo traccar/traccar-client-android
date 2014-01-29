@@ -116,11 +116,16 @@ public class TraccarService extends Service {
         wakeLock.release();
     }
 
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
     public double getBatteryLevel() {
-        Intent batteryIntent = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-        int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1);
-        return (level * 100.0) / scale;
+        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.ECLAIR) {
+            Intent batteryIntent = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+            int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+            int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1);
+            return (level * 100.0) / scale;
+        } else {
+            return 0;
+        }
     }
 
     private PositionProvider.PositionListener positionListener = new PositionProvider.PositionListener() {
