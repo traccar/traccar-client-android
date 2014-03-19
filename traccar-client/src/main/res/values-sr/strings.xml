@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Traccar klijent</string>
+    <string name="app_logo">Traccar</string>
+
+    <string name="settings_id_title">Identifikator uređaja</string>
+    <string name="settings_address_title">Adresa servera</string>
+    <string name="settings_address_summary">Domen ime ili IP adresa</string>
+    <string name="settings_port_title">Server port</string>
+    <string name="settings_port_summary">TCP port servera</string>
+    <string name="settings_interval_title">Učestalost</string>
+    <string name="settings_interval_summary">Interval podataka u sekundama</string>
+    <string name="settings_status_title">Status servisa</string>
+    <string name="settings_status_off">Start</string>
+    <string name="settings_status_on">Stop</string>
+    <string name="settings_status_off_summary">Servis zaustavljen</string>
+    <string name="settings_status_on_summary">Servis pokrenut</string>
+    <string name="settings_extended_title">Produžen format</string>
+    <string name="settings_extended_summary">Koristi novi format za poruke</string>
+    <string name="settings_provider_title">Provajder lokacije</string>
+    <string name="settings_provider_summary">Izvor lokacijskih podataka</string>
+    <string-array name="settings_provider_names">
+        <item>GPS provajder</item>
+        <item>Provajder Mreže</item>
+        <item>Oba zajedno provajdera</item>
+    </string-array>
+
+    <string name="menu_status">Status</string>
+    <string name="menu_about">O klijentu</string>
+    <string name="menu_clear">Očisti</string>
+
+    <string name="about_description">GPS tracker za Android telefone. GPS satelit kompatibilno.</string>
+    <string name="about_license">Ova aplikacija je besplatna i open source,izvorni kod je licenciran pod Apache License Version 2.0 i dostupan na GitHub</string>
+    <string name="about_web">"Za više informacija www.traccar.org/client "</string>
+
+    <string name="status_service_create">Servis kreiran</string>
+    <string name="status_service_start">Servis pokrenut</string>
+    <string name="status_service_destroy">Servis uništen</string>
+    <string name="status_connection_success">Konekcija uspešna</string>
+    <string name="status_connection_fail">Konekcija neuspešna</string>
+    <string name="status_send_fail">Slanje neuspešno</string>
+    <string name="status_location_update">Ažuriranje lokacije</string>
+    <string name="status_preference_update">Ažuriranje preferenci</string>
+    <string name="status_connectivity_change">Promenjena konekcija</string>
+
+</resources>
