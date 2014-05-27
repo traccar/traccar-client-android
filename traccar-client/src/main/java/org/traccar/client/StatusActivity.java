@@ -19,7 +19,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import android.app.ListActivity;
@@ -32,7 +31,9 @@ import android.widget.ArrayAdapter;
 
 public class StatusActivity extends ListActivity {
 
-    private static final List<String> messages = new LinkedList<String>();
+    private static final int LIMIT = 20;
+
+    private static final LinkedList<String> messages = new LinkedList<String>();
     private static final Set<ArrayAdapter<String>> adapters = new HashSet<ArrayAdapter<String>>();
 
     private static void notifyAdapters() {
@@ -46,6 +47,9 @@ public class StatusActivity extends ListActivity {
         DateFormat format = DateFormat.getTimeInstance(DateFormat.SHORT);
         message = format.format(new Date()) + " - " + message;
         messages.add(message);
+        while (messages.size() > LIMIT) {
+            messages.removeFirst();
+        }
         notifyAdapters();
     }
 

@@ -58,10 +58,6 @@ public class TraccarService extends Service {
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
         wakeLock.acquire();
-    }
-    
-    public void onStart(Intent intent, int startId) {
-        StatusActivity.addMessage(getString(R.string.status_service_start));
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -83,13 +79,6 @@ public class TraccarService extends Service {
         positionProvider.startUpdates();
 
         sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
-    }
-
-    @TargetApi(Build.VERSION_CODES.ECLAIR)
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-    	onStart(intent, startId);
-        return START_STICKY;
     }
 
     @Override
