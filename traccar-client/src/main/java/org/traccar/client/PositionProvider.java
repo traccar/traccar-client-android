@@ -24,6 +24,7 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 public class PositionProvider {
 
@@ -39,6 +40,7 @@ public class PositionProvider {
     private final LocationManager locationManager;
     private final long period;
     private final PositionListener listener;
+    private final Context context;
 
     private boolean useFine;
     private boolean useCoarse;
@@ -48,6 +50,7 @@ public class PositionProvider {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         this.period = period;
         this.listener = listener;
+        this.context = context;
 
         // Determine providers
         if (type.equals(PROVIDER_MIXED)) {
@@ -80,6 +83,12 @@ public class PositionProvider {
 
         private boolean tryProvider(String provider) {
             Location location = locationManager.getLastKnownLocation(provider);
+
+            /*if (location != null) {
+                Toast.makeText(context, "phone: " + new Date() + "\ngps: " + new Date(location.getTime()), Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(context, "no location", Toast.LENGTH_LONG).show();
+            }*/
             
             if (location != null && new Date().getTime() - location.getTime() <= period + PERIOD_DELTA) {
                 listener.onPositionUpdate(location);
