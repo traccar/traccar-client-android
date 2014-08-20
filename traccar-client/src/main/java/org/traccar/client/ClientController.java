@@ -111,7 +111,7 @@ public class ClientController implements Connection.ConnectionHandler {
     public void setNewLocation(String locationMessage) {
         messageQueue.offer(locationMessage);
         if (!connection.isClosed() && !connection.isBusy()) {
-            connection.send(messageQueue.poll());
+            connection.send(messageQueue.peek());
         }
     }
 
@@ -119,7 +119,8 @@ public class ClientController implements Connection.ConnectionHandler {
     public void onConnected(boolean result) {
         if (result) {
             StatusActivity.addMessage(context.getString(R.string.status_connection_success));
-            connection.send(loginMessage);
+            messageQueue.offer(loginMessage);
+            connection.send(messageQueue.peek());
         } else {
             StatusActivity.addMessage(context.getString(R.string.status_connection_fail));
             delayedReconnect();
@@ -129,13 +130,16 @@ public class ClientController implements Connection.ConnectionHandler {
     @Override
     public void onSent(boolean result) {
         if (result) {
+            messageQueue.remove();
             if (!messageQueue.isEmpty()) {
-                connection.send(messageQueue.poll());
+                connection.send(messageQueue.peek());
             }
         } else {
             StatusActivity.addMessage(context.getString(R.string.status_send_fail));
             delayedReconnect();
         }
     }
+
+
 
 }
