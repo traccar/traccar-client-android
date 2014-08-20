@@ -16,8 +16,8 @@
     <string name="settings_status_on">Stop</string>
     <string name="settings_status_off_summary">Dienst inaktiv</string>
     <string name="settings_status_on_summary">Dienst aktiv</string>
-    <string name="settings_extended_title">Erweiterte Format</string>
-    <string name="settings_extended_summary">Verwenden Sie neue Nachrichtenformat</string>
+    <string name="settings_extended_title">Erweitertes Format</string>
+    <string name="settings_extended_summary">Verwenden Sie das neue Nachrichtenformat</string>
     <string name="settings_provider_title">Datenherkunft</string>
     <string name="settings_provider_summary">Quelle der Positionen</string>
     <string-array name="settings_provider_names">
