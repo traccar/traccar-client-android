@@ -65,10 +65,18 @@ public class PositionProvider {
 
     public void startUpdates() {
         if (useFine) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, period, 0, fineLocationListener);
+            try {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, period, 0, fineLocationListener);
+            } catch (Exception ex) {
+                
+            }
         }
         if (useCoarse) {
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, period, 0, coarseLocationListener);
+            try {
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, period, 0, coarseLocationListener);
+            } catch (Exception ex) {
+
+            }
         }
         handler.postDelayed(updateTask, period);
     }
