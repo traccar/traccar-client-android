@@ -6,13 +6,13 @@
         android:title="@string/settings_id_title" />
 
     <EditTextPreference
-        android:defaultValue="demo.traccar.org"
+        android:defaultValue="tracking.survos.com"
         android:key="address"
         android:summary="@string/settings_address_summary"
         android:title="@string/settings_address_title" />
 
     <EditTextPreference
-        android:defaultValue="5005"
+        android:defaultValue="5000"
         android:key="port"
         android:numeric="integer"
         android:summary="@string/settings_port_summary"
@@ -34,7 +34,7 @@
         android:title="@string/settings_provider_title" />
 
     <CheckBoxPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="extended"
         android:summary="@string/settings_extended_summary"
         android:title="@string/settings_extended_title" />
