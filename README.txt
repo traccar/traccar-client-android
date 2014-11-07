@@ -6,7 +6,7 @@ Author - Anton Tananaev (anton.tananaev@gmail.com)
 
 SUMMARY:
 
-Traccar Client is Android GPS tracking application. In can work with
+Traccar Client is Android GPS tracking application. It can work with
 Traccar open source server software.
 
 LICENSE:
