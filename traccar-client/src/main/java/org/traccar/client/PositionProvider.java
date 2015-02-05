@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 - 2014 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2013 - 2015 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,15 +67,15 @@ public class PositionProvider {
         if (useFine) {
             try {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, period, 0, fineLocationListener);
-            } catch (Exception ex) {
-                
+            } catch (Exception e) {
+                StatusActivity.addMessage(context.getString(R.string.status_provider_missing));
             }
         }
         if (useCoarse) {
             try {
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, period, 0, coarseLocationListener);
-            } catch (Exception ex) {
-
+            } catch (Exception e) {
+                StatusActivity.addMessage(context.getString(R.string.status_provider_missing));
             }
         }
         handler.postDelayed(updateTask, period);
