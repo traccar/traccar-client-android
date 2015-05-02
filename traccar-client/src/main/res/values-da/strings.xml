@@ -35,7 +35,6 @@
     <string name="about_web">For mere information besøg\nwww.traccar.org/client</string>
 
     <string name="status_service_create">Service oprettet</string>
-    <string name="status_service_start">Service startet</string>
     <string name="status_service_destroy">Service ødelagt</string>
     <string name="status_connection_success">Forbindelse lykkedes</string>
     <string name="status_connection_fail">Forbindelse fejlet</string>

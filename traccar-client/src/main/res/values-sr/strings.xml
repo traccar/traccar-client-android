@@ -35,7 +35,6 @@
     <string name="about_web">"Za više informacija www.traccar.org/client "</string>
 
     <string name="status_service_create">Servis kreiran</string>
-    <string name="status_service_start">Servis pokrenut</string>
     <string name="status_service_destroy">Servis uništen</string>
     <string name="status_connection_success">Konekcija uspešna</string>
     <string name="status_connection_fail">Konekcija neuspešna</string>

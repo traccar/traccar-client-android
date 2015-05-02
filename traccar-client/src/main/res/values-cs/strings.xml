@@ -35,7 +35,6 @@
     <string name="about_web">Pro více informací navštivte\nwww.traccar.org/client</string>
 
     <string name="status_service_create">Služba vytvořena</string>
-    <string name="status_service_start">Služba spuštěna</string>
     <string name="status_service_destroy">Služba zastavena</string>
     <string name="status_connection_success">Spojení se zdařilo</string>
     <string name="status_connection_fail">Spojení selhalo</string>

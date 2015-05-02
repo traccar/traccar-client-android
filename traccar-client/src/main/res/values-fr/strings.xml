@@ -35,7 +35,6 @@
     <string name="about_web">Pour plus d’information, visitez le site: \nwww.traccar.org/client</string>
 
     <string name="status_service_create">Service créé</string>
-    <string name="status_service_start">Service démarré</string>
     <string name="status_service_destroy">Service supprimé</string>
     <string name="status_connection_success">Connexion établie avec le serveur</string>
     <string name="status_connection_fail">Echec de la connexion au serveur</string>

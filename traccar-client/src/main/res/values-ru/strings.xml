@@ -35,7 +35,6 @@
     <string name="about_web">Для получения дополнительной информации посетите\nwww.traccar.org/client</string>
 
     <string name="status_service_create">Сервис создан</string>
-    <string name="status_service_start">Сервис запущен</string>
     <string name="status_service_destroy">Сервис удален</string>
     <string name="status_connection_success">Соедниение установлено</string>
     <string name="status_connection_fail">Ошибка установки соединения</string>
