@@ -89,6 +89,8 @@ public class PositionProvider {
 
     private final Runnable updateTask = new Runnable() {
 
+        private long lastTime;
+
         private boolean tryProvider(String provider) {
             Location location = locationManager.getLastKnownLocation(provider);
 
@@ -98,7 +100,8 @@ public class PositionProvider {
                 Toast.makeText(context, "no location", Toast.LENGTH_LONG).show();
             }*/
             
-            if (location != null && new Date().getTime() - location.getTime() <= period + PERIOD_DELTA) {
+            if (location != null && location.getTime() != lastTime) {
+                lastTime = location.getTime();
                 listener.onPositionUpdate(location);
                 return true;
             } else {
