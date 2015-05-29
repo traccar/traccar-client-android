@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        minSdkVersion 3
+        minSdkVersion 5
         targetSdkVersion 22
         versionCode 22
         versionName "3.2"
@@ -34,4 +34,5 @@ android {
 }
 
 dependencies {
+    compile 'com.loopj.android:android-async-http:1.4.7'
 }

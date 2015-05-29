@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.traccar.client">
+<manifest
+    package="org.traccar.client"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -8,25 +9,31 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    
-    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:allowBackup="true" android:theme="@style/TraccarTheme">
-        
-        <activity android:name="TraccarActivity">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/TraccarTheme">
+
+        <activity android:name=".activity.TraccarActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name="StatusActivity">
+        <activity android:name=".activity.StatusActivity">
         </activity>
 
-        <activity android:name="AboutActivity">
+        <activity android:name=".activity.AboutActivity">
         </activity>
-        
-        <service android:name="TraccarService" />
-        
-        <receiver android:name="AutostartReceiver">
+
+        <service android:name=".service.TraccarService"/>
+
+        <receiver android:name=".receiver.AutostartReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

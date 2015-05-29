@@ -13,13 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
-
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+package org.traccar.client.activity;
 
 import android.app.ListActivity;
 import android.os.Bundle;
@@ -29,12 +23,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
+import org.traccar.client.R;
+
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
+
 public class StatusActivity extends ListActivity {
 
     private static final int LIMIT = 20;
 
     private static final LinkedList<String> messages = new LinkedList<String>();
     private static final Set<ArrayAdapter<String>> adapters = new HashSet<ArrayAdapter<String>>();
+    private ArrayAdapter<String> adapter;
 
     private static void notifyAdapters() {
         for (ArrayAdapter<String> adapter : adapters) {
@@ -57,8 +60,6 @@ public class StatusActivity extends ListActivity {
         messages.clear();
         notifyAdapters();
     }
-
-    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

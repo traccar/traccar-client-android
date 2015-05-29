@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/cdan/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.7/cd78109020f9ec803ef4e652c17ee4615b03e20a/android-async-http-1.4.7.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="cd78109020f9ec803ef4e652c17ee4615b03e20a">
+        <dex dex="/home/cdan/CDAN/WORKSPACEv2/GIT/traccar-client-android/traccar-client/build/intermediates/pre-dexed/debug/android-async-http-1.4.7-142ea993cb945e8a3b66adb7b0f6ed7b16eb6770.jar" />
+    </item>
+
+</items>
