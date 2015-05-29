@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
+package org.traccar.client.activity;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
@@ -28,6 +28,9 @@ import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import org.traccar.client.R;
+import org.traccar.client.service.TraccarService;
 
 /**
  * Main user interface
@@ -44,6 +47,20 @@ public class TraccarActivity extends PreferenceActivity {
     public static final String KEY_PROVIDER = "provider";
     public static final String KEY_EXTENDED = "extended";
     public static final String KEY_STATUS = "status";
+    OnSharedPreferenceChangeListener preferenceChangeListener = new OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if (key.equals(KEY_STATUS)) {
+                if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
+                    startService(new Intent(TraccarActivity.this, TraccarService.class));
+                } else {
+                    stopService(new Intent(TraccarActivity.this, TraccarService.class));
+                }
+            } else if (key.equals(KEY_ID)) {
+                findPreference(KEY_ID).setSummary(sharedPreferences.getString(KEY_ID, null));
+            }
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,21 +85,6 @@ public class TraccarActivity extends PreferenceActivity {
                 preferenceChangeListener);
         super.onPause();
     }
-
-    OnSharedPreferenceChangeListener preferenceChangeListener = new OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (key.equals(KEY_STATUS)) {
-                if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
-                    startService(new Intent(TraccarActivity.this, TraccarService.class));
-                } else {
-                    stopService(new Intent(TraccarActivity.this, TraccarService.class));
-                }
-            } else if (key.equals(KEY_ID)) {
-                findPreference(KEY_ID).setSummary(sharedPreferences.getString(KEY_ID, null));
-            }
-        }
-    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

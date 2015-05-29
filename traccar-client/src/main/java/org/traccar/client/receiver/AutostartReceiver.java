@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
+package org.traccar.client.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -21,16 +21,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import org.traccar.client.activity.TraccarActivity;
+import org.traccar.client.service.TraccarService;
+
 public class AutostartReceiver extends BroadcastReceiver {
-	
-	public static final String LOG_TAG = "Traccar.AutostartReceiver";
- 
+
+    public static final String LOG_TAG = "Traccar.AutostartReceiver";
+
     @Override
     public void onReceive(Context context, Intent intent) {
-    	SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-    	if (sharedPreferences.getBoolean(TraccarActivity.KEY_STATUS, false)) {
-    		context.startService(new Intent(context, TraccarService.class));
-    	}
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        if (sharedPreferences.getBoolean(TraccarActivity.KEY_STATUS, false)) {
+            context.startService(new Intent(context, TraccarService.class));
+        }
     }
 
 }
