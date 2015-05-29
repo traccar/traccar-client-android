@@ -16,6 +16,7 @@
 package org.traccar.client.provider;
 
 import android.content.Context;
+import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -25,6 +26,7 @@ import android.os.Handler;
 
 import org.traccar.client.R;
 import org.traccar.client.activity.StatusActivity;
+import org.traccar.client.util.Utilities;
 
 public class PositionProvider {
 
@@ -40,6 +42,15 @@ public class PositionProvider {
     private final InternalLocationListener coarseLocationListener = new InternalLocationListener();
     private boolean useFine;
     private boolean useCoarse;
+
+    private String latestHdop;
+    private String latestPdop;
+    private String latestVdop;
+    private String geoIdHeight;
+    private String ageOfDgpsData;
+    private String dgpsId;
+
+
     private final Runnable updateTask = new Runnable() {
 
         private long lastTime;
@@ -47,14 +58,19 @@ public class PositionProvider {
         private boolean tryProvider(String provider) {
             Location location = locationManager.getLastKnownLocation(provider);
 
-            /*if (location != null) {
-                Toast.makeText(context, "phone: " + new Date() + "\ngps: " + new Date(location.getTime()), Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(context, "no location", Toast.LENGTH_LONG).show();
-            }*/
-
             if (location != null && location.getTime() != lastTime) {
                 lastTime = location.getTime();
+
+                Bundle b = new Bundle();
+                b.putString("HDOP", getLatestHdop());
+                b.putString("PDOP", getLatestPdop());
+                b.putString("VDOP", getLatestVdop());
+                b.putString("GEOIDHEIGHT", getGeoIdHeight());
+                b.putString("AGEOFDGPSDATA", getAgeOfDgpsData());
+                b.putString("DGPSID", getDgpsId());
+
+                location.setExtras(b);
+
                 listener.onPositionUpdate(location);
                 return true;
             } else {
@@ -120,7 +136,7 @@ public class PositionProvider {
         public void onPositionUpdate(Location location);
     }
 
-    private class InternalLocationListener implements LocationListener {
+    private class InternalLocationListener implements LocationListener,GpsStatus.NmeaListener {
 
         @Override
         public void onLocationChanged(Location location) {
@@ -147,6 +163,97 @@ public class PositionProvider {
             }
         }
 
+        @Override
+        public void onNmeaReceived(long timestamp, String nmeaSentence) {
+            if(Utilities.IsNullOrEmpty(nmeaSentence)){
+                return;
+            }
+
+            String[] nmeaParts = nmeaSentence.split(",");
+
+            if (nmeaParts[0].equalsIgnoreCase("$GPGSA")) {
+
+                if (nmeaParts.length > 15 && !Utilities.IsNullOrEmpty(nmeaParts[15])) {
+                    setLatestPdop(nmeaParts[15]);
+                }
+
+                if (nmeaParts.length > 16 &&!Utilities.IsNullOrEmpty(nmeaParts[16])) {
+                    setLatestHdop(nmeaParts[16]);
+                }
+
+                if (nmeaParts.length > 17 &&!Utilities.IsNullOrEmpty(nmeaParts[17]) && !nmeaParts[17].startsWith("*")) {
+                    setLatestVdop(nmeaParts[17].split("\\*")[0]);
+                }
+            }
+
+
+            if (nmeaParts[0].equalsIgnoreCase("$GPGGA")) {
+                if (nmeaParts.length > 8 &&!Utilities.IsNullOrEmpty(nmeaParts[8])) {
+                    setLatestHdop(nmeaParts[16]);
+                }
+
+                if (nmeaParts.length > 11 &&!Utilities.IsNullOrEmpty(nmeaParts[11])) {
+                    setGeoIdHeight(nmeaParts[11]);
+                }
+
+                if (nmeaParts.length > 13 &&!Utilities.IsNullOrEmpty(nmeaParts[13])) {
+                    setAgeOfDgpsData(nmeaParts[13]);
+                }
+
+                if (nmeaParts.length > 14 &&!Utilities.IsNullOrEmpty(nmeaParts[14]) && !nmeaParts[14].startsWith("*")) {
+                    setDgpsId(nmeaParts[14].split("\\*")[0]);
+                }
+            }
+        }
     }
 
+
+
+    public String getLatestPdop() {
+        return latestPdop;
+    }
+
+    public void setLatestPdop(String latestPdop) {
+        this.latestPdop = latestPdop;
+    }
+
+    public String getLatestHdop() {
+        return latestHdop;
+    }
+
+    public void setLatestHdop(String latestHdop) {
+        this.latestHdop = latestHdop;
+    }
+
+    public String getLatestVdop() {
+        return latestVdop;
+    }
+
+    public void setLatestVdop(String latestVdop) {
+        this.latestVdop = latestVdop;
+    }
+
+    public String getGeoIdHeight() {
+        return geoIdHeight;
+    }
+
+    public void setGeoIdHeight(String geoIdHeight) {
+        this.geoIdHeight = geoIdHeight;
+    }
+
+    public String getAgeOfDgpsData() {
+        return ageOfDgpsData;
+    }
+
+    public void setAgeOfDgpsData(String ageOfDgpsData) {
+        this.ageOfDgpsData = ageOfDgpsData;
+    }
+
+    public String getDgpsId() {
+        return dgpsId;
+    }
+
+    public void setDgpsId(String dgpsId) {
+        this.dgpsId = dgpsId;
+    }
 }

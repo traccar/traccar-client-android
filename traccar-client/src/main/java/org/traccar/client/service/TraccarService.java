@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.BatteryManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
@@ -25,6 +26,7 @@ import org.traccar.client.R;
 import org.traccar.client.activity.StatusActivity;
 import org.traccar.client.activity.TraccarActivity;
 import org.traccar.client.provider.PositionProvider;
+import org.traccar.client.util.Utilities;
 
 import java.net.InetAddress;
 import java.text.SimpleDateFormat;
@@ -62,7 +64,7 @@ public class TraccarService extends Service {
         @Override
         public void onPositionUpdate(Location location) {
             if (location != null) {
-                sendMessage(createLocationMessage(location, getBatteryLevel()));
+                setNewLocation(createLocationMessage(location, getBatteryLevel()));
             }
         }
     };
@@ -180,6 +182,7 @@ public class TraccarService extends Service {
 
     private void sendMessage(RequestParams requestParams) {
 
+//        TODO set Request time out and rety count ;)
         httpClient.get(this, getAbsoluteUrl(), requestParams, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -202,19 +205,23 @@ public class TraccarService extends Service {
 
 
     public boolean isInternetAvailable() {
-        if (isNetworkConnected()) {
-            try {
-                InetAddress ipAddr = InetAddress.getByName(address);
-                if (ipAddr.equals("")) {
-                    return false;
-                } else {
-                    return true;
-                }
-            } catch (Exception e) {
-                return false;
-            }
-        } else
-            return false;
+
+        return  isNetworkConnected();
+
+//        TODO Handle me please Check the reachability and send the message , Should not run on Main thread (will throws exeption)
+//        if (isNetworkConnected()) {
+//            try {
+//                InetAddress ipAddr = InetAddress.getByName(address);
+//                if (Utilities.IsNullOrEmpty(ipAddr.getHostAddress())) {
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+//            } catch (Exception e) {
+//                return false;
+//            }
+//        } else
+//            return false;
     }
 
 
@@ -238,7 +245,10 @@ public class TraccarService extends Service {
         String lon = String.valueOf(l.getLongitude());
         String alt = String.valueOf(l.getAltitude());
         String speed = String.valueOf(l.getSpeed() * 1.943844); // speed in knots
-        String hdop = String.valueOf(0);
+
+        Bundle b = l.getExtras();
+
+        String hdop = b.getString("HDOP");
 
 
         mRequestParams = new RequestParams();
