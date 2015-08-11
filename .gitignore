@@ -1,5 +1,7 @@
 .gradle
+.idea/
 local.properties
-.idea/workspace.xml
-.DS_Store
-traccar-client/build
+traccar-client-android.iml
+traccar-client/traccar-client.iml
+build/
+traccar-client/build/
