@@ -23,7 +23,7 @@ import java.util.TimeZone;
 import android.location.Location;
 import android.net.Uri;
 
-public class Protocol {
+public class ProtocolFormatter {
 
     public static String formatRequest(String address, int port, String id, Location l, double battery) {
 

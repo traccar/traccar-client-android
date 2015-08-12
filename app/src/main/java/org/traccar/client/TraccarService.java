@@ -72,7 +72,7 @@ public class TraccarService extends Service {
             Log.w(LOG_TAG, error);
         }
 
-        clientController = new ClientController(this, address, port, Protocol.createLoginMessage(id));
+        clientController = new ClientController(this, address, port, ProtocolFormatter.createLoginMessage(id));
         clientController.start();
 
         positionProvider = new PositionProvider(this, provider, interval * 1000, positionListener);
@@ -123,7 +123,7 @@ public class TraccarService extends Service {
         public void onPositionUpdate(Location location) {
             if (location != null) {
                 StatusActivity.addMessage(getString(R.string.status_location_update));
-                clientController.setNewLocation(Protocol.createLocationMessage(extended, location, getBatteryLevel()));
+                clientController.setNewLocation(ProtocolFormatter.createLocationMessage(extended, location, getBatteryLevel()));
             }
         }
 
@@ -155,7 +155,7 @@ public class TraccarService extends Service {
                 } else if (key.equals(TraccarActivity.KEY_ID)) {
 
                     id = sharedPreferences.getString(TraccarActivity.KEY_ID, null);
-                    clientController.setNewLogin(Protocol.createLoginMessage(id));
+                    clientController.setNewLogin(ProtocolFormatter.createLoginMessage(id));
 
                 } else if (key.equals(TraccarActivity.KEY_PROVIDER)) {
 
