@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2014 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2015 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,10 +31,7 @@ import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-/**
- * Background service
- */
-public class TrackingService extends Service {
+public class TrackingService extends Service implements PositionProvider.PositionListener {
 
     public static final String LOG_TAG = "Traccar.TrackingService";
 
@@ -74,7 +71,7 @@ public class TrackingService extends Service {
         clientController = new ClientController(this, address, port, ProtocolFormatter.createLoginMessage(id));
         clientController.start();
 
-        positionProvider = new PositionProvider(this, provider, interval * 1000, positionListener);
+        positionProvider = new PositionProvider(this, provider, interval * 1000, this);
         positionProvider.startUpdates();
     }
 
@@ -110,16 +107,12 @@ public class TrackingService extends Service {
         }
     }
 
-    private PositionProvider.PositionListener positionListener = new PositionProvider.PositionListener() {
-
-        @Override
-        public void onPositionUpdate(Location location) {
-            if (location != null) {
-                StatusActivity.addMessage(getString(R.string.status_location_update));
-                clientController.setNewLocation(ProtocolFormatter.createLocationMessage(extended, location, getBatteryLevel()));
-            }
+    @Override
+    public void onPositionUpdate(Location location) {
+        if (location != null) {
+            StatusActivity.addMessage(getString(R.string.status_location_update));
+            clientController.setNewLocation(ProtocolFormatter.createLocationMessage(extended, location, getBatteryLevel()));
         }
-
-    };
+    }
 
 }
