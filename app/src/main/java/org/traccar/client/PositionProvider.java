@@ -15,25 +15,26 @@
  */
 package org.traccar.client;
 
-import java.util.Date;
-
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.Toast;
 
 public class PositionProvider {
 
     public static final String PROVIDER_MIXED = "mixed";
-    public static final long PERIOD_DELTA = 10 * 1000;
-    public static final long RETRY_PERIOD = 60 * 1000;
+    public static final long PROVIDER_RETRY_PERIOD = 60 * 1000;
 
     public interface PositionListener {
-        public void onPositionUpdate(Location location);
+        void onPositionUpdate(Position position);
     }
     
     private final Handler handler;
@@ -41,16 +42,18 @@ public class PositionProvider {
     private final long period;
     private final PositionListener listener;
     private final Context context;
+    private String id;
 
     private boolean useFine;
     private boolean useCoarse;
 
-    public PositionProvider(Context context, String type, long period, PositionListener listener) {
+    public PositionProvider(Context context, String type, long period, String id, PositionListener listener) {
         handler = new Handler(context.getMainLooper());
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         this.period = period;
         this.listener = listener;
         this.context = context;
+        this.id = id;
 
         // Determine providers
         if (type.equals(PROVIDER_MIXED)) {
@@ -102,7 +105,7 @@ public class PositionProvider {
             
             if (location != null && location.getTime() != lastTime) {
                 lastTime = location.getTime();
-                listener.onPositionUpdate(location);
+                listener.onPositionUpdate(new Position(id, location, getBatteryLevel()));
                 return true;
             } else {
                 return false;
@@ -147,10 +150,22 @@ public class PositionProvider {
                         locationManager.removeUpdates(InternalLocationListener.this);
                         locationManager.requestLocationUpdates(provider, period, 0, InternalLocationListener.this);
                     }
-                }, RETRY_PERIOD);
+                }, PROVIDER_RETRY_PERIOD);
             }
         }
 
+    }
+
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
+    public double getBatteryLevel() {
+        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.ECLAIR) {
+            Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+            int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+            int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1);
+            return (level * 100.0) / scale;
+        } else {
+            return 0;
+        }
     }
 
 }

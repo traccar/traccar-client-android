@@ -71,7 +71,7 @@ public class TrackingService extends Service implements PositionProvider.Positio
         clientController = new ClientController(this, address, port, ProtocolFormatter.createLoginMessage(id));
         clientController.start();
 
-        positionProvider = new PositionProvider(this, provider, interval * 1000, this);
+        positionProvider = new PositionProvider(this, provider, interval * 1000, id, this);
         positionProvider.startUpdates();
     }
 
@@ -95,23 +95,11 @@ public class TrackingService extends Service implements PositionProvider.Positio
         wakeLock.release();
     }
 
-    @TargetApi(Build.VERSION_CODES.ECLAIR)
-    public double getBatteryLevel() {
-        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.ECLAIR) {
-            Intent batteryIntent = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-            int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-            int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1);
-            return (level * 100.0) / scale;
-        } else {
-            return 0;
-        }
-    }
-
     @Override
-    public void onPositionUpdate(Location location) {
-        if (location != null) {
+    public void onPositionUpdate(Position position) {
+        if (position != null) {
             StatusActivity.addMessage(getString(R.string.status_location_update));
-            clientController.setNewLocation(ProtocolFormatter.createLocationMessage(extended, location, getBatteryLevel()));
+            clientController.setNewLocation(ProtocolFormatter.createLocationMessage(extended, position.location, 0));
         }
     }
 
