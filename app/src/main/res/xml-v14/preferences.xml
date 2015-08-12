@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="status"
+        android:summaryOff="@string/settings_status_off_summary"
+        android:summaryOn="@string/settings_status_on_summary"
+        android:switchTextOff="@string/settings_status_off"
+        android:switchTextOn="@string/settings_status_on"
+        android:title="@string/settings_status_title" />
+
     <EditTextPreference
         android:key="id"
         android:title="@string/settings_id_title" />
@@ -38,14 +47,5 @@
         android:key="extended"
         android:summary="@string/settings_extended_summary"
         android:title="@string/settings_extended_title" />
-
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="status"
-        android:summaryOff="@string/settings_status_off_summary"
-        android:summaryOn="@string/settings_status_on_summary"
-        android:switchTextOff="@string/settings_status_off"
-        android:switchTextOn="@string/settings_status_on"
-        android:title="@string/settings_status_title" />
 
 </PreferenceScreen>

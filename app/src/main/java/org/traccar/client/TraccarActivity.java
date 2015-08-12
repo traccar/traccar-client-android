@@ -24,6 +24,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -69,14 +70,26 @@ public class TraccarActivity extends PreferenceActivity {
         super.onPause();
     }
 
+    private void setPreferencesEnabled(boolean enabled) {
+        PreferenceScreen preferenceScreen = getPreferenceScreen();
+        preferenceScreen.findPreference(KEY_ID).setEnabled(enabled);
+        preferenceScreen.findPreference(KEY_ADDRESS).setEnabled(enabled);
+        preferenceScreen.findPreference(KEY_PORT).setEnabled(enabled);
+        preferenceScreen.findPreference(KEY_INTERVAL).setEnabled(enabled);
+        preferenceScreen.findPreference(KEY_PROVIDER).setEnabled(enabled);
+        preferenceScreen.findPreference(KEY_EXTENDED).setEnabled(enabled);
+    }
+
     OnSharedPreferenceChangeListener preferenceChangeListener = new OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             if (key.equals(KEY_STATUS)) {
                 if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
+                    setPreferencesEnabled(false);
                     startService(new Intent(TraccarActivity.this, TraccarService.class));
                 } else {
                     stopService(new Intent(TraccarActivity.this, TraccarService.class));
+                    setPreferencesEnabled(true);
                 }
             } else if (key.equals(KEY_ID)) {
                 findPreference(KEY_ID).setSummary(sharedPreferences.getString(KEY_ID, null));
@@ -86,8 +99,7 @@ public class TraccarActivity extends PreferenceActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -101,16 +113,6 @@ public class TraccarActivity extends PreferenceActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private boolean isServiceRunning() {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (TraccarService.class.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private void initPreferences() {
