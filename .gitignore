@@ -2,6 +2,6 @@
 .idea/
 local.properties
 traccar-client-android.iml
-traccar-client/traccar-client.iml
+app/app.iml
 build/
-traccar-client/build/
+app/build/
