@@ -34,9 +34,9 @@ import android.util.Log;
 /**
  * Background service
  */
-public class TraccarService extends Service {
+public class TrackingService extends Service {
 
-    public static final String LOG_TAG = "Traccar.TraccarService";
+    public static final String LOG_TAG = "Traccar.TrackingService";
 
     private String id;
     private String address;
@@ -149,7 +149,7 @@ public class TraccarService extends Service {
 
                     interval = Integer.valueOf(sharedPreferences.getString(MainActivity.KEY_INTERVAL, null));
                     positionProvider.stopUpdates();
-                    positionProvider = new PositionProvider(TraccarService.this, provider, interval * 1000, positionListener);
+                    positionProvider = new PositionProvider(TrackingService.this, provider, interval * 1000, positionListener);
                     positionProvider.startUpdates();
 
                 } else if (key.equals(MainActivity.KEY_ID)) {
@@ -161,7 +161,7 @@ public class TraccarService extends Service {
 
                     provider = sharedPreferences.getString(MainActivity.KEY_PROVIDER, null);
                     positionProvider.stopUpdates();
-                    positionProvider = new PositionProvider(TraccarService.this, provider, interval * 1000, positionListener);
+                    positionProvider = new PositionProvider(TrackingService.this, provider, interval * 1000, positionListener);
                     positionProvider.startUpdates();
 
                 } else if (key.equals(MainActivity.KEY_EXTENDED)) {

@@ -24,7 +24,7 @@
         <activity android:name=".AboutActivity">
         </activity>
         
-        <service android:name=".TraccarService" />
+        <service android:name=".TrackingService" />
         
         <receiver android:name=".AutostartReceiver">
             <intent-filter>

@@ -29,7 +29,7 @@ public class AutostartReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
     	SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     	if (sharedPreferences.getBoolean(MainActivity.KEY_STATUS, false)) {
-    		context.startService(new Intent(context, TraccarService.class));
+    		context.startService(new Intent(context, TrackingService.class));
     	}
     }
 

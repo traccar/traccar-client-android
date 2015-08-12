@@ -46,7 +46,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
         if (getPreferenceScreen().getSharedPreferences().getBoolean(KEY_STATUS, false)) {
-            startService(new Intent(this, TraccarService.class));
+            setPreferencesEnabled(false);
+            startService(new Intent(this, TrackingService.class));
         }
     }
 
@@ -77,9 +78,9 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         if (key.equals(KEY_STATUS)) {
             if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
                 setPreferencesEnabled(false);
-                startService(new Intent(this, TraccarService.class));
+                startService(new Intent(this, TrackingService.class));
             } else {
-                stopService(new Intent(this, TraccarService.class));
+                stopService(new Intent(this, TrackingService.class));
                 setPreferencesEnabled(true);
             }
         } else if (key.equals(KEY_ID)) {
