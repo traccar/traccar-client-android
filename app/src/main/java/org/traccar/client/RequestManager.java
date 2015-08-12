@@ -15,17 +15,68 @@
  */
 package org.traccar.client;
 
+import android.os.AsyncTask;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class RequestManager {
+
+    private static final int TIMEOUT = 15 * 1000;
 
     public interface RequestHandler {
         void onSuccess();
         void onFailure();
     }
 
+    private static class RequestAsyncTask extends AsyncTask<String, Void, Boolean> {
+
+        private RequestHandler handler;
+
+        public RequestAsyncTask(RequestHandler handler) {
+            this.handler = handler;
+        }
+
+        @Override
+        protected Boolean doInBackground(String... request) {
+            InputStream inputStream = null;
+            try {
+                URL url = new URL(request[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setReadTimeout(TIMEOUT);
+                connection.setConnectTimeout(TIMEOUT);
+                connection.connect();
+                inputStream = connection.getInputStream();
+                while (inputStream.read() != -1);
+                return true;
+            } catch (IOException error) {
+                return false;
+            } finally {
+                try {
+                    if (inputStream != null) {
+                        inputStream.close();
+                    }
+                } catch (IOException secondError) {
+                    return false;
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                handler.onSuccess();
+            } else {
+                handler.onFailure();
+            }
+        }
+    }
+
     public static void sendRequest(String request, RequestHandler handler) {
-
-        handler.onSuccess();
-
+        RequestAsyncTask task = new RequestAsyncTask(handler);
+        task.execute(request);
     }
 
 }
