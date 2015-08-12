@@ -18,17 +18,14 @@ package org.traccar.client;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.preference.PreferenceManager;
 
-public class TrackingService extends Service implements PositionProvider.PositionListener {
+public class TrackingService extends Service {
 
-    private ClientController clientController;
-    private PositionProvider positionProvider;
-    
+    private TrackingController trackingController;
+
     private WakeLock wakeLock;
 
     @Override
@@ -39,20 +36,8 @@ public class TrackingService extends Service implements PositionProvider.Positio
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
         wakeLock.acquire();
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        String id = sharedPreferences.getString(MainActivity.KEY_ID, null);
-
-        clientController = new ClientController(this,
-                sharedPreferences.getString(MainActivity.KEY_ADDRESS, null),
-                Integer.parseInt(sharedPreferences.getString(MainActivity.KEY_PORT, null)),
-                ProtocolFormatter.createLoginMessage(id));
-        clientController.start();
-
-        positionProvider = new PositionProvider(this, this, id,
-                sharedPreferences.getString(MainActivity.KEY_PROVIDER, null),
-                Integer.parseInt(sharedPreferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000);
-        positionProvider.startUpdates();
+        trackingController = new TrackingController(this);
+        trackingController.start();
     }
 
     @Override
@@ -64,23 +49,11 @@ public class TrackingService extends Service implements PositionProvider.Positio
     public void onDestroy() {
         StatusActivity.addMessage(getString(R.string.status_service_destroy));
 
-        if (positionProvider != null) {
-        	positionProvider.stopUpdates();
-        }
-
-        if (clientController != null) {
-        	clientController.stop();
+        if (trackingController != null) {
+            trackingController.stop();
         }
 
         wakeLock.release();
-    }
-
-    @Override
-    public void onPositionUpdate(Position position) {
-        if (position != null) {
-            StatusActivity.addMessage(getString(R.string.status_location_update));
-            clientController.setNewLocation(ProtocolFormatter.createLocationMessage(position.location, 0));
-        }
     }
 
 }
