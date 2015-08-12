@@ -16,8 +16,6 @@
     <string name="settings_status_on">Stop</string>
     <string name="settings_status_off_summary">Servis zaustavljen</string>
     <string name="settings_status_on_summary">Servis pokrenut</string>
-    <string name="settings_extended_title">Produžen format</string>
-    <string name="settings_extended_summary">Koristi novi format za poruke</string>
     <string name="settings_provider_title">Provajder lokacije</string>
     <string name="settings_provider_summary">Izvor lokacijskih podataka</string>
     <string-array name="settings_provider_names">

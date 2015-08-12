@@ -37,7 +37,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     public static final String KEY_PORT = "port";
     public static final String KEY_INTERVAL = "interval";
     public static final String KEY_PROVIDER = "provider";
-    public static final String KEY_EXTENDED = "extended";
     public static final String KEY_STATUS = "status";
 
     @Override
@@ -70,7 +69,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         preferenceScreen.findPreference(KEY_PORT).setEnabled(enabled);
         preferenceScreen.findPreference(KEY_INTERVAL).setEnabled(enabled);
         preferenceScreen.findPreference(KEY_PROVIDER).setEnabled(enabled);
-        preferenceScreen.findPreference(KEY_EXTENDED).setEnabled(enabled);
     }
 
     @Override

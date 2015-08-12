@@ -16,8 +16,6 @@
     <string name="settings_status_on">Stopp</string>
     <string name="settings_status_off_summary">Tjenesten stoppet</string>
     <string name="settings_status_on_summary">Tjenesten kjører</string>
-    <string name="settings_extended_title">Utvidet format</string>
-    <string name="settings_extended_summary">Bruk det nye utvidede formatet</string>
     <string name="settings_provider_title">Lokaliseringsleverandør</string>
     <string name="settings_provider_summary">Kilde for lokaliseringsdata</string>
     <string-array name="settings_provider_names">

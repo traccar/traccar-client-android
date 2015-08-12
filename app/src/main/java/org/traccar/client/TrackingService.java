@@ -40,7 +40,6 @@ public class TrackingService extends Service implements PositionProvider.Positio
     private int port;
     private int interval;
     private String provider;
-    private boolean extended;
 
     private ClientController clientController;
     private PositionProvider positionProvider;
@@ -63,7 +62,6 @@ public class TrackingService extends Service implements PositionProvider.Positio
             provider = sharedPreferences.getString(MainActivity.KEY_PROVIDER, null);
             port = Integer.valueOf(sharedPreferences.getString(MainActivity.KEY_PORT, null));
             interval = Integer.valueOf(sharedPreferences.getString(MainActivity.KEY_INTERVAL, null));
-            extended = sharedPreferences.getBoolean(MainActivity.KEY_EXTENDED, false);
         } catch (Exception error) {
             Log.w(LOG_TAG, error);
         }
@@ -99,7 +97,7 @@ public class TrackingService extends Service implements PositionProvider.Positio
     public void onPositionUpdate(Position position) {
         if (position != null) {
             StatusActivity.addMessage(getString(R.string.status_location_update));
-            clientController.setNewLocation(ProtocolFormatter.createLocationMessage(extended, position.location, 0));
+            clientController.setNewLocation(ProtocolFormatter.createLocationMessage(position.location, 0));
         }
     }
 

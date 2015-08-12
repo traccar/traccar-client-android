@@ -16,8 +16,6 @@
     <string name="settings_status_on">Stop</string>
     <string name="settings_status_off_summary">Service stoppet</string>
     <string name="settings_status_on_summary">Service er aktiv</string>
-    <string name="settings_extended_title">Udvidet format</string>
-    <string name="settings_extended_summary">Brug ny besked format</string>
     <string name="settings_provider_title">Udbyder</string>
     <string name="settings_provider_summary">Udbyder lokaliseringsdata</string>
     <string-array name="settings_provider_names">

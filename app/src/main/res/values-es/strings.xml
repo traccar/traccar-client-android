@@ -16,8 +16,6 @@
     <string name="settings_status_on">Desactivado</string>
     <string name="settings_status_off_summary">Servicio parado</string>
     <string name="settings_status_on_summary">Servicio activado</string>
-    <string name="settings_extended_title">Formato extendido</string>
-    <string name="settings_extended_summary">Utilice el nuevo formato de mensaje</string>
     <string name="settings_provider_title">Proveedor de localización</string>
     <string name="settings_provider_summary">Fuente de los datos de localización</string>
     <string-array name="settings_provider_names">

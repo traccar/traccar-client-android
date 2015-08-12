@@ -40,10 +40,4 @@
         android:summary="@string/settings_provider_summary"
         android:title="@string/settings_provider_title" />
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="extended"
-        android:summary="@string/settings_extended_summary"
-        android:title="@string/settings_extended_title" />
-
 </PreferenceScreen>
