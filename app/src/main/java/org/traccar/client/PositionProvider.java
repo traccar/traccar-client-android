@@ -42,18 +42,18 @@ public class PositionProvider {
     private final long period;
     private final PositionListener listener;
     private final Context context;
-    private String id;
+    private String deviceId;
 
     private boolean useFine;
     private boolean useCoarse;
 
-    public PositionProvider(Context context, PositionListener listener, String id, String type, long period) {
+    public PositionProvider(Context context, PositionListener listener, String deviceId, String type, long period) {
         handler = new Handler(context.getMainLooper());
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         this.period = period;
         this.listener = listener;
         this.context = context;
-        this.id = id;
+        this.deviceId = deviceId;
 
         // Determine providers
         if (type.equals(PROVIDER_MIXED)) {
@@ -105,7 +105,7 @@ public class PositionProvider {
             
             if (location != null && location.getTime() != lastTime) {
                 lastTime = location.getTime();
-                listener.onPositionUpdate(new Position(id, location, getBatteryLevel()));
+                listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel()));
                 return true;
             } else {
                 return false;

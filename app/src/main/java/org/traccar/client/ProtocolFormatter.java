@@ -24,7 +24,7 @@ public class ProtocolFormatter {
 
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("http").encodedAuthority(address + ':' + port)
-                .appendQueryParameter("id", position.getId())
+                .appendQueryParameter("id", position.getDeviceId())
                 .appendQueryParameter("timestamp", String.valueOf(position.getTime().getTime() / 1000))
                 .appendQueryParameter("lat", String.valueOf(position.getLatitude()))
                 .appendQueryParameter("lon", String.valueOf(position.getLongitude()))

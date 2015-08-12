@@ -23,10 +23,10 @@ public class Position {
 
     public Location location; // DELME
 
-    public Position(String id, Location location, double battery) {
+    public Position(String deviceId, Location location, double battery) {
         this.location = location; // DELME
 
-        this.id = id;
+        this.deviceId = deviceId;
         time = new Date(location.getTime());
         latitude = location.getLatitude();
         longitude = location.getLongitude();
@@ -36,9 +36,9 @@ public class Position {
         this.battery = battery;
     }
 
-    private String id;
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    private String deviceId;
+    public String getDeviceId() { return deviceId; }
+    public void setDeviceId(String deviceId) { this.deviceId = deviceId; }
 
     private Date time;
     public Date getTime() { return time; }

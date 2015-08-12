@@ -35,7 +35,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     public static final String LOG_TAG = "traccar";
 
-    public static final String KEY_ID = "id";
+    public static final String KEY_DEVICE = "id";
     public static final String KEY_ADDRESS = "address";
     public static final String KEY_PORT = "port";
     public static final String KEY_INTERVAL = "interval";
@@ -71,7 +71,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     private void setPreferencesEnabled(boolean enabled) {
         PreferenceScreen preferenceScreen = getPreferenceScreen();
-        preferenceScreen.findPreference(KEY_ID).setEnabled(enabled);
+        preferenceScreen.findPreference(KEY_DEVICE).setEnabled(enabled);
         preferenceScreen.findPreference(KEY_ADDRESS).setEnabled(enabled);
         preferenceScreen.findPreference(KEY_PORT).setEnabled(enabled);
         preferenceScreen.findPreference(KEY_INTERVAL).setEnabled(enabled);
@@ -88,8 +88,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
                 stopService(new Intent(this, TrackingService.class));
                 setPreferencesEnabled(true);
             }
-        } else if (key.equals(KEY_ID)) {
-            findPreference(KEY_ID).setSummary(sharedPreferences.getString(KEY_ID, null));
+        } else if (key.equals(KEY_DEVICE)) {
+            findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
         }
     }
 
@@ -119,10 +119,10 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
         SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
 
-        if (!sharedPreferences.contains(KEY_ID)) {
-            sharedPreferences.edit().putString(KEY_ID, id).commit();
+        if (!sharedPreferences.contains(KEY_DEVICE)) {
+            sharedPreferences.edit().putString(KEY_DEVICE, id).commit();
         }
-        findPreference(KEY_ID).setSummary(sharedPreferences.getString(KEY_ID, id));
+        findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, id));
     }
 
     // TEMPORARY PORT CHANGE DIALOG (DELME)

@@ -30,7 +30,7 @@ public class TrackingController implements PositionProvider.PositionListener {
         this.context = context;
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         positionProvider = new PositionProvider(context, this,
-                preferences.getString(MainActivity.KEY_ID, null),
+                preferences.getString(MainActivity.KEY_DEVICE, null),
                 preferences.getString(MainActivity.KEY_PROVIDER, null),
                 Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000);
     }
