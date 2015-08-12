@@ -62,12 +62,12 @@ public class TraccarService extends Service {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         try {
-            id = sharedPreferences.getString(TraccarActivity.KEY_ID, null);
-            address = sharedPreferences.getString(TraccarActivity.KEY_ADDRESS, null);
-            provider = sharedPreferences.getString(TraccarActivity.KEY_PROVIDER, null);
-            port = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_PORT, null));
-            interval = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_INTERVAL, null));
-            extended = sharedPreferences.getBoolean(TraccarActivity.KEY_EXTENDED, false);
+            id = sharedPreferences.getString(MainActivity.KEY_ID, null);
+            address = sharedPreferences.getString(MainActivity.KEY_ADDRESS, null);
+            provider = sharedPreferences.getString(MainActivity.KEY_PROVIDER, null);
+            port = Integer.valueOf(sharedPreferences.getString(MainActivity.KEY_PORT, null));
+            interval = Integer.valueOf(sharedPreferences.getString(MainActivity.KEY_INTERVAL, null));
+            extended = sharedPreferences.getBoolean(MainActivity.KEY_EXTENDED, false);
         } catch (Exception error) {
             Log.w(LOG_TAG, error);
         }
@@ -135,38 +135,38 @@ public class TraccarService extends Service {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             StatusActivity.addMessage(getString(R.string.status_preference_update));
             try {
-                if (key.equals(TraccarActivity.KEY_ADDRESS)) {
+                if (key.equals(MainActivity.KEY_ADDRESS)) {
 
-                    address = sharedPreferences.getString(TraccarActivity.KEY_ADDRESS, null);
+                    address = sharedPreferences.getString(MainActivity.KEY_ADDRESS, null);
                     clientController.setNewServer(address, port);
 
-                } else if (key.equals(TraccarActivity.KEY_PORT)) {
+                } else if (key.equals(MainActivity.KEY_PORT)) {
 
-                    port = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_PORT, null));
+                    port = Integer.valueOf(sharedPreferences.getString(MainActivity.KEY_PORT, null));
                     clientController.setNewServer(address, port);
 
-                } else if (key.equals(TraccarActivity.KEY_INTERVAL)) {
+                } else if (key.equals(MainActivity.KEY_INTERVAL)) {
 
-                    interval = Integer.valueOf(sharedPreferences.getString(TraccarActivity.KEY_INTERVAL, null));
+                    interval = Integer.valueOf(sharedPreferences.getString(MainActivity.KEY_INTERVAL, null));
                     positionProvider.stopUpdates();
                     positionProvider = new PositionProvider(TraccarService.this, provider, interval * 1000, positionListener);
                     positionProvider.startUpdates();
 
-                } else if (key.equals(TraccarActivity.KEY_ID)) {
+                } else if (key.equals(MainActivity.KEY_ID)) {
 
-                    id = sharedPreferences.getString(TraccarActivity.KEY_ID, null);
+                    id = sharedPreferences.getString(MainActivity.KEY_ID, null);
                     clientController.setNewLogin(ProtocolFormatter.createLoginMessage(id));
 
-                } else if (key.equals(TraccarActivity.KEY_PROVIDER)) {
+                } else if (key.equals(MainActivity.KEY_PROVIDER)) {
 
-                    provider = sharedPreferences.getString(TraccarActivity.KEY_PROVIDER, null);
+                    provider = sharedPreferences.getString(MainActivity.KEY_PROVIDER, null);
                     positionProvider.stopUpdates();
                     positionProvider = new PositionProvider(TraccarService.this, provider, interval * 1000, positionListener);
                     positionProvider.startUpdates();
 
-                } else if (key.equals(TraccarActivity.KEY_EXTENDED)) {
+                } else if (key.equals(MainActivity.KEY_EXTENDED)) {
 
-                    extended = sharedPreferences.getBoolean(TraccarActivity.KEY_EXTENDED, false);
+                    extended = sharedPreferences.getBoolean(MainActivity.KEY_EXTENDED, false);
 
                 }
             } catch (Exception error) {

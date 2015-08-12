@@ -28,7 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 @SuppressWarnings("deprecation")
-public class TraccarActivity extends PreferenceActivity {
+public class MainActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
     public static final String LOG_TAG = "traccar";
 
@@ -45,23 +45,21 @@ public class TraccarActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
-        SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
-        if (sharedPreferences.getBoolean(KEY_STATUS, false))
+        if (getPreferenceScreen().getSharedPreferences().getBoolean(KEY_STATUS, false)) {
             startService(new Intent(this, TraccarService.class));
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(
-                preferenceChangeListener);
+        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     protected void onPause() {
-        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(
-                preferenceChangeListener);
         super.onPause();
+        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
     }
 
     private void setPreferencesEnabled(boolean enabled) {
@@ -74,22 +72,20 @@ public class TraccarActivity extends PreferenceActivity {
         preferenceScreen.findPreference(KEY_EXTENDED).setEnabled(enabled);
     }
 
-    OnSharedPreferenceChangeListener preferenceChangeListener = new OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (key.equals(KEY_STATUS)) {
-                if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
-                    setPreferencesEnabled(false);
-                    startService(new Intent(TraccarActivity.this, TraccarService.class));
-                } else {
-                    stopService(new Intent(TraccarActivity.this, TraccarService.class));
-                    setPreferencesEnabled(true);
-                }
-            } else if (key.equals(KEY_ID)) {
-                findPreference(KEY_ID).setSummary(sharedPreferences.getString(KEY_ID, null));
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(KEY_STATUS)) {
+            if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
+                setPreferencesEnabled(false);
+                startService(new Intent(this, TraccarService.class));
+            } else {
+                stopService(new Intent(this, TraccarService.class));
+                setPreferencesEnabled(true);
             }
+        } else if (key.equals(KEY_ID)) {
+            findPreference(KEY_ID).setSummary(sharedPreferences.getString(KEY_ID, null));
         }
-    };
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

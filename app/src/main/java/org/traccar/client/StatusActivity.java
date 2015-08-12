@@ -43,7 +43,7 @@ public class StatusActivity extends ListActivity {
     }
 
     public static void addMessage(String message) {
-        Log.i(TraccarActivity.LOG_TAG, message);
+        Log.i(MainActivity.LOG_TAG, message);
         DateFormat format = DateFormat.getTimeInstance(DateFormat.SHORT);
         message = format.format(new Date()) + " - " + message;
         messages.add(message);
