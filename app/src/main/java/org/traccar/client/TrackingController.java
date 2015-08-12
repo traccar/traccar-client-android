@@ -45,21 +45,25 @@ public class TrackingController implements PositionProvider.PositionListener {
 
     @Override
     public void onPositionUpdate(Position position) {
-        String request = ProtocolFormatter.formatRequest(
-                preferences.getString(MainActivity.KEY_ADDRESS, null),
-                Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)),
-                position.getId(), position.location, position.getBattery());
+        if (position != null) {
+            StatusActivity.addMessage(context.getString(R.string.status_location_update));
 
-        RequestManager.sendRequest(request, new RequestManager.RequestHandler() {
-            @Override
-            public void onSuccess() {
-            }
+            String request = ProtocolFormatter.formatRequest(
+                    preferences.getString(MainActivity.KEY_ADDRESS, null),
+                    Integer.parseInt(preferences.getString(MainActivity.KEY_PORT, null)),
+                    position.getId(), position.location, position.getBattery());
 
-            @Override
-            public void onFailure() {
-                StatusActivity.addMessage(context.getString(R.string.status_send_fail));
-            }
-        });
+            RequestManager.sendRequest(request, new RequestManager.RequestHandler() {
+                @Override
+                public void onSuccess() {
+                }
+
+                @Override
+                public void onFailure() {
+                    StatusActivity.addMessage(context.getString(R.string.status_send_fail));
+                }
+            });
+        }
     }
 
 }

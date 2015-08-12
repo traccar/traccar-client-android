@@ -21,7 +21,7 @@
         android:title="@string/settings_address_title" />
 
     <EditTextPreference
-        android:defaultValue="5005"
+        android:defaultValue="5055"
         android:key="port"
         android:numeric="integer"
         android:summary="@string/settings_port_summary"
