@@ -47,7 +47,7 @@ public class PositionProvider {
     private boolean useFine;
     private boolean useCoarse;
 
-    public PositionProvider(Context context, String type, long period, String id, PositionListener listener) {
+    public PositionProvider(Context context, PositionListener listener, String id, String type, long period) {
         handler = new Handler(context.getMainLooper());
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         this.period = period;

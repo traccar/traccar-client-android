@@ -15,31 +15,16 @@
  */
 package org.traccar.client;
 
-import android.annotation.TargetApi;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.location.Location;
-import android.os.BatteryManager;
-import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 public class TrackingService extends Service implements PositionProvider.PositionListener {
-
-    public static final String LOG_TAG = "Traccar.TrackingService";
-
-    private String id;
-    private String address;
-    private int port;
-    private int interval;
-    private String provider;
 
     private ClientController clientController;
     private PositionProvider positionProvider;
@@ -56,20 +41,17 @@ public class TrackingService extends Service implements PositionProvider.Positio
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        try {
-            id = sharedPreferences.getString(MainActivity.KEY_ID, null);
-            address = sharedPreferences.getString(MainActivity.KEY_ADDRESS, null);
-            provider = sharedPreferences.getString(MainActivity.KEY_PROVIDER, null);
-            port = Integer.valueOf(sharedPreferences.getString(MainActivity.KEY_PORT, null));
-            interval = Integer.valueOf(sharedPreferences.getString(MainActivity.KEY_INTERVAL, null));
-        } catch (Exception error) {
-            Log.w(LOG_TAG, error);
-        }
+        String id = sharedPreferences.getString(MainActivity.KEY_ID, null);
 
-        clientController = new ClientController(this, address, port, ProtocolFormatter.createLoginMessage(id));
+        clientController = new ClientController(this,
+                sharedPreferences.getString(MainActivity.KEY_ADDRESS, null),
+                Integer.parseInt(sharedPreferences.getString(MainActivity.KEY_PORT, null)),
+                ProtocolFormatter.createLoginMessage(id));
         clientController.start();
 
-        positionProvider = new PositionProvider(this, provider, interval * 1000, id, this);
+        positionProvider = new PositionProvider(this, this, id,
+                sharedPreferences.getString(MainActivity.KEY_PROVIDER, null),
+                Integer.parseInt(sharedPreferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000);
         positionProvider.startUpdates();
     }
 
