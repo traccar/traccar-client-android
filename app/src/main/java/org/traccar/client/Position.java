@@ -21,11 +21,10 @@ import java.util.Date;
 
 public class Position {
 
-    public Location location; // DELME
+    public Position() {
+    }
 
     public Position(String deviceId, Location location, double battery) {
-        this.location = location; // DELME
-
         this.deviceId = deviceId;
         time = new Date(location.getTime());
         latitude = location.getLatitude();
@@ -35,6 +34,10 @@ public class Position {
         course = location.getBearing();
         this.battery = battery;
     }
+
+    private long id;
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
     private String deviceId;
     public String getDeviceId() { return deviceId; }
