@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2014 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2015 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,25 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import android.location.Location;
+import android.net.Uri;
 
-/**
- * Protocol formatting
- */
 public class Protocol {
+
+    public static String formatRequest(String address, int port, String id, Location l, double battery) {
+
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("http").encodedAuthority(address + ':' + port)
+                .appendQueryParameter("id", id)
+                .appendQueryParameter("timestamp", String.valueOf(l.getTime()))
+                .appendQueryParameter("lat", String.valueOf(l.getLatitude()))
+                .appendQueryParameter("lon", String.valueOf(l.getLongitude()))
+                .appendQueryParameter("speed", String.valueOf(l.getSpeed() * 1.943844))
+                .appendQueryParameter("bearing", String.valueOf(l.getBearing()))
+                .appendQueryParameter("altitude", String.valueOf(l.getAltitude()))
+                .appendQueryParameter("batt", String.valueOf(battery));
+
+        return builder.build().toString();
+    }
 
     /**
      * Format device id message
