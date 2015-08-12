@@ -15,7 +15,10 @@
  */
 package org.traccar.client;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -39,9 +42,12 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     public static final String KEY_PROVIDER = "provider";
     public static final String KEY_STATUS = "status";
 
+    private boolean firstLaunch; // DELME
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        firstLaunch = !PreferenceManager.getDefaultSharedPreferences(this).contains(KEY_PORT);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
         if (getPreferenceScreen().getSharedPreferences().getBoolean(KEY_STATUS, false)) {
@@ -53,6 +59,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     @Override
     protected void onResume() {
         super.onResume();
+        checkAndShowPortDialog(); // DELME
         getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
     }
 
@@ -116,6 +123,37 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             sharedPreferences.edit().putString(KEY_ID, id).commit();
         }
         findPreference(KEY_ID).setSummary(sharedPreferences.getString(KEY_ID, id));
+    }
+
+    // TEMPORARY PORT CHANGE DIALOG (DELME)
+
+    private void checkAndShowPortDialog() {
+
+        String KEY_SHOWN_PORT_DIALOG = "portDialogHasBeenShown";
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (!firstLaunch) {
+            if (!preferences.contains(KEY_SHOWN_PORT_DIALOG)) {
+                showDialog(0);
+            }
+        }
+
+        preferences.edit().putBoolean(KEY_SHOWN_PORT_DIALOG, true).commit();
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setMessage("Communication protocol used by the app has changed. Now it uses port 5055 on Traccar server. Do you want to change port to 5055?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString(KEY_PORT, "5055").commit();
+                    }
+                })
+                .setNegativeButton("No", null);
+
+        return builder.create();
     }
 
 }
