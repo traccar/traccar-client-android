@@ -53,7 +53,7 @@ public class TrackingController implements PositionProvider.PositionListener {
                     Integer.parseInt(preferences.getString(MainActivity.KEY_PORT, null)),
                     position);
 
-            RequestManager.sendRequest(request, new RequestManager.RequestHandler() {
+            RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
                 @Override
                 public void onSuccess() {
                 }

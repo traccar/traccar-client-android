@@ -41,27 +41,7 @@ public class RequestManager {
 
         @Override
         protected Boolean doInBackground(String... request) {
-            InputStream inputStream = null;
-            try {
-                URL url = new URL(request[0]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setReadTimeout(TIMEOUT);
-                connection.setConnectTimeout(TIMEOUT);
-                connection.connect();
-                inputStream = connection.getInputStream();
-                while (inputStream.read() != -1);
-                return true;
-            } catch (IOException error) {
-                return false;
-            } finally {
-                try {
-                    if (inputStream != null) {
-                        inputStream.close();
-                    }
-                } catch (IOException secondError) {
-                    return false;
-                }
-            }
+            return sendRequest(request[0]);
         }
 
         @Override
@@ -74,7 +54,31 @@ public class RequestManager {
         }
     }
 
-    public static void sendRequest(String request, RequestHandler handler) {
+    public static boolean sendRequest(String request) {
+        InputStream inputStream = null;
+        try {
+            URL url = new URL(request);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setReadTimeout(TIMEOUT);
+            connection.setConnectTimeout(TIMEOUT);
+            connection.connect();
+            inputStream = connection.getInputStream();
+            while (inputStream.read() != -1);
+            return true;
+        } catch (IOException error) {
+            return false;
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            } catch (IOException secondError) {
+                return false;
+            }
+        }
+    }
+
+    public static void sendRequestAsync(String request, RequestHandler handler) {
         RequestAsyncTask task = new RequestAsyncTask(handler);
         task.execute(request);
     }
