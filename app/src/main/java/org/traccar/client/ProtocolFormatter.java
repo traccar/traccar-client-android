@@ -20,21 +20,20 @@ import android.net.Uri;
 
 public class ProtocolFormatter {
 
-    public static String formatRequest(String address, int port, String id, Location l, double battery) {
+    public static String formatRequest(String address, int port, Position position) {
 
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("http").encodedAuthority(address + ':' + port)
-                .appendQueryParameter("id", id)
-                .appendQueryParameter("timestamp", String.valueOf(l.getTime()))
-                .appendQueryParameter("lat", String.valueOf(l.getLatitude()))
-                .appendQueryParameter("lon", String.valueOf(l.getLongitude()))
-                .appendQueryParameter("speed", String.valueOf(l.getSpeed() * 1.943844))
-                .appendQueryParameter("bearing", String.valueOf(l.getBearing()))
-                .appendQueryParameter("altitude", String.valueOf(l.getAltitude()))
-                .appendQueryParameter("batt", String.valueOf(battery));
+                .appendQueryParameter("id", position.getId())
+                .appendQueryParameter("timestamp", String.valueOf(position.getTime().getTime() / 1000))
+                .appendQueryParameter("lat", String.valueOf(position.getLatitude()))
+                .appendQueryParameter("lon", String.valueOf(position.getLongitude()))
+                .appendQueryParameter("speed", String.valueOf(position.getSpeed() * 1.943844))
+                .appendQueryParameter("bearing", String.valueOf(position.getCourse()))
+                .appendQueryParameter("altitude", String.valueOf(position.getAltitude()))
+                .appendQueryParameter("batt", String.valueOf(position.getBattery()));
 
         return builder.build().toString();
     }
 
 }
-

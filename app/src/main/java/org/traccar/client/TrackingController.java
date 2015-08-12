@@ -51,7 +51,7 @@ public class TrackingController implements PositionProvider.PositionListener {
             String request = ProtocolFormatter.formatRequest(
                     preferences.getString(MainActivity.KEY_ADDRESS, null),
                     Integer.parseInt(preferences.getString(MainActivity.KEY_PORT, null)),
-                    position.getId(), position.location, position.getBattery());
+                    position);
 
             RequestManager.sendRequest(request, new RequestManager.RequestHandler() {
                 @Override
