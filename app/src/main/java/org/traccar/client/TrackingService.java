@@ -45,7 +45,6 @@ public class TrackingService extends Service {
     private String provider;
     private boolean extended;
 
-    private SharedPreferences sharedPreferences;
     private ClientController clientController;
     private PositionProvider positionProvider;
     
@@ -59,7 +58,7 @@ public class TrackingService extends Service {
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
         wakeLock.acquire();
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         try {
             id = sharedPreferences.getString(MainActivity.KEY_ID, null);
@@ -77,8 +76,6 @@ public class TrackingService extends Service {
 
         positionProvider = new PositionProvider(this, provider, interval * 1000, positionListener);
         positionProvider.startUpdates();
-
-        sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
     }
 
     @Override
@@ -89,10 +86,6 @@ public class TrackingService extends Service {
     @Override
     public void onDestroy() {
         StatusActivity.addMessage(getString(R.string.status_service_destroy));
-
-        if (sharedPreferences != null) {
-        	sharedPreferences.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
-        }
 
         if (positionProvider != null) {
         	positionProvider.stopUpdates();
@@ -124,53 +117,6 @@ public class TrackingService extends Service {
             if (location != null) {
                 StatusActivity.addMessage(getString(R.string.status_location_update));
                 clientController.setNewLocation(ProtocolFormatter.createLocationMessage(extended, location, getBatteryLevel()));
-            }
-        }
-
-    };
-
-    OnSharedPreferenceChangeListener preferenceChangeListener = new OnSharedPreferenceChangeListener() {
-
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            StatusActivity.addMessage(getString(R.string.status_preference_update));
-            try {
-                if (key.equals(MainActivity.KEY_ADDRESS)) {
-
-                    address = sharedPreferences.getString(MainActivity.KEY_ADDRESS, null);
-                    clientController.setNewServer(address, port);
-
-                } else if (key.equals(MainActivity.KEY_PORT)) {
-
-                    port = Integer.valueOf(sharedPreferences.getString(MainActivity.KEY_PORT, null));
-                    clientController.setNewServer(address, port);
-
-                } else if (key.equals(MainActivity.KEY_INTERVAL)) {
-
-                    interval = Integer.valueOf(sharedPreferences.getString(MainActivity.KEY_INTERVAL, null));
-                    positionProvider.stopUpdates();
-                    positionProvider = new PositionProvider(TrackingService.this, provider, interval * 1000, positionListener);
-                    positionProvider.startUpdates();
-
-                } else if (key.equals(MainActivity.KEY_ID)) {
-
-                    id = sharedPreferences.getString(MainActivity.KEY_ID, null);
-                    clientController.setNewLogin(ProtocolFormatter.createLoginMessage(id));
-
-                } else if (key.equals(MainActivity.KEY_PROVIDER)) {
-
-                    provider = sharedPreferences.getString(MainActivity.KEY_PROVIDER, null);
-                    positionProvider.stopUpdates();
-                    positionProvider = new PositionProvider(TrackingService.this, provider, interval * 1000, positionListener);
-                    positionProvider.startUpdates();
-
-                } else if (key.equals(MainActivity.KEY_EXTENDED)) {
-
-                    extended = sharedPreferences.getBoolean(MainActivity.KEY_EXTENDED, false);
-
-                }
-            } catch (Exception error) {
-                Log.w(LOG_TAG, error);
             }
         }
 
