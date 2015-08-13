@@ -25,6 +25,7 @@ public class TrackingController implements PositionProvider.PositionListener {
     private SharedPreferences preferences;
 
     private PositionProvider positionProvider;
+    private DatabaseHelper databaseHelper;
 
     public TrackingController(Context context) {
         this.context = context;
@@ -33,6 +34,7 @@ public class TrackingController implements PositionProvider.PositionListener {
                 preferences.getString(MainActivity.KEY_DEVICE, null),
                 preferences.getString(MainActivity.KEY_PROVIDER, null),
                 Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000);
+        databaseHelper = new DatabaseHelper(context);
     }
 
     public void start() {
@@ -47,6 +49,8 @@ public class TrackingController implements PositionProvider.PositionListener {
     public void onPositionUpdate(Position position) {
         if (position != null) {
             StatusActivity.addMessage(context.getString(R.string.status_location_update));
+
+
 
             String request = ProtocolFormatter.formatRequest(
                     preferences.getString(MainActivity.KEY_ADDRESS, null),

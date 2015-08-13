@@ -29,17 +29,17 @@ public class DatabaseHelperTest {
         Position position = new Position("123456789012345", new Location("gps"), 0);
         position.setTime(new Date(0));
 
-        assertNull(databaseHelper.selectPosition(db));
+        assertNull(databaseHelper.selectPosition());
 
-        databaseHelper.insertPosition(db, position);
+        databaseHelper.insertPosition(position);
 
-        position = databaseHelper.selectPosition(db);
+        position = databaseHelper.selectPosition();
 
         assertNotNull(position);
 
-        databaseHelper.deletePosition(db, position.getId());
+        databaseHelper.deletePosition(position.getId());
 
-        assertNull(databaseHelper.selectPosition(db));
+        assertNull(databaseHelper.selectPosition());
 
     }
 
