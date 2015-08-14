@@ -33,8 +33,6 @@ import android.view.MenuItem;
 @SuppressWarnings("deprecation")
 public class MainActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
-    public static final String LOG_TAG = "traccar";
-
     public static final String KEY_DEVICE = "id";
     public static final String KEY_ADDRESS = "address";
     public static final String KEY_PORT = "port";

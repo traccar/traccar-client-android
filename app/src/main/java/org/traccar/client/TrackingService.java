@@ -23,8 +23,11 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.util.Log;
 
 public class TrackingService extends Service {
+
+    private static final String TAG = TrackingService.class.getSimpleName();
 
     private TrackingController trackingController;
 
@@ -32,6 +35,7 @@ public class TrackingService extends Service {
 
     @Override
     public void onCreate() {
+        Log.i(TAG, "service create");
         StatusActivity.addMessage(getString(R.string.status_service_create));
 
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -55,6 +59,7 @@ public class TrackingService extends Service {
 
     @Override
     public void onDestroy() {
+        Log.i(TAG, "service destroy");
         StatusActivity.addMessage(getString(R.string.status_service_destroy));
 
         if (trackingController != null) {

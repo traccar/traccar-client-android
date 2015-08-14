@@ -27,8 +27,11 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 public class PositionProvider {
+
+    private static final String TAG = PositionProvider.class.getSimpleName();
 
     public static final String PROVIDER_MIXED = "mixed";
     public static final long PROVIDER_RETRY_PERIOD = 60 * 1000;
@@ -104,10 +107,12 @@ public class PositionProvider {
             }*/
             
             if (location != null && location.getTime() != lastTime) {
+                Log.i(TAG, "location new");
                 lastTime = location.getTime();
                 listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel()));
                 return true;
             } else {
+                Log.i(TAG, location != null ? "location old" : "location nil");
                 return false;
             }
         }

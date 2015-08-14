@@ -23,7 +23,6 @@ import java.util.Set;
 
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -43,7 +42,6 @@ public class StatusActivity extends ListActivity {
     }
 
     public static void addMessage(String message) {
-        Log.i(MainActivity.LOG_TAG, message);
         DateFormat format = DateFormat.getTimeInstance(DateFormat.SHORT);
         message = format.format(new Date()) + " - " + message;
         messages.add(message);

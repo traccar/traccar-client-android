@@ -19,9 +19,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class TrackingController implements PositionProvider.PositionListener, NetworkManager.NetworkHandler {
 
+    private static final String TAG = TrackingController.class.getSimpleName();
     private static final int RETRY_DELAY = 30 * 1000;
 
     private boolean isOnline;
@@ -49,7 +51,9 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     }
 
     public void start() {
-        read();
+        if (isOnline) {
+            read();
+        }
         positionProvider.startUpdates();
         networkManager.start();
     }
@@ -84,7 +88,19 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     // read -> send -> retry -> read -> send
     //
 
+    private void log(String action, Position position) {
+        if (position != null) {
+            action += " (" +
+                    "id:" + position.getId() +
+                    " time:" + position.getTime().getTime() / 1000 +
+                    " lat:" + position.getLatitude() +
+                    " lon:" + position.getLongitude() + ")";
+        }
+        Log.d(TAG, action);
+    }
+
     private void write(Position position) {
+        log("write", position);
         databaseHelper.insertPositionAsync(position, new DatabaseHelper.DatabaseHandler<Void>() {
             @Override
             public void onSuccess(Void result) {
@@ -101,6 +117,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     }
 
     private void read() {
+        log("read", null);
         databaseHelper.selectPositionAsync(new DatabaseHelper.DatabaseHandler<Position>() {
             @Override
             public void onSuccess(Position result) {
@@ -119,6 +136,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     }
 
     private void delete(Position position) {
+        log("delete", position);
         databaseHelper.deletePositionAsync(position.getId(), new DatabaseHelper.DatabaseHandler<Void>() {
             @Override
             public void onSuccess(Void result) {
@@ -133,6 +151,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     }
 
     private void send(final Position position) {
+        log("send", position);
         String request = ProtocolFormatter.formatRequest(
                 preferences.getString(MainActivity.KEY_ADDRESS, null),
                 Integer.parseInt(preferences.getString(MainActivity.KEY_PORT, null)),
@@ -153,10 +172,13 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     }
 
     private void retry() {
+        log("retry", null);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                read();
+                if (isOnline) {
+                    read();
+                }
             }
         }, RETRY_DELAY);
     }

@@ -23,8 +23,6 @@ import android.preference.PreferenceManager;
 
 public class AutostartReceiver extends BroadcastReceiver {
 	
-	public static final String LOG_TAG = "Traccar.AutostartReceiver";
- 
     @Override
     public void onReceive(Context context, Intent intent) {
     	SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
