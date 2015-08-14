@@ -20,10 +20,11 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 
-public class TrackingController implements PositionProvider.PositionListener {
+public class TrackingController implements PositionProvider.PositionListener, NetworkManager.NetworkHandler {
 
     private static final int RETRY_DELAY = 30 * 1000;
 
+    private boolean isOnline;
     private boolean isWaiting;
 
     private Context context;
@@ -32,6 +33,7 @@ public class TrackingController implements PositionProvider.PositionListener {
 
     private PositionProvider positionProvider;
     private DatabaseHelper databaseHelper;
+    private NetworkManager networkManager;
 
     public TrackingController(Context context) {
         this.context = context;
@@ -42,13 +44,18 @@ public class TrackingController implements PositionProvider.PositionListener {
                 preferences.getString(MainActivity.KEY_PROVIDER, null),
                 Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000);
         databaseHelper = new DatabaseHelper(context);
+        networkManager = new NetworkManager(context, this);
+        isOnline = networkManager.isOnline();
     }
 
     public void start() {
+        read();
         positionProvider.startUpdates();
+        networkManager.start();
     }
 
     public void stop() {
+        networkManager.stop();
         positionProvider.stopUpdates();
         handler.removeCallbacksAndMessages(null);
     }
@@ -61,11 +68,37 @@ public class TrackingController implements PositionProvider.PositionListener {
         }
     }
 
+    @Override
+    public void onNetworkUpdate(boolean isOnline) {
+        if (!this.isOnline && isOnline) {
+            read();
+        }
+        this.isOnline = isOnline;
+    }
+
+    //
+    // State transition examples:
     //
     // write -> read -> send -> delete -> read
     //
     // read -> send -> retry -> read -> send
     //
+
+    private void write(Position position) {
+        databaseHelper.insertPositionAsync(position, new DatabaseHelper.DatabaseHandler<Void>() {
+            @Override
+            public void onSuccess(Void result) {
+                if (isOnline && isWaiting) {
+                    read();
+                    isWaiting = false;
+                }
+            }
+
+            @Override
+            public void onFailure(RuntimeException error) {
+            }
+        });
+    }
 
     private void read() {
         databaseHelper.selectPositionAsync(new DatabaseHelper.DatabaseHandler<Position>() {
@@ -81,22 +114,6 @@ public class TrackingController implements PositionProvider.PositionListener {
             @Override
             public void onFailure(RuntimeException error) {
                 retry();
-            }
-        });
-    }
-
-    private void write(Position position) {
-        databaseHelper.insertPositionAsync(position, new DatabaseHelper.DatabaseHandler<Void>() {
-            @Override
-            public void onSuccess(Void result) {
-                if (isWaiting) {
-                    read();
-                    isWaiting = false;
-                }
-            }
-
-            @Override
-            public void onFailure(RuntimeException error) {
             }
         });
     }
