@@ -51,9 +51,16 @@ public class TrackingService extends Service {
         return null;
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStart(Intent intent, int startId) {
+        AutostartReceiver.completeWakefulIntent(intent);
+    }
+
     @TargetApi(Build.VERSION_CODES.ECLAIR)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        onStart(intent, startId);
         return START_STICKY;
     }
 
