@@ -26,7 +26,7 @@
         android:title="@string/settings_port_title" />
 
     <EditTextPreference
-        android:defaultValue="60"
+        android:defaultValue="300"
         android:key="interval"
         android:numeric="integer"
         android:summary="@string/settings_interval_summary"
