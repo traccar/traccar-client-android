@@ -45,10 +45,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         this.context = context;
         handler = new Handler();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        positionProvider = new PositionProvider(context, this,
-                preferences.getString(MainActivity.KEY_DEVICE, null),
-                preferences.getString(MainActivity.KEY_PROVIDER, null),
-                Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000);
+        positionProvider = new PositionProvider(context, this);
         databaseHelper = new DatabaseHelper(context);
         networkManager = new NetworkManager(context, this);
         isOnline = networkManager.isOnline();

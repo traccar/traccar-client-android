@@ -21,7 +21,6 @@
     <string-array name="settings_provider_names">
         <item>GPS-lokalisering</item>
         <item>Nettverkslokalisering</item>
-        <item>Blandet lokalisering</item>
     </string-array>
     
     <string name="menu_status">Status</string>

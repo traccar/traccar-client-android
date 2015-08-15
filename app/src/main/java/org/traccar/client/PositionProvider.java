@@ -19,146 +19,80 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class PositionProvider {
+public class PositionProvider implements LocationListener {
 
     private static final String TAG = PositionProvider.class.getSimpleName();
-
-    public static final String PROVIDER_MIXED = "mixed";
-    public static final long PROVIDER_RETRY_PERIOD = 60 * 1000;
 
     public interface PositionListener {
         void onPositionUpdate(Position position);
     }
-    
-    private final Handler handler;
-    private final LocationManager locationManager;
-    private final long period;
+
     private final PositionListener listener;
+
     private final Context context;
+    private final SharedPreferences preferences;
+    private final LocationManager locationManager;
+
     private String deviceId;
+    private String type;
+    private final long period;
 
-    private boolean useFine;
-    private boolean useCoarse;
-
-    public PositionProvider(Context context, PositionListener listener, String deviceId, String type, long period) {
-        handler = new Handler(context.getMainLooper());
-        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        this.period = period;
-        this.listener = listener;
+    public PositionProvider(Context context, PositionListener listener) {
         this.context = context;
-        this.deviceId = deviceId;
+        this.listener = listener;
 
-        // Determine providers
-        if (type.equals(PROVIDER_MIXED)) {
-            useFine = true;
-            useCoarse = true;
-        } else if (type.equals(LocationManager.GPS_PROVIDER)) {
-            useFine = true;
-        } else if (type.equals(LocationManager.NETWORK_PROVIDER)) {
-            useCoarse = true;
-        }
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+
+        deviceId = preferences.getString(MainActivity.KEY_DEVICE, null);
+        type = preferences.getString(MainActivity.KEY_PROVIDER, null);
+        period = Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000;
     }
 
     public void startUpdates() {
-        if (useFine) {
-            try {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, period, 0, fineLocationListener);
-            } catch (Exception e) {
-                StatusActivity.addMessage(context.getString(R.string.status_provider_missing));
-            }
-        }
-        if (useCoarse) {
-            try {
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, period, 0, coarseLocationListener);
-            } catch (Exception e) {
-                StatusActivity.addMessage(context.getString(R.string.status_provider_missing));
-            }
-        }
-        handler.postDelayed(updateTask, period);
+        locationManager.requestLocationUpdates(type, period, 0, this);
     }
 
     public void stopUpdates() {
-        handler.removeCallbacks(updateTask);
-        locationManager.removeUpdates(fineLocationListener);
-        locationManager.removeUpdates(coarseLocationListener);
+        locationManager.removeUpdates(this);
     }
 
-    private final Runnable updateTask = new Runnable() {
+    private long lastTime;
 
-        private long lastTime;
-
-        private boolean tryProvider(String provider) {
-            Location location = locationManager.getLastKnownLocation(provider);
-
-            /*if (location != null) {
-                Toast.makeText(context, "phone: " + new Date() + "\ngps: " + new Date(location.getTime()), Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(context, "no location", Toast.LENGTH_LONG).show();
-            }*/
-            
-            if (location != null && location.getTime() != lastTime) {
-                Log.i(TAG, "location new");
-                lastTime = location.getTime();
-                listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel()));
-                return true;
-            } else {
-                Log.i(TAG, location != null ? "location old" : "location nil");
-                return false;
-            }
+    @Override
+    public void onLocationChanged(Location location) {
+        if (location != null && location.getTime() != lastTime) {
+            Log.i(TAG, "location new");
+            lastTime = location.getTime();
+            listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel()));
+        } else {
+            Log.i(TAG, location != null ? "location old" : "location nil");
         }
+    }
 
-        @Override
-        public void run() {
-            if (useFine && tryProvider(LocationManager.GPS_PROVIDER)) {
-            } else if (useCoarse && tryProvider(LocationManager.NETWORK_PROVIDER)) {
-            } else {
-                listener.onPositionUpdate(null);
-            }
-            handler.postDelayed(this, period);
-        }
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.i(TAG, "provider status");
+    }
 
-    };
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.i(TAG, "provider enabled");
+    }
 
-    private final InternalLocationListener fineLocationListener = new InternalLocationListener();
-    private final InternalLocationListener coarseLocationListener = new InternalLocationListener();
-
-    private class InternalLocationListener implements LocationListener {
-
-        @Override
-        public void onLocationChanged(Location location) {
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-        }
-
-        @Override
-        public void onStatusChanged(final String provider, int status, Bundle extras) {
-            if (status == LocationProvider.TEMPORARILY_UNAVAILABLE || status == LocationProvider.OUT_OF_SERVICE) {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        locationManager.removeUpdates(InternalLocationListener.this);
-                        locationManager.requestLocationUpdates(provider, period, 0, InternalLocationListener.this);
-                    }
-                }, PROVIDER_RETRY_PERIOD);
-            }
-        }
-
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.i(TAG, "provider disabled");
     }
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)

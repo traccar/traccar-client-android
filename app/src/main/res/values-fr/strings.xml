@@ -21,7 +21,6 @@
     <string-array name="settings_provider_names">
         <item>Mode GPS uniquement</item>
         <item>Mode cellulaire uniquement</item>
-        <item>Mode hybride</item>
     </string-array>
 
     <string name="menu_status">Etat</string>

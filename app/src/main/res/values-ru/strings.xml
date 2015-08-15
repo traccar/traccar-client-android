@@ -21,7 +21,6 @@
     <string-array name="settings_provider_names">
         <item>GPS провайдер</item>
         <item>Сетевой провайдер</item>
-        <item>Смешанный провайдер</item>
     </string-array>
 
     <string name="menu_status">Состояние</string>

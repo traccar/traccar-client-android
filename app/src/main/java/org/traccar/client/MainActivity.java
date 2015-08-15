@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -48,6 +49,12 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         firstLaunch = !PreferenceManager.getDefaultSharedPreferences(this).contains(KEY_PORT);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
+
+        // DELME
+        if (PreferenceManager.getDefaultSharedPreferences(this).getString(KEY_PROVIDER, null).equals("mixed")) {
+            PreferenceManager.getDefaultSharedPreferences(this).edit().putString(KEY_PROVIDER, LocationManager.GPS_PROVIDER).commit();
+        }
+
         if (getPreferenceScreen().getSharedPreferences().getBoolean(KEY_STATUS, false)) {
             setPreferencesEnabled(false);
             startService(new Intent(this, TrackingService.class));

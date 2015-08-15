@@ -21,7 +21,6 @@
     <string-array name="settings_provider_names">
         <item>GPS</item>
         <item>Mobilní síť</item>
-        <item>Obojí</item>
     </string-array>
     
     <string name="menu_status">Stav</string>

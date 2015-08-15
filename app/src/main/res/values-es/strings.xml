@@ -21,7 +21,6 @@
     <string-array name="settings_provider_names">
         <item>Proveedor GPS</item>
         <item>Proveedor de red</item>
-        <item>Proveedor mixto</item>
 	</string-array>
 
     <string name="menu_status">Estado</string>
