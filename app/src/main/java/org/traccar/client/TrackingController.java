@@ -18,6 +18,7 @@ package org.traccar.client;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -25,6 +26,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     private static final String TAG = TrackingController.class.getSimpleName();
     private static final int RETRY_DELAY = 30 * 1000;
+    private static final int WAKE_LOCK_TIMEOUT = 60 * 1000;
 
     private boolean isOnline;
     private boolean isWaiting;
@@ -37,6 +39,8 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     private DatabaseHelper databaseHelper;
     private NetworkManager networkManager;
 
+    private PowerManager.WakeLock wakeLock;
+
     public TrackingController(Context context) {
         this.context = context;
         handler = new Handler();
@@ -48,6 +52,9 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         databaseHelper = new DatabaseHelper(context);
         networkManager = new NetworkManager(context, this);
         isOnline = networkManager.isOnline();
+
+        PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
     }
 
     public void start() {
@@ -101,6 +108,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     private void write(Position position) {
         log("write", position);
+        wakeLock.acquire(WAKE_LOCK_TIMEOUT);
         databaseHelper.insertPositionAsync(position, new DatabaseHelper.DatabaseHandler<Void>() {
             @Override
             public void onSuccess(Void result) {
@@ -108,16 +116,19 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
                     read();
                     isWaiting = false;
                 }
+                wakeLock.release();
             }
 
             @Override
             public void onFailure(RuntimeException error) {
+                wakeLock.release();
             }
         });
     }
 
     private void read() {
         log("read", null);
+        wakeLock.acquire(WAKE_LOCK_TIMEOUT);
         databaseHelper.selectPositionAsync(new DatabaseHelper.DatabaseHandler<Position>() {
             @Override
             public void onSuccess(Position result) {
@@ -126,32 +137,38 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
                 } else {
                     isWaiting = true;
                 }
+                wakeLock.release();
             }
 
             @Override
             public void onFailure(RuntimeException error) {
                 retry();
+                wakeLock.release();
             }
         });
     }
 
     private void delete(Position position) {
         log("delete", position);
+        wakeLock.acquire(WAKE_LOCK_TIMEOUT);
         databaseHelper.deletePositionAsync(position.getId(), new DatabaseHelper.DatabaseHandler<Void>() {
             @Override
             public void onSuccess(Void result) {
                 read();
+                wakeLock.release();
             }
 
             @Override
             public void onFailure(RuntimeException error) {
                 retry();
+                wakeLock.release();
             }
         });
     }
 
     private void send(final Position position) {
         log("send", position);
+        wakeLock.acquire(WAKE_LOCK_TIMEOUT);
         String request = ProtocolFormatter.formatRequest(
                 preferences.getString(MainActivity.KEY_ADDRESS, null),
                 Integer.parseInt(preferences.getString(MainActivity.KEY_PORT, null)),
@@ -161,12 +178,14 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
             @Override
             public void onSuccess() {
                 delete(position);
+                wakeLock.release();
             }
 
             @Override
             public void onFailure() {
                 StatusActivity.addMessage(context.getString(R.string.status_send_fail));
                 retry();
+                wakeLock.release();
             }
         });
     }

@@ -17,12 +17,9 @@ package org.traccar.client;
 
 import android.annotation.TargetApi;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
-import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.util.Log;
 
 public class TrackingService extends Service {
@@ -31,16 +28,10 @@ public class TrackingService extends Service {
 
     private TrackingController trackingController;
 
-    private WakeLock wakeLock;
-
     @Override
     public void onCreate() {
         Log.i(TAG, "service create");
         StatusActivity.addMessage(getString(R.string.status_service_create));
-
-        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
-        wakeLock.acquire();
 
         trackingController = new TrackingController(this);
         trackingController.start();
@@ -72,8 +63,6 @@ public class TrackingService extends Service {
         if (trackingController != null) {
             trackingController.stop();
         }
-
-        wakeLock.release();
     }
 
 }
