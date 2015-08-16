@@ -13,7 +13,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('/home/user/Documents/android.keystore')
+            storeFile file('../../android.keystore')
             keyAlias "tananaev"
             storePassword ""
             keyPassword ""
