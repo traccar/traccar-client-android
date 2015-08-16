@@ -35,12 +35,8 @@
 
     <string name="status_service_create">Service created</string>
     <string name="status_service_destroy">Service destroyed</string>
-    <string name="status_connection_success">Connection succeeded</string>
-    <string name="status_connection_fail">Connection failed</string>
     <string name="status_send_fail">Send failed</string>
     <string name="status_location_update">Location update</string>
-    <string name="status_preference_update">Preference update</string>
     <string name="status_connectivity_change">Connectivity change</string>
-    <string name="status_provider_missing">Missing location provider</string>
 
 </resources>

@@ -35,11 +35,8 @@
 
     <string name="status_service_create">Služba vytvořena</string>
     <string name="status_service_destroy">Služba zastavena</string>
-    <string name="status_connection_success">Spojení se zdařilo</string>
-    <string name="status_connection_fail">Spojení selhalo</string>
     <string name="status_send_fail">Odesílání selhalo</string>
     <string name="status_location_update">Aktualizace pozice</string>
-    <string name="status_preference_update">Aktualizace nastavení</string>
     <string name="status_connectivity_change">Změna připojení</string>
 
 </resources>

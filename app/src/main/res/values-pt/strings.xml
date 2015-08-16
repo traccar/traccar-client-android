@@ -35,11 +35,8 @@
 
     <string name="status_service_create">Serviço criado</string>
     <string name="status_service_destroy">Serviço destruído</string>
-    <string name="status_connection_success">Sucesso na conexão</string>
-    <string name="status_connection_fail">Falha na conexão</string>
     <string name="status_send_fail">Falha no envio</string>
     <string name="status_location_update">Localização atualizada</string>
-    <string name="status_preference_update">Preferências atualizadas</string>
     <string name="status_connectivity_change">Mudança de conectividade</string>
 
 </resources>

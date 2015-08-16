@@ -35,11 +35,8 @@
 
     <string name="status_service_create">Servis kreiran</string>
     <string name="status_service_destroy">Servis uništen</string>
-    <string name="status_connection_success">Konekcija uspešna</string>
-    <string name="status_connection_fail">Konekcija neuspešna</string>
     <string name="status_send_fail">Slanje neuspešno</string>
     <string name="status_location_update">Ažuriranje lokacije</string>
-    <string name="status_preference_update">Ažuriranje preferenci</string>
     <string name="status_connectivity_change">Promenjena konekcija</string>
 
 </resources>

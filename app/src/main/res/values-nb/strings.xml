@@ -35,11 +35,8 @@
 
     <string name="status_service_create">Tjeneste opprettet</string>
     <string name="status_service_destroy">Tjeneste ødelagt</string>
-    <string name="status_connection_success">Tilkobling var vellykket</string>
-    <string name="status_connection_fail">Tilkobling mislyktes</string>
     <string name="status_send_fail">Sending mislyktes</string>
     <string name="status_location_update">Plassering oppdatert</string>
-    <string name="status_preference_update">Innstillinger oppdatert</string>
     <string name="status_connectivity_change">Tilkobling forandret</string>
 
 </resources>
