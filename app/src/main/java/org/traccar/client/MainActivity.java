@@ -40,6 +40,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     public static final String KEY_INTERVAL = "interval";
     public static final String KEY_PROVIDER = "provider";
     public static final String KEY_STATUS = "status";
+    public static final String KEY_FOREGROUND = "foreground";
 
     private boolean firstLaunch; // DELME
 
@@ -81,6 +82,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         preferenceScreen.findPreference(KEY_PORT).setEnabled(enabled);
         preferenceScreen.findPreference(KEY_INTERVAL).setEnabled(enabled);
         preferenceScreen.findPreference(KEY_PROVIDER).setEnabled(enabled);
+        preferenceScreen.findPreference(KEY_FOREGROUND).setEnabled(enabled);
     }
 
     @Override

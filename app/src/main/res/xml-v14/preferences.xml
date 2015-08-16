@@ -42,4 +42,10 @@
         android:summary="@string/settings_provider_summary"
         android:title="@string/settings_provider_title" />
 
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="foreground"
+        android:summary="@string/settings_foreground_summary"
+        android:title="@string/settings_foreground_title" />
+
 </PreferenceScreen>

@@ -16,17 +16,23 @@
 package org.traccar.client;
 
 import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class TrackingService extends Service {
 
     private static final String TAG = TrackingService.class.getSimpleName();
+    private static final int NOTIFICATION_ID = 1;
 
     private TrackingController trackingController;
+
+    private boolean foreground;
 
     @Override
     public void onCreate() {
@@ -35,6 +41,8 @@ public class TrackingService extends Service {
 
         trackingController = new TrackingController(this);
         trackingController.start();
+
+        foreground = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(MainActivity.KEY_FOREGROUND, false);
     }
 
     @Override
@@ -46,6 +54,17 @@ public class TrackingService extends Service {
     @Override
     public void onStart(Intent intent, int startId) {
         AutostartReceiver.completeWakefulIntent(intent);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR && foreground) {
+            Intent notificationIntent = new Intent(this, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+            Notification notification = new Notification(android.R.drawable.stat_notify_sync_noanim, null, 0);
+            notification.setLatestEventInfo(
+                    this, getString(R.string.app_name), getString(R.string.settings_status_on_summary), pendingIntent);
+
+            startForeground(NOTIFICATION_ID, notification);
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)
@@ -59,6 +78,10 @@ public class TrackingService extends Service {
     public void onDestroy() {
         Log.i(TAG, "service destroy");
         StatusActivity.addMessage(getString(R.string.status_service_destroy));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR && foreground) {
+            stopForeground(true);
+        }
 
         if (trackingController != null) {
             trackingController.stop();

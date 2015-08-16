@@ -22,6 +22,8 @@
         <item>GPS provajder</item>
         <item>Provajder Mreže</item>
     </string-array>
+    <string name="settings_foreground_title">Prvi plan servis</string>
+        <string name="settings_foreground_summary">Povecanje usluga prioritet</string>
 
     <string name="menu_status">Status</string>
     <string name="menu_about">O klijentu</string>

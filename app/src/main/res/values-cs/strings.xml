@@ -22,6 +22,8 @@
         <item>GPS</item>
         <item>Mobilní síť</item>
     </string-array>
+    <string name="settings_foreground_title">Popředí služba</string>
+    <string name="settings_foreground_summary">Zvýšit prioritu služba</string>
     
     <string name="menu_status">Stav</string>
     <string name="menu_about">O aplikaci</string>

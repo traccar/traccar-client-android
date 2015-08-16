@@ -22,7 +22,9 @@
         <item>GPS-lokalisering</item>
         <item>Nettverkslokalisering</item>
     </string-array>
-    
+    <string name="settings_foreground_title">Forgrunnen tjeneste</string>
+    <string name="settings_foreground_summary">Øk tjeneste prioritet</string>
+
     <string name="menu_status">Status</string>
     <string name="menu_about">Om</string>
     <string name="menu_clear">Tøm</string>

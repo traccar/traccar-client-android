@@ -22,7 +22,9 @@
         <item>GPS</item>
         <item>Netzwerk</item>
     </string-array>
-    
+    <string name="settings_foreground_title">Vordergrund service</string>
+    <string name="settings_foreground_summary">Erhöhen service priorität</string>
+
     <string name="menu_status">Status</string>
     <string name="menu_about">Über</string>
     <string name="menu_clear">Leeren</string>

@@ -22,6 +22,8 @@
         <item>GPS провайдер</item>
         <item>Сетевой провайдер</item>
     </string-array>
+    <string name="settings_foreground_title">Приотитетный сервис</string>
+    <string name="settings_foreground_summary">Увеличить приоритет сервиса</string>
 
     <string name="menu_status">Состояние</string>
     <string name="menu_about">О программе</string>

@@ -22,6 +22,8 @@
         <item>Mode GPS uniquement</item>
         <item>Mode cellulaire uniquement</item>
     </string-array>
+    <string name="settings_foreground_title">Un service de premier plan</string>
+    <string name="settings_foreground_summary">Augmenter la priorité de service</string>
 
     <string name="menu_status">Etat</string>
     <string name="menu_about">A propos</string>

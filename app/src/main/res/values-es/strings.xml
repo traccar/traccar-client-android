@@ -22,6 +22,8 @@
         <item>Proveedor GPS</item>
         <item>Proveedor de red</item>
 	</string-array>
+    <string name="settings_foreground_title">Servicio de primer plano</string>
+    <string name="settings_foreground_summary">Aumentar prioridad de servicio</string>
 
     <string name="menu_status">Estado</string>
     <string name="menu_about">Acerca de&#8230;</string>

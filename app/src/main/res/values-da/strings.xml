@@ -22,6 +22,8 @@
         <item>GPS udbyder</item>
         <item>Netværks udbyder</item>
     </string-array>
+    <string name="settings_foreground_title">Forgrunden tjeneste</string>
+    <string name="settings_foreground_summary">Øg tjeneste prioritet</string>
 
     <string name="menu_status">Status</string>
     <string name="menu_about">Om</string>
