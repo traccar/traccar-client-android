@@ -15,8 +15,8 @@ android {
         release {
             storeFile file('../../android.keystore')
             keyAlias "tananaev"
-            storePassword System.console().readLine("Enter store password: ")
-            keyPassword System.console().readLine("Enter key password: ")
+            storePassword new String(System.console().readPassword("\nEnter store password: "))
+            keyPassword new String(System.console().readPassword("Enter key password: "))
         }
     }
 
