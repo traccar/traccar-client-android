@@ -22,13 +22,13 @@ import android.preference.PreferenceManager;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
 public class AutostartReceiver extends WakefulBroadcastReceiver {
-	
+    
     @Override
     public void onReceive(Context context, Intent intent) {
-    	SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-    	if (sharedPreferences.getBoolean(MainActivity.KEY_STATUS, false)) {
-    		context.startService(new Intent(context, TrackingService.class));
-    	}
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        if (sharedPreferences.getBoolean(MainActivity.KEY_STATUS, false)) {
+            startWakefulService(context, new Intent(context, TrackingService.class));
+        }
     }
 
 }

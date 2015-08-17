@@ -53,7 +53,9 @@ public class TrackingService extends Service {
     @SuppressWarnings("deprecation")
     @Override
     public void onStart(Intent intent, int startId) {
-        AutostartReceiver.completeWakefulIntent(intent);
+        if (intent != null) {
+            AutostartReceiver.completeWakefulIntent(intent);
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR && foreground) {
             Intent notificationIntent = new Intent(this, MainActivity.class);
