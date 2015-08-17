@@ -41,6 +41,16 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     private PowerManager.WakeLock wakeLock;
 
+    private void lock() {
+        wakeLock.acquire(WAKE_LOCK_TIMEOUT);
+    }
+
+    private void unlock() {
+        if (wakeLock.isHeld()) {
+            wakeLock.release();
+        }
+    }
+
     public TrackingController(Context context) {
         this.context = context;
         handler = new Handler();
@@ -105,7 +115,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     private void write(Position position) {
         log("write", position);
-        wakeLock.acquire(WAKE_LOCK_TIMEOUT);
+        lock();
         databaseHelper.insertPositionAsync(position, new DatabaseHelper.DatabaseHandler<Void>() {
             @Override
             public void onSuccess(Void result) {
@@ -113,19 +123,19 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
                     read();
                     isWaiting = false;
                 }
-                wakeLock.release();
+                unlock();
             }
 
             @Override
             public void onFailure(RuntimeException error) {
-                wakeLock.release();
+                unlock();
             }
         });
     }
 
     private void read() {
         log("read", null);
-        wakeLock.acquire(WAKE_LOCK_TIMEOUT);
+        lock();
         databaseHelper.selectPositionAsync(new DatabaseHelper.DatabaseHandler<Position>() {
             @Override
             public void onSuccess(Position result) {
@@ -134,38 +144,38 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
                 } else {
                     isWaiting = true;
                 }
-                wakeLock.release();
+                unlock();
             }
 
             @Override
             public void onFailure(RuntimeException error) {
                 retry();
-                wakeLock.release();
+                unlock();
             }
         });
     }
 
     private void delete(Position position) {
         log("delete", position);
-        wakeLock.acquire(WAKE_LOCK_TIMEOUT);
+        lock();
         databaseHelper.deletePositionAsync(position.getId(), new DatabaseHelper.DatabaseHandler<Void>() {
             @Override
             public void onSuccess(Void result) {
                 read();
-                wakeLock.release();
+                unlock();
             }
 
             @Override
             public void onFailure(RuntimeException error) {
                 retry();
-                wakeLock.release();
+                unlock();
             }
         });
     }
 
     private void send(final Position position) {
         log("send", position);
-        wakeLock.acquire(WAKE_LOCK_TIMEOUT);
+        lock();
         String request = ProtocolFormatter.formatRequest(
                 preferences.getString(MainActivity.KEY_ADDRESS, null),
                 Integer.parseInt(preferences.getString(MainActivity.KEY_PORT, null)),
@@ -175,14 +185,14 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
             @Override
             public void onSuccess() {
                 delete(position);
-                wakeLock.release();
+                unlock();
             }
 
             @Override
             public void onFailure() {
                 StatusActivity.addMessage(context.getString(R.string.status_send_fail));
                 retry();
-                wakeLock.release();
+                unlock();
             }
         });
     }
