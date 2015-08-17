@@ -55,8 +55,12 @@ public class PositionProvider implements LocationListener {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
         deviceId = preferences.getString(MainActivity.KEY_DEVICE, null);
-        type = preferences.getString(MainActivity.KEY_PROVIDER, null);
         period = Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000;
+
+        type = preferences.getString(MainActivity.KEY_PROVIDER, null);
+        if (!type.equals(LocationManager.NETWORK_PROVIDER)) {
+            type = LocationManager.GPS_PROVIDER;
+        }
     }
 
     public void startUpdates() {
