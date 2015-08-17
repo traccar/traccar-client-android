@@ -7,16 +7,16 @@ android {
     defaultConfig {
         minSdkVersion 3
         targetSdkVersion 22
-        versionCode 23
-        versionName "3.3"
+        versionCode 24
+        versionName "3.4"
     }
 
     signingConfigs {
         release {
             storeFile file('../../android.keystore')
             keyAlias "tananaev"
-            storePassword ""
-            keyPassword ""
+            storePassword System.console().readLine("Enter store password: ")
+            keyPassword System.console().readLine("Enter key password: ")
         }
     }
 
