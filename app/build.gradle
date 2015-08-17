@@ -15,8 +15,8 @@ android {
         release {
             storeFile file('../../android.keystore')
             keyAlias "tananaev"
-            storePassword new String(System.console().readPassword("\nEnter store password: "))
-            keyPassword new String(System.console().readPassword("Enter key password: "))
+            storePassword ""
+            keyPassword ""
         }
     }
 
@@ -31,4 +31,15 @@ android {
 dependencies {
     testCompile 'junit:junit:4.12'
     testCompile "org.robolectric:robolectric:3.0"
+}
+
+task requestPasswords << {
+    android.signingConfigs.release.storePassword = new String(System.console().readPassword("\nStore password: "))
+    android.signingConfigs.release.keyPassword = new String(System.console().readPassword("Key password: "))
+}
+
+tasks.whenTaskAdded { theTask ->
+    if (theTask.name.equals("packageRelease")) {
+        theTask.dependsOn "requestPasswords"
+    }
 }
