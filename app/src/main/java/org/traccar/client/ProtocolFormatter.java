@@ -28,7 +28,7 @@ public class ProtocolFormatter {
                 .appendQueryParameter("timestamp", String.valueOf(position.getTime().getTime() / 1000))
                 .appendQueryParameter("lat", String.valueOf(position.getLatitude()))
                 .appendQueryParameter("lon", String.valueOf(position.getLongitude()))
-                .appendQueryParameter("speed", String.valueOf(position.getSpeed() * 1.943844))
+                .appendQueryParameter("speed", String.valueOf(position.getSpeed()))
                 .appendQueryParameter("bearing", String.valueOf(position.getCourse()))
                 .appendQueryParameter("altitude", String.valueOf(position.getAltitude()))
                 .appendQueryParameter("batt", String.valueOf(position.getBattery()));
