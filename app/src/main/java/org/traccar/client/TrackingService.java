@@ -65,7 +65,15 @@ public class TrackingService extends Service {
             notification.setLatestEventInfo(
                     this, getString(R.string.app_name), getString(R.string.settings_status_on_summary), pendingIntent);
 
-            startForeground(NOTIFICATION_ID, notification);
+            int notificationId = NOTIFICATION_ID;
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                notification.priority = Notification.PRIORITY_MIN;
+            } else {
+                notificationId = 0;
+            }
+
+            startForeground(notificationId, notification);
         }
     }
 
