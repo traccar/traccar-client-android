@@ -21,6 +21,7 @@
     <string-array name="settings_provider_names">
         <item>GPS</item>
         <item>Netzwerk</item>
+        <item>Gemischt</item>
     </string-array>
     <string name="settings_foreground_title">Vordergrund service</string>
     <string name="settings_foreground_summary">Erhöhen service priorität</string>

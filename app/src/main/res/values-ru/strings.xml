@@ -21,6 +21,7 @@
     <string-array name="settings_provider_names">
         <item>GPS провайдер</item>
         <item>Сетевой провайдер</item>
+        <item>Смешанный провайдер</item>
     </string-array>
     <string name="settings_foreground_title">Приоритетный сервис</string>
     <string name="settings_foreground_summary">Увеличить приоритет сервиса</string>

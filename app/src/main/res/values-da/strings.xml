@@ -21,6 +21,7 @@
     <string-array name="settings_provider_names">
         <item>GPS udbyder</item>
         <item>Netværks udbyder</item>
+        <item>Mixet udbyder</item>
     </string-array>
     <string name="settings_foreground_title">Forgrunden tjeneste</string>
     <string name="settings_foreground_summary">Øg tjeneste prioritet</string>

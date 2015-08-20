@@ -21,6 +21,7 @@
     <string-array name="settings_provider_names">
         <item>GPS</item>
         <item>Mobilní síť</item>
+        <item>Obojí</item>
     </string-array>
     <string name="settings_foreground_title">Popředí služba</string>
     <string name="settings_foreground_summary">Zvýšit prioritu služba</string>

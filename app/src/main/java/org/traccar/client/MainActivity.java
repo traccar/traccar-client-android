@@ -51,11 +51,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
 
-        // DELME
-        if (PreferenceManager.getDefaultSharedPreferences(this).getString(KEY_PROVIDER, null).equals("mixed")) {
-            PreferenceManager.getDefaultSharedPreferences(this).edit().putString(KEY_PROVIDER, LocationManager.GPS_PROVIDER).commit();
-        }
-
         if (getPreferenceScreen().getSharedPreferences().getBoolean(KEY_STATUS, false)) {
             setPreferencesEnabled(false);
             startService(new Intent(this, TrackingService.class));

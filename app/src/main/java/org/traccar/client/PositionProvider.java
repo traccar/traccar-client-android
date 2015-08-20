@@ -21,17 +21,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.BatteryManager;
 import android.os.Build;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class PositionProvider implements LocationListener {
+public abstract class PositionProvider {
 
-    private static final String TAG = PositionProvider.class.getSimpleName();
+    protected static final String TAG = PositionProvider.class.getSimpleName();
 
     public interface PositionListener {
         void onPositionUpdate(Position position);
@@ -41,11 +39,13 @@ public class PositionProvider implements LocationListener {
 
     private final Context context;
     private final SharedPreferences preferences;
-    private final LocationManager locationManager;
+    protected final LocationManager locationManager;
 
     private String deviceId;
-    private String type;
-    private final long period;
+    protected String type;
+    protected final long period;
+
+    private long lastUpdateTime;
 
     public PositionProvider(Context context, PositionListener listener) {
         this.context = context;
@@ -58,49 +58,24 @@ public class PositionProvider implements LocationListener {
         period = Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000;
 
         type = preferences.getString(MainActivity.KEY_PROVIDER, null);
-        if (!type.equals(LocationManager.NETWORK_PROVIDER)) {
-            type = LocationManager.GPS_PROVIDER;
-        }
     }
 
-    public void startUpdates() {
-        locationManager.requestLocationUpdates(type, period, 0, this);
-    }
+    public abstract void startUpdates();
 
-    public void stopUpdates() {
-        locationManager.removeUpdates(this);
-    }
+    public abstract void stopUpdates();
 
-    private long lastTime;
-
-    @Override
-    public void onLocationChanged(Location location) {
-        if (location != null && location.getTime() != lastTime) {
+    protected void updateLocation(Location location) {
+        if (location != null && location.getTime() != lastUpdateTime) {
             Log.i(TAG, "location new");
-            lastTime = location.getTime();
+            lastUpdateTime = location.getTime();
             listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel()));
         } else {
             Log.i(TAG, location != null ? "location old" : "location nil");
         }
     }
 
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.i(TAG, "provider status");
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        Log.i(TAG, "provider enabled");
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        Log.i(TAG, "provider disabled");
-    }
-
     @TargetApi(Build.VERSION_CODES.ECLAIR)
-    public double getBatteryLevel() {
+    private double getBatteryLevel() {
         if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.ECLAIR) {
             Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
             int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);

@@ -21,6 +21,7 @@
     <string-array name="settings_provider_names">
         <item>Proveedor GPS</item>
         <item>Proveedor de red</item>
+        <item>Proveedor mixto</item>
 	</string-array>
     <string name="settings_foreground_title">Servicio de primer plano</string>
     <string name="settings_foreground_summary">Aumentar prioridad de servicio</string>

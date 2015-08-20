@@ -21,6 +21,7 @@
     <string-array name="settings_provider_names">
         <item>Mode GPS uniquement</item>
         <item>Mode cellulaire uniquement</item>
+        <item>Mode hybride</item>
     </string-array>
     <string name="settings_foreground_title">Un service de premier plan</string>
     <string name="settings_foreground_summary">Augmenter la priorité de service</string>
