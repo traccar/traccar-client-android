@@ -134,9 +134,11 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         String KEY_SHOWN_PORT_DIALOG = "portDialogHasBeenShown";
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (!firstLaunch) {
-            if (!preferences.contains(KEY_SHOWN_PORT_DIALOG)) {
-                showDialog(0);
+        if (!preferences.getString(KEY_PORT, "5055").equals("5055")) {
+            if (!firstLaunch) {
+                if (!preferences.contains(KEY_SHOWN_PORT_DIALOG)) {
+                    showDialog(0);
+                }
             }
         }
 
