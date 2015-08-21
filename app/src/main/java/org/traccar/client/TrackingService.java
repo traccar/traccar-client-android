@@ -34,6 +34,7 @@ public class TrackingService extends Service {
 
     private boolean foreground;
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onCreate() {
         Log.i(TAG, "service create");
@@ -43,19 +44,6 @@ public class TrackingService extends Service {
         trackingController.start();
 
         foreground = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(MainActivity.KEY_FOREGROUND, false);
-    }
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onStart(Intent intent, int startId) {
-        if (intent != null) {
-            AutostartReceiver.completeWakefulIntent(intent);
-        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR && foreground) {
             Intent notificationIntent = new Intent(this, MainActivity.class);
@@ -75,6 +63,20 @@ public class TrackingService extends Service {
 
             startForeground(notificationId, notification);
         }
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStart(Intent intent, int startId) {
+        if (intent != null) {
+            AutostartReceiver.completeWakefulIntent(intent);
+        }
+
     }
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)
