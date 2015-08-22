@@ -10,29 +10,32 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:allowBackup="true" android:theme="@style/TraccarTheme">
-        
-        <activity android:name=".MainActivity">
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/TraccarTheme">
+
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".StatusActivity">
-        </activity>
+        <activity android:name=".StatusActivity"/>
 
-        <activity android:name=".AboutActivity">
-        </activity>
-        
+        <activity android:name=".AboutActivity"/>
+
         <service android:name=".TrackingService" />
-        
+
         <receiver android:name=".AutostartReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-    
+
     </application>
 
 </manifest>
