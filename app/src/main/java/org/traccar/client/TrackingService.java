@@ -76,7 +76,6 @@ public class TrackingService extends Service {
         if (intent != null) {
             AutostartReceiver.completeWakefulIntent(intent);
         }
-
     }
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)

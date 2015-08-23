@@ -2,21 +2,21 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    buildToolsVersion '22.0.1'
 
     defaultConfig {
         minSdkVersion 3
         targetSdkVersion 22
         versionCode 25
-        versionName "3.5"
+        versionName '3.5'
     }
 
     signingConfigs {
         release {
             storeFile file('../../android.keystore')
-            keyAlias "tananaev"
-            storePassword ""
-            keyPassword ""
+            keyAlias 'tananaev'
+            storePassword ''
+            keyPassword ''
         }
     }
 
@@ -30,16 +30,16 @@ android {
 
 dependencies {
     testCompile 'junit:junit:4.12'
-    testCompile "org.robolectric:robolectric:3.0"
+    testCompile 'org.robolectric:robolectric:3.0'
 }
 
 task requestPasswords << {
-    android.signingConfigs.release.storePassword = new String(System.console().readPassword("\nStore password: "))
-    android.signingConfigs.release.keyPassword = new String(System.console().readPassword("Key password: "))
+    android.signingConfigs.release.storePassword = new String(System.console().readPassword('\nStore password: '))
+    android.signingConfigs.release.keyPassword = new String(System.console().readPassword('Key password: '))
 }
 
 tasks.whenTaskAdded { theTask ->
-    if (theTask.name.equals("packageRelease")) {
-        theTask.dependsOn "requestPasswords"
+    if (theTask.name.equals('packageRelease')) {
+        theTask.dependsOn 'requestPasswords'
     }
 }
