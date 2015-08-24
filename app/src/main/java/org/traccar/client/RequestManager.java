@@ -27,8 +27,7 @@ public class RequestManager {
     private static final int TIMEOUT = 15 * 1000;
 
     public interface RequestHandler {
-        void onSuccess();
-        void onFailure();
+        void onComplete(boolean success);
     }
 
     private static class RequestAsyncTask extends AsyncTask<String, Void, Boolean> {
@@ -46,11 +45,7 @@ public class RequestManager {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            if (result) {
-                handler.onSuccess();
-            } else {
-                handler.onFailure();
-            }
+            handler.onComplete(result);
         }
     }
 

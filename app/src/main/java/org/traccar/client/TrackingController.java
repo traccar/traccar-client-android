@@ -122,16 +122,13 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         lock();
         databaseHelper.insertPositionAsync(position, new DatabaseHelper.DatabaseHandler<Void>() {
             @Override
-            public void onSuccess(Void result) {
-                if (isOnline && isWaiting) {
-                    read();
-                    isWaiting = false;
+            public void onComplete(boolean success, Void result) {
+                if (success) {
+                    if (isOnline && isWaiting) {
+                        read();
+                        isWaiting = false;
+                    }
                 }
-                unlock();
-            }
-
-            @Override
-            public void onFailure(RuntimeException error) {
                 unlock();
             }
         });
@@ -142,18 +139,16 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         lock();
         databaseHelper.selectPositionAsync(new DatabaseHelper.DatabaseHandler<Position>() {
             @Override
-            public void onSuccess(Position result) {
-                if (result != null) {
-                    send(result);
+            public void onComplete(boolean success, Position result) {
+                if (success) {
+                    if (result != null) {
+                        send(result);
+                    } else {
+                        isWaiting = true;
+                    }
                 } else {
-                    isWaiting = true;
+                    retry();
                 }
-                unlock();
-            }
-
-            @Override
-            public void onFailure(RuntimeException error) {
-                retry();
                 unlock();
             }
         });
@@ -164,14 +159,12 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         lock();
         databaseHelper.deletePositionAsync(position.getId(), new DatabaseHelper.DatabaseHandler<Void>() {
             @Override
-            public void onSuccess(Void result) {
-                read();
-                unlock();
-            }
-
-            @Override
-            public void onFailure(RuntimeException error) {
-                retry();
+            public void onComplete(boolean success, Void result) {
+                if (success) {
+                    read();
+                } else {
+                    retry();
+                }
                 unlock();
             }
         });
@@ -187,15 +180,12 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
         RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
             @Override
-            public void onSuccess() {
-                delete(position);
-                unlock();
-            }
-
-            @Override
-            public void onFailure() {
-                StatusActivity.addMessage(context.getString(R.string.status_send_fail));
-                retry();
+            public void onComplete(boolean success) {
+                if (success) {
+                    delete(position);
+                } else {
+                    retry();
+                }
                 unlock();
             }
         });

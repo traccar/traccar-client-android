@@ -31,8 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "traccar.db";
 
     public interface DatabaseHandler<T> {
-        void onSuccess(T result);
-        void onFailure(RuntimeException error);
+        void onComplete(boolean success, T result);
     }
 
     private static abstract class DatabaseAsyncTask<T> extends AsyncTask<Void, Void, T> {
@@ -58,11 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         @Override
         protected void onPostExecute(T result) {
-            if (error == null) {
-                handler.onSuccess(result);
-            } else {
-                handler.onFailure(error);
-            }
+            handler.onComplete(error == null, result);
         }
     }
 
