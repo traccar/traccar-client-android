@@ -33,7 +33,9 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     private Context context;
     private Handler handler;
-    private SharedPreferences preferences;
+
+    private String address;
+    private int port;
 
     private PositionProvider positionProvider;
     private DatabaseHelper databaseHelper;
@@ -54,7 +56,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     public TrackingController(Context context) {
         this.context = context;
         handler = new Handler();
-        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         if (preferences.getString(MainActivity.KEY_PROVIDER, null).equals("mixed")) {
             positionProvider = new MixedPositionProvider(context, this);
         } else {
@@ -63,6 +65,9 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         databaseHelper = new DatabaseHelper(context);
         networkManager = new NetworkManager(context, this);
         isOnline = networkManager.isOnline();
+
+        address = preferences.getString(MainActivity.KEY_ADDRESS, null);
+        port = Integer.parseInt(preferences.getString(MainActivity.KEY_PORT, null));
 
         PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
@@ -173,11 +178,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     private void send(final Position position) {
         log("send", position);
         lock();
-        String request = ProtocolFormatter.formatRequest(
-                preferences.getString(MainActivity.KEY_ADDRESS, null),
-                Integer.parseInt(preferences.getString(MainActivity.KEY_PORT, null)),
-                position);
-
+        String request = ProtocolFormatter.formatRequest(address, port, position);
         RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
             @Override
             public void onComplete(boolean success) {
