@@ -89,14 +89,15 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     @Override
     public void onPositionUpdate(Position position) {
+        StatusActivity.addMessage(context.getString(R.string.status_location_update));
         if (position != null) {
-            StatusActivity.addMessage(context.getString(R.string.status_location_update));
             write(position);
         }
     }
 
     @Override
     public void onNetworkUpdate(boolean isOnline) {
+        StatusActivity.addMessage(context.getString(R.string.status_connectivity_change));
         if (!this.isOnline && isOnline) {
             read();
         }
@@ -185,6 +186,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
                 if (success) {
                     delete(position);
                 } else {
+                    StatusActivity.addMessage(context.getString(R.string.status_send_fail));
                     retry();
                 }
                 unlock();
