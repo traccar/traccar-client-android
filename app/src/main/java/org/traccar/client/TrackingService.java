@@ -36,9 +36,45 @@ public class TrackingService extends Service {
 
     private TrackingController trackingController;
 
-    private boolean foreground;
-
     @SuppressWarnings("deprecation")
+    private static Notification createNotification(Context context) {
+        Intent notificationIntent = new Intent(context, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+
+        Notification notification = new Notification(android.R.drawable.stat_notify_sync_noanim, null, 0);
+        try {
+            Method method = notification.getClass().getMethod("setLatestEventInfo", Context.class, CharSequence.class, CharSequence.class, PendingIntent.class);
+            try {
+                method.invoke(notification, context, context.getString(R.string.app_name), context.getString(R.string.settings_status_on_summary), pendingIntent);
+            } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
+                Log.w(TAG, e);
+            }
+        } catch (SecurityException | NoSuchMethodException e) {
+            Log.w(TAG, e);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            notification.priority = Notification.PRIORITY_MIN;
+        }
+
+        return notification;
+    }
+
+    public static class HideNotificationService extends Service {
+        @Override
+        public IBinder onBind(Intent intent) {
+            return null;
+        }
+
+
+        @TargetApi(Build.VERSION_CODES.ECLAIR)
+        @Override
+        public void onCreate() {
+            startForeground(NOTIFICATION_ID, createNotification(this));
+            stopForeground(true);
+        }
+    }
+
     @Override
     public void onCreate() {
         Log.i(TAG, "service create");
@@ -47,33 +83,9 @@ public class TrackingService extends Service {
         trackingController = new TrackingController(this);
         trackingController.start();
 
-        foreground = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(MainActivity.KEY_FOREGROUND, false);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR && foreground) {
-            Intent notificationIntent = new Intent(this, MainActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-
-            Notification notification = new Notification(android.R.drawable.stat_notify_sync_noanim, null, 0);
-            try {
-                Method method = notification.getClass().getMethod("setLatestEventInfo", Context.class, CharSequence.class, CharSequence.class, PendingIntent.class);
-                try {
-                    method.invoke(notification, this, getString(R.string.app_name), getString(R.string.settings_status_on_summary), pendingIntent);
-                } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-                    Log.w(TAG, e);
-                }
-            } catch (SecurityException | NoSuchMethodException e) {
-                Log.w(TAG, e);
-            }
-
-            int notificationId = NOTIFICATION_ID;
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                notification.priority = Notification.PRIORITY_MIN;
-            } else {
-                notificationId = 0;
-            }
-
-            startForeground(notificationId, notification);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
+            startForeground(NOTIFICATION_ID, createNotification(this));
+            startService(new Intent(this, HideNotificationService.class));
         }
     }
 
@@ -102,7 +114,7 @@ public class TrackingService extends Service {
         Log.i(TAG, "service destroy");
         StatusActivity.addMessage(getString(R.string.status_service_destroy));
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR && foreground) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
             stopForeground(true);
         }
 
