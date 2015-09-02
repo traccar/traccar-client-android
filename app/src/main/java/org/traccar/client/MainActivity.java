@@ -65,7 +65,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         initPreferences();
 
         if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
-            checkPermissionsAndStartService();
+            startTrackingService(true, false);
         }
     }
 
@@ -105,10 +105,9 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(KEY_STATUS)) {
             if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
-                checkPermissionsAndStartService();
+                startTrackingService(true, false);
             } else {
-                stopService(new Intent(this, TrackingService.class));
-                setPreferencesEnabled(true);
+                stopTrackingService();
             }
         } else if (key.equals(KEY_DEVICE)) {
             findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
@@ -137,9 +136,9 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
     }
 
-    private void initDeviceId(boolean devicePermission) {
+    private void initDeviceId(boolean permission) {
         String id;
-        if (devicePermission) {
+        if (permission) {
             id = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
         } else {
             id = String.valueOf(new Random().nextInt(900000) + 100000);
@@ -150,20 +149,41 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         preference.setSummary(id);
     }
 
-    private void checkPermissionsAndStartService() {
-        Set<String> missingPermissions = new HashSet<String>();
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            missingPermissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+    private void startTrackingService(boolean checkPermission, boolean permission) {
+        if (checkPermission) {
+            Set<String> missingPermissions = new HashSet<String>();
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                missingPermissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+            }
+            if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                missingPermissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+            }
+            if (missingPermissions.isEmpty()) {
+                permission = true;
+            } else {
+                requestPermissions(missingPermissions.toArray(new String[missingPermissions.size()]), PERMISSIONS_REQUEST_LOCATION);
+                return;
+            }
         }
-        if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            missingPermissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-        }
-        if (missingPermissions.isEmpty()) {
+
+        if (permission) {
             setPreferencesEnabled(false);
             startService(new Intent(this, TrackingService.class));
         } else {
-            requestPermissions(missingPermissions.toArray(new String[missingPermissions.size()]), PERMISSIONS_REQUEST_LOCATION);
+            sharedPreferences.edit().putBoolean(KEY_STATUS, false).commit();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                TwoStatePreference preference = (TwoStatePreference) findPreference(KEY_STATUS);
+                preference.setChecked(false);
+            } else {
+                CheckBoxPreference preference = (CheckBoxPreference) findPreference(KEY_STATUS);
+                preference.setChecked(false);
+            }
         }
+    }
+
+    private void stopTrackingService() {
+        stopService(new Intent(this, TrackingService.class));
+        setPreferencesEnabled(true);
     }
 
     @Override
@@ -171,19 +191,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         if (requestCode == PERMISSIONS_REQUEST_DEVICE) {
             initDeviceId(grantResults[0] == PackageManager.PERMISSION_GRANTED);
         } else if (requestCode == PERMISSIONS_REQUEST_LOCATION) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED && (permissions.length < 2 || grantResults[1] == PackageManager.PERMISSION_GRANTED)) {
-                setPreferencesEnabled(false);
-                startService(new Intent(this, TrackingService.class));
-            } else {
-                sharedPreferences.edit().putBoolean(KEY_STATUS, false).commit();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                    TwoStatePreference preference = (TwoStatePreference) findPreference(KEY_STATUS);
-                    preference.setChecked(false);
-                } else {
-                    CheckBoxPreference preference = (CheckBoxPreference) findPreference(KEY_STATUS);
-                    preference.setChecked(false);
-                }
-            }
+            startTrackingService(false, grantResults[0] == PackageManager.PERMISSION_GRANTED && (permissions.length < 2 || grantResults[1] == PackageManager.PERMISSION_GRANTED));
         }
     }
 
