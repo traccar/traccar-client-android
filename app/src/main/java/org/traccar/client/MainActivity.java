@@ -69,13 +69,20 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         }
     }
 
+    private boolean hasPermission(String permission) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            return true;
+        }
+        return checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
         if (!sharedPreferences.contains(KEY_DEVICE)) {
-            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            if (hasPermission(Manifest.permission.READ_PHONE_STATE)) {
                 initDeviceId(true);
             } else {
                 requestPermissions(new String[] { Manifest.permission.READ_PHONE_STATE }, PERMISSIONS_REQUEST_DEVICE);
@@ -152,10 +159,10 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     private void startTrackingService(boolean checkPermission, boolean permission) {
         if (checkPermission) {
             Set<String> missingPermissions = new HashSet<String>();
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (!hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
                 missingPermissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
             }
-            if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (!hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
                 missingPermissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
             }
             if (missingPermissions.isEmpty()) {
