@@ -60,18 +60,23 @@ public class TrackingService extends Service {
         return notification;
     }
 
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
     public static class HideNotificationService extends Service {
         @Override
         public IBinder onBind(Intent intent) {
             return null;
         }
 
-
-        @TargetApi(Build.VERSION_CODES.ECLAIR)
         @Override
         public void onCreate() {
             startForeground(NOTIFICATION_ID, createNotification(this));
             stopForeground(true);
+        }
+
+        @Override
+        public int onStartCommand(Intent intent, int flags, int startId) {
+            stopSelfResult(startId);
+            return START_NOT_STICKY;
         }
     }
 
