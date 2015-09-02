@@ -13,7 +13,7 @@
         android:layout_marginLeft="@dimen/about_margin"
         android:layout_marginStart="@dimen/about_margin"
         android:layout_marginTop="@dimen/about_margin"
-        android:src="@drawable/ic_launcher"
+        android:src="@mipmap/ic_launcher"
         android:contentDescription="@string/app_logo" />
 
     <LinearLayout
