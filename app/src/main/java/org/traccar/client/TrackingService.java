@@ -19,11 +19,15 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class TrackingService extends Service {
 
@@ -50,8 +54,16 @@ public class TrackingService extends Service {
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
             Notification notification = new Notification(android.R.drawable.stat_notify_sync_noanim, null, 0);
-            notification.setLatestEventInfo(
-                    this, getString(R.string.app_name), getString(R.string.settings_status_on_summary), pendingIntent);
+            try {
+                Method method = notification.getClass().getMethod("setLatestEventInfo", Context.class, CharSequence.class, CharSequence.class, PendingIntent.class);
+                try {
+                    method.invoke(notification, this, getString(R.string.app_name), getString(R.string.settings_status_on_summary), pendingIntent);
+                } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
+                    Log.w(TAG, e);
+                }
+            } catch (SecurityException | NoSuchMethodException e) {
+                Log.w(TAG, e);
+            }
 
             int notificationId = NOTIFICATION_ID;
 
