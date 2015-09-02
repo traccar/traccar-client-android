@@ -15,6 +15,7 @@
  */
 package org.traccar.client;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -22,14 +23,23 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.preference.TwoStatePreference;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
@@ -42,32 +52,43 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     public static final String KEY_STATUS = "status";
     public static final String KEY_FOREGROUND = "foreground";
 
-    private boolean firstLaunch; // DELME
+    private static final int PERMISSIONS_REQUEST_DEVICE = 1;
+    private static final int PERMISSIONS_REQUEST_LOCATION = 2;
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firstLaunch = !PreferenceManager.getDefaultSharedPreferences(this).contains(KEY_PORT);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
 
-        if (getPreferenceScreen().getSharedPreferences().getBoolean(KEY_STATUS, false)) {
-            setPreferencesEnabled(false);
-            startService(new Intent(this, TrackingService.class));
+        if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
+            checkPermissionsAndStartService();
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        checkAndShowPortDialog(); // DELME
-        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+
+        if (!sharedPreferences.contains(KEY_DEVICE)) {
+            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+                initDeviceId(true);
+            } else {
+                requestPermissions(new String[] { Manifest.permission.READ_PHONE_STATE }, PERMISSIONS_REQUEST_DEVICE);
+            }
+        } else {
+            findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
 
     private void setPreferencesEnabled(boolean enabled) {
@@ -84,8 +105,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(KEY_STATUS)) {
             if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
-                setPreferencesEnabled(false);
-                startService(new Intent(this, TrackingService.class));
+                checkPermissionsAndStartService();
             } else {
                 stopService(new Intent(this, TrackingService.class));
                 setPreferencesEnabled(true);
@@ -115,49 +135,56 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     private void initPreferences() {
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        String id = telephonyManager.getDeviceId();
-
-        SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
-
-        if (!sharedPreferences.contains(KEY_DEVICE)) {
-            sharedPreferences.edit().putString(KEY_DEVICE, id).commit();
-        }
-        findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, id));
     }
 
-    // TEMPORARY PORT CHANGE DIALOG (DELME)
-
-    private void checkAndShowPortDialog() {
-
-        String KEY_SHOWN_PORT_DIALOG = "portDialogHasBeenShown";
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (!preferences.getString(KEY_PORT, "5055").equals("5055")) {
-            if (!firstLaunch) {
-                if (!preferences.contains(KEY_SHOWN_PORT_DIALOG)) {
-                    showDialog(0);
-                }
-            }
+    private void initDeviceId(boolean devicePermission) {
+        String id;
+        if (devicePermission) {
+            id = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+        } else {
+            id = String.valueOf(new Random().nextInt(900000) + 100000);
         }
+        sharedPreferences.edit().putString(KEY_DEVICE, id).commit();
+        EditTextPreference preference = (EditTextPreference) findPreference(KEY_DEVICE);
+        preference.setText(id);
+        preference.setSummary(id);
+    }
 
-        preferences.edit().putBoolean(KEY_SHOWN_PORT_DIALOG, true).commit();
+    private void checkPermissionsAndStartService() {
+        Set<String> missingPermissions = new HashSet<String>();
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            missingPermissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            missingPermissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+        if (missingPermissions.isEmpty()) {
+            setPreferencesEnabled(false);
+            startService(new Intent(this, TrackingService.class));
+        } else {
+            requestPermissions(missingPermissions.toArray(new String[missingPermissions.size()]), PERMISSIONS_REQUEST_LOCATION);
+        }
     }
 
     @Override
-    protected Dialog onCreateDialog(int id) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setMessage("Communication protocol used by the app has changed. Now it uses port 5055 on Traccar server. Do you want to change port to 5055?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit().putString(KEY_PORT, "5055").commit();
-                    }
-                })
-                .setNegativeButton("No", null);
-
-        return builder.create();
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == PERMISSIONS_REQUEST_DEVICE) {
+            initDeviceId(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+        } else if (requestCode == PERMISSIONS_REQUEST_LOCATION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED && (permissions.length < 2 || grantResults[1] == PackageManager.PERMISSION_GRANTED)) {
+                setPreferencesEnabled(false);
+                startService(new Intent(this, TrackingService.class));
+            } else {
+                sharedPreferences.edit().putBoolean(KEY_STATUS, false).commit();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                    TwoStatePreference preference = (TwoStatePreference) findPreference(KEY_STATUS);
+                    preference.setChecked(false);
+                } else {
+                    CheckBoxPreference preference = (CheckBoxPreference) findPreference(KEY_STATUS);
+                    preference.setChecked(false);
+                }
+            }
+        }
     }
 
 }
