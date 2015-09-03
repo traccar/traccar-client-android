@@ -18,6 +18,7 @@ package org.traccar.client;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -59,12 +60,32 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (BuildConfig.HIDDEN_APP) {
+            removeLauncherIcon();
+        }
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
 
         if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
             startTrackingService(true, false);
+        }
+    }
+
+    private void removeLauncherIcon() {
+        ComponentName componentName = new ComponentName(getPackageName(), getPackageName() + ".Launcher");
+        PackageManager packageManager = getPackageManager();
+        if (packageManager.getComponentEnabledSetting(componentName) != PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+            packageManager.setComponentEnabledSetting(
+                    componentName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setIcon(android.R.drawable.ic_dialog_alert);
+            builder.setMessage(getString(R.string.hidden_alert));
+            builder.setPositiveButton(android.R.string.ok, null);
+            builder.show();
         }
     }
 
