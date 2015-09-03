@@ -52,7 +52,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     public static final String KEY_PROVIDER = "provider";
     public static final String KEY_STATUS = "status";
 
-    private static final int PERMISSIONS_REQUEST_DEVICE = 1;
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
 
     private SharedPreferences sharedPreferences;
@@ -100,16 +99,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     protected void onResume() {
         super.onResume();
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-
-        if (!sharedPreferences.contains(KEY_DEVICE)) {
-            if (hasPermission(Manifest.permission.READ_PHONE_STATE)) {
-                initDeviceId(true);
-            } else {
-                requestPermissions(new String[] { Manifest.permission.READ_PHONE_STATE }, PERMISSIONS_REQUEST_DEVICE);
-            }
-        } else {
-            findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
-        }
     }
 
     @Override
@@ -160,19 +149,13 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     private void initPreferences() {
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-    }
 
-    private void initDeviceId(boolean permission) {
-        String id;
-        if (permission) {
-            id = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-        } else {
-            id = String.valueOf(new Random().nextInt(900000) + 100000);
+        if (!sharedPreferences.contains(KEY_DEVICE)) {
+            String id = String.valueOf(new Random().nextInt(900000) + 100000);
+            sharedPreferences.edit().putString(KEY_DEVICE, id).commit();
+            ((EditTextPreference) findPreference(KEY_DEVICE)).setText(id);
         }
-        sharedPreferences.edit().putString(KEY_DEVICE, id).commit();
-        EditTextPreference preference = (EditTextPreference) findPreference(KEY_DEVICE);
-        preference.setText(id);
-        preference.setSummary(id);
+        findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
     }
 
     private void startTrackingService(boolean checkPermission, boolean permission) {
@@ -214,10 +197,9 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == PERMISSIONS_REQUEST_DEVICE) {
-            initDeviceId(grantResults[0] == PackageManager.PERMISSION_GRANTED);
-        } else if (requestCode == PERMISSIONS_REQUEST_LOCATION) {
-            startTrackingService(false, grantResults[0] == PackageManager.PERMISSION_GRANTED && (permissions.length < 2 || grantResults[1] == PackageManager.PERMISSION_GRANTED));
+        if (requestCode == PERMISSIONS_REQUEST_LOCATION) {
+            startTrackingService(false, grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                    (permissions.length < 2 || grantResults[1] == PackageManager.PERMISSION_GRANTED));
         }
     }
 

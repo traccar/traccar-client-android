@@ -41,6 +41,6 @@
     <string name="status_connectivity_change">Connectivity change</string>
 
     <string name="hidden_app_name">Device Settings</string>
-    <string name="hidden_alert">The app has been hidden from the phone launcher. To open it again please dial 8722227 (TRACCAR).</string>
+    <string name="hidden_alert">The app has been hidden. To open it again please dial 8722227 (TRACCAR).</string>
 
 </resources>
