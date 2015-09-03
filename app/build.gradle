@@ -48,7 +48,7 @@ task requestPasswords << {
 }
 
 tasks.whenTaskAdded { theTask ->
-    if (theTask.name.equals('packageRelease')) {
+    if (theTask.name.equals('packageRegularRelease') || theTask.name.equals('packageHiddenRelease')) {
         theTask.dependsOn 'requestPasswords'
     }
 }
