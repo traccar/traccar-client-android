@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Traccar Client</string>
+    <string name="app_name_hidden">Device Settings</string>
     <string name="app_logo">Traccar</string>
 
     <string name="settings_id_title">Device identifier</string>
