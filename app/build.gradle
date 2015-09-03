@@ -20,6 +20,13 @@ android {
         }
     }
 
+    productFlavors {
+        regular {
+        }
+        hidden {
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
