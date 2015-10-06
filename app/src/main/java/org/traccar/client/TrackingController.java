@@ -17,6 +17,7 @@ package org.traccar.client;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
@@ -44,7 +45,11 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     private PowerManager.WakeLock wakeLock;
 
     private void lock() {
-        wakeLock.acquire(WAKE_LOCK_TIMEOUT);
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
+            wakeLock.acquire();
+        } else {
+            wakeLock.acquire(WAKE_LOCK_TIMEOUT);
+        }
     }
 
     private void unlock() {
