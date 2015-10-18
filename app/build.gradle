@@ -22,9 +22,11 @@ android {
 
     productFlavors {
         regular {
+            applicationId "org.traccar.client"
             buildConfigField "boolean", "HIDDEN_APP", "false"
         }
         hidden {
+            applicationId "org.traccar.client.hidden"
             buildConfigField "boolean", "HIDDEN_APP", "true"
         }
     }
