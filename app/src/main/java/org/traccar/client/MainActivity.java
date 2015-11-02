@@ -24,6 +24,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
@@ -74,7 +75,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     }
 
     private void removeLauncherIcon() {
-        ComponentName componentName = new ComponentName(getPackageName(), getPackageName() + ".Launcher");
+        String className = MainActivity.class.getCanonicalName().replace(".MainActivity", ".Launcher");
+        ComponentName componentName = new ComponentName(getPackageName(), className);
         PackageManager packageManager = getPackageManager();
         if (packageManager.getComponentEnabledSetting(componentName) != PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
             packageManager.setComponentEnabledSetting(
