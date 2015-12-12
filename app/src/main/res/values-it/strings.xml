@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Traccar Client</string>
+    <string name="app_logo">Traccar</string>
+
+    <string name="settings_id_title">Identificativo dispositivo</string>
+    <string name="settings_address_title">Indrizzo server</string>
+    <string name="settings_address_summary">Nome del dominio o indizzo IP</string>
+    <string name="settings_port_title">Porta server</string>
+    <string name="settings_port_summary">Porta TCP del Tracking server</string>
+    <string name="settings_interval_title">Frequenza</string>
+    <string name="settings_interval_summary">Intervallo in secondi tra i messaggi</string>
+    <string name="settings_status_title">Stato del servizio</string>
+    <string name="settings_status_off">Start</string>
+    <string name="settings_status_on">Stop</string>
+    <string name="settings_status_off_summary">Servizio arrestatto</string>
+    <string name="settings_status_on_summary">Servizio avviato</string>
+    <string name="settings_provider_title">Posizione provider</string>
+    <string name="settings_provider_summary">Sorgente dei dati di localizzazione</string>
+    <string-array name="settings_provider_names">
+        <item>GPS provider</item>
+        <item>Network provider</item>
+        <item>Mixed provider</item>
+    </string-array>
+    <string name="settings_foreground_title">Foreground service</string>
+    <string name="settings_foreground_summary">Aumenta la priorita` del servizio</string>
+
+    <string name="menu_status">Stato</string>
+    <string name="menu_about">About</string>
+    <string name="menu_clear">Pulisici</string>
+    
+    <string name="about_description">Real time GPS tracker per dispositivi Android. Compatibile con Traccar Server e altri sistemi di tracking.</string>
+    <string name="about_license">Questa applicazione e` gratuita e open source, il codice sorgente e` sotto licenza Apache License Version 2.0 e disponibile su GitHub.</string>
+    <string name="about_web">Per maggiori informazioni visitate \nwww.traccar.org/client</string>
+
+    <string name="status_service_create">Servizio creato</string>
+    <string name="status_service_destroy">Servizio distrutto</string>
+    <string name="status_send_fail">Invio fallito</string>
+    <string name="status_location_update">Aggiornamento posizione</string>
+    <string name="status_connectivity_change">Connessione cambiata</string>
+
+    <string name="hidden_app_name">Impostazioni dispositivo</string>
+    <string name="hidden_alert">La app e` stata nascosta. Per aprirla nuovamente digita 8722227 (TRACCAR).</string>
+
+</resources>
