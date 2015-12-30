@@ -36,7 +36,7 @@
 
     <string name="status_service_create">Servicio creado</string>
     <string name="status_service_destroy">Servicio destruído</string>
-    <string name="status_send_fail">Erro en el envío</string>
+    <string name="status_send_fail">Error en el envío</string>
     <string name="status_location_update">Posición actualizada</string>
     <string name="status_connectivity_change">Cambio conectividad</string>
 
