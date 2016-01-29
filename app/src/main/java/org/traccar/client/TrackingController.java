@@ -82,13 +82,21 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         if (isOnline) {
             read();
         }
-        positionProvider.startUpdates();
+        try {
+            positionProvider.startUpdates();
+        } catch (SecurityException e) {
+            Log.w(TAG, e);
+        }
         networkManager.start();
     }
 
     public void stop() {
         networkManager.stop();
-        positionProvider.stopUpdates();
+        try {
+            positionProvider.stopUpdates();
+        } catch (SecurityException e) {
+            Log.w(TAG, e);
+        }
         handler.removeCallbacksAndMessages(null);
     }
 
