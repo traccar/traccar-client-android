@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2015 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2016 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,11 @@ package org.traccar.client;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -34,9 +29,7 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
-import android.telephony.TelephonyManager;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -74,7 +67,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         findPreference(KEY_DEVICE).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                return newValue != null && !((String) newValue).isEmpty();
+                return newValue != null && !newValue.equals("");
             }
         });
         findPreference(KEY_ADDRESS).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -137,6 +130,20 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         }
     }
 
+    private void addShortcuts(boolean start, int name) {
+        Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
+        shortcutIntent.setComponent(new ComponentName(getPackageName(), ".ShortcutActivity"));
+        shortcutIntent.putExtra(ShortcutActivity.EXTRA_ACTION, start);
+
+        Intent installShortCutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+        installShortCutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+        installShortCutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(name));
+        installShortCutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
+                Intent.ShortcutIconResource.fromContext(this, R.mipmap.ic_launcher));
+
+        sendBroadcast(installShortCutIntent);
+    }
+
     private boolean hasPermission(String permission) {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
             return true;
@@ -188,6 +195,10 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         if (item.getItemId() == R.id.status) {
             startActivity(new Intent(this, StatusActivity.class));
             return true;
+        } else if (item.getItemId() == R.id.shortcuts) {
+            addShortcuts(true, R.string.shortcut_start);
+            addShortcuts(false, R.string.shortcut_stop);
+            return true;
         } else if (item.getItemId() == R.id.about) {
             startActivity(new Intent(this, AboutActivity.class));
             return true;
@@ -208,7 +219,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     private void startTrackingService(boolean checkPermission, boolean permission) {
         if (checkPermission) {
-            Set<String> missingPermissions = new HashSet<String>();
+            Set<String> missingPermissions = new HashSet<>();
             if (!hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
                 missingPermissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
             }

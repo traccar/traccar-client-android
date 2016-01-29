@@ -7,8 +7,13 @@
         android:showAsAction="always" />
 
     <item
+        android:id="@+id/shortcuts"
+        android:title="@string/menu_shortcuts"
+        android:showAsAction="never" />
+
+    <item
         android:id="@+id/about"
         android:title="@string/menu_about"
-        android:showAsAction="ifRoom" />
+        android:showAsAction="never" />
 
 </menu>
