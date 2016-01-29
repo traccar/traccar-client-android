@@ -31,11 +31,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
 import android.telephony.TelephonyManager;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -68,6 +70,51 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
+
+        findPreference(KEY_DEVICE).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                return newValue != null && !((String) newValue).isEmpty();
+            }
+        });
+        findPreference(KEY_ADDRESS).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
+                    return newValue != null && Patterns.DOMAIN_NAME.matcher((String) newValue).matches();
+                } else {
+                    return newValue != null && !((String) newValue).isEmpty();
+                }
+            }
+        });
+        findPreference(KEY_PORT).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (newValue != null) {
+                    try {
+                        int value = Integer.parseInt((String) newValue);
+                        if (value > 0 && value <= 65536) {
+                            return true;
+                        }
+                    } catch (NumberFormatException e) {
+                    }
+                }
+                return false;
+            }
+        });
+        findPreference(KEY_INTERVAL).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (newValue != null) {
+                    try {
+                        Integer.parseInt((String) newValue);
+                        return true;
+                    } catch (NumberFormatException e) {
+                    }
+                }
+                return false;
+            }
+        });
 
         if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
             startTrackingService(true, false);
@@ -110,12 +157,11 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     }
 
     private void setPreferencesEnabled(boolean enabled) {
-        PreferenceScreen preferenceScreen = getPreferenceScreen();
-        preferenceScreen.findPreference(KEY_DEVICE).setEnabled(enabled);
-        preferenceScreen.findPreference(KEY_ADDRESS).setEnabled(enabled);
-        preferenceScreen.findPreference(KEY_PORT).setEnabled(enabled);
-        preferenceScreen.findPreference(KEY_INTERVAL).setEnabled(enabled);
-        preferenceScreen.findPreference(KEY_PROVIDER).setEnabled(enabled);
+        findPreference(KEY_DEVICE).setEnabled(enabled);
+        findPreference(KEY_ADDRESS).setEnabled(enabled);
+        findPreference(KEY_PORT).setEnabled(enabled);
+        findPreference(KEY_INTERVAL).setEnabled(enabled);
+        findPreference(KEY_PROVIDER).setEnabled(enabled);
     }
 
     @Override
