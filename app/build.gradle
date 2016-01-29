@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.1'
+    buildToolsVersion '23.0.2'
 
     defaultConfig {
         minSdkVersion 3
         targetSdkVersion 23
-        versionCode 27
-        versionName '3.7'
+        versionCode 28
+        versionName '3.8'
     }
 
     signingConfigs {
