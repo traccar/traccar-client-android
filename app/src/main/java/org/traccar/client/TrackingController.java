@@ -34,6 +34,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     private Context context;
     private Handler handler;
+    private SharedPreferences preferences;
 
     private String address;
     private int port;
@@ -61,7 +62,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     public TrackingController(Context context) {
         this.context = context;
         handler = new Handler();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
         if (preferences.getString(MainActivity.KEY_PROVIDER, null).equals("mixed")) {
             positionProvider = new MixedPositionProvider(context, this);
         } else {
@@ -161,7 +162,11 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
             public void onComplete(boolean success, Position result) {
                 if (success) {
                     if (result != null) {
-                        send(result);
+                        if (result.getDeviceId().equals(preferences.getString(MainActivity.KEY_DEVICE, null))) {
+                            send(result);
+                        } else {
+                            delete(result);
+                        }
                     } else {
                         isWaiting = true;
                     }
