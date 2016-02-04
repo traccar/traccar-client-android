@@ -8,7 +8,7 @@
         android:label="@string/hidden_app_name"
         tools:replace="label">
 
-        <receiver android:name=".DialLaunchReceiver" >
+        <receiver android:name="org.traccar.client.DialLaunchReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
