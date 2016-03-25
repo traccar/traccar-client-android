@@ -48,5 +48,7 @@
     <string name="settings_interval_fast_summary">Interval während der Fahrt in Sekunden</string>
     <string name="settings_timeout_fast_summary">Verweildauer im Auto Modus in Sekunden</string>
     <string name="settings_timeout_fast_title">Auto Modus Timeout</string>
+    <string name="settings_carmode_off">Aktiviert</string>
+    <string name="settings_carmode_on">Deaktiviert</string>
 
 </resources>

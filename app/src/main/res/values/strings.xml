@@ -14,6 +14,8 @@
     <string name="settings_interval_title">Frequency</string>
     <string name="settings_interval_summary">Messages interval in seconds</string>
     <string name="settings_carmode_title">Carmode</string>
+    <string name="settings_carmode_off">Activated</string>
+    <string name="settings_carmode_on">Deactivated</string>
     <string name="settings_carmode_off_summary">Carmode deactivated</string>
     <string name="settings_carmode_on_summary">Carmode activated</string>
     <string name="settings_timeout_fast_title">Carmode timeout</string>
