@@ -22,12 +22,17 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
+import android.util.ArrayMap;
+import android.util.Log;
 
 import java.util.Date;
+import java.util.Map;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 1;
+    protected static final String TAG = PositionProvider.class.getSimpleName();
+
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "traccar.db";
 
     public interface DatabaseHandler<T> {
@@ -80,11 +85,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "speed REAL," +
                 "course REAL," +
                 "battery REAL)");
+
+        db.execSQL("CREATE TABLE positionData (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "positionId INTEGER," +
+                "v TEXT," +
+                "k TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS position;");
+        db.execSQL("DROP TABLE IF EXISTS positionData;");
         onCreate(db);
     }
 
@@ -99,7 +111,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("course", position.getCourse());
         values.put("battery", position.getBattery());
 
-        db.insertOrThrow("position", null, values);
+        final long id = db.insertOrThrow("position", null, values);
+        Log.i(TAG, "Inserted position " + id);
+
+        values = new ContentValues();
+        values.put("positionId", id);
+        for(Map.Entry<String, String> entry : position.getAdditionalData().entrySet()) {
+            values.put("k", entry.getKey());
+            values.put("v", entry.getValue());
+
+            long idData = db.insertOrThrow("positionData", null, values);
+            Log.i(TAG, "Inserted positionData " + idData);
+        }
     }
 
     public void insertPositionAsync(final Position position, DatabaseHandler<Void> handler) {
@@ -137,6 +160,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } finally {
             cursor.close();
         }
+        Cursor cursorData = db.rawQuery("SELECT * FROM positionData WHERE positionID=? ", new String[] { String.valueOf(position.getId()) });
+        try {
+            while (cursorData.moveToNext()) {
+                position.setAdditionalData(cursorData.getString(cursorData.getColumnIndex("k")),
+                        cursorData.getString(cursorData.getColumnIndex("v")));
+            }
+        } finally {
+            cursorData.close();
+        }
 
         return position;
     }
@@ -154,6 +186,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (db.delete("position", "id = ?", new String[] { String.valueOf(id) }) != 1) {
             throw new SQLException();
         }
+        db.delete("positionData", "positionId = ?", new String[] { String.valueOf(id) });
     }
 
     public void deletePositionAsync(final long id, DatabaseHandler<Void> handler) {

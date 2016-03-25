@@ -2,6 +2,11 @@
 <resources>
 
     <style name="TraccarTheme" parent="android:Theme.Light">
+        <item name="android:listViewStyle">@style/lightListView</item>
     </style>
+    <style name="lightListView">
+        <item name="android:background">#ffffff</item>
+    </style>
+
 
 </resources>

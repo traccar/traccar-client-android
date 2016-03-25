@@ -18,6 +18,8 @@ package org.traccar.client;
 import android.location.Location;
 import android.net.Uri;
 
+import java.util.Map;
+
 public class ProtocolFormatter {
 
     public static String formatRequest(String address, int port, Position position) {
@@ -32,6 +34,10 @@ public class ProtocolFormatter {
                 .appendQueryParameter("bearing", String.valueOf(position.getCourse()))
                 .appendQueryParameter("altitude", String.valueOf(position.getAltitude()))
                 .appendQueryParameter("batt", String.valueOf(position.getBattery()));
+
+        for(Map.Entry<String, String> entry : position.getAdditionalData().entrySet()) {
+            builder.appendQueryParameter(entry.getKey(),entry.getValue());
+        }
 
         return builder.build().toString();
     }

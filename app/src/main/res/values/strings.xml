@@ -39,6 +39,12 @@
     <string name="settings_foreground_title">Foreground service</string>
     <string name="settings_foreground_summary">Increase service priority</string>
 
+    <string name="settings_additional_title">Additions data</string>
+    <string name="settings_additional_summary">Selected values to submit</string>
+
+    <string name="additional_provider_title">Location provider</string>
+    <string name="additional_charging_title">Charging status</string>
+
     <string name="menu_status">Status</string>
     <string name="menu_about">About</string>
     <string name="menu_shortcuts">Add shortcuts</string>

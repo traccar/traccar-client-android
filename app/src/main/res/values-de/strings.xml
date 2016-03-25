@@ -50,5 +50,9 @@
     <string name="settings_timeout_fast_title">Auto Modus Timeout</string>
     <string name="settings_carmode_off">Aktiviert</string>
     <string name="settings_carmode_on">Deaktiviert</string>
+    <string name="settings_additional_summary">Zusätzlich zu übertragene Werte</string>
+    <string name="settings_additional_title">Weitere Daten</string>
+    <string name="additional_charging_title">Ladezustand</string>
+    <string name="additional_provider_title">Location Provider</string>
 
 </resources>

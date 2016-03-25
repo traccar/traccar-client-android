@@ -68,4 +68,22 @@
         android:summary="@string/settings_provider_summary"
         android:title="@string/settings_provider_title" />
 
+    <PreferenceScreen
+        android:title="@string/settings_additional_title"
+        android:summary="@string/settings_additional_summary"
+        android:key="additional"
+        >
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="additional_provider"
+            android:title="@string/additional_provider_title"/>
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="additional_charging"
+            android:title="@string/additional_charging_title"/>
+
+    </PreferenceScreen>
+
 </PreferenceScreen>

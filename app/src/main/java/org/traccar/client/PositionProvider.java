@@ -52,6 +52,9 @@ public abstract class PositionProvider {
     protected final long minDistance;
     protected final boolean carMode;
 
+    protected final boolean add_charging;
+    protected final boolean add_provider;
+
     private long lastUpdateTime;
 
     public PositionProvider(Context context, PositionListener listener) {
@@ -68,6 +71,9 @@ public abstract class PositionProvider {
         timeoutFast = Integer.parseInt(preferences.getString(MainActivity.KEY_TIMEOUT_FAST, null)) * 1000;
         minDistance = Integer.parseInt(preferences.getString(MainActivity.KEY_DISTANCE_START, null));
 
+        add_charging = preferences.getBoolean(MainActivity.KEY_ADD_CHARGING, false);
+        add_provider = preferences.getBoolean(MainActivity.KEY_ADD_PROVIDER, false);
+
         type = preferences.getString(MainActivity.KEY_PROVIDER, null);
     }
 
@@ -78,6 +84,8 @@ public abstract class PositionProvider {
     public abstract void stopUpdates();
 
     protected void updateLocation(Location location) {
+        Position position = new Position(deviceId, location, getBatteryLevel());
+
         if(lastLocation == null) {
             Log.i(TAG, "init lastLocation");
             lastLocation = location;
@@ -90,11 +98,13 @@ public abstract class PositionProvider {
                     stateCarMode = true;
                     stopUpdates();
                     startUpdatesFast();
+                    position.setAdditionalData("carMode", "start");
                 }
             } else {
-
+                position.setAdditionalData("carMode", "active");
                 if(lastLocation.distanceTo(location) > minDistance) { // moving car
                     lastLocation = location;
+                    position.setAdditionalData("carMode", "activeMove");
                 }
 
                 if(location.getTime() - lastLocation.getTime() > timeoutFast) { // not moving while normal period time
@@ -102,6 +112,7 @@ public abstract class PositionProvider {
                     stateCarMode = false;
                     stopUpdates();
                     startUpdates();
+                    position.setAdditionalData("carMode", "stop");
                 } else if(lastLocation.distanceTo(location) == 0) { // No timeout but no moving, so we don't need data to send
                     return;
                 }
@@ -112,7 +123,8 @@ public abstract class PositionProvider {
         if (location != null && location.getTime() != lastUpdateTime) {
             Log.i(TAG, "location new");
             lastUpdateTime = location.getTime();
-            listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel()));
+            addAdditionalFields(position);
+            listener.onPositionUpdate(position);
         } else {
             Log.i(TAG, location != null ? "location old" : "location nil");
         }
@@ -120,7 +132,7 @@ public abstract class PositionProvider {
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)
     private double getBatteryLevel() {
-        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.ECLAIR) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
             Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
             int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
             int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1);
@@ -128,6 +140,27 @@ public abstract class PositionProvider {
         } else {
             return 0;
         }
+    }
+
+    private void addAdditionalFields(Position position) {
+        if(add_provider) {
+            position.setAdditionalData("provider", lastLocation.getProvider());
+        }
+
+        if(add_charging) {
+            position.setAdditionalData("charging", String.valueOf(getCharging()));
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
+    private boolean getCharging() {
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.ECLAIR) return false;
+
+        Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        int status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+
+        return status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                status == BatteryManager.BATTERY_STATUS_FULL;
     }
 
 }

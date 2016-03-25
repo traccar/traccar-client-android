@@ -52,6 +52,10 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     public static final String KEY_PROVIDER = "provider";
     public static final String KEY_STATUS = "status";
 
+    public static final String KEY_ADDITIONAL = "additional";
+    public static final String KEY_ADD_CHARGING = "additional_charging";
+    public static final String KEY_ADD_PROVIDER = "additional_provider";
+
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
 
     private SharedPreferences sharedPreferences;
@@ -215,6 +219,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         findPreference(KEY_INTERVAL).setEnabled(enabled);
         findPreference(KEY_CARMODE).setEnabled(enabled);
         findPreference(KEY_PROVIDER).setEnabled(enabled);
+        findPreference(KEY_ADDITIONAL).setEnabled(enabled);
         setCarmodeEnable(enabled);
     }
 
