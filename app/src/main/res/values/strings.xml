@@ -13,6 +13,13 @@
     <string name="settings_port_summary">Tracking server TCP port</string>
     <string name="settings_interval_title">Frequency</string>
     <string name="settings_interval_summary">Messages interval in seconds</string>
+    <string name="settings_carmode_title">Carmode</string>
+    <string name="settings_carmode_off_summary">Carmode deactivated</string>
+    <string name="settings_carmode_on_summary">Carmode activated</string>
+    <string name="settings_interval_fast_title">Frequency while driving</string>
+    <string name="settings_interval_fast_summary">Messages interval in seconds while Driving</string>
+    <string name="settings_distance_start_title">Starting distance</string>
+    <string name="settings_distance_start_summary">Minimum distance in meters</string>
     <string name="settings_status_title">Service status</string>
     <string name="settings_status_off">Start</string>
     <string name="settings_status_on">Stop</string>

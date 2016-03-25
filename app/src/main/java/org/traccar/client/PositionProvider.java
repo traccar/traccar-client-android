@@ -43,7 +43,13 @@ public abstract class PositionProvider {
 
     private String deviceId;
     protected String type;
+    protected boolean stateCarMode = false;
     protected final long period;
+
+    protected Location lastLocation = null;
+    protected final long periodFast;
+    protected final long minDistance;
+    protected final boolean carMode;
 
     private long lastUpdateTime;
 
@@ -55,16 +61,52 @@ public abstract class PositionProvider {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
         deviceId = preferences.getString(MainActivity.KEY_DEVICE, null);
+        carMode = preferences.getBoolean(MainActivity.KEY_CARMODE, false);
         period = Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000;
+        periodFast = Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL_FAST, null)) * 1000;
+        minDistance = Integer.parseInt(preferences.getString(MainActivity.KEY_DISTANCE_START, null));
 
         type = preferences.getString(MainActivity.KEY_PROVIDER, null);
     }
 
     public abstract void startUpdates();
 
+    public abstract void startUpdatesFast();
+
     public abstract void stopUpdates();
 
     protected void updateLocation(Location location) {
+        if(lastLocation == null) {
+            Log.i(TAG, "init lastLocation");
+            lastLocation = location;
+        }
+
+        if(carMode) {
+            if(stateCarMode == false) {
+                if (lastLocation.distanceTo(location) > minDistance) {
+                    Log.i(TAG, "update switch : sleepMode => CarMode");
+                    stateCarMode = true;
+                    stopUpdates();
+                    startUpdatesFast();
+                }
+            } else {
+
+                if(lastLocation.distanceTo(location) > minDistance) { // moving car
+                    lastLocation = location;
+                }
+
+                if(location.getTime() - lastLocation.getTime() > period) { // not moving while normal period time
+                    Log.i(TAG, "update switch : carMode => sleepMode");
+                    stateCarMode = false;
+                    stopUpdates();
+                    startUpdates();
+                } else if(lastLocation.distanceTo(location) == 0) { // No timeout but no moving, so we don't need data to send
+                    return;
+                }
+
+            }
+        }
+
         if (location != null && location.getTime() != lastUpdateTime) {
             Log.i(TAG, "location new");
             lastUpdateTime = location.getTime();

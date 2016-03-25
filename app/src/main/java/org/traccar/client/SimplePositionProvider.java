@@ -34,6 +34,10 @@ public class SimplePositionProvider extends PositionProvider implements Location
         locationManager.requestLocationUpdates(type, period, 0, this);
     }
 
+    public void startUpdatesFast() {
+        locationManager.requestLocationUpdates(type, periodFast, 0, this);
+    }
+
     public void stopUpdates() {
         locationManager.removeUpdates(this);
     }

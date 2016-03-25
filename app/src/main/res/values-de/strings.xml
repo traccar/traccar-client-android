@@ -39,5 +39,12 @@
     <string name="status_send_fail">Übertragung fehlerhaft</string>
     <string name="status_location_update">Positionsupdate</string>
     <string name="status_connectivity_change">Anschlusswechsel</string>
+    <string name="settings_distance_start_summary">Minimale Distanz in Metern</string>
+    <string name="settings_carmode_title">Auto Modus</string>
+    <string name="settings_carmode_on_summary">Modus aktiviert</string>
+    <string name="settings_carmode_off_summary">Modus deaktiviert</string>
+    <string name="settings_distance_start_title">Start Entfernung</string>
+    <string name="settings_interval_fast_title">Frequenz während der Fahrt</string>
+    <string name="settings_interval_fast_summary">Interval während der Fahrt in Sekunden</string>
 
 </resources>
