@@ -46,5 +46,7 @@
     <string name="settings_distance_start_title">Start Entfernung</string>
     <string name="settings_interval_fast_title">Frequenz während der Fahrt</string>
     <string name="settings_interval_fast_summary">Interval während der Fahrt in Sekunden</string>
+    <string name="settings_timeout_fast_summary">Verweildauer im Auto Modus in Sekunden</string>
+    <string name="settings_timeout_fast_title">Auto Modus Timeout</string>
 
 </resources>

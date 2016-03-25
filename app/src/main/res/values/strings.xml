@@ -16,6 +16,8 @@
     <string name="settings_carmode_title">Carmode</string>
     <string name="settings_carmode_off_summary">Carmode deactivated</string>
     <string name="settings_carmode_on_summary">Carmode activated</string>
+    <string name="settings_timeout_fast_title">Carmode timeout</string>
+    <string name="settings_timeout_fast_summary">Seconds remaining in Carmode</string>
     <string name="settings_interval_fast_title">Frequency while driving</string>
     <string name="settings_interval_fast_summary">Messages interval in seconds while Driving</string>
     <string name="settings_distance_start_title">Starting distance</string>

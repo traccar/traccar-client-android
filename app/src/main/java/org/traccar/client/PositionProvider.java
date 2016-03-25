@@ -48,6 +48,7 @@ public abstract class PositionProvider {
 
     protected Location lastLocation = null;
     protected final long periodFast;
+    protected final long timeoutFast;
     protected final long minDistance;
     protected final boolean carMode;
 
@@ -64,6 +65,7 @@ public abstract class PositionProvider {
         carMode = preferences.getBoolean(MainActivity.KEY_CARMODE, false);
         period = Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000;
         periodFast = Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL_FAST, null)) * 1000;
+        timeoutFast = Integer.parseInt(preferences.getString(MainActivity.KEY_TIMEOUT_FAST, null)) * 1000;
         minDistance = Integer.parseInt(preferences.getString(MainActivity.KEY_DISTANCE_START, null));
 
         type = preferences.getString(MainActivity.KEY_PROVIDER, null);
@@ -95,7 +97,7 @@ public abstract class PositionProvider {
                     lastLocation = location;
                 }
 
-                if(location.getTime() - lastLocation.getTime() > period) { // not moving while normal period time
+                if(location.getTime() - lastLocation.getTime() > timeoutFast) { // not moving while normal period time
                     Log.i(TAG, "update switch : carMode => sleepMode");
                     stateCarMode = false;
                     stopUpdates();

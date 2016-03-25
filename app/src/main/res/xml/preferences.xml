@@ -47,6 +47,13 @@
         android:title="@string/settings_interval_fast_title" />
 
     <EditTextPreference
+        android:defaultValue="180"
+        android:key="timeout_fast"
+        android:numeric="integer"
+        android:summary="@string/settings_timeout_fast_summary"
+        android:title="@string/settings_timeout_fast_title" />
+
+    <EditTextPreference
         android:defaultValue="10"
         android:key="distance_start"
         android:numeric="integer"

@@ -46,6 +46,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     public static final String KEY_PORT = "port";
     public static final String KEY_INTERVAL = "interval";
     public static final String KEY_CARMODE = "carmode";
+    public static final String KEY_TIMEOUT_FAST = "timeout_fast";
     public static final String KEY_INTERVAL_FAST = "interval_fast";
     public static final String KEY_DISTANCE_START = "distance_start";
     public static final String KEY_PROVIDER = "provider";
@@ -99,6 +100,19 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             }
         });
         findPreference(KEY_INTERVAL).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (newValue != null) {
+                    try {
+                        Integer.parseInt((String) newValue);
+                        return true;
+                    } catch (NumberFormatException e) {
+                    }
+                }
+                return false;
+            }
+        });
+        findPreference(KEY_TIMEOUT_FAST).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (newValue != null) {
@@ -208,6 +222,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         if(enabled) {
             enabled = sharedPreferences.getBoolean(KEY_CARMODE, false);
         }
+        findPreference(KEY_TIMEOUT_FAST).setEnabled(enabled);
         findPreference(KEY_INTERVAL_FAST).setEnabled(enabled);
         findPreference(KEY_DISTANCE_START).setEnabled(enabled);
     }
