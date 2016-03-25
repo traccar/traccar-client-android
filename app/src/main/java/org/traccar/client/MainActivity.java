@@ -53,8 +53,11 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     public static final String KEY_STATUS = "status";
 
     public static final String KEY_ADDITIONAL = "additional";
+    public static final String KEY_ADD_ACCURACY = "additional_accuracy";
     public static final String KEY_ADD_CHARGING = "additional_charging";
     public static final String KEY_ADD_PROVIDER = "additional_provider";
+    public static final String KEY_ADD_TEMPBATT = "additional_tempbatt";
+    public static final String KEY_ADD_VOLTAGE = "additional_voltage";
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
 
@@ -71,6 +74,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
+        checkAdditionalAPICompat();
 
         findPreference(KEY_DEVICE).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -278,6 +282,26 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             ((EditTextPreference) findPreference(KEY_DEVICE)).setText(id);
         }
         findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
+    }
+
+    private void checkAdditionalAPICompat() {
+        if(android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.ECLAIR) { // min. API 5
+            disableAdditional(KEY_ADD_CHARGING);
+            disableAdditional(KEY_ADD_TEMPBATT);
+            disableAdditional(KEY_ADD_VOLTAGE);
+        }
+    }
+
+    private void disableAdditional(String preferenceName) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            TwoStatePreference preference = (TwoStatePreference) findPreference(preferenceName);
+            preference.setChecked(false);
+            preference.setEnabled(false);
+        } else {
+            CheckBoxPreference preference = (CheckBoxPreference) findPreference(preferenceName);
+            preference.setChecked(false);
+            preference.setEnabled(false);
+        }
     }
 
     private void startTrackingService(boolean checkPermission, boolean permission) {

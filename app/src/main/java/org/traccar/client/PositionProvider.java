@@ -20,12 +20,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import java.util.List;
 
 public abstract class PositionProvider {
 
@@ -40,6 +44,7 @@ public abstract class PositionProvider {
     private final Context context;
     private final SharedPreferences preferences;
     protected final LocationManager locationManager;
+    protected final SensorManager sensorManager;
 
     private String deviceId;
     protected String type;
@@ -52,8 +57,11 @@ public abstract class PositionProvider {
     protected final long minDistance;
     protected final boolean carMode;
 
+    protected final boolean add_accuracy;
     protected final boolean add_charging;
     protected final boolean add_provider;
+    protected final boolean add_tempbatt;
+    protected final boolean add_voltage;
 
     private long lastUpdateTime;
 
@@ -63,6 +71,13 @@ public abstract class PositionProvider {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        // Possible readable sensors
+        List<Sensor> deviceSensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
+
+        for (Sensor sensor: deviceSensors) {
+            Log.i("Sensors", sensor.getName());
+        }
 
         deviceId = preferences.getString(MainActivity.KEY_DEVICE, null);
         carMode = preferences.getBoolean(MainActivity.KEY_CARMODE, false);
@@ -71,8 +86,11 @@ public abstract class PositionProvider {
         timeoutFast = Integer.parseInt(preferences.getString(MainActivity.KEY_TIMEOUT_FAST, null)) * 1000;
         minDistance = Integer.parseInt(preferences.getString(MainActivity.KEY_DISTANCE_START, null));
 
+        add_accuracy = preferences.getBoolean(MainActivity.KEY_ADD_ACCURACY, false);
         add_charging = preferences.getBoolean(MainActivity.KEY_ADD_CHARGING, false);
         add_provider = preferences.getBoolean(MainActivity.KEY_ADD_PROVIDER, false);
+        add_tempbatt = preferences.getBoolean(MainActivity.KEY_ADD_TEMPBATT, false);
+        add_voltage = preferences.getBoolean(MainActivity.KEY_ADD_VOLTAGE, false);
 
         type = preferences.getString(MainActivity.KEY_PROVIDER, null);
     }
@@ -143,12 +161,24 @@ public abstract class PositionProvider {
     }
 
     private void addAdditionalFields(Position position) {
-        if(add_provider) {
-            position.setAdditionalData("provider", lastLocation.getProvider());
+        if(add_accuracy) {
+            position.setAdditionalData("accuracy", String.valueOf(lastLocation.getAccuracy()));
         }
 
         if(add_charging) {
             position.setAdditionalData("charging", String.valueOf(getCharging()));
+        }
+
+        if(add_provider) {
+            position.setAdditionalData("provider", lastLocation.getProvider());
+        }
+
+        if(add_tempbatt) {
+            position.setAdditionalData("tempbatt", String.valueOf(((float)getBatteryExtraInt(BatteryManager.EXTRA_TEMPERATURE)/10)));
+        }
+
+        if(add_voltage) {
+            position.setAdditionalData("voltage", String.valueOf(((float)getBatteryExtraInt(BatteryManager.EXTRA_VOLTAGE)/1000)));
         }
     }
 
@@ -161,6 +191,14 @@ public abstract class PositionProvider {
 
         return status == BatteryManager.BATTERY_STATUS_CHARGING ||
                 status == BatteryManager.BATTERY_STATUS_FULL;
+    }
+
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
+    private int getBatteryExtraInt(String extra) {
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.ECLAIR) return 0;
+
+        Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return batteryIntent.getIntExtra(extra, 0);
     }
 
 }

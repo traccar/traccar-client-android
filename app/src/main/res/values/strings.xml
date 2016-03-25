@@ -14,8 +14,8 @@
     <string name="settings_interval_title">Frequency</string>
     <string name="settings_interval_summary">Messages interval in seconds</string>
     <string name="settings_carmode_title">Carmode</string>
-    <string name="settings_carmode_off">Activated</string>
-    <string name="settings_carmode_on">Deactivated</string>
+    <string name="settings_carmode_off">Activate</string>
+    <string name="settings_carmode_on">Deactivate</string>
     <string name="settings_carmode_off_summary">Carmode deactivated</string>
     <string name="settings_carmode_on_summary">Carmode activated</string>
     <string name="settings_timeout_fast_title">Carmode timeout</string>
@@ -42,8 +42,14 @@
     <string name="settings_additional_title">Additions data</string>
     <string name="settings_additional_summary">Selected values to submit</string>
 
-    <string name="additional_provider_title">Location provider</string>
+    <string name="additional_gps_cat">Location data</string>
+    <string name="additional_batt_cat">Battery data</string>
+
     <string name="additional_charging_title">Charging status</string>
+    <string name="additional_tempbatt_title">Battery temperature</string>
+    <string name="additional_voltage_title">Battery voltage</string>
+    <string name="additional_provider_title">Location provider</string>
+    <string name="additional_accuracy_title">Accuracy</string>
 
     <string name="menu_status">Status</string>
     <string name="menu_about">About</string>

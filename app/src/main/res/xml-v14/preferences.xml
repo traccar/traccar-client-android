@@ -72,4 +72,39 @@
         android:summary="@string/settings_provider_summary"
         android:title="@string/settings_provider_title" />
 
+    <PreferenceScreen
+        android:title="@string/settings_additional_title"
+        android:summary="@string/settings_additional_summary"
+        android:key="additional"
+        >
+
+        <PreferenceCategory android:title="@string/additional_batt_cat">
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="additional_charging"
+                android:title="@string/additional_charging_title"/>
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="additional_tempbatt"
+                android:title="@string/additional_tempbatt_title"/>
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="additional_voltage"
+                android:title="@string/additional_voltage_title"/>
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/additional_gps_cat">
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="additional_provider"
+                android:title="@string/additional_provider_title"/>
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="additional_accuracy"
+                android:title="@string/additional_accuracy_title"/>
+        </PreferenceCategory>
+
+    </PreferenceScreen>
+
 </PreferenceScreen>
