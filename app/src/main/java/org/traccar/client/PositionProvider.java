@@ -161,7 +161,7 @@ public abstract class PositionProvider {
     }
 
     private void addAdditionalFields(Position position) {
-        if(add_accuracy) {
+        if(add_accuracy && lastLocation.hasAccuracy()) {
             position.setAdditionalData("accuracy", String.valueOf(lastLocation.getAccuracy()));
         }
 
