@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">ລາວຈີພີເອສ໌ຄາຣ໌</string>
+  <string name="app_logo">ລາວຈີພີເອສ໌ຄາຣ໌</string>
+  <string name="shortcut_start">ລາວຈີພີເອສ໌ຄາຣ໌ - ເລີ່ມຕົ້ນ</string>
+  <string name="shortcut_stop">ລາວຈີພີເອສ໌ຄາຣ໌ - ຢຸດ</string>
+  <string name="settings_id_title">ໝາຍເລກອຸປະກອນ</string>
+  <string name="settings_address_title">ທີ່ຢູ່ຂອງເຊີເວີ້</string>
+  <string name="settings_address_summary">ໂດເມນເນມຫລື້ທີ່ຢູ່ໄອພີ</string>
+  <string name="settings_port_title">ພອດເຊີເວີ້</string>
+  <string name="settings_port_summary">ພອດ TCP ການຕິດຕາມເຊີເວີ້</string>
+  <string name="settings_interval_title">ລະດັບຄວາມຖີ່</string>
+  <string name="settings_interval_summary">ໄລຍະຫ່າງສົ່ງຂໍ້ຄວາມເປັນວິນາທີ</string>
+  <string name="settings_status_title">ສະຖານະໃຊ້ງານ</string>
+  <string name="settings_status_off">ເລີ່ມ</string>
+  <string name="settings_status_on">ຢຸດ</string>
+  <string name="settings_status_off_summary">ການໃຊ້ງານໄດ້ຢຸດລົງ</string>
+  <string name="settings_status_on_summary">ການໃຊ້ງານກຳລັງທຳງານຢູ່</string>
+  <string name="settings_provider_title">ຜູ້ໃຫ້ບໍລິການຈຸດພິກັດ</string>
+  <string name="settings_provider_summary">ແຫລ່ງຂອງຂໍ້ມູນພິກັດ</string>
+  <string name="settings_provider_gps">ຜູ້ໃຫ້ບໍລິການ GPS</string>
+  <string name="settings_provider_network">ຜູ້ໃຫ້ບໍລິການເຄື່ອຄ່າຍ</string>
+  <string name="settings_provider_mixed">ຜູ້ໃຫ້ບໍລິການແບບຮ່ວມກັນ</string>
+  <string name="settings_foreground_title">ເຊີວິດໂຟກຣາວດ໌</string>
+  <string name="settings_foreground_summary">ເພີ່ມເຊີວິດໄພອໍຣິດຕີ້</string>
+  <string name="menu_status">ສະຖານະ</string>
+  <string name="menu_about">ກ່ຽວກັບ</string>
+  <string name="menu_shortcuts">ເພີ່ມຊອດຄັດ</string>
+  <string name="menu_clear">ລົບລ້າງ</string>
+  <string name="about_description">ລາວຈີພີເອສຄາຣ໌ສຳລັບແອນດຣອຍ. ສາມາດໃຊ້ໄດ້ກັບລາວຈີພີເອສຄາຣ໌ເຊີເວີ້.</string>
+  <string name="about_license">ແອັບໂຕນີ້ສາມາດດາວໂຫລດໃຊ້ໄດ້ຟຣີໂດຍບໍ່ມີຄ່າໃຊ້ຈ່າຍຫຍັງ.</string>
+  <string name="about_web">ຂໍ້ມູນເພີ່ມເຕີມໄດ້ທີ່\nwww.traccar.org/client</string>
+  <string name="status_service_create">ການໃຊ້ງານໄດ້ຖືກສ້າງຂຶ້ນແລ້ວ</string>
+  <string name="status_service_destroy">ການໃຊ້ງານໄດ້ປີດລົງແລ້ວ</string>
+  <string name="status_send_fail">ມີຂໍ້ຜິດພາດໃນການສົ່ງຂໍ້ມູນ</string>
+  <string name="status_location_update">ສະຖານທີ່ພິກັດໄດ້ອັບເດດ</string>
+  <string name="status_connectivity_change">ການເຊື່ອມຕໍ່ມີການປ່ຽນແປງ</string>
+  <string name="hidden_app_name">ການຕັ້ງຄ່າອຸປະກອນ</string>
+  <string name="hidden_alert">ແອັບໂຕນີ້ໄດ້ຖືກຊ້ອນໄວ້. ຖ້າຢາກເປີດຂຶ້ນມາອີກຄັ້ງກະລຸນາກົດໝາຍເລກ 8722227 (TRACCAR).</string>
+</resources>
