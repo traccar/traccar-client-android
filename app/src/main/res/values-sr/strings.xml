@@ -18,11 +18,11 @@
     <string name="settings_status_on_summary">Servis pokrenut</string>
     <string name="settings_provider_title">Provajder lokacije</string>
     <string name="settings_provider_summary">Izvor lokacijskih podataka</string>
-    <string-array name="settings_provider_names">
-        <item>GPS provajder</item>
-        <item>Provajder Mreže</item>
-        <item>Oba zajedno provajdera</item>
-    </string-array>
+
+    <string name="settings_provider_gps">GPS provajder</string>
+    <string name="settings_provider_network">Provajder Mreže</string>
+    <string name="settings_provider_mixed">Oba zajedno provajdera</string>
+
     <string name="settings_foreground_title">Prvi plan servis</string>
     <string name="settings_foreground_summary">Povecanje usluga prioritet</string>
 

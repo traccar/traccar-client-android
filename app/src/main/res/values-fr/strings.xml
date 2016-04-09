@@ -18,11 +18,11 @@
     <string name="settings_status_on_summary">En marche</string>
     <string name="settings_provider_title">Source de localisation</string>
     <string name="settings_provider_summary">Source utilisée par le système afin d\'obtenir la localisation de l\'appareil</string>
-    <string-array name="settings_provider_names">
-        <item>Mode GPS uniquement</item>
-        <item>Mode cellulaire uniquement</item>
-        <item>Mode hybride</item>
-    </string-array>
+
+    <string name="settings_provider_gps">Mode GPS uniquement</string>
+    <string name="settings_provider_network">Mode cellulaire uniquement</string>
+    <string name="settings_provider_mixed">Mode hybride</string>
+
     <string name="settings_foreground_title">Un service de premier plan</string>
     <string name="settings_foreground_summary">Augmenter la priorité de service</string>
 

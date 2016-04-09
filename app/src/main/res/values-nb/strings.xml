@@ -18,11 +18,11 @@
     <string name="settings_status_on_summary">Tjenesten kjører</string>
     <string name="settings_provider_title">Lokaliseringsleverandør</string>
     <string name="settings_provider_summary">Kilde for lokaliseringsdata</string>
-    <string-array name="settings_provider_names">
-        <item>GPS-lokalisering</item>
-        <item>Nettverkslokalisering</item>
-        <item>Blandet lokalisering</item>
-    </string-array>
+
+    <string name="settings_provider_gps">GPS-lokalisering</string>
+    <string name="settings_provider_network">Nettverkslokalisering</string>
+    <string name="settings_provider_mixed">Blandet lokalisering</string>
+
     <string name="settings_foreground_title">Forgrunnen tjeneste</string>
     <string name="settings_foreground_summary">Øk tjeneste prioritet</string>
 

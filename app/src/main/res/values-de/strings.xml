@@ -18,11 +18,11 @@
     <string name="settings_status_on_summary">Dienst aktiv</string>
     <string name="settings_provider_title">Datenherkunft</string>
     <string name="settings_provider_summary">Quelle der Positionen</string>
-    <string-array name="settings_provider_names">
-        <item>GPS</item>
-        <item>Netzwerk</item>
-        <item>Gemischt</item>
-    </string-array>
+
+    <string name="settings_provider_gps">GPS</string>
+    <string name="settings_provider_network">Netzwerk</string>
+    <string name="settings_provider_mixed">Gemischt</string>
+
     <string name="settings_foreground_title">Vordergrund service</string>
     <string name="settings_foreground_summary">Erhöhen service priorität</string>
 

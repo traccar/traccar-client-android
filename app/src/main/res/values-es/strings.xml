@@ -18,11 +18,11 @@
     <string name="settings_status_on_summary">Servicio activado</string>
     <string name="settings_provider_title">Proveedor de localización</string>
     <string name="settings_provider_summary">Fuente de los datos de localización</string>
-    <string-array name="settings_provider_names">
-        <item>Proveedor GPS</item>
-        <item>Proveedor de red</item>
-        <item>Proveedor mixto</item>
-	</string-array>
+
+    <string name="settings_provider_gps">Proveedor GPS</string>
+    <string name="settings_provider_network">Proveedor de red</string>
+    <string name="settings_provider_mixed">Proveedor mixto</string>
+
     <string name="settings_foreground_title">Servicio de primer plano</string>
     <string name="settings_foreground_summary">Aumentar prioridad de servicio</string>
 

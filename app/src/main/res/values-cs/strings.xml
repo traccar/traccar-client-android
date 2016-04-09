@@ -18,11 +18,11 @@
     <string name="settings_status_on_summary">Spuštěno</string>
     <string name="settings_provider_title">Poskytovatel zaměření</string>
     <string name="settings_provider_summary">Zdroj zaměřovacích dat</string>
-    <string-array name="settings_provider_names">
-        <item>GPS</item>
-        <item>Mobilní síť</item>
-        <item>Obojí</item>
-    </string-array>
+
+    <string name="settings_provider_gps">GPS</string>
+    <string name="settings_provider_network">Mobilní síť</string>
+    <string name="settings_provider_mixed">Obojí</string>
+
     <string name="settings_foreground_title">Popředí služba</string>
     <string name="settings_foreground_summary">Zvýšit prioritu služba</string>
     

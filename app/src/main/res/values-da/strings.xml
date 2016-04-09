@@ -18,11 +18,11 @@
     <string name="settings_status_on_summary">Service er aktiv</string>
     <string name="settings_provider_title">Udbyder</string>
     <string name="settings_provider_summary">Udbyder lokaliseringsdata</string>
-    <string-array name="settings_provider_names">
-        <item>GPS udbyder</item>
-        <item>Netværks udbyder</item>
-        <item>Mixet udbyder</item>
-    </string-array>
+
+    <string name="settings_provider_gps">GPS udbyder</string>
+    <string name="settings_provider_network">Netværks udbyder</string>
+    <string name="settings_provider_mixed">Mixet udbyder</string>
+
     <string name="settings_foreground_title">Forgrunden tjeneste</string>
     <string name="settings_foreground_summary">Øg tjeneste prioritet</string>
 
