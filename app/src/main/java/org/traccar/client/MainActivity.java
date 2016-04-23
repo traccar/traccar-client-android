@@ -132,7 +132,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     private void addShortcuts(boolean start, int name) {
         Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
-        shortcutIntent.setComponent(new ComponentName(getPackageName(), ".ShortcutActivity"));
+        shortcutIntent.setComponent(new ComponentName(getPackageName(), ShortcutActivity.class.getCanonicalName()));
         shortcutIntent.putExtra(ShortcutActivity.EXTRA_ACTION, start);
 
         Intent installShortCutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
