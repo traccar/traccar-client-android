@@ -65,7 +65,7 @@ public abstract class PositionProvider {
     public abstract void stopUpdates();
 
     protected void updateLocation(Location location) {
-        if (location != null && location.getTime() != lastUpdateTime) {
+        if (location != null && location.getTime() - lastUpdateTime >= period) {
             Log.i(TAG, "location new");
             lastUpdateTime = location.getTime();
             listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel()));
