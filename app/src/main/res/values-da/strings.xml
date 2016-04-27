@@ -1,43 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-
-    <string name="app_name">Traccar klient</string>
-    <string name="app_logo">Traccar</string>
-
-    <string name="settings_id_title">Indentificere Enhed</string>
-    <string name="settings_address_title">Server adresse</string>
-    <string name="settings_address_summary">Domænenavn eller IP adresse</string>
-    <string name="settings_port_title">Server port</string>
-    <string name="settings_port_summary">Tracking server TCP port</string>
-    <string name="settings_interval_title">Tracking interval</string>
-    <string name="settings_interval_summary">Besked interval i sekunder</string>
-    <string name="settings_status_title">Service status</string>
-    <string name="settings_status_off">Start</string>
-    <string name="settings_status_on">Stop</string>
-    <string name="settings_status_off_summary">Service stoppet</string>
-    <string name="settings_status_on_summary">Service er aktiv</string>
-    <string name="settings_provider_title">Udbyder</string>
-    <string name="settings_provider_summary">Udbyder lokaliseringsdata</string>
-
-    <string name="settings_provider_gps">GPS udbyder</string>
-    <string name="settings_provider_network">Netværks udbyder</string>
-    <string name="settings_provider_mixed">Mixet udbyder</string>
-
-    <string name="settings_foreground_title">Forgrunden tjeneste</string>
-    <string name="settings_foreground_summary">Øg tjeneste prioritet</string>
-
-    <string name="menu_status">Status</string>
-    <string name="menu_about">Om</string>
-    <string name="menu_clear">Tilbage</string>
-
-    <string name="about_description">Real tid`s GPS tracker for Android enheder. Kompatibel med Traccar Server og andre tracking systemer.</string>
-    <string name="about_license">Denne application er en fri og open source, source koden er licenseret under Apache License Version 2.0 og tilgængelig på GitHub.</string>
-    <string name="about_web">For mere information besøg\nwww.traccar.org/client</string>
-
-    <string name="status_service_create">Service oprettet</string>
-    <string name="status_service_destroy">Service ødelagt</string>
-    <string name="status_send_fail">Send fejl</string>
-    <string name="status_location_update">Placering opdateret</string>
-    <string name="status_connectivity_change">Connectivity forandring</string>
-
+  <string name="app_name">Traccar klient</string>
+  <string name="app_logo">Traccar</string>
+  <string name="settings_id_title">Indentificere Enhed</string>
+  <string name="settings_address_title">Server adresse</string>
+  <string name="settings_address_summary">Domænenavn eller IP adresse</string>
+  <string name="settings_port_title">Server port</string>
+  <string name="settings_port_summary">Tracking server TCP port</string>
+  <string name="settings_interval_title">Tracking interval</string>
+  <string name="settings_interval_summary">Besked interval i sekunder</string>
+  <string name="settings_status_title">Service status</string>
+  <string name="settings_status_off">Start</string>
+  <string name="settings_status_on">Stop</string>
+  <string name="settings_status_off_summary">Service stoppet</string>
+  <string name="settings_status_on_summary">Service er aktiv</string>
+  <string name="settings_provider_title">Udbyder</string>
+  <string name="settings_provider_summary">Udbyder lokaliseringsdata</string>
+  <string name="settings_provider_gps">GPS udbyder</string>
+  <string name="settings_provider_network">Netværks udbyder</string>
+  <string name="settings_provider_mixed">Mixet udbyder</string>
+  <string name="settings_foreground_title">Forgrunden tjeneste</string>
+  <string name="settings_foreground_summary">Øg tjeneste prioritet</string>
+  <string name="menu_status">Status</string>
+  <string name="menu_about">Om</string>
+  <string name="menu_clear">Tilbage</string>
+  <string name="about_description">Real tid`s GPS tracker for Android enheder. Kompatibel med Traccar Server og andre tracking systemer.</string>
+  <string name="about_license">Denne application er en fri og open source, source koden er licenseret under Apache License Version 2.0 og tilgængelig på GitHub.</string>
+  <string name="about_web">For mere information besøg\nwww.traccar.org/client</string>
+  <string name="status_service_create">Service oprettet</string>
+  <string name="status_service_destroy">Service ødelagt</string>
+  <string name="status_send_fail">Send fejl</string>
+  <string name="status_location_update">Placering opdateret</string>
+  <string name="status_connectivity_change">Connectivity forandring</string>
 </resources>

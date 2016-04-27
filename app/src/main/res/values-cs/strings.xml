@@ -1,43 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-
-    <string name="app_name">Traccar klient</string>
-    <string name="app_logo">Traccar</string>
-
-    <string name="settings_id_title">Identifikátor zařízení</string>
-    <string name="settings_address_title">Adresa serveru</string>
-    <string name="settings_address_summary">Doménové jméno nebo IP adresa</string>
-    <string name="settings_port_title">Port</string>
-    <string name="settings_port_summary">TCP port sledovacího serveru</string>
-    <string name="settings_interval_title">Frekvence</string>
-    <string name="settings_interval_summary">Interval zpráv v sekundách</string>
-    <string name="settings_status_title">Stav služby</string>
-    <string name="settings_status_off">Start</string>
-    <string name="settings_status_on">Stop</string>
-    <string name="settings_status_off_summary">Zastaveno</string>
-    <string name="settings_status_on_summary">Spuštěno</string>
-    <string name="settings_provider_title">Poskytovatel zaměření</string>
-    <string name="settings_provider_summary">Zdroj zaměřovacích dat</string>
-
-    <string name="settings_provider_gps">GPS</string>
-    <string name="settings_provider_network">Mobilní síť</string>
-    <string name="settings_provider_mixed">Obojí</string>
-
-    <string name="settings_foreground_title">Popředí služba</string>
-    <string name="settings_foreground_summary">Zvýšit prioritu služba</string>
-    
-    <string name="menu_status">Stav</string>
-    <string name="menu_about">O aplikaci</string>
-    <string name="menu_clear">Vyčistit</string>
-    
-    <string name="about_description">GPS sledovací aplikace pracující v reálném čase pro zařízení s operačním systémem Android. Kompatibilní s Traccar serverem a dalšími sledovacími systémy.</string>
-    <string name="about_license">Tato aplikace je zdarma a open source, zdrojový kód je licencován pod Apache License Version 2.0 a je přístupný na GitHub.</string>
-    <string name="about_web">Pro více informací navštivte\nwww.traccar.org/client</string>
-
-    <string name="status_service_create">Služba vytvořena</string>
-    <string name="status_service_destroy">Služba zastavena</string>
-    <string name="status_send_fail">Odesílání selhalo</string>
-    <string name="status_location_update">Aktualizace pozice</string>
-    <string name="status_connectivity_change">Změna připojení</string>
-
+  <string name="app_name">Traccar klient</string>
+  <string name="app_logo">Traccar</string>
+  <string name="settings_id_title">Identifikátor zařízení</string>
+  <string name="settings_address_title">Adresa serveru</string>
+  <string name="settings_address_summary">Doménové jméno nebo IP adresa</string>
+  <string name="settings_port_title">Port</string>
+  <string name="settings_port_summary">TCP port sledovacího serveru</string>
+  <string name="settings_interval_title">Frekvence</string>
+  <string name="settings_interval_summary">Interval zpráv v sekundách</string>
+  <string name="settings_status_title">Stav služby</string>
+  <string name="settings_status_off">Start</string>
+  <string name="settings_status_on">Stop</string>
+  <string name="settings_status_off_summary">Zastaveno</string>
+  <string name="settings_status_on_summary">Spuštěno</string>
+  <string name="settings_provider_title">Poskytovatel zaměření</string>
+  <string name="settings_provider_summary">Zdroj zaměřovacích dat</string>
+  <string name="settings_provider_gps">GPS</string>
+  <string name="settings_provider_network">Mobilní síť</string>
+  <string name="settings_provider_mixed">Obojí</string>
+  <string name="settings_foreground_title">Popředí služba</string>
+  <string name="settings_foreground_summary">Zvýšit prioritu služba</string>
+  <string name="menu_status">Stav</string>
+  <string name="menu_about">O aplikaci</string>
+  <string name="menu_clear">Vyčistit</string>
+  <string name="about_description">GPS sledovací aplikace pracující v reálném čase pro zařízení s operačním systémem Android. Kompatibilní s Traccar serverem a dalšími sledovacími systémy.</string>
+  <string name="about_license">Tato aplikace je zdarma a open source, zdrojový kód je licencován pod Apache License Version 2.0 a je přístupný na GitHub.</string>
+  <string name="about_web">Pro více informací navštivte\nwww.traccar.org/client</string>
+  <string name="status_service_create">Služba vytvořena</string>
+  <string name="status_service_destroy">Služba zastavena</string>
+  <string name="status_send_fail">Odesílání selhalo</string>
+  <string name="status_location_update">Aktualizace pozice</string>
+  <string name="status_connectivity_change">Změna připojení</string>
 </resources>

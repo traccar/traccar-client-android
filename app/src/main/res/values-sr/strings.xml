@@ -1,43 +1,40 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-
-    <string name="app_name">Traccar klijent</string>
-    <string name="app_logo">Traccar</string>
-
-    <string name="settings_id_title">Identifikator uređaja</string>
-    <string name="settings_address_title">Adresa servera</string>
-    <string name="settings_address_summary">Domen ime ili IP adresa</string>
-    <string name="settings_port_title">Server port</string>
-    <string name="settings_port_summary">TCP port servera</string>
-    <string name="settings_interval_title">Učestalost</string>
-    <string name="settings_interval_summary">Interval podataka u sekundama</string>
-    <string name="settings_status_title">Status servisa</string>
-    <string name="settings_status_off">Start</string>
-    <string name="settings_status_on">Stop</string>
-    <string name="settings_status_off_summary">Servis zaustavljen</string>
-    <string name="settings_status_on_summary">Servis pokrenut</string>
-    <string name="settings_provider_title">Provajder lokacije</string>
-    <string name="settings_provider_summary">Izvor lokacijskih podataka</string>
-
-    <string name="settings_provider_gps">GPS provajder</string>
-    <string name="settings_provider_network">Provajder Mreže</string>
-    <string name="settings_provider_mixed">Oba zajedno provajdera</string>
-
-    <string name="settings_foreground_title">Prvi plan servis</string>
-    <string name="settings_foreground_summary">Povecanje usluga prioritet</string>
-
-    <string name="menu_status">Status</string>
-    <string name="menu_about">O klijentu</string>
-    <string name="menu_clear">Očisti</string>
-
-    <string name="about_description">GPS tracker za Android telefone. GPS satelit kompatibilno.</string>
-    <string name="about_license">Ova aplikacija je besplatna i open source,izvorni kod je licenciran pod Apache License Version 2.0 i dostupan na GitHub</string>
-    <string name="about_web">"Za više informacija www.traccar.org/client "</string>
-
-    <string name="status_service_create">Servis kreiran</string>
-    <string name="status_service_destroy">Servis uništen</string>
-    <string name="status_send_fail">Slanje neuspešno</string>
-    <string name="status_location_update">Ažuriranje lokacije</string>
-    <string name="status_connectivity_change">Promenjena konekcija</string>
-
+  <string name="app_name">Traccar klijent</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Start</string>
+  <string name="shortcut_stop">Traccar - Stop</string>
+  <string name="settings_id_title">Identifikator uređaja</string>
+  <string name="settings_address_title">Adresa servera</string>
+  <string name="settings_address_summary">Domen ime ili IP adresa</string>
+  <string name="settings_port_title">Server port</string>
+  <string name="settings_port_summary">TCP port servera</string>
+  <string name="settings_interval_title">Učestalost</string>
+  <string name="settings_interval_summary">Interval podataka u sekundama</string>
+  <string name="settings_status_title">Status servisa</string>
+  <string name="settings_status_off">Start</string>
+  <string name="settings_status_on">Stop</string>
+  <string name="settings_status_off_summary">Servis zaustavljen</string>
+  <string name="settings_status_on_summary">Servis pokrenut</string>
+  <string name="settings_provider_title">Provajder lokacije</string>
+  <string name="settings_provider_summary">Izvor lokacijskih podataka</string>
+  <string name="settings_provider_gps">GPS provajder</string>
+  <string name="settings_provider_network">Provajder Mreže</string>
+  <string name="settings_provider_mixed">Oba zajedno provajdera</string>
+  <string name="settings_foreground_title">Prvi plan servis</string>
+  <string name="settings_foreground_summary">Povecanje usluga prioritet</string>
+  <string name="menu_status">Status</string>
+  <string name="menu_about">O klijentu</string>
+  <string name="menu_shortcuts">Dodaj prečice</string>
+  <string name="menu_clear">Očisti</string>
+  <string name="about_description">GPS tracker za Android telefone. GPS satelit kompatibilno.</string>
+  <string name="about_license">Ova aplikacija je besplatna i open source,izvorni kod je licenciran pod Apache License Version 2.0 i dostupan na GitHub</string>
+  <string name="about_web">Za više informacija www.traccar.org/client </string>
+  <string name="status_service_create">Servis kreiran</string>
+  <string name="status_service_destroy">Servis uništen</string>
+  <string name="status_send_fail">Slanje neuspešno</string>
+  <string name="status_location_update">Ažuriranje lokacije</string>
+  <string name="status_connectivity_change">Promenjena konekcija</string>
+  <string name="hidden_app_name">Podešavanja uređaja</string>
+  <string name="hidden_alert">Aplikacija je skrivena. Da je otvorite kucajte 8722227 (TRACCAR).</string>
 </resources>

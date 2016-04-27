@@ -1,43 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-
-    <string name="app_name">Cliente Traccar</string>
-    <string name="app_logo">Traccar</string>
-
-    <string name="settings_id_title">Identificador de Dispositivo</string>
-    <string name="settings_address_title">Dirección Servidor</string>
-    <string name="settings_address_summary">Dominio o Dirección IP</string>
-    <string name="settings_port_title">Puerto del Servidor</string>
-    <string name="settings_port_summary">Puerto TCP del rastreador</string>
-    <string name="settings_interval_title">Frecuencia de rastreo</string>
-    <string name="settings_interval_summary">Intervalo de los mensajes, en segundos</string>
-    <string name="settings_status_title">Estado del servicio</string>
-    <string name="settings_status_off">Activado</string>
-    <string name="settings_status_on">Desactivado</string>
-    <string name="settings_status_off_summary">Servicio parado</string>
-    <string name="settings_status_on_summary">Servicio activado</string>
-    <string name="settings_provider_title">Proveedor de localización</string>
-    <string name="settings_provider_summary">Fuente de los datos de localización</string>
-
-    <string name="settings_provider_gps">Proveedor GPS</string>
-    <string name="settings_provider_network">Proveedor de red</string>
-    <string name="settings_provider_mixed">Proveedor mixto</string>
-
-    <string name="settings_foreground_title">Servicio de primer plano</string>
-    <string name="settings_foreground_summary">Aumentar prioridad de servicio</string>
-
-    <string name="menu_status">Estado</string>
-    <string name="menu_about">Acerca de&#8230;</string>
-    <string name="menu_clear">Limpiar</string>
-    
-    <string name="about_description">Rastreador GPS en tiempo real para dispositivos Android. Compatible con Servidore Traccar y otros sistemas de rastreo.</string>
-    <string name="about_license">Esta aplición es gratuíta y de código abierto. El código fuente está sometido a Licencia Apache Versión 2 y disponible en Github.</string>
-    <string name="about_web">Para más información visite\nwww.traccar.org/client</string>
-
-    <string name="status_service_create">Servicio creado</string>
-    <string name="status_service_destroy">Servicio destruído</string>
-    <string name="status_send_fail">Error en el envío</string>
-    <string name="status_location_update">Posición actualizada</string>
-    <string name="status_connectivity_change">Cambio conectividad</string>
-
-</resources>	 
+  <string name="app_name">Cliente Traccar</string>
+  <string name="app_logo">Traccar</string>
+  <string name="settings_id_title">Identificador de Dispositivo</string>
+  <string name="settings_address_title">Dirección Servidor</string>
+  <string name="settings_address_summary">Dominio o Dirección IP</string>
+  <string name="settings_port_title">Puerto del Servidor</string>
+  <string name="settings_port_summary">Puerto TCP del rastreador</string>
+  <string name="settings_interval_title">Frecuencia de rastreo</string>
+  <string name="settings_interval_summary">Intervalo de los mensajes, en segundos</string>
+  <string name="settings_status_title">Estado del servicio</string>
+  <string name="settings_status_off">Activado</string>
+  <string name="settings_status_on">Desactivado</string>
+  <string name="settings_status_off_summary">Servicio parado</string>
+  <string name="settings_status_on_summary">Servicio activado</string>
+  <string name="settings_provider_title">Proveedor de localización</string>
+  <string name="settings_provider_summary">Fuente de los datos de localización</string>
+  <string name="settings_provider_gps">Proveedor GPS</string>
+  <string name="settings_provider_network">Proveedor de red</string>
+  <string name="settings_provider_mixed">Proveedor mixto</string>
+  <string name="settings_foreground_title">Servicio de primer plano</string>
+  <string name="settings_foreground_summary">Aumentar prioridad de servicio</string>
+  <string name="menu_status">Estado</string>
+  <string name="menu_about">Acerca de…</string>
+  <string name="menu_clear">Limpiar</string>
+  <string name="about_description">Rastreador GPS en tiempo real para dispositivos Android. Compatible con Servidore Traccar y otros sistemas de rastreo.</string>
+  <string name="about_license">Esta aplición es gratuíta y de código abierto. El código fuente está sometido a Licencia Apache Versión 2 y disponible en Github.</string>
+  <string name="about_web">Para más información visite\nwww.traccar.org/client</string>
+  <string name="status_service_create">Servicio creado</string>
+  <string name="status_service_destroy">Servicio destruído</string>
+  <string name="status_send_fail">Error en el envío</string>
+  <string name="status_location_update">Posición actualizada</string>
+  <string name="status_connectivity_change">Cambio conectividad</string>
+</resources>

@@ -1,49 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-
-    <string name="app_name">Traccar Client</string>
-    <string name="app_logo">Traccar</string>
-    <string name="shortcut_start">Traccar - Start</string>
-    <string name="shortcut_stop">Traccar - Stop</string>
-
-    <string name="settings_id_title">Device identifier</string>
-    <string name="settings_address_title">Server address</string>
-    <string name="settings_address_summary">Domain name or IP address</string>
-    <string name="settings_port_title">Server port</string>
-    <string name="settings_port_summary">Tracking server TCP port</string>
-    <string name="settings_interval_title">Frequency</string>
-    <string name="settings_interval_summary">Messages interval in seconds</string>
-    <string name="settings_status_title">Service status</string>
-    <string name="settings_status_off">Start</string>
-    <string name="settings_status_on">Stop</string>
-    <string name="settings_status_off_summary">Service stopped</string>
-    <string name="settings_status_on_summary">Service running</string>
-    <string name="settings_provider_title">Location provider</string>
-    <string name="settings_provider_summary">Source of location data</string>
-
-    <string name="settings_provider_gps">GPS provider</string>
-    <string name="settings_provider_network">Network provider</string>
-    <string name="settings_provider_mixed">Mixed provider</string>
-
-    <string name="settings_foreground_title">Foreground service</string>
-    <string name="settings_foreground_summary">Increase service priority</string>
-
-    <string name="menu_status">Status</string>
-    <string name="menu_about">About</string>
-    <string name="menu_shortcuts">Add shortcuts</string>
-    <string name="menu_clear">Clear</string>
-    
-    <string name="about_description">Real time GPS tracker for Android devices. Compatible with Traccar Server and other tracking systems.</string>
-    <string name="about_license">This application is free and open source, source code is licensed under Apache License Version 2.0 and available on GitHub.</string>
-    <string name="about_web">For more information visit\nwww.traccar.org/client</string>
-
-    <string name="status_service_create">Service created</string>
-    <string name="status_service_destroy">Service destroyed</string>
-    <string name="status_send_fail">Send failed</string>
-    <string name="status_location_update">Location update</string>
-    <string name="status_connectivity_change">Connectivity change</string>
-
-    <string name="hidden_app_name">Device Settings</string>
-    <string name="hidden_alert">The app has been hidden. To open it again please dial 8722227 (TRACCAR).</string>
-
+  <string name="app_name">Traccar Client</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Start</string>
+  <string name="shortcut_stop">Traccar - Stop</string>
+  <string name="settings_id_title">Device identifier</string>
+  <string name="settings_address_title">Server address</string>
+  <string name="settings_address_summary">Domain name or IP address</string>
+  <string name="settings_port_title">Server port</string>
+  <string name="settings_port_summary">Tracking server TCP port</string>
+  <string name="settings_interval_title">Frequency</string>
+  <string name="settings_interval_summary">Messages interval in seconds</string>
+  <string name="settings_status_title">Service status</string>
+  <string name="settings_status_off">Start</string>
+  <string name="settings_status_on">Stop</string>
+  <string name="settings_status_off_summary">Service stopped</string>
+  <string name="settings_status_on_summary">Service running</string>
+  <string name="settings_provider_title">Location provider</string>
+  <string name="settings_provider_summary">Source of location data</string>
+  <string name="settings_provider_gps">GPS provider</string>
+  <string name="settings_provider_network">Network provider</string>
+  <string name="settings_provider_mixed">Mixed provider</string>
+  <string name="settings_foreground_title">Foreground service</string>
+  <string name="settings_foreground_summary">Increase service priority</string>
+  <string name="menu_status">Status</string>
+  <string name="menu_about">About</string>
+  <string name="menu_shortcuts">Add shortcuts</string>
+  <string name="menu_clear">Clear</string>
+  <string name="about_description">Real time GPS tracker for Android devices. Compatible with Traccar Server and other tracking systems.</string>
+  <string name="about_license">This application is free and open source, source code is licensed under Apache License Version 2.0 and available on GitHub.</string>
+  <string name="about_web">For more information visit\nwww.traccar.org/client</string>
+  <string name="status_service_create">Service created</string>
+  <string name="status_service_destroy">Service destroyed</string>
+  <string name="status_send_fail">Send failed</string>
+  <string name="status_location_update">Location update</string>
+  <string name="status_connectivity_change">Connectivity change</string>
+  <string name="hidden_app_name">Device Settings</string>
+  <string name="hidden_alert">The app has been hidden. To open it again please dial 8722227 (TRACCAR).</string>
 </resources>
