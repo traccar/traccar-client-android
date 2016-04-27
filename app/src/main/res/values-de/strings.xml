@@ -39,5 +39,25 @@
     <string name="status_send_fail">Übertragung fehlerhaft</string>
     <string name="status_location_update">Positionsupdate</string>
     <string name="status_connectivity_change">Anschlusswechsel</string>
+    <string name="settings_distance_start_summary">Minimale Distanz in Metern</string>
+    <string name="settings_carmode_title">Auto Modus</string>
+    <string name="settings_carmode_on_summary">Modus aktiviert</string>
+    <string name="settings_carmode_off_summary">Modus deaktiviert</string>
+    <string name="settings_distance_start_title">Start Entfernung</string>
+    <string name="settings_interval_fast_title">Frequenz während der Fahrt</string>
+    <string name="settings_interval_fast_summary">Interval während der Fahrt in Sekunden</string>
+    <string name="settings_timeout_fast_summary">Verweildauer im Auto Modus in Sekunden</string>
+    <string name="settings_timeout_fast_title">Auto Modus Timeout</string>
+    <string name="settings_carmode_off">Aktivieren</string>
+    <string name="settings_carmode_on">Deaktivieren</string>
+    <string name="settings_additional_summary">Zusätzlich zu übertragene Werte</string>
+    <string name="settings_additional_title">Weitere Daten</string>
+    <string name="additional_charging_title">Ladezustand</string>
+    <string name="additional_provider_title">Location Provider</string>
+    <string name="additional_accuracy_title">Genauigkeit</string>
+    <string name="additional_batt_cat">Batteriedaten</string>
+    <string name="additional_gps_cat">Positionsdaten</string>
+    <string name="additional_tempbatt_title">Batterie Temperatur</string>
+    <string name="additional_voltage_title">Batterie Spannung</string>
 
 </resources>

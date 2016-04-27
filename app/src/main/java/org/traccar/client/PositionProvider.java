@@ -20,12 +20,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import java.util.List;
 
 public abstract class PositionProvider {
 
@@ -40,10 +44,24 @@ public abstract class PositionProvider {
     private final Context context;
     private final SharedPreferences preferences;
     protected final LocationManager locationManager;
+    protected final SensorManager sensorManager;
 
     private String deviceId;
     protected String type;
+    protected boolean stateCarMode = false;
     protected final long period;
+
+    protected Location lastLocation = null;
+    protected final long periodFast;
+    protected final long timeoutFast;
+    protected final long minDistance;
+    protected final boolean carMode;
+
+    protected final boolean add_accuracy;
+    protected final boolean add_charging;
+    protected final boolean add_provider;
+    protected final boolean add_tempbatt;
+    protected final boolean add_voltage;
 
     private long lastUpdateTime;
 
@@ -53,22 +71,78 @@ public abstract class PositionProvider {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        // Possible readable sensors
+        List<Sensor> deviceSensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
+
+        for (Sensor sensor: deviceSensors) {
+            Log.i("Sensors", sensor.getName());
+        }
 
         deviceId = preferences.getString(MainActivity.KEY_DEVICE, null);
+        carMode = preferences.getBoolean(MainActivity.KEY_CARMODE, false);
         period = Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000;
+        periodFast = Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL_FAST, null)) * 1000;
+        timeoutFast = Integer.parseInt(preferences.getString(MainActivity.KEY_TIMEOUT_FAST, null)) * 1000;
+        minDistance = Integer.parseInt(preferences.getString(MainActivity.KEY_DISTANCE_START, null));
+
+        add_accuracy = preferences.getBoolean(MainActivity.KEY_ADD_ACCURACY, false);
+        add_charging = preferences.getBoolean(MainActivity.KEY_ADD_CHARGING, false);
+        add_provider = preferences.getBoolean(MainActivity.KEY_ADD_PROVIDER, false);
+        add_tempbatt = preferences.getBoolean(MainActivity.KEY_ADD_TEMPBATT, false);
+        add_voltage = preferences.getBoolean(MainActivity.KEY_ADD_VOLTAGE, false);
 
         type = preferences.getString(MainActivity.KEY_PROVIDER, null);
     }
 
     public abstract void startUpdates();
 
+    public abstract void startUpdatesFast();
+
     public abstract void stopUpdates();
 
     protected void updateLocation(Location location) {
+        Position position = new Position(deviceId, location, getBatteryLevel());
+
+        if(lastLocation == null) {
+            Log.i(TAG, "init lastLocation");
+            lastLocation = location;
+        }
+
+        if(carMode) {
+            if(stateCarMode == false) {
+                if (lastLocation.distanceTo(location) > minDistance) {
+                    Log.i(TAG, "update switch : sleepMode => CarMode");
+                    stateCarMode = true;
+                    stopUpdates();
+                    startUpdatesFast();
+                    position.setAdditionalData("carMode", "start");
+                }
+            } else {
+                position.setAdditionalData("carMode", "active");
+                if(lastLocation.distanceTo(location) > minDistance) { // moving car
+                    lastLocation = location;
+                    position.setAdditionalData("carMode", "activeMove");
+                }
+
+                if(location.getTime() - lastLocation.getTime() > timeoutFast) { // not moving while normal period time
+                    Log.i(TAG, "update switch : carMode => sleepMode");
+                    stateCarMode = false;
+                    stopUpdates();
+                    startUpdates();
+                    position.setAdditionalData("carMode", "stop");
+                } else if(lastLocation.distanceTo(location) == 0) { // No timeout but no moving, so we don't need data to send
+                    return;
+                }
+
+            }
+        }
+
         if (location != null && location.getTime() != lastUpdateTime) {
             Log.i(TAG, "location new");
             lastUpdateTime = location.getTime();
-            listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel()));
+            addAdditionalFields(position);
+            listener.onPositionUpdate(position);
         } else {
             Log.i(TAG, location != null ? "location old" : "location nil");
         }
@@ -76,7 +150,7 @@ public abstract class PositionProvider {
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)
     private double getBatteryLevel() {
-        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.ECLAIR) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
             Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
             int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
             int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1);
@@ -84,6 +158,47 @@ public abstract class PositionProvider {
         } else {
             return 0;
         }
+    }
+
+    private void addAdditionalFields(Position position) {
+        if(add_accuracy && lastLocation.hasAccuracy()) {
+            position.setAdditionalData("accuracy", String.valueOf(lastLocation.getAccuracy()));
+        }
+
+        if(add_charging) {
+            position.setAdditionalData("charging", String.valueOf(getCharging()));
+        }
+
+        if(add_provider) {
+            position.setAdditionalData("provider", lastLocation.getProvider());
+        }
+
+        if(add_tempbatt) {
+            position.setAdditionalData("tempbatt", String.valueOf(((float)getBatteryExtraInt(BatteryManager.EXTRA_TEMPERATURE)/10)));
+        }
+
+        if(add_voltage) {
+            position.setAdditionalData("voltage", String.valueOf(((float)getBatteryExtraInt(BatteryManager.EXTRA_VOLTAGE)/1000)));
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
+    private boolean getCharging() {
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.ECLAIR) return false;
+
+        Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        int status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+
+        return status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                status == BatteryManager.BATTERY_STATUS_FULL;
+    }
+
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
+    private int getBatteryExtraInt(String extra) {
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.ECLAIR) return 0;
+
+        Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return batteryIntent.getIntExtra(extra, 0);
     }
 
 }

@@ -18,6 +18,7 @@ package org.traccar.client;
 import android.location.Location;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class Position {
 
@@ -70,5 +71,9 @@ public class Position {
     private double battery;
     public double getBattery() { return battery; }
     public void setBattery(double battery) { this.battery = battery; }
+
+    private HashMap<String,String> additionalData = new HashMap<String,String>();
+    public HashMap<String,String> getAdditionalData() { return additionalData; }
+    public Position setAdditionalData(String key, String value) {additionalData.put(key,value); return this; }
 
 }

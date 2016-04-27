@@ -45,8 +45,19 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     public static final String KEY_ADDRESS = "address";
     public static final String KEY_PORT = "port";
     public static final String KEY_INTERVAL = "interval";
+    public static final String KEY_CARMODE = "carmode";
+    public static final String KEY_TIMEOUT_FAST = "timeout_fast";
+    public static final String KEY_INTERVAL_FAST = "interval_fast";
+    public static final String KEY_DISTANCE_START = "distance_start";
     public static final String KEY_PROVIDER = "provider";
     public static final String KEY_STATUS = "status";
+
+    public static final String KEY_ADDITIONAL = "additional";
+    public static final String KEY_ADD_ACCURACY = "additional_accuracy";
+    public static final String KEY_ADD_CHARGING = "additional_charging";
+    public static final String KEY_ADD_PROVIDER = "additional_provider";
+    public static final String KEY_ADD_TEMPBATT = "additional_tempbatt";
+    public static final String KEY_ADD_VOLTAGE = "additional_voltage";
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
 
@@ -63,6 +74,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
+        checkAdditionalAPICompat();
 
         findPreference(KEY_DEVICE).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -108,9 +120,50 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
                 return false;
             }
         });
+        findPreference(KEY_TIMEOUT_FAST).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (newValue != null) {
+                    try {
+                        Integer.parseInt((String) newValue);
+                        return true;
+                    } catch (NumberFormatException e) {
+                    }
+                }
+                return false;
+            }
+        });
+        findPreference(KEY_INTERVAL_FAST).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (newValue != null) {
+                    try {
+                        Integer.parseInt((String) newValue);
+                        return true;
+                    } catch (NumberFormatException e) {
+                    }
+                }
+                return false;
+            }
+        });
+        findPreference(KEY_DISTANCE_START).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (newValue != null) {
+                    try {
+                        Integer.parseInt((String) newValue);
+                        return true;
+                    } catch (NumberFormatException e) {
+                    }
+                }
+                return false;
+            }
+        });
 
         if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
             startTrackingService(true, false);
+        } else {
+            setCarmodeEnable(true);
         }
     }
 
@@ -168,7 +221,19 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         findPreference(KEY_ADDRESS).setEnabled(enabled);
         findPreference(KEY_PORT).setEnabled(enabled);
         findPreference(KEY_INTERVAL).setEnabled(enabled);
+        findPreference(KEY_CARMODE).setEnabled(enabled);
         findPreference(KEY_PROVIDER).setEnabled(enabled);
+        findPreference(KEY_ADDITIONAL).setEnabled(enabled);
+        setCarmodeEnable(enabled);
+    }
+
+    private void setCarmodeEnable(boolean enabled) {
+        if(enabled) {
+            enabled = sharedPreferences.getBoolean(KEY_CARMODE, false);
+        }
+        findPreference(KEY_TIMEOUT_FAST).setEnabled(enabled);
+        findPreference(KEY_INTERVAL_FAST).setEnabled(enabled);
+        findPreference(KEY_DISTANCE_START).setEnabled(enabled);
     }
 
     @Override
@@ -181,6 +246,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             }
         } else if (key.equals(KEY_DEVICE)) {
             findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
+        } else if (key.equals(KEY_CARMODE)) {
+            setCarmodeEnable(!sharedPreferences.getBoolean(KEY_STATUS, false));
         }
     }
 
@@ -215,6 +282,26 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             ((EditTextPreference) findPreference(KEY_DEVICE)).setText(id);
         }
         findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
+    }
+
+    private void checkAdditionalAPICompat() {
+        if(android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.ECLAIR) { // min. API 5
+            disableAdditional(KEY_ADD_CHARGING);
+            disableAdditional(KEY_ADD_TEMPBATT);
+            disableAdditional(KEY_ADD_VOLTAGE);
+        }
+    }
+
+    private void disableAdditional(String preferenceName) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            TwoStatePreference preference = (TwoStatePreference) findPreference(preferenceName);
+            preference.setChecked(false);
+            preference.setEnabled(false);
+        } else {
+            CheckBoxPreference preference = (CheckBoxPreference) findPreference(preferenceName);
+            preference.setChecked(false);
+            preference.setEnabled(false);
+        }
     }
 
     private void startTrackingService(boolean checkPermission, boolean permission) {
