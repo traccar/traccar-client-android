@@ -16,7 +16,9 @@
 package org.traccar.client;
 
 import android.Manifest;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -51,6 +53,9 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
 
     private SharedPreferences sharedPreferences;
+
+    private AlarmManager alarmManager;
+    private PendingIntent alarmIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -112,6 +117,9 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
             startTrackingService(true, false);
         }
+
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, AutostartReceiver.class), 0);
     }
 
     private void removeLauncherIcon() {
@@ -237,6 +245,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         if (permission) {
             setPreferencesEnabled(false);
             startService(new Intent(this, TrackingService.class));
+            alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    15000, 15000, alarmIntent);
         } else {
             sharedPreferences.edit().putBoolean(KEY_STATUS, false).commit();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -250,6 +260,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     }
 
     private void stopTrackingService() {
+        alarmManager.cancel(alarmIntent);
         stopService(new Intent(this, TrackingService.class));
         setPreferencesEnabled(true);
     }
