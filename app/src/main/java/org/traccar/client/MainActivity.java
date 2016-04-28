@@ -114,12 +114,12 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             }
         });
 
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, AutostartReceiver.class), 0);
+
         if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
             startTrackingService(true, false);
         }
-
-        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, AutostartReceiver.class), 0);
     }
 
     private void removeLauncherIcon() {
