@@ -1,5 +1,7 @@
 # [Traccar Client for Android](https://www.traccar.org/client)
 
+[![](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=org.traccar.client)
+
 ## Contacts
 
 Author - Anton Tananaev ([anton.tananaev@gmail.com](mailto:anton.tananaev@gmail.com))
