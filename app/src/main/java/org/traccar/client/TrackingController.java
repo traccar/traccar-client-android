@@ -38,6 +38,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     private String address;
     private int port;
+    private boolean secure;
 
     private PositionProvider positionProvider;
     private DatabaseHelper databaseHelper;
@@ -74,6 +75,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
         address = preferences.getString(MainActivity.KEY_ADDRESS, null);
         port = Integer.parseInt(preferences.getString(MainActivity.KEY_PORT, null));
+        secure = preferences.getBoolean(MainActivity.KEY_SECURE, false);
 
         PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
@@ -197,7 +199,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     private void send(final Position position) {
         log("send", position);
         lock();
-        String request = ProtocolFormatter.formatRequest(address, port, position);
+        String request = ProtocolFormatter.formatRequest(address, port, secure, position);
         RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
             @Override
             public void onComplete(boolean success) {

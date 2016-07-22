@@ -25,6 +25,13 @@
         android:summary="@string/settings_port_summary"
         android:title="@string/settings_port_title" />
 
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="secure"
+        android:summaryOff="@string/settings_secure_off_summary"
+        android:summaryOn="@string/settings_secure_on_summary"
+        android:title="@string/settings_secure_title" />
+
     <EditTextPreference
         android:defaultValue="300"
         android:key="interval"
