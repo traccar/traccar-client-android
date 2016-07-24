@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2015 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2016 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package org.traccar.client;
 
-import android.location.Location;
 import android.net.Uri;
 
 public class ProtocolFormatter {
@@ -23,7 +22,7 @@ public class ProtocolFormatter {
     public static String formatRequest(String address, int port, boolean secure, Position position) {
 
         Uri.Builder builder = new Uri.Builder();
-        builder.scheme(secure?"https":"http").encodedAuthority(address + ':' + port)
+        builder.scheme(secure ? "https" : "http").encodedAuthority(address + ':' + port)
                 .appendQueryParameter("id", position.getDeviceId())
                 .appendQueryParameter("timestamp", String.valueOf(position.getTime().getTime() / 1000))
                 .appendQueryParameter("lat", String.valueOf(position.getLatitude()))
