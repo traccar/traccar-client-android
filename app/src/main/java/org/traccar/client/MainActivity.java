@@ -46,6 +46,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     public static final String KEY_DEVICE = "id";
     public static final String KEY_ADDRESS = "address";
     public static final String KEY_PORT = "port";
+    public static final String KEY_SECURE = "secure";
     public static final String KEY_INTERVAL = "interval";
     public static final String KEY_PROVIDER = "provider";
     public static final String KEY_STATUS = "status";
@@ -175,6 +176,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         findPreference(KEY_DEVICE).setEnabled(enabled);
         findPreference(KEY_ADDRESS).setEnabled(enabled);
         findPreference(KEY_PORT).setEnabled(enabled);
+        findPreference(KEY_SECURE).setEnabled(enabled);
         findPreference(KEY_INTERVAL).setEnabled(enabled);
         findPreference(KEY_PROVIDER).setEnabled(enabled);
     }

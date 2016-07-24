@@ -20,10 +20,10 @@ import android.net.Uri;
 
 public class ProtocolFormatter {
 
-    public static String formatRequest(String address, int port, Position position) {
+    public static String formatRequest(String address, int port, boolean secure, Position position) {
 
         Uri.Builder builder = new Uri.Builder();
-        builder.scheme("http").encodedAuthority(address + ':' + port)
+        builder.scheme(secure?"https":"http").encodedAuthority(address + ':' + port)
                 .appendQueryParameter("id", position.getDeviceId())
                 .appendQueryParameter("timestamp", String.valueOf(position.getTime().getTime() / 1000))
                 .appendQueryParameter("lat", String.valueOf(position.getLatitude()))
