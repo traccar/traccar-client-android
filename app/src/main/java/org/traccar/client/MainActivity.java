@@ -270,8 +270,14 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == PERMISSIONS_REQUEST_LOCATION) {
-            startTrackingService(false, grantResults[0] == PackageManager.PERMISSION_GRANTED &&
-                    (permissions.length < 2 || grantResults[1] == PackageManager.PERMISSION_GRANTED));
+            boolean granted = true;
+            for (int result : grantResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    granted = false;
+                    break;
+                }
+            }
+            startTrackingService(false, granted);
         }
     }
 
