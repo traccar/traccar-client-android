@@ -239,7 +239,10 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             if (missingPermissions.isEmpty()) {
                 permission = true;
             } else {
-                requestPermissions(missingPermissions.toArray(new String[missingPermissions.size()]), PERMISSIONS_REQUEST_LOCATION);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(missingPermissions.toArray(new String[missingPermissions.size()]),
+                            PERMISSIONS_REQUEST_LOCATION);
+                }
                 return;
             }
         }

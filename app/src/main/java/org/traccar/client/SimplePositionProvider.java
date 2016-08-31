@@ -20,7 +20,9 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
+@SuppressWarnings("MissingPermission")
 public class SimplePositionProvider extends PositionProvider implements LocationListener {
 
     public SimplePositionProvider(Context context, PositionListener listener) {
@@ -31,7 +33,11 @@ public class SimplePositionProvider extends PositionProvider implements Location
     }
 
     public void startUpdates() {
-        locationManager.requestLocationUpdates(type, period, 0, this);
+        try {
+            locationManager.requestLocationUpdates(type, period, 0, this);
+        } catch (IllegalArgumentException e) {
+            Log.w(TAG, e);
+        }
     }
 
     public void stopUpdates() {

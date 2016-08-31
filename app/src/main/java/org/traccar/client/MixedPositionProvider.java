@@ -23,6 +23,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
+@SuppressWarnings("MissingPermission")
 public class MixedPositionProvider extends PositionProvider implements LocationListener, GpsStatus.Listener {
 
     private static int FIX_TIMEOUT = 30 * 1000;
@@ -37,7 +38,11 @@ public class MixedPositionProvider extends PositionProvider implements LocationL
     public void startUpdates() {
         lastFixTime = System.currentTimeMillis();
         locationManager.addGpsStatusListener(this);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, period, 0, this);
+        try {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, period, 0, this);
+        } catch (IllegalArgumentException e) {
+            Log.w(TAG, e);
+        }
     }
 
     public void stopUpdates() {
