@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.lang.reflect.InvocationTargetException;
