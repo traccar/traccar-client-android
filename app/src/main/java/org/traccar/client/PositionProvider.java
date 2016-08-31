@@ -57,7 +57,7 @@ public abstract class PositionProvider {
         deviceId = preferences.getString(MainActivity.KEY_DEVICE, null);
         period = Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000;
 
-        type = preferences.getString(MainActivity.KEY_PROVIDER, null);
+        type = preferences.getString(MainActivity.KEY_PROVIDER, "gps");
     }
 
     public abstract void startUpdates();
