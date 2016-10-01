@@ -55,7 +55,7 @@ public abstract class PositionProvider {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
         deviceId = preferences.getString(MainActivity.KEY_DEVICE, null);
-        period = Integer.parseInt(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000;
+        period = Long.parseLong(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000;
 
         type = preferences.getString(MainActivity.KEY_PROVIDER, "gps");
     }
