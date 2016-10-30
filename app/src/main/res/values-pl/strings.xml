@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Traccar Client</string>
+    <string name="about_description">Tropiciel GPS czasu rzeczywistego dla urządzeń Android. Kompatybilny z Traccar Server i innymi systemami tropiącymi.</string>
+    <string name="about_license">Ta aplikacja jest darmowa i o otwartym kodzie, kod źródłowy jest na licencji Apache License Version 2.0 i dostępny na GitHub</string>
+    <string name="about_web">Po więcej informacji odwiedź www.traccar.org/client</string>
+    <string name="app_logo">Traccar</string>
+    <string name="hidden_alert">Aplikacja została ukryta. By otworzyć ją ponownie zadzwoń na 8722227 (TRACCAR).</string>
+    <string name="hidden_app_name">Ustawienia urządzenia</string>
+    <string name="menu_about">O aplikacji</string>
+    <string name="menu_clear">Wyczyść</string>
+    <string name="menu_shortcuts">Dodaj skrót</string>
+    <string name="menu_status">Status</string>
+    <string name="settings_address_summary">Nazwa domeny lub adres IP</string>
+    <string name="settings_address_title">Adres serwera</string>
+    <string name="settings_foreground_summary">Zwiększ priorytet serwisu</string>
+    <string name="settings_foreground_title">Serwis pierwszoplanowy</string>
+    <string name="settings_id_title">Idetyfikator urządzenia</string>
+    <string name="settings_interval_summary">Częstotliwość wiadomości w sekundach</string>
+    <string name="settings_interval_title">Częstotliwość</string>
+    <string name="settings_port_summary">Port TCP serwera śledzącego</string>
+    <string name="settings_port_title">Port serwera</string>
+    <string name="settings_provider_gps">Dostawca GPS</string>
+    <string name="settings_provider_mixed">Dostawca mieszany</string>
+    <string name="settings_provider_network">Dostawca sieciowy</string>
+    <string name="settings_provider_summary">Źródło danych lokalizacyjnych</string>
+    <string name="settings_provider_title">Dostawca lokalizacji</string>
+    <string name="settings_secure_off">Włącz</string>
+    <string name="settings_secure_off_summary">Szyfrowanie wyłączone</string>
+    <string name="settings_secure_on">Wyłącz</string>
+    <string name="settings_secure_on_summary">Szyfrowanie włączone</string>
+    <string name="settings_secure_title">Szyfrowanie</string>
+    <string name="settings_status_off">Start</string>
+    <string name="settings_status_off_summary">Serwis zatrzymany</string>
+    <string name="settings_status_on">Stop</string>
+    <string name="settings_status_on_summary">Serwis działa</string>
+    <string name="settings_status_title">Status serwisu</string>
+    <string name="shortcut_start">Traccar - Start</string>
+    <string name="shortcut_stop">Traccar - Stop</string>
+    <string name="status_connectivity_change">Zmiana połączenia</string>
+    <string name="status_location_update">Aktualizacja lokalizacji</string>
+    <string name="status_send_fail">Błąd wysyłania</string>
+    <string name="status_service_create">Serwis utworzony</string>
+    <string name="status_service_destroy">Serwis zniszczony</string>
+</resources>
