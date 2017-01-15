@@ -20,6 +20,10 @@ import android.net.Uri;
 public class ProtocolFormatter {
 
     public static String formatRequest(String address, int port, boolean secure, Position position) {
+        return formatRequest(address, port, secure, position, null);
+    }
+
+    public static String formatRequest(String address, int port, boolean secure, Position position, String alarm) {
 
         Uri.Builder builder = new Uri.Builder();
         builder.scheme(secure ? "https" : "http").encodedAuthority(address + ':' + port)
@@ -31,6 +35,10 @@ public class ProtocolFormatter {
                 .appendQueryParameter("bearing", String.valueOf(position.getCourse()))
                 .appendQueryParameter("altitude", String.valueOf(position.getAltitude()))
                 .appendQueryParameter("batt", String.valueOf(position.getBattery()));
+
+        if (alarm != null) {
+            builder.appendQueryParameter("alarm", alarm);
+        }
 
         return builder.build().toString();
     }

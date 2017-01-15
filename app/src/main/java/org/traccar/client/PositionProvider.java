@@ -68,14 +68,14 @@ public abstract class PositionProvider {
         if (location != null && location.getTime() - lastUpdateTime >= period) {
             Log.i(TAG, "location new");
             lastUpdateTime = location.getTime();
-            listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel()));
+            listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel(context)));
         } else {
             Log.i(TAG, location != null ? "location old" : "location nil");
         }
     }
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)
-    private double getBatteryLevel() {
+    public static double getBatteryLevel(Context context) {
         if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.ECLAIR) {
             Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
             int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
