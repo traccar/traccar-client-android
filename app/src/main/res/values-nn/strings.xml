@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar Client</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Start</string>
+  <string name="shortcut_stop">Traccar - Stopp</string>
+  <string name="settings_id_title">Einingsidentifikator</string>
+  <string name="settings_address_title">Tenaradresse</string>
+  <string name="settings_address_summary">Domenenamn eller IP-adresse</string>
+  <string name="settings_port_title">Tenarport</string>
+  <string name="settings_port_summary">TCP-port for sporingstenar</string>
+  <string name="settings_interval_title">Frekvens</string>
+  <string name="settings_interval_summary">Beskjedintervall i sekundar</string>
+  <string name="settings_status_title">Tenarstatus</string>
+  <string name="settings_status_off">Start</string>
+  <string name="settings_status_on">Stopp</string>
+  <string name="settings_status_off_summary">Teneste stoppa</string>
+  <string name="settings_status_on_summary">Tenar køyrer</string>
+  <string name="settings_secure_title">Kryptering</string>
+  <string name="settings_secure_off">Akiver</string>
+  <string name="settings_secure_on">Deaktiver</string>
+  <string name="settings_secure_off_summary">Kryptering deaktivert</string>
+  <string name="settings_secure_on_summary">Kryptering aktivert</string>
+  <string name="settings_provider_title">Lokaliseringsleverandør</string>
+  <string name="settings_provider_summary">Kilde for lokaliseringsdata</string>
+  <string name="settings_provider_gps">GPS-lokalisering</string>
+  <string name="settings_provider_network">Nettverkslokalisering</string>
+  <string name="settings_provider_mixed">Blanda lokalisering</string>
+  <string name="settings_foreground_title">Forgrunnsteneste</string>
+  <string name="settings_foreground_summary">Auk teneste-prioritet</string>
+  <string name="menu_status">Status</string>
+  <string name="menu_about">Om</string>
+  <string name="menu_shortcuts">Legg til snarveg</string>
+  <string name="menu_clear">Nullstill</string>
+  <string name="about_description">Sanntids GPS-sporing for Android-einingar. Kompatibel med Traccar Server og andre sporingssystem</string>
+  <string name="about_license">Dette programmet har fri og åpen kildekode; kildekoden er lisensiert under Apache License Version 2.0 og er tilgjengeleg på GitHub.</string>
+  <string name="about_web">For meir informasjon besøk\nwww.traccar.org/client</string>
+  <string name="status_service_create">Teneste oppretta</string>
+  <string name="status_service_destroy">Teneste øydelagd</string>
+  <string name="status_send_fail">Sending feila</string>
+  <string name="status_location_update">Plassering oppdatert</string>
+  <string name="status_connectivity_change">Tilkopling forandra</string>
+  <string name="hidden_app_name">Einingsinnstillingar</string>
+  <string name="hidden_alert">App\'en har blitt gøymt. For å åpne han igjen, ver venleg å tast (ring) 8722227 (TRACCAR).</string>
+</resources>

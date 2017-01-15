@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Máy khách Traccar</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Bắt đầu</string>
+  <string name="shortcut_stop">Traccar - Kết thúc</string>
+  <string name="settings_id_title">Định danh thiết bị</string>
+  <string name="settings_address_title">Địa chỉ máy chủ</string>
+  <string name="settings_address_summary">Tên miền hoặc địa chỉ IP</string>
+  <string name="settings_port_title">Cổng máy chủ</string>
+  <string name="settings_port_summary">Cổng TCP theo dõi máy chủ</string>
+  <string name="settings_interval_title">Tần suất</string>
+  <string name="settings_interval_summary">Chu kỳ tin nhắn theo đơn vị giây</string>
+  <string name="settings_status_title">Trạng thái dịch vụ</string>
+  <string name="settings_status_off">Bắt đầu</string>
+  <string name="settings_status_on">Kết thúc</string>
+  <string name="settings_status_off_summary">Dịch vụ kết thúc</string>
+  <string name="settings_status_on_summary">Dịch vụ đang hoạt động</string>
+  <string name="settings_secure_title">Mã hóa</string>
+  <string name="settings_secure_off">Kích hoạt</string>
+  <string name="settings_secure_on">Ngừng kích hoạt</string>
+  <string name="settings_secure_off_summary">Không mã hóa</string>
+  <string name="settings_secure_on_summary">Kích hoạt mã hóa</string>
+  <string name="settings_provider_title">Định vị</string>
+  <string name="settings_provider_summary">Nguồn dữ liệu vị trí</string>
+  <string name="settings_provider_gps">Thiết bị GPS</string>
+  <string name="settings_provider_network">Nhà cung cấp mạng</string>
+  <string name="settings_provider_mixed">Nhà cung cấp tổng hợp</string>
+  <string name="settings_foreground_title">Dịch vụ chạy nổi</string>
+  <string name="settings_foreground_summary">Tăng thứ tự ưu tiên dịch vụ</string>
+  <string name="menu_status">Trạng thái</string>
+  <string name="menu_about">About</string>
+  <string name="menu_shortcuts">Thêm phím tắt</string>
+  <string name="menu_clear">Xóa</string>
+  <string name="about_description">Định vị GPS thời gian thực cho thiết bị Android. Tương thích với máy chủ Traccar và các hệ thống theo dõi khác.</string>
+  <string name="about_license">Ứng dụng miễn phí và mã nguồn mở, mã nguồn được phát hành theo giấy phép Apache License phiên bản 2.0 trên GitHub.</string>
+  <string name="about_web">Thông tin chi tiết\nwww.traccar.org/client</string>
+  <string name="status_service_create">Dịch vụ đã được khởi tạo</string>
+  <string name="status_service_destroy">Dịch vụ đã được hủy</string>
+  <string name="status_send_fail">Gửi lỗi</string>
+  <string name="status_location_update">Vị trí đã được cập nhật</string>
+  <string name="status_connectivity_change">Kết nối thay đổi</string>
+  <string name="hidden_app_name">Cài đặt thiết bị</string>
+  <string name="hidden_alert">Ứng dụng đã được ẩn. Để mở lại xin vui lòng gọi 8722227 (TRACCAR).</string>
+</resources>

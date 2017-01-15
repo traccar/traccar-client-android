@@ -2,6 +2,8 @@
 <resources>
   <string name="app_name">Traccar klient</string>
   <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Spustit</string>
+  <string name="shortcut_stop">Traccar - Zastavit</string>
   <string name="settings_id_title">Identifikátor zařízení</string>
   <string name="settings_address_title">Adresa serveru</string>
   <string name="settings_address_summary">Doménové jméno nebo IP adresa</string>
@@ -14,6 +16,11 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Zastaveno</string>
   <string name="settings_status_on_summary">Spuštěno</string>
+  <string name="settings_secure_title">Šifrování</string>
+  <string name="settings_secure_off">Povolit</string>
+  <string name="settings_secure_on">Zakázat</string>
+  <string name="settings_secure_off_summary">Šifrování zakázáno</string>
+  <string name="settings_secure_on_summary">Šifrování povoleno</string>
   <string name="settings_provider_title">Poskytovatel zaměření</string>
   <string name="settings_provider_summary">Zdroj zaměřovacích dat</string>
   <string name="settings_provider_gps">GPS</string>
@@ -23,6 +30,7 @@
   <string name="settings_foreground_summary">Zvýšit prioritu služba</string>
   <string name="menu_status">Stav</string>
   <string name="menu_about">O aplikaci</string>
+  <string name="menu_shortcuts">Přidat zástupce</string>
   <string name="menu_clear">Vyčistit</string>
   <string name="about_description">GPS sledovací aplikace pracující v reálném čase pro zařízení s operačním systémem Android. Kompatibilní s Traccar serverem a dalšími sledovacími systémy.</string>
   <string name="about_license">Tato aplikace je zdarma a open source, zdrojový kód je licencován pod Apache License Version 2.0 a je přístupný na GitHub.</string>
@@ -32,4 +40,6 @@
   <string name="status_send_fail">Odesílání selhalo</string>
   <string name="status_location_update">Aktualizace pozice</string>
   <string name="status_connectivity_change">Změna připojení</string>
+  <string name="hidden_app_name">Nastavení zařízení</string>
+  <string name="hidden_alert">Aplikace byla skryta. Pro znovuotevření vytočte 8722227 (TRACCAR)</string>
 </resources>

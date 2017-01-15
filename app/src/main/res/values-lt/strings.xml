@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar programėlė</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Pradėti</string>
+  <string name="shortcut_stop">Traccar - Stabdyti</string>
+  <string name="settings_id_title">Įrenginio numeris</string>
+  <string name="settings_address_title">Serveris</string>
+  <string name="settings_address_summary">Domenas arba IP adresas</string>
+  <string name="settings_port_title">Serverio prievadas</string>
+  <string name="settings_port_summary">Serverio TCP prievadas</string>
+  <string name="settings_interval_title">Dažnumas</string>
+  <string name="settings_interval_summary">Siuntimo intervalas sekundėmis</string>
+  <string name="settings_status_title">Tarnybos būklė</string>
+  <string name="settings_status_off">Pradėti</string>
+  <string name="settings_status_on">Stabdyti</string>
+  <string name="settings_status_off_summary">Tarnyba sustabdyta</string>
+  <string name="settings_status_on_summary">Tarnyba veikia</string>
+  <string name="settings_provider_title">Vietos nustatymas</string>
+  <string name="settings_provider_summary">Vietos nustatymo šaltinis</string>
+  <string name="settings_provider_gps">Įrenginio GPS</string>
+  <string name="settings_provider_network">GSM tinklas</string>
+  <string name="settings_provider_mixed">Mišrus: GSM ir GPS</string>
+  <string name="settings_foreground_title">Žeminti tarnybos prioritetą</string>
+  <string name="settings_foreground_summary">Padidinti tarnybos prioritetą</string>
+  <string name="menu_status">Būklė</string>
+  <string name="menu_about">Apie</string>
+  <string name="menu_shortcuts">Pridėti nuorodas</string>
+  <string name="menu_clear">Valyti</string>
+  <string name="about_description">GPS sekimo programėlė Android įrenginiams. Suderinta su Traccar Serveriu ir kitomis vietos nustatymo tarnybomis.</string>
+  <string name="about_license">Ši programėlė yra nemokama ir atviro kodo. Autorinės teisės yra saugomos pagal Apache Licence Version 2.0 reglamentą (pasiekiama GitHub)</string>
+  <string name="about_web">Daugiau informacijos adresu visit\nwww.traccar.org\client</string>
+  <string name="status_service_create">Tarnyba sukurta</string>
+  <string name="status_service_destroy">Tarnyba sustabdyta</string>
+  <string name="status_send_fail">Klaida siunčiant</string>
+  <string name="status_location_update">Vietos nusatymo duomenų atnaujinimas</string>
+  <string name="status_connectivity_change">Prisijungimo duomenų pasikeitimas</string>
+  <string name="hidden_app_name">Įrenginio nustatymai</string>
+  <string name="hidden_alert">Ši programėlė veikia paslėptu režimu. Norint ją atidaryti, prašau skambinti numeriu 8722227 (TRACCAR)</string>
+</resources>

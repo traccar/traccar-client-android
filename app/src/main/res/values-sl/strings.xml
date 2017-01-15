@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar klient</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Zaženi</string>
+  <string name="shortcut_stop">Traccar - Ustavi</string>
+  <string name="settings_address_title">Naslov strežnika</string>
+  <string name="settings_status_off">Zaženi</string>
+  <string name="settings_status_on">Ustavi</string>
+  <string name="settings_status_off_summary">Servis ustavljen</string>
+  <string name="settings_status_on_summary">Servis teče</string>
+  <string name="settings_secure_title">Šifriranje</string>
+  <string name="settings_secure_off">Omogoči</string>
+  <string name="settings_secure_on">Onemogoči</string>
+  <string name="settings_secure_off_summary">Šifriranje onemogočeno</string>
+  <string name="settings_secure_on_summary">Šifriranje omogočeno</string>
+  <string name="menu_status">Stanje</string>
+  <string name="menu_clear">Počisti</string>
+  <string name="status_service_create">Servis ustvarjen</string>
+  <string name="status_service_destroy">Servis uničen</string>
+  <string name="status_send_fail">Pošiljanje spodletelo</string>
+  <string name="hidden_app_name">Nastavitve naprave</string>
+</resources>

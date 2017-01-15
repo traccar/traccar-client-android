@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar Client</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar -Старт</string>
+  <string name="shortcut_stop">Traccar - Стоп</string>
+  <string name="settings_id_title">Идентификатор</string>
+  <string name="settings_address_title">Адрес на сървъра</string>
+  <string name="settings_address_summary">Име на домейн или IP адрес</string>
+  <string name="settings_port_title">Порт на сървъра</string>
+  <string name="settings_port_summary">Tracking server TCP port</string>
+  <string name="settings_interval_title">Честота</string>
+  <string name="settings_interval_summary">Интервал на координатите в сек.</string>
+  <string name="settings_status_title">Състояние на услугата</string>
+  <string name="settings_status_off">Старт</string>
+  <string name="settings_status_on">Стоп</string>
+  <string name="settings_status_off_summary">Услугата е спряна</string>
+  <string name="settings_status_on_summary">Услугата работи</string>
+  <string name="settings_secure_title">Шифроване</string>
+  <string name="settings_secure_off">Активиране</string>
+  <string name="settings_secure_on">Деактивиране</string>
+  <string name="settings_secure_off_summary">Шифроване изкл.</string>
+  <string name="settings_secure_on_summary">Шифроване вкл.</string>
+  <string name="settings_provider_title">Доставчик на местоположение</string>
+  <string name="settings_provider_summary">Източник на данни за местоположението</string>
+  <string name="settings_provider_gps">GPS</string>
+  <string name="settings_provider_network">Мрежи</string>
+  <string name="settings_provider_mixed">Смесен Доставчик</string>
+  <string name="settings_foreground_title">Foreground service</string>
+  <string name="settings_foreground_summary">Увеличаване на приоритета на услугата</string>
+  <string name="menu_status">Състояние</string>
+  <string name="menu_about">About</string>
+  <string name="menu_shortcuts">Добави пряк път</string>
+  <string name="menu_clear">Изтрий</string>
+  <string name="about_description">Real time GPS tracker for Android devices. Compatible with Traccar Server and other tracking systems.</string>
+  <string name="about_license">This application is free and open source, source code is licensed under Apache License Version 2.0 and available on GitHub.</string>
+  <string name="about_web">For more information visit\nwww.traccar.org/client</string>
+  <string name="status_service_create">Услугата е създадена</string>
+  <string name="status_service_destroy">Услугата е премахната</string>
+  <string name="status_send_fail">Грешка в изпращането</string>
+  <string name="status_location_update">Местоположението е обновено</string>
+  <string name="status_connectivity_change">Промяна в свързването</string>
+  <string name="hidden_app_name">Настройки</string>
+  <string name="hidden_alert">The app has been hidden. To open it again please dial 8722227 (TRACCAR).</string>
+</resources>

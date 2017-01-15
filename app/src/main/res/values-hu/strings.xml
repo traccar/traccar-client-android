@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar Kliens</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Indítás</string>
+  <string name="shortcut_stop">Traccar - Megállítás</string>
+  <string name="settings_id_title">Eszközazonosító</string>
+  <string name="settings_address_title">Szervercím</string>
+  <string name="settings_address_summary">Domainnév vagy IP-cím</string>
+  <string name="settings_port_title">Szerver port</string>
+  <string name="settings_port_summary">Követő szerver TCP portja</string>
+  <string name="settings_interval_title">Frekvencia</string>
+  <string name="settings_interval_summary">Üzenetküldési intervallum másodpercben</string>
+  <string name="settings_status_title">Szolgáltatás státusza</string>
+  <string name="settings_status_off">Indítás</string>
+  <string name="settings_status_on">Megállítás</string>
+  <string name="settings_status_off_summary">Szolgáltatás megállítva</string>
+  <string name="settings_status_on_summary">Szolgáltatás elindítva</string>
+  <string name="settings_secure_title">Titkosítás</string>
+  <string name="settings_secure_off">Engedélyezés</string>
+  <string name="settings_secure_on">Tiltás</string>
+  <string name="settings_secure_off_summary">Titkosítás letiltva</string>
+  <string name="settings_secure_on_summary">Titkosítás engedélyezve</string>
+  <string name="settings_provider_title">Pozíciós szolgáltató</string>
+  <string name="settings_provider_summary">Pozíciós adatok forrása</string>
+  <string name="settings_provider_gps">GPS szolgáltató</string>
+  <string name="settings_provider_network">Hálózati szolgáltató</string>
+  <string name="settings_provider_mixed">Kevert szolgáltató</string>
+  <string name="settings_foreground_title">Előtér szolgáltatás</string>
+  <string name="settings_foreground_summary">Szolgáltatás prioritásának emelése</string>
+  <string name="menu_status">Státusz</string>
+  <string name="menu_about">Névjegy</string>
+  <string name="menu_shortcuts">Parancsikon hozzáadása</string>
+  <string name="menu_clear">Töröl</string>
+  <string name="about_description">Valós idejű GPS követő Android eszközökre. Kompatibilis többek közt a Traccar Szerverrel és egyéb követő rendszerekkel is.</string>
+  <string name="about_license">Ez az applikáció ingyenes és nyílt forrású, forráskódja az Apache License 2.0 licenccel rendelkezik és elérhető a GitHub-on.</string>
+  <string name="about_web">További információkért látogass el az alábbi weboldalra\nwww.traccar.org/client</string>
+  <string name="status_service_create">Szolgáltatás létrehozva</string>
+  <string name="status_service_destroy">Szolgáltatás megsemmisítve</string>
+  <string name="status_send_fail">Küldés sikertelen</string>
+  <string name="status_location_update">Pozíció frissítés</string>
+  <string name="status_connectivity_change">Kapcsolódás módosítása</string>
+  <string name="hidden_app_name">Eszköz beállítások</string>
+  <string name="hidden_alert">Ez az applikáció el lett rejtve. Megnyitásához  kérjük hívja a 8722227 (TRACCAR) telefonszámot.</string>
+</resources>

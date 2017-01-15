@@ -2,6 +2,8 @@
 <resources>
   <string name="app_name">Traccar Klient</string>
   <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Start</string>
+  <string name="shortcut_stop">Traccar - Stopp</string>
   <string name="settings_id_title">Enhetsidentifikasjon</string>
   <string name="settings_address_title">Tjeneradresse</string>
   <string name="settings_address_summary">Domenenavn eller IP-adresse</string>
@@ -14,17 +16,23 @@
   <string name="settings_status_on">Stopp</string>
   <string name="settings_status_off_summary">Tjenesten stoppet</string>
   <string name="settings_status_on_summary">Tjenesten kjører</string>
+  <string name="settings_secure_title">Kryptering</string>
+  <string name="settings_secure_off">Aktiver</string>
+  <string name="settings_secure_on">Deaktiver</string>
+  <string name="settings_secure_off_summary">Krytpering deaktivert</string>
+  <string name="settings_secure_on_summary">Kryptering aktivert</string>
   <string name="settings_provider_title">Lokaliseringsleverandør</string>
   <string name="settings_provider_summary">Kilde for lokaliseringsdata</string>
   <string name="settings_provider_gps">GPS-lokalisering</string>
   <string name="settings_provider_network">Nettverkslokalisering</string>
   <string name="settings_provider_mixed">Blandet lokalisering</string>
   <string name="settings_foreground_title">Forgrunnen tjeneste</string>
-  <string name="settings_foreground_summary">Øk tjeneste prioritet</string>
+  <string name="settings_foreground_summary">Øk tjeneste-prioritet</string>
   <string name="menu_status">Status</string>
   <string name="menu_about">Om</string>
+  <string name="menu_shortcuts">Legg til snarvei</string>
   <string name="menu_clear">Tøm</string>
-  <string name="about_description">Sanntids GPS-sporing for Android-enheter. Kompatible med Traccar Server og andre sporingssystemer.</string>
+  <string name="about_description">Sanntids GPS-sporing for Android-enheter. Kompatibel med Traccar Server og andre sporingssystemer.</string>
   <string name="about_license">Dette programmet har fri og åpen kildekode; kildekoden er lisensiert under Apache License Version 2.0 og er tilgjengelig på GitHub.</string>
   <string name="about_web">For mer informasjon besøk\nwww.traccar.org/client</string>
   <string name="status_service_create">Tjeneste opprettet</string>
@@ -32,4 +40,6 @@
   <string name="status_send_fail">Sending mislyktes</string>
   <string name="status_location_update">Plassering oppdatert</string>
   <string name="status_connectivity_change">Tilkobling forandret</string>
+  <string name="hidden_app_name">Enhetsinnstillinger</string>
+  <string name="hidden_alert">App\'en har blitt gjemt. For å åpne igjen, vennligst tast (ring) 8722227 (TRACCAR).</string>
 </resources>

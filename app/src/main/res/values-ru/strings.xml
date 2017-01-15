@@ -2,6 +2,8 @@
 <resources>
   <string name="app_name">Traccar Клиент</string>
   <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Старт</string>
+  <string name="shortcut_stop">Traccar - Стоп</string>
   <string name="settings_id_title">Идентификатор устройства</string>
   <string name="settings_address_title">Адрес сервера</string>
   <string name="settings_address_summary">Домен или IP адрес</string>
@@ -14,6 +16,11 @@
   <string name="settings_status_on">Стоп</string>
   <string name="settings_status_off_summary">Сервис остановлен</string>
   <string name="settings_status_on_summary">Сервис запущен</string>
+  <string name="settings_secure_title">Шифрование</string>
+  <string name="settings_secure_off">Доступный</string>
+  <string name="settings_secure_on">Недоступный</string>
+  <string name="settings_secure_off_summary">Шифрование недоступно</string>
+  <string name="settings_secure_on_summary">Шифрование включено</string>
   <string name="settings_provider_title">Провайдер местоположения</string>
   <string name="settings_provider_summary">Источник данных о местоположении</string>
   <string name="settings_provider_gps">GPS провайдер</string>
@@ -23,6 +30,7 @@
   <string name="settings_foreground_summary">Увеличить приоритет сервиса</string>
   <string name="menu_status">Состояние</string>
   <string name="menu_about">О программе</string>
+  <string name="menu_shortcuts">Добавить ярлыки</string>
   <string name="menu_clear">Очистить</string>
   <string name="about_description">Трекер для Android устройств. Совместим с Traccar сервером и другими мониторинговыми системами.</string>
   <string name="about_license">Это приложение распростаняется бесплатно, исходный код распростаняется по лицензии Apache License Version 2.0 и доступен на GitHub.</string>
@@ -32,4 +40,6 @@
   <string name="status_send_fail">Ошибка отправки</string>
   <string name="status_location_update">Обновление местоположения</string>
   <string name="status_connectivity_change">Изменение подключения</string>
+  <string name="hidden_app_name">Настройки устройтва</string>
+  <string name="hidden_alert">Приложение было спрятано. Чтобы открыть позвоните на номер 8722227 (TRACCAR).</string>
 </resources>

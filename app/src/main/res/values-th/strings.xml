@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar Client</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">เริ่ม Traccar</string>
+  <string name="shortcut_stop">หยุด Traccar</string>
+  <string name="settings_id_title">หมายเลขอุปกรณ์</string>
+  <string name="settings_address_title">ที่อยู่เซิร์ฟเวอร์</string>
+  <string name="settings_address_summary">ชื่อโดเมน หรือ ที่อยู่ไอพี</string>
+  <string name="settings_port_title">เซิร์ฟเวอร์พอร์ต</string>
+  <string name="settings_port_summary">พอร์ต TCP เซิร์ฟเวอร์ติดตาม</string>
+  <string name="settings_interval_title">ช่วงเวลาส่งข้อมูล</string>
+  <string name="settings_interval_summary">ช่วงเวลาส่งข้อมูลทุกกี่วินาที</string>
+  <string name="settings_status_title">สถานะเซิร์ฟเวอร์</string>
+  <string name="settings_status_off">เริ่มต้น</string>
+  <string name="settings_status_on">สิ้นสุด</string>
+  <string name="settings_status_off_summary">เริ่มทำงาน</string>
+  <string name="settings_status_on_summary">หยุดทำงาน</string>
+  <string name="settings_secure_title">เข้ารหัส</string>
+  <string name="settings_secure_off">เลือก</string>
+  <string name="settings_secure_on">ไม่เลือก</string>
+  <string name="settings_secure_off_summary">ไม่เข้ารหัสข้อมูล</string>
+  <string name="settings_secure_on_summary">เข้ารหัสข้อมูล</string>
+  <string name="settings_provider_title">ตัวบอกตำแหน่ง</string>
+  <string name="settings_provider_summary">แหล่งของข้อมูลบอกตำแหน่ง</string>
+  <string name="settings_provider_gps">ใช้จาก GPS</string>
+  <string name="settings_provider_network">ใช้จากข้อมูลเครือข่าย</string>
+  <string name="settings_provider_mixed">ใช้ร่วมกันทั้งสองแบบ</string>
+  <string name="settings_foreground_title">ทำงานเบื้องหน้า</string>
+  <string name="settings_foreground_summary">เพิ่มความลำดับสำคัญการทำงาน</string>
+  <string name="menu_status">สถานะ</string>
+  <string name="menu_about">เกี่ยวกับ</string>
+  <string name="menu_shortcuts">เพิ่มชอร์ตคัท</string>
+  <string name="menu_clear">ล้างข้อมูล</string>
+  <string name="about_description">Real time GPS tracker for Android devices. Compatible with Traccar Server and other tracking systems.</string>
+  <string name="about_license">This application is free and open source, source code is licensed under Apache License Version 2.0 and available on GitHub.</string>
+  <string name="about_web">For more information visit\nwww.traccar.org/client</string>
+  <string name="status_service_create">เริ่มทำงาน</string>
+  <string name="status_service_destroy">เลิกการทำงาน</string>
+  <string name="status_send_fail">ส่งข้อมูลล้มเหลว</string>
+  <string name="status_location_update">ปรับปรุงตำแหน่ง</string>
+  <string name="status_connectivity_change">เปลี่ยนแปลงการเชื่อมต่อ</string>
+  <string name="hidden_app_name">ตั้งค่าอุปกรณ์</string>
+  <string name="hidden_alert">The app has been hidden. To open it again please dial 8722227 (TRACCAR).</string>
+</resources>

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Client Traccar</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Pornit</string>
+  <string name="shortcut_stop">Traccar - Oprit</string>
+  <string name="settings_id_title">Identificare dispozitiv</string>
+  <string name="settings_address_title">Adresă Server</string>
+  <string name="settings_address_summary">Nume domeniu sau adresă IP</string>
+  <string name="settings_port_title">Port Server</string>
+  <string name="settings_port_summary">Monitorizare port server TCP</string>
+  <string name="settings_interval_title">Frecvenţă</string>
+  <string name="settings_interval_summary">Interval mesaje în secunde</string>
+  <string name="settings_status_title">Status service</string>
+  <string name="settings_status_off">Pornit</string>
+  <string name="settings_status_on">Oprit</string>
+  <string name="settings_status_off_summary">Serviciu Oprit</string>
+  <string name="settings_status_on_summary">Serviciul rulează</string>
+  <string name="settings_secure_title">Criptare</string>
+  <string name="settings_secure_off">Activare</string>
+  <string name="settings_secure_on">Dezactivare</string>
+  <string name="settings_secure_off_summary">Criptare dezactivare</string>
+  <string name="settings_secure_on_summary">Criptare activă</string>
+  <string name="settings_provider_title">Furnizor locaţie</string>
+  <string name="settings_provider_summary">Sursă date localizare</string>
+  <string name="settings_provider_gps">Furnizor GPS</string>
+  <string name="settings_provider_network">Furnizor Reţea</string>
+  <string name="settings_provider_mixed">Furnizor Mixt</string>
+  <string name="settings_foreground_title">Serviciul prim-plan</string>
+  <string name="settings_foreground_summary">Creştere prioritate serviciu</string>
+  <string name="menu_status">Stare</string>
+  <string name="menu_about">Despre</string>
+  <string name="menu_shortcuts">Adăugare scurtătură</string>
+  <string name="menu_clear">Golire</string>
+  <string name="about_description">Localizare GPS în timp real pentru dispozitive Android. Compatibil cu Server Traccar si alte sisteme de localizare.</string>
+  <string name="about_license">Aplicaţia este gratuită şi open source, codul sursă este licenţiat sub Apache License Version 2.0 şi este disponibil pe GitHub.</string>
+  <string name="about_web">Pentru mai multe informaţii vizitaţi\nwww.traccar.org/client</string>
+  <string name="status_service_create">Serviciu creat</string>
+  <string name="status_service_destroy">Serviciu şters</string>
+  <string name="status_send_fail">Trimitere eşuată</string>
+  <string name="status_location_update">Actualizare locaţie</string>
+  <string name="status_connectivity_change">Schimbare conectivitate</string>
+  <string name="hidden_app_name">Setări Dispozitiv</string>
+  <string name="hidden_alert">Aplicaţia este ascunsă. Pentru deschidere vă rugam apelaţi numărul de telefon 8722227 (TRACCAR).</string>
+</resources>

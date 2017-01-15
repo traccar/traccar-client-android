@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Klient Traccar</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Start</string>
+  <string name="shortcut_stop">Traccar - Stop</string>
+  <string name="settings_id_title">Identyfikator urządzenia</string>
+  <string name="settings_address_title">Adres serwera</string>
+  <string name="settings_address_summary">Domena lub adres IP</string>
+  <string name="settings_port_title">Port serwera</string>
+  <string name="settings_port_summary">Port TCP serwera śledzącego</string>
+  <string name="settings_interval_title">Częstotliwość</string>
+  <string name="settings_interval_summary">Odstęp między wiadomościami w sekundach</string>
+  <string name="settings_status_title">Status usługi</string>
+  <string name="settings_status_off">Uruchomiona</string>
+  <string name="settings_status_on">Zatrzymana</string>
+  <string name="settings_status_off_summary">Usługa zatrzymana</string>
+  <string name="settings_status_on_summary">Usługa uruchomiona</string>
+  <string name="settings_secure_title">Szyfrowanie</string>
+  <string name="settings_secure_off">Włącz</string>
+  <string name="settings_secure_on">Wyłącz</string>
+  <string name="settings_secure_off_summary">Szyfrowanie wyłączone</string>
+  <string name="settings_secure_on_summary">Szyfrowanie włączone</string>
+  <string name="settings_provider_title">Dostawca lokalizacji</string>
+  <string name="settings_provider_summary">Źródło danych o lokalizacji</string>
+  <string name="settings_provider_gps">GPS</string>
+  <string name="settings_provider_network">Sieć</string>
+  <string name="settings_provider_mixed">Mieszane</string>
+  <string name="settings_foreground_title">Usługa pierwszoplanowa</string>
+  <string name="settings_foreground_summary">Zwiększ priorytet usługi</string>
+  <string name="menu_status">Status</string>
+  <string name="menu_about">O Traccar</string>
+  <string name="menu_shortcuts">Dodaj skróty</string>
+  <string name="menu_clear">Wyczyść</string>
+  <string name="about_description">Monitor GPS dla urządzeń Android. Kompatybilny z serwerem Traccar oraz innymi platformami śledzącymi.</string>
+  <string name="about_license">Ta aplikacja jest darmowa i otwartoźródłowa. Kod źródłowy jest licencjonowany Apache License Version 2.0 i jest dostępny na GitHub.</string>
+  <string name="about_web">Więcej informacji - odwiedź\nwww.traccar.org/client</string>
+  <string name="status_service_create">Utworzono usługę</string>
+  <string name="status_service_destroy">Usunięto usługę</string>
+  <string name="status_send_fail">Wysyłka nieudana</string>
+  <string name="status_location_update">Aktualizacja lokalizacji</string>
+  <string name="status_connectivity_change">Zmiana połączenia</string>
+  <string name="hidden_app_name">Ustawienia urządzenia</string>
+  <string name="hidden_alert">Aplikacja została ukryta. By ją otworzyć, zadzwoń na 8722227 (TRACCAR).</string>
+</resources>

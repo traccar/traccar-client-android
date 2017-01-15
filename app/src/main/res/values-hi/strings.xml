@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">ट्रैक्कार क्लाइंट </string>
+  <string name="app_logo">ट्रैक्कार</string>
+  <string name="shortcut_start">ट्रैक्कार  - आरम्भ </string>
+  <string name="shortcut_stop">ट्रैक्कार - रोकें</string>
+  <string name="settings_id_title">उपकरण पहचानकर्ता</string>
+  <string name="settings_address_title">सर्वर का पता</string>
+  <string name="settings_address_summary">डोमेन का नाम या आई पी (IP)  एड्रेस का पता</string>
+  <string name="settings_port_title">सर्वर पोर्ट</string>
+  <string name="settings_port_summary">ट्रैकिंग सर्वर का टीसीपी पोर्ट</string>
+  <string name="settings_interval_title">फ्रीक्वेंसी / आवृत्ति</string>
+  <string name="settings_interval_summary">सैकंड्स में संदेश अंतराल </string>
+  <string name="settings_status_title">सेवा की स्थिति</string>
+  <string name="settings_status_off">आरम्भ</string>
+  <string name="settings_status_on">रोकें</string>
+  <string name="settings_status_off_summary">सेवा रुक गई है</string>
+  <string name="settings_status_on_summary">सेवा चल रही है</string>
+  <string name="settings_secure_title">कूटलेखन</string>
+  <string name="settings_secure_off">सक्षम</string>
+  <string name="settings_secure_on">अक्षम</string>
+  <string name="settings_secure_off_summary">कूटलेखन अक्षम</string>
+  <string name="settings_secure_on_summary">कूटलेखन सक्षम</string>
+  <string name="settings_provider_title">जगह / स्थान / स्तिथि प्रदाता</string>
+  <string name="settings_provider_summary">जगह / स्थान / स्तिथि डेटा का स्रोत</string>
+  <string name="settings_provider_gps">जीपीएस प्रदाता</string>
+  <string name="settings_provider_network">नेटवर्क प्रदाता</string>
+  <string name="settings_provider_mixed">मिश्रित प्रदाता</string>
+  <string name="settings_foreground_title">अग्रभूमि सेवा</string>
+  <string name="settings_foreground_summary">सेवा प्राथमिकता बढ़ाएँ</string>
+  <string name="menu_status">स्थिति</string>
+  <string name="menu_about">बारे में</string>
+  <string name="menu_shortcuts">शॉर्टकट्स जोड़ें</string>
+  <string name="menu_clear">स्पष्ट /  साफ़</string>
+  <string name="about_description">एंड्रॉयड उपकरणों के लिए वास्तविक समय जीपीएस ट्रैकर। ट्रैक्कार सर्वर और अन्य  ट्रैकिंग प्रणालियों के साथ अनुकूल।</string>
+  <string name="about_license">इस एप्लिकेशन के पास स्वतंत्र और खुला स्रोत है  , स्रोत कोड अपाचे लाइसेंस संस्करण 2.0 और GitHub के अंतर्गत उपलब्ध लाइसेंस प्राप्त है ।</string>
+  <string name="about_web">अधिक जानकारी के लिए www.traccar.org/client वेबसाइट देखें </string>
+  <string name="status_service_create">सेवा का सृजन हो गया है</string>
+  <string name="status_service_destroy">सेवा को नष्ट कर दिया गया है</string>
+  <string name="status_send_fail">भेजना विफल हो गया है </string>
+  <string name="status_location_update">जगह / स्थान / स्तिथि का अद्यतन / ताजी जानकारी</string>
+  <string name="status_connectivity_change">कनेक्टिविटी / संयोजकता परिवर्तन</string>
+  <string name="hidden_app_name">उपकरण की सेटिंग्स</string>
+  <string name="hidden_alert">एप्लिकेशन को छुपा दिया गया है l इसे फिर से खोलने के लिए डायल करें 8722227 ( TRACCAR ) l</string>
+</resources>

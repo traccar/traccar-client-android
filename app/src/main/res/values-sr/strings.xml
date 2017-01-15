@@ -16,6 +16,11 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Servis zaustavljen</string>
   <string name="settings_status_on_summary">Servis pokrenut</string>
+  <string name="settings_secure_title">Šifrovanje</string>
+  <string name="settings_secure_off">Omogući</string>
+  <string name="settings_secure_on">Onemogući</string>
+  <string name="settings_secure_off_summary">Šifrovanje omogućeno</string>
+  <string name="settings_secure_on_summary">Šifrovanje onemogućeno</string>
   <string name="settings_provider_title">Provajder lokacije</string>
   <string name="settings_provider_summary">Izvor lokacijskih podataka</string>
   <string name="settings_provider_gps">GPS provajder</string>

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar client</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Start</string>
+  <string name="shortcut_stop">Traccar - Stop</string>
+  <string name="settings_id_title">Toestel identificator</string>
+  <string name="settings_address_title">Server adres</string>
+  <string name="settings_address_summary">Domeinnaam of IP-adres</string>
+  <string name="settings_port_title">Server poort</string>
+  <string name="settings_port_summary">Tracking server TCP poort</string>
+  <string name="settings_interval_title">Frequentie</string>
+  <string name="settings_interval_summary">Bericht interval in seconden</string>
+  <string name="settings_status_title">Server status</string>
+  <string name="settings_status_off">Start</string>
+  <string name="settings_status_on">Stop</string>
+  <string name="settings_status_off_summary">Service gestopt</string>
+  <string name="settings_status_on_summary">Service draait</string>
+  <string name="settings_secure_title">Versleuteling</string>
+  <string name="settings_secure_off">Aan</string>
+  <string name="settings_secure_on">Uit</string>
+  <string name="settings_secure_off_summary">Versleuteling uitgeschakeld</string>
+  <string name="settings_secure_on_summary">Versleuteling ingeschakeld</string>
+  <string name="settings_provider_title">Locatie provider</string>
+  <string name="settings_provider_summary">Bron van locatie data</string>
+  <string name="settings_provider_gps">GPS provider</string>
+  <string name="settings_provider_network">Netwerk provider</string>
+  <string name="settings_provider_mixed">Gecombineerde providers</string>
+  <string name="settings_foreground_title">Voorgrond service</string>
+  <string name="settings_foreground_summary">Verhoog voorrang voor service</string>
+  <string name="menu_status">Status</string>
+  <string name="menu_about">Over ons</string>
+  <string name="menu_shortcuts">Voeg snelkoppelingen toe</string>
+  <string name="menu_clear">Wis</string>
+  <string name="about_description">Real time GPS tracker voor Android apparaten. Compatibel met de Traccar server en andere tracking systemen.</string>
+  <string name="about_license">Deze toepassing is gratis en open source, de broncode is beschikbaar onder de Apache Licentie versie 2.0 op GitHub.</string>
+  <string name="about_web">Voor meer informatie bezoek\nwww.traccar.org/client</string>
+  <string name="status_service_create">Service aangemaakt</string>
+  <string name="status_service_destroy">Service gestopt</string>
+  <string name="status_send_fail">Verzenden mislukt</string>
+  <string name="status_location_update">Locatie update</string>
+  <string name="status_connectivity_change">Verbinding gewijzigd</string>
+  <string name="hidden_app_name">Toestel instellingen</string>
+  <string name="hidden_alert">De app is verborgen. Om hem opnieuw te openen bel je naar 8722227 (TRACCAR).</string>
+</resources>

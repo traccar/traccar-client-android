@@ -16,6 +16,11 @@
   <string name="settings_status_on">Arrêter</string>
   <string name="settings_status_off_summary">Arrêté</string>
   <string name="settings_status_on_summary">En marche</string>
+  <string name="settings_secure_title">Encryption</string>
+  <string name="settings_secure_off">Activer</string>
+  <string name="settings_secure_on">Désactiver</string>
+  <string name="settings_secure_off_summary">Encryption désactivée</string>
+  <string name="settings_secure_on_summary">Encryption activée</string>
   <string name="settings_provider_title">Source de localisation</string>
   <string name="settings_provider_summary">Source utilisée par le système afin d\'obtenir la localisation de l\'appareil</string>
   <string name="settings_provider_gps">Mode GPS uniquement</string>

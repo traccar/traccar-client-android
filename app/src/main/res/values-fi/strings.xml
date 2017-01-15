@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar Client</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Aloita</string>
+  <string name="shortcut_stop">Traccar - Lopeta</string>
+  <string name="settings_id_title">Laitteen tunniste</string>
+  <string name="settings_address_title">Palvelimen osoite</string>
+  <string name="settings_address_summary">Domain tai ip-osoite</string>
+  <string name="settings_port_title">Serverin portti</string>
+  <string name="settings_port_summary">Jäljityspalvelimen TCP-portti</string>
+  <string name="settings_interval_title">Taajuus</string>
+  <string name="settings_interval_summary">Viestien aikaväli sekunneissa</string>
+  <string name="settings_status_title">Palvelun tila</string>
+  <string name="settings_status_off">Aloita</string>
+  <string name="settings_status_on">Pysäytä</string>
+  <string name="settings_status_off_summary">Palvelu pysäytetty</string>
+  <string name="settings_status_on_summary">Palvelu käynnissä</string>
+  <string name="settings_secure_title">Salaus</string>
+  <string name="settings_secure_off">Päälle</string>
+  <string name="settings_secure_on">Pois päältä</string>
+  <string name="settings_secure_off_summary">Salaus poissa päältä</string>
+  <string name="settings_secure_on_summary">Salaus päällä</string>
+  <string name="settings_provider_title">Sijainnin tarjoaja</string>
+  <string name="settings_provider_summary">Sijaintidatan lähde</string>
+  <string name="settings_provider_gps">GPS satelliiti</string>
+  <string name="settings_provider_network">Matkapuhelinverkko</string>
+  <string name="settings_provider_mixed">Yhdistelmä</string>
+  <string name="menu_status">Tila</string>
+  <string name="menu_about">About</string>
+  <string name="menu_clear">Tyhjennä</string>
+  <string name="status_service_create">Palvelu luotu</string>
+  <string name="status_service_destroy">Palvelu tuhottu</string>
+  <string name="status_send_fail">Lähetys epäonnistui</string>
+  <string name="status_location_update">Sijainnin päivitys</string>
+  <string name="hidden_app_name">Laitteen asetukset</string>
+  <string name="hidden_alert">Sovellus on piilotettu. Näppäile 8722227 (TRACCAR) avataksesi sovelluksen uudelleen.</string>
+</resources>

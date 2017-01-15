@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar Manager</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Štart</string>
+  <string name="shortcut_stop">Traccar - Stop</string>
+  <string name="settings_id_title">Identifikátor zariadenia</string>
+  <string name="settings_address_title">Adresa servera</string>
+  <string name="settings_address_summary">Názov domény alebo IP adresa</string>
+  <string name="settings_port_title">Port servera</string>
+  <string name="settings_port_summary">Sledovanie TCP portu servera</string>
+  <string name="settings_interval_title">Frekvencia</string>
+  <string name="settings_interval_summary">Interval správ v sekundách</string>
+  <string name="settings_status_title">Stav služby</string>
+  <string name="settings_status_off">Štart</string>
+  <string name="settings_status_on">Stop</string>
+  <string name="settings_status_off_summary">Služba sa zastavila</string>
+  <string name="settings_status_on_summary">Služba beží</string>
+  <string name="settings_secure_title">Šifrovanie</string>
+  <string name="settings_secure_off">Zapnúť</string>
+  <string name="settings_secure_on">Vypnúť</string>
+  <string name="settings_secure_off_summary">Šifrovanie vypnuté</string>
+  <string name="settings_secure_on_summary">Šifrovanie zapnuté</string>
+  <string name="settings_provider_title">Poskytovateľ polohy</string>
+  <string name="settings_provider_summary">Zdroj polohovacích údajov</string>
+  <string name="settings_provider_gps">Poskytovateľ GPS</string>
+  <string name="settings_provider_network">Poskytovateľ sieťových služieb</string>
+  <string name="settings_provider_mixed">Mix poskytovateľ </string>
+  <string name="settings_foreground_title">Služba v popredí</string>
+  <string name="settings_foreground_summary">Zvýšiť prioritu servis</string>
+  <string name="menu_status">Status</string>
+  <string name="menu_about">O</string>
+  <string name="menu_shortcuts">Pridanie skratiek</string>
+  <string name="menu_clear">Vyčistiť</string>
+  <string name="about_description">Real time GPS tracker pre Android zariadenia. Kompatibilný s Traccar Serverom a ďalšími sledovacími systémami.</string>
+  <string name="about_license">Táto aplikácia je zadarmo a open source, zdrojový kód pod licenciou Apache License verzie 2.0 a je k dispozícii na GitHub.</string>
+  <string name="about_web">Pre viac informácií navštívte visit\nwww.traccar.org/client</string>
+  <string name="status_service_create">Servis vytvoril</string>
+  <string name="status_service_destroy">Servis odstránený</string>
+  <string name="status_send_fail">Odoslanie zlyhalo</string>
+  <string name="status_location_update">Aktualizácia polohy</string>
+  <string name="status_connectivity_change">Zmena konektivity</string>
+  <string name="hidden_app_name">Nastavenie zariadenia</string>
+  <string name="hidden_alert">Aplikácia bola skrytá. Pre opätovné otvorenie znova vytočte 8722227 (TRACCAR).</string>
+</resources>

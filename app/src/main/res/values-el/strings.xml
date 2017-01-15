@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">πελάτης Traccar</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Εκκίνηση</string>
+  <string name="shortcut_stop">Traccar - Παύση</string>
+  <string name="settings_id_title">Αναγνωριστικό συσκευής</string>
+  <string name="settings_address_title">Διεύθυνση εξυπηρετητή</string>
+  <string name="settings_address_summary">Όνομα χώρου ή διεύθυνση δικτύου</string>
+  <string name="settings_port_title">Θύρα εξυπηρετητή</string>
+  <string name="settings_port_summary">TCP θύρα εξυπηρετητή</string>
+  <string name="settings_interval_title">Συχνότητα</string>
+  <string name="settings_interval_summary">Διάστημα μηνυμάτων σε δευτεόλεπτα</string>
+  <string name="settings_status_title">Κατάσταση υπηρεσίας</string>
+  <string name="settings_status_off">Εκκίνηση</string>
+  <string name="settings_status_on">Παύση</string>
+  <string name="settings_status_off_summary">Η υπηρεσία σταμάτησε</string>
+  <string name="settings_status_on_summary">Η υπηρεσία εκτελείται</string>
+  <string name="settings_secure_title">Kρυπτογράφηση</string>
+  <string name="settings_secure_off">Ενεργοποίηση</string>
+  <string name="settings_secure_on">Απενεργοποίηση</string>
+  <string name="settings_secure_off_summary">Η κρυπτογράφηση απενεργοποιήθηκε</string>
+  <string name="settings_secure_on_summary">Η κρυπτογράφηση ενεργοποιήθηκε</string>
+  <string name="settings_provider_title">Παροχέας τοποθεσίας</string>
+  <string name="settings_provider_summary">Πηγή δεδομένων τοποθεσίας</string>
+  <string name="settings_provider_gps">Παροχή GPS</string>
+  <string name="settings_provider_network">Παροχή δικτύου</string>
+  <string name="settings_provider_mixed">Μεικτή παροχή</string>
+  <string name="settings_foreground_title">Υπηρεσία προσκηνίου</string>
+  <string name="settings_foreground_summary">Αύξηση προτεραιότητας της υπηρεσίας</string>
+  <string name="menu_status">Κατάσταση</string>
+  <string name="menu_about">Περί</string>
+  <string name="menu_shortcuts">Προσθήκη συντόμευσης</string>
+  <string name="menu_clear">Καθαρισμός</string>
+  <string name="about_description">GPS ιχνηλάτης πραγματικού χρόνου για συσκευές Android. Συμβατός με Traccar και άλλα συστήματα ιχνηλάτησης.</string>
+  <string name="about_license">Εφαρμογή Ελεύθερου και Ανοικτού κώδικα. Ο πηγαίος κώδικας παρέχεται με άδεια Apache 2.0 και διατίθεται στο GitHub.</string>
+  <string name="about_web">Για περισσότερες πληροφορίες επισκεφτείτε\nwww.traccar.org/client</string>
+  <string name="status_service_create">Η υπηρεσία δημιουργήθηκε</string>
+  <string name="status_service_destroy">Η υπηρεσία διαγράφηκε</string>
+  <string name="status_send_fail">Αποτυχημένη αποστολή</string>
+  <string name="status_location_update">Ενημέρωση τοποθεσίας</string>
+  <string name="status_connectivity_change">Αλλαγή στη διασύνδεση</string>
+  <string name="hidden_app_name">Ρυθμίσεις συσκευής</string>
+  <string name="hidden_alert">Η εφαρμογή αποκρύφτηκε. Για να προβληθεί καλέστε 8722227 (TRACCAR)</string>
+</resources>

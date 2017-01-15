@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar für Android</string>
+  <string name="app_name">Traccar Klient</string>
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar - Start</string>
   <string name="shortcut_stop">Traccar - Stop</string>
@@ -16,6 +16,11 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Dienst inaktiv</string>
   <string name="settings_status_on_summary">Dienst aktiv</string>
+  <string name="settings_secure_title">Verschlüsselung</string>
+  <string name="settings_secure_off">Aktivieren</string>
+  <string name="settings_secure_on">Deaktivieren</string>
+  <string name="settings_secure_off_summary">Verschlüsselung aktiviert </string>
+  <string name="settings_secure_on_summary">Verschlüsselung deaktiviert</string>
   <string name="settings_provider_title">Datenherkunft</string>
   <string name="settings_provider_summary">Quelle der Positionen</string>
   <string name="settings_provider_gps">GPS</string>

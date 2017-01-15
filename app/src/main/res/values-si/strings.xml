@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar Client</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - ආරම්භ කරන්න</string>
+  <string name="shortcut_stop">Traccar - නවතන්න</string>
+  <string name="settings_id_title">උපකරණ හඳුන්වනය</string>
+  <string name="settings_address_title">සර්වර් ලිපිනය</string>
+  <string name="settings_address_summary">ඩොමේන් නාමය හෝ අයි පී ලිපිනය</string>
+  <string name="settings_port_title">සර්වර් port</string>
+  <string name="settings_port_summary">Tracking server TCP port</string>
+  <string name="settings_interval_title">සංඛ්‍යාතය</string>
+  <string name="settings_interval_summary">Messages interval in seconds</string>
+  <string name="settings_status_title">සේවා තත්වය</string>
+  <string name="settings_status_off">ඇරැඹීම</string>
+  <string name="settings_status_on">නැවතීම</string>
+  <string name="settings_status_off_summary">සේවාව අක්‍රීයයි</string>
+  <string name="settings_status_on_summary">සේවාව ක්‍රියාත්මකයි</string>
+  <string name="settings_secure_title">Encryption</string>
+  <string name="settings_secure_off">ක්‍රියාත්මක කරන්න</string>
+  <string name="settings_secure_on">අක්‍රීය කරන්න</string>
+  <string name="settings_secure_off_summary">Encryption disabled</string>
+  <string name="settings_secure_on_summary">Encryption enabled</string>
+  <string name="settings_provider_title">Location provider</string>
+  <string name="settings_provider_summary">Source of location data</string>
+  <string name="settings_provider_gps">GPS provider</string>
+  <string name="settings_provider_network">Network provider</string>
+  <string name="settings_provider_mixed">Mixed provider</string>
+  <string name="settings_foreground_title">Foreground service</string>
+  <string name="settings_foreground_summary">Increase service priority</string>
+  <string name="menu_status">තත්වය</string>
+  <string name="menu_about">පිළිබඳ</string>
+  <string name="menu_shortcuts">කෙටි මං එකතු කරන්න</string>
+  <string name="menu_clear">හිස් කරන්න</string>
+  <string name="about_description">Real time GPS tracker for Android devices. Compatible with Traccar Server and other tracking systems.</string>
+  <string name="about_license">This application is free and open source, source code is licensed under Apache License Version 2.0 and available on GitHub.</string>
+  <string name="about_web">For more information visit\nwww.traccar.org/client</string>
+  <string name="status_service_create">සේවාව සකසන ලදි</string>
+  <string name="status_service_destroy">සේවාව නසන ලදි</string>
+  <string name="status_send_fail">යැවිය නොහැකිය</string>
+  <string name="status_location_update">Location update</string>
+  <string name="status_connectivity_change">Connectivity change</string>
+  <string name="hidden_app_name">උපකරණ සැකසුම්</string>
+</resources>

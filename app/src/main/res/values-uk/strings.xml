@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar Клієнт</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Старт</string>
+  <string name="shortcut_stop">Traccar - Стоп</string>
+  <string name="settings_id_title">Ідентифікатор пристрою</string>
+  <string name="settings_address_title">Адреса сервера</string>
+  <string name="settings_address_summary">Домен або ІР адреса</string>
+  <string name="settings_port_title">Порт сервера</string>
+  <string name="settings_port_summary">TCP порт сервера</string>
+  <string name="settings_interval_title">Частота</string>
+  <string name="settings_interval_summary">Інтервал повідомлень в секундах</string>
+  <string name="settings_status_title">Стан сервісу</string>
+  <string name="settings_status_off">Старт</string>
+  <string name="settings_status_on">Стоп</string>
+  <string name="settings_status_off_summary">Сервіс зупинений</string>
+  <string name="settings_status_on_summary">Сервіс працює</string>
+  <string name="settings_secure_title">Кодування</string>
+  <string name="settings_secure_off">Увімкнути</string>
+  <string name="settings_secure_on">Вимкнути</string>
+  <string name="settings_secure_off_summary">Кодування вимкнене</string>
+  <string name="settings_secure_on_summary">Кодування увімкнене</string>
+  <string name="settings_provider_title">Місцезнаходження провайдера</string>
+  <string name="settings_provider_summary">Джерело місцезнаходження</string>
+  <string name="settings_provider_gps">Дані GPS</string>
+  <string name="settings_provider_network">Дані мережі провайдера</string>
+  <string name="settings_provider_mixed">Змішані дані</string>
+  <string name="settings_foreground_title">Служба переднього плану</string>
+  <string name="settings_foreground_summary">Збільшення пріоритету обслуговування</string>
+  <string name="menu_status">Статус</string>
+  <string name="menu_about">Про</string>
+  <string name="menu_shortcuts">Додати ярлики</string>
+  <string name="menu_clear">Очистити</string>
+  <string name="about_description">GPS трекер реального часу для Android пристроїв. Сумісність з Traccar сервером і іншими системами стеження.</string>
+  <string name="about_license">Цей додаток є безкоштовним з відкритим кодом, код розміщений під ліцензією Apache License версії 2.0 і доступний на GitHub.</string>
+  <string name="about_web">Більше інформації на сайті \nwww.traccar.org/client</string>
+  <string name="status_service_create">Сервіс створений</string>
+  <string name="status_service_destroy">Сервіс знищено</string>
+  <string name="status_send_fail">Відправлення  невдале</string>
+  <string name="status_location_update">Оновлення розташування</string>
+  <string name="status_connectivity_change">Зміна підключення</string>
+  <string name="hidden_app_name">Налаштування пристрою</string>
+  <string name="hidden_alert">Додаток було приховано. Щоб відкрити його знову наберіть 8722227 (TRACCAR).</string>
+</resources>
