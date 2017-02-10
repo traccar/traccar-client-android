@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -35,6 +36,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.TwoStatePreference;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
@@ -63,6 +65,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
+    private Object message;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -233,22 +236,17 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
     }
 
-    private void displayPromptForEnablingGPS(
-            final Activity activity)
+    private void promptForEnablingLocationService(final Activity activity)
     {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
-        final String message = "Enable location service to find current location. Click OK to go to.";
-
-        builder.setMessage(message)
+        builder.setMessage(R.string.prompt_location_service)
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface d, int id) {
-                                activity.startActivity(new Intent(action));
+                                activity.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                                 d.dismiss();
                             }
                         });
-
         builder.create().show();
     }
 
@@ -277,9 +275,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             startService(new Intent(this, TrackingService.class));
             alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                     15000, 15000, alarmIntent);
-            String locationProviders = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-            if (locationProviders == null || locationProviders.equals("")) {
-                displayPromptForEnablingGPS(this);
+            if (TextUtils.isEmpty(Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED))) {
+                promptForEnablingLocationService(this);
             }
         } else {
             sharedPreferences.edit().putBoolean(KEY_STATUS, false).commit();
@@ -312,5 +309,4 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             startTrackingService(false, granted);
         }
     }
-
 }
