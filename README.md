@@ -1,9 +1,9 @@
 # [Traccar Client for Android](https://www.traccar.org/client)
 
-<a href="https://f-droid.org/repository/browse/?fdid=org.traccar.client" target="_blank">
-<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/></a>
 <a href="https://play.google.com/store/apps/details?id=org.traccar.client" target="_blank">
-<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="80"/></a>
+<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play"/></a>
+<a href="https://f-droid.org/repository/browse/?fdid=org.traccar.client" target="_blank">
+<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid"/></a>
 
 ## Overview
 
