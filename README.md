@@ -1,6 +1,6 @@
 # [Traccar Client for Android](https://www.traccar.org/client)
 
-<a href="https://play.google.com/store/apps/details?id=org.traccar.client" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Get_it_on_Google_play.svg" height="60"/></a>
+[![Get it on Google Play](http://www.tananaev.com/badges/google-play.svg)](https://play.google.com/store/apps/details?id=org.traccar.client) [![Get it on F-Droid](http://www.tananaev.com/badges/f-droid.svg)](https://f-droid.org/repository/browse/?fdid=org.traccar.client)
 
 ## Overview
 
