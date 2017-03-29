@@ -1,6 +1,6 @@
 # [Traccar Client for Android](https://www.traccar.org/client)
 
-<a href="https://play.google.com/store/apps/details?id=org.traccar.client" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Get_it_on_Google_play.svg"/></a>
+<a href="https://play.google.com/store/apps/details?id=org.traccar.client" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Get_it_on_Google_play.svg" height="60"/></a>
 
 ## Overview
 
