@@ -37,26 +37,33 @@ public class TrackingService extends Service {
 
     @SuppressWarnings("deprecation")
     private static Notification createNotification(Context context) {
-        Intent notificationIntent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
 
-        Notification notification = new Notification(android.R.drawable.stat_notify_sync_noanim, null, 0);
-        try {
-            Method method = notification.getClass().getMethod("setLatestEventInfo", Context.class, CharSequence.class, CharSequence.class, PendingIntent.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+
+            return new Notification.Builder(context)
+                .setContentTitle(context.getString(R.string.app_name))
+                .setContentText(context.getString(R.string.settings_status_on_summary))
+                .setContentIntent(pendingIntent)
+                .setPriority(Notification.PRIORITY_MIN)
+                .build();
+
+        } else {
+
+            Notification notification = new Notification(android.R.drawable.stat_notify_sync_noanim, null, 0);
             try {
-                method.invoke(notification, context, context.getString(R.string.app_name), context.getString(R.string.settings_status_on_summary), pendingIntent);
-            } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
+                Method method = notification.getClass().getMethod("setLatestEventInfo", Context.class, CharSequence.class, CharSequence.class, PendingIntent.class);
+                try {
+                    method.invoke(notification, context, context.getString(R.string.app_name), context.getString(R.string.settings_status_on_summary), pendingIntent);
+                } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
+                    Log.w(TAG, e);
+                }
+            } catch (SecurityException | NoSuchMethodException e) {
                 Log.w(TAG, e);
             }
-        } catch (SecurityException | NoSuchMethodException e) {
-            Log.w(TAG, e);
-        }
+            return notification;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            notification.priority = Notification.PRIORITY_MIN;
         }
-
-        return notification;
     }
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)
