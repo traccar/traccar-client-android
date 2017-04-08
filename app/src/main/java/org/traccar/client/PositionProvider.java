@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 - 2015 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2013 - 2017 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,8 @@ public abstract class PositionProvider {
 
     protected static final String TAG = PositionProvider.class.getSimpleName();
 
+    private static final int MINIMUM_INTERVAL = 1000;
+
     public interface PositionListener {
         void onPositionUpdate(Position position);
     }
@@ -38,24 +40,34 @@ public abstract class PositionProvider {
     private final PositionListener listener;
 
     private final Context context;
-    private final SharedPreferences preferences;
     protected final LocationManager locationManager;
 
     private String deviceId;
     protected String type;
-    protected final long period;
+    protected long requestInterval;
+    protected long interval;
+    protected double distance;
+    protected double angle;
 
-    private long lastUpdateTime;
+    private Location lastLocation;
 
     public PositionProvider(Context context, PositionListener listener) {
         this.context = context;
         this.listener = listener;
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
         deviceId = preferences.getString(MainActivity.KEY_DEVICE, null);
-        period = Long.parseLong(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000;
+        interval = Long.parseLong(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000;
+        distance = Integer.parseInt(preferences.getString(MainActivity.KEY_DISTANCE, null));
+        angle = Integer.parseInt(preferences.getString(MainActivity.KEY_ANGLE, null));
+
+        if (distance > 0 || angle > 0) {
+            requestInterval = MINIMUM_INTERVAL;
+        } else {
+            requestInterval = interval;
+        }
 
         type = preferences.getString(MainActivity.KEY_PROVIDER, "gps");
     }
@@ -65,12 +77,15 @@ public abstract class PositionProvider {
     public abstract void stopUpdates();
 
     protected void updateLocation(Location location) {
-        if (location != null && location.getTime() - lastUpdateTime >= period) {
+        if (location != null && (lastLocation == null
+                || location.getTime() - lastLocation.getTime() >= interval
+                || distance > 0 && DistanceCalculator.distance(location.getLatitude(), location.getLongitude(), lastLocation.getLatitude(), location.getLongitude()) >= distance
+                || angle > 0 && Math.abs(location.getBearing() - lastLocation.getBearing()) >= angle)) {
             Log.i(TAG, "location new");
-            lastUpdateTime = location.getTime();
+            lastLocation = location;
             listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel(context)));
         } else {
-            Log.i(TAG, location != null ? "location old" : "location nil");
+            Log.i(TAG, location != null ? "location ignored" : "location nil");
         }
     }
 

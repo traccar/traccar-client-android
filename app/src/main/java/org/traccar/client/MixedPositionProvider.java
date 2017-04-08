@@ -26,7 +26,7 @@ import android.util.Log;
 @SuppressWarnings("MissingPermission")
 public class MixedPositionProvider extends PositionProvider implements LocationListener, GpsStatus.Listener {
 
-    private static int FIX_TIMEOUT = 30 * 1000;
+    private static final int FIX_TIMEOUT = 30 * 1000;
 
     private LocationListener backupListener;
     private long lastFixTime;
@@ -39,7 +39,7 @@ public class MixedPositionProvider extends PositionProvider implements LocationL
         lastFixTime = System.currentTimeMillis();
         locationManager.addGpsStatusListener(this);
         try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, period, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, requestInterval, 0, this);
         } catch (IllegalArgumentException e) {
             Log.w(TAG, e);
         }
@@ -76,7 +76,7 @@ public class MixedPositionProvider extends PositionProvider implements LocationL
             };
 
             locationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER, period, 0, backupListener);
+                    LocationManager.NETWORK_PROVIDER, requestInterval, 0, backupListener);
         }
     }
 
@@ -114,7 +114,7 @@ public class MixedPositionProvider extends PositionProvider implements LocationL
 
     @Override
     public void onGpsStatusChanged(int event) {
-        if (backupListener == null && System.currentTimeMillis() - (lastFixTime + period) > FIX_TIMEOUT) {
+        if (backupListener == null && System.currentTimeMillis() - lastFixTime - requestInterval > FIX_TIMEOUT) {
             startBackupProvider();
         }
     }

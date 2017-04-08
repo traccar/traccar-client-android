@@ -11,7 +11,11 @@
   <string name="settings_port_title">Server port</string>
   <string name="settings_port_summary">Tracking server TCP port</string>
   <string name="settings_interval_title">Frequency</string>
-  <string name="settings_interval_summary">Messages interval in seconds</string>
+  <string name="settings_interval_summary">Reporting interval in seconds</string>
+  <string name="settings_distance_title">Distance</string>
+  <string name="settings_distance_summary">Reporting distance in meters</string>
+  <string name="settings_angle_title">Angle</string>
+  <string name="settings_angle_summary">Reporting angle in degrees</string>
   <string name="settings_status_title">Service status</string>
   <string name="settings_status_off">Start</string>
   <string name="settings_status_on">Stop</string>

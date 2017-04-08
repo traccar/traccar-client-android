@@ -34,7 +34,7 @@ public class SimplePositionProvider extends PositionProvider implements Location
 
     public void startUpdates() {
         try {
-            locationManager.requestLocationUpdates(type, period, 0, this);
+            locationManager.requestLocationUpdates(type, requestInterval, 0, this);
         } catch (IllegalArgumentException e) {
             Log.w(TAG, e);
         }
