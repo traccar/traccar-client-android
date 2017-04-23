@@ -93,22 +93,24 @@ public class ShortcutActivity extends Activity {
         } else {
             action = intent.getStringExtra(EXTRA_ACTION);
         }
-        switch (action) {
-            case EXTRA_ACTION_START:
-                PreferenceManager.getDefaultSharedPreferences(this)
-                        .edit().putBoolean(MainActivity.KEY_STATUS, true).commit();
-                startService(new Intent(this, TrackingService.class));
-                Toast.makeText(this, R.string.status_service_create, Toast.LENGTH_SHORT).show();
-                break;
-            case EXTRA_ACTION_STOP:
-                PreferenceManager.getDefaultSharedPreferences(this)
-                        .edit().putBoolean(MainActivity.KEY_STATUS, false).commit();
-                stopService(new Intent(this, TrackingService.class));
-                Toast.makeText(this, R.string.status_service_destroy, Toast.LENGTH_SHORT).show();
-                break;
-            case EXTRA_ACTION_SOS:
-                sendAlarm();
-                break;
+        if (action != null) {
+            switch (action) {
+                case EXTRA_ACTION_START:
+                    PreferenceManager.getDefaultSharedPreferences(this)
+                            .edit().putBoolean(MainActivity.KEY_STATUS, true).commit();
+                    startService(new Intent(this, TrackingService.class));
+                    Toast.makeText(this, R.string.status_service_create, Toast.LENGTH_SHORT).show();
+                    break;
+                case EXTRA_ACTION_STOP:
+                    PreferenceManager.getDefaultSharedPreferences(this)
+                            .edit().putBoolean(MainActivity.KEY_STATUS, false).commit();
+                    stopService(new Intent(this, TrackingService.class));
+                    Toast.makeText(this, R.string.status_service_destroy, Toast.LENGTH_SHORT).show();
+                    break;
+                case EXTRA_ACTION_SOS:
+                    sendAlarm();
+                    break;
+            }
         }
         finish();
     }
