@@ -4,13 +4,13 @@
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar - Spustit</string>
   <string name="shortcut_stop">Traccar - Zastavit</string>
+  <string name="shortcut_sos">Traccar - SOS</string>
   <string name="settings_id_title">Identifikátor zařízení</string>
   <string name="settings_address_title">Adresa serveru</string>
   <string name="settings_address_summary">Doménové jméno nebo IP adresa</string>
   <string name="settings_port_title">Port</string>
   <string name="settings_port_summary">TCP port sledovacího serveru</string>
   <string name="settings_interval_title">Frekvence</string>
-  <string name="settings_interval_summary">Interval zpráv v sekundách</string>
   <string name="settings_status_title">Stav služby</string>
   <string name="settings_status_off">Start</string>
   <string name="settings_status_on">Stop</string>
@@ -37,6 +37,7 @@
   <string name="about_web">Pro více informací navštivte\nwww.traccar.org/client</string>
   <string name="status_service_create">Služba vytvořena</string>
   <string name="status_service_destroy">Služba zastavena</string>
+  <string name="status_send_success">Úspěšně odesláno</string>
   <string name="status_send_fail">Odesílání selhalo</string>
   <string name="status_location_update">Aktualizace pozice</string>
   <string name="status_connectivity_change">Změna připojení</string>

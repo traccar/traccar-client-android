@@ -1,16 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar Client</string>
+  <string name="app_name">Traccar клиент</string>
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar -Старт</string>
   <string name="shortcut_stop">Traccar - Стоп</string>
+  <string name="shortcut_sos">Traccar SOS</string>
   <string name="settings_id_title">Идентификатор</string>
   <string name="settings_address_title">Адрес на сървъра</string>
-  <string name="settings_address_summary">Име на домейн или IP адрес</string>
+  <string name="settings_address_summary">Домейн или IP адрес</string>
   <string name="settings_port_title">Порт на сървъра</string>
-  <string name="settings_port_summary">Tracking server TCP port</string>
+  <string name="settings_port_summary">ТСР порт на сървъра</string>
   <string name="settings_interval_title">Честота</string>
-  <string name="settings_interval_summary">Интервал на координатите в сек.</string>
+  <string name="settings_interval_summary">Докладван интервал в сек.</string>
+  <string name="settings_distance_title">Разстояние</string>
+  <string name="settings_distance_summary">Докладвано разстояние в метри</string>
+  <string name="settings_angle_title">Ъгъл</string>
+  <string name="settings_angle_summary">Докладван ъгъл в градуси</string>
   <string name="settings_status_title">Състояние на услугата</string>
   <string name="settings_status_off">Старт</string>
   <string name="settings_status_on">Стоп</string>
@@ -29,7 +34,7 @@
   <string name="settings_foreground_title">Foreground service</string>
   <string name="settings_foreground_summary">Увеличаване на приоритета на услугата</string>
   <string name="menu_status">Състояние</string>
-  <string name="menu_about">About</string>
+  <string name="menu_about">Относно</string>
   <string name="menu_shortcuts">Добави пряк път</string>
   <string name="menu_clear">Изтрий</string>
   <string name="about_description">Real time GPS tracker for Android devices. Compatible with Traccar Server and other tracking systems.</string>
@@ -37,9 +42,10 @@
   <string name="about_web">For more information visit\nwww.traccar.org/client</string>
   <string name="status_service_create">Услугата е създадена</string>
   <string name="status_service_destroy">Услугата е премахната</string>
+  <string name="status_send_success">Успешно изпращане</string>
   <string name="status_send_fail">Грешка в изпращането</string>
   <string name="status_location_update">Местоположението е обновено</string>
   <string name="status_connectivity_change">Промяна в свързването</string>
   <string name="hidden_app_name">Настройки</string>
-  <string name="hidden_alert">The app has been hidden. To open it again please dial 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">Приложението е скрито. За да го отворите отново, моля наберете 8722227 (TRACCAR).</string>
 </resources>

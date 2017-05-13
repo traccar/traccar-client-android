@@ -4,13 +4,13 @@
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar - Başlat</string>
   <string name="shortcut_stop">Traccar - Durdur</string>
+  <string name="shortcut_sos">Traccar-SOS</string>
   <string name="settings_id_title">Cihaz Kimliği</string>
   <string name="settings_address_title">Sunucu Adresi</string>
   <string name="settings_address_summary">Alanadı veya IP adresi</string>
   <string name="settings_port_title">Sunucu Portu</string>
   <string name="settings_port_summary">İzleme Sunucusu TCP portu</string>
   <string name="settings_interval_title">Sıklık</string>
-  <string name="settings_interval_summary">Mesaj aralığı Sn.</string>
   <string name="settings_status_title">Servis Durumu</string>
   <string name="settings_status_off">Başlat</string>
   <string name="settings_status_on">Durdur</string>
@@ -37,6 +37,7 @@
   <string name="about_web">Daha fazla bilgi için http:\\www.traccar.org/client adresini ziyaret edin.</string>
   <string name="status_service_create">Servis oluşturuldu</string>
   <string name="status_service_destroy">Servis kaldırıldı.</string>
+  <string name="status_send_success">Gönderme başarılı</string>
   <string name="status_send_fail">Gönderme başarısız</string>
   <string name="status_location_update">Yer güncellendi</string>
   <string name="status_connectivity_change">Bağlantı değişimi</string>

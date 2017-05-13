@@ -10,7 +10,6 @@
   <string name="settings_port_title">Tjenerport</string>
   <string name="settings_port_summary">TCP-port til sporingstjener</string>
   <string name="settings_interval_title">Frekvens</string>
-  <string name="settings_interval_summary">Beskjedintervall i sekunder</string>
   <string name="settings_status_title">Tjeneste-status</string>
   <string name="settings_status_off">Start</string>
   <string name="settings_status_on">Stopp</string>

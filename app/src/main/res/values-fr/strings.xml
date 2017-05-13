@@ -4,13 +4,13 @@
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar - Départ</string>
   <string name="shortcut_stop">Traccar - Arrêt</string>
+  <string name="shortcut_sos">Traccar - SOS</string>
   <string name="settings_id_title">Identifiant du périphérique</string>
   <string name="settings_address_title">Adresse du serveur</string>
   <string name="settings_address_summary">Nom de domaine ou adresse IP</string>
   <string name="settings_port_title">Port du serveur</string>
   <string name="settings_port_summary">Port TCP du serveur</string>
   <string name="settings_interval_title">Fréquence</string>
-  <string name="settings_interval_summary">Fréquence d\'envoi de la localisation en secondes</string>
   <string name="settings_status_title">Statut</string>
   <string name="settings_status_off">Démarrer</string>
   <string name="settings_status_on">Arrêter</string>
@@ -37,7 +37,8 @@
   <string name="about_web">Pour plus d’information, visitez le site: \nwww.traccar.org/client</string>
   <string name="status_service_create">Service créé</string>
   <string name="status_service_destroy">Service supprimé</string>
-  <string name="status_send_fail">L’envoi de localisation a échoué</string>
+  <string name="status_send_success">Envoyé avec succès</string>
+  <string name="status_send_fail">L’envoi a échoué</string>
   <string name="status_location_update">Localisation mise à jour</string>
   <string name="status_connectivity_change">Changement de connectivité</string>
   <string name="hidden_app_name">Paramètres du périphérique</string>

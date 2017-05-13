@@ -4,13 +4,13 @@
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar - Старт</string>
   <string name="shortcut_stop">Traccar - Стоп</string>
+  <string name="shortcut_sos">Traccar - SOS</string>
   <string name="settings_id_title">Ідентифікатор пристрою</string>
   <string name="settings_address_title">Адреса сервера</string>
   <string name="settings_address_summary">Домен або ІР адреса</string>
   <string name="settings_port_title">Порт сервера</string>
   <string name="settings_port_summary">TCP порт сервера</string>
   <string name="settings_interval_title">Частота</string>
-  <string name="settings_interval_summary">Інтервал повідомлень в секундах</string>
   <string name="settings_status_title">Стан сервісу</string>
   <string name="settings_status_off">Старт</string>
   <string name="settings_status_on">Стоп</string>
@@ -37,6 +37,7 @@
   <string name="about_web">Більше інформації на сайті \nwww.traccar.org/client</string>
   <string name="status_service_create">Сервіс створений</string>
   <string name="status_service_destroy">Сервіс знищено</string>
+  <string name="status_send_success">Успішно відправлено</string>
   <string name="status_send_fail">Відправлення  невдале</string>
   <string name="status_location_update">Оновлення розташування</string>
   <string name="status_connectivity_change">Зміна підключення</string>

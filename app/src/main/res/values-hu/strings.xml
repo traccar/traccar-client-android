@@ -4,13 +4,18 @@
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar - Indítás</string>
   <string name="shortcut_stop">Traccar - Megállítás</string>
+  <string name="shortcut_sos">Traccar - SOS</string>
   <string name="settings_id_title">Eszközazonosító</string>
   <string name="settings_address_title">Szervercím</string>
   <string name="settings_address_summary">Domainnév vagy IP-cím</string>
   <string name="settings_port_title">Szerver port</string>
   <string name="settings_port_summary">Követő szerver TCP portja</string>
   <string name="settings_interval_title">Frekvencia</string>
-  <string name="settings_interval_summary">Üzenetküldési intervallum másodpercben</string>
+  <string name="settings_interval_summary">Jelentési időköz másodpercben</string>
+  <string name="settings_distance_title">Távolság</string>
+  <string name="settings_distance_summary">Jelentés: távolság méterben</string>
+  <string name="settings_angle_title">Fok</string>
+  <string name="settings_angle_summary">Jelentés: fok szögben</string>
   <string name="settings_status_title">Szolgáltatás státusza</string>
   <string name="settings_status_off">Indítás</string>
   <string name="settings_status_on">Megállítás</string>
@@ -37,6 +42,7 @@
   <string name="about_web">További információkért látogass el az alábbi weboldalra\nwww.traccar.org/client</string>
   <string name="status_service_create">Szolgáltatás létrehozva</string>
   <string name="status_service_destroy">Szolgáltatás megsemmisítve</string>
+  <string name="status_send_success">Küldés sikeres</string>
   <string name="status_send_fail">Küldés sikertelen</string>
   <string name="status_location_update">Pozíció frissítés</string>
   <string name="status_connectivity_change">Kapcsolódás módosítása</string>

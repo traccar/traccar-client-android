@@ -4,13 +4,18 @@
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar - Bắt đầu</string>
   <string name="shortcut_stop">Traccar - Kết thúc</string>
+  <string name="shortcut_sos">Traccar - Khẩn cấp</string>
   <string name="settings_id_title">Định danh thiết bị</string>
   <string name="settings_address_title">Địa chỉ máy chủ</string>
   <string name="settings_address_summary">Tên miền hoặc địa chỉ IP</string>
   <string name="settings_port_title">Cổng máy chủ</string>
   <string name="settings_port_summary">Cổng TCP theo dõi máy chủ</string>
   <string name="settings_interval_title">Tần suất</string>
-  <string name="settings_interval_summary">Chu kỳ tin nhắn theo đơn vị giây</string>
+  <string name="settings_interval_summary">Thời gian báo cáo định kỳ tính bằng giây</string>
+  <string name="settings_distance_title">Khoảng cách</string>
+  <string name="settings_distance_summary">Khoảng cách đo theo mét</string>
+  <string name="settings_angle_title">Góc</string>
+  <string name="settings_angle_summary">Đơn vị tính theo độ</string>
   <string name="settings_status_title">Trạng thái dịch vụ</string>
   <string name="settings_status_off">Bắt đầu</string>
   <string name="settings_status_on">Kết thúc</string>
@@ -37,6 +42,7 @@
   <string name="about_web">Thông tin chi tiết\nwww.traccar.org/client</string>
   <string name="status_service_create">Dịch vụ đã được khởi tạo</string>
   <string name="status_service_destroy">Dịch vụ đã được hủy</string>
+  <string name="status_send_success">Gửi thành công</string>
   <string name="status_send_fail">Gửi lỗi</string>
   <string name="status_location_update">Vị trí đã được cập nhật</string>
   <string name="status_connectivity_change">Kết nối thay đổi</string>

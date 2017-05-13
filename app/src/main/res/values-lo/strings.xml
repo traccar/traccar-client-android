@@ -10,7 +10,6 @@
   <string name="settings_port_title">ພອດເຊີເວີ້</string>
   <string name="settings_port_summary">ພອດ TCP ການຕິດຕາມເຊີເວີ້</string>
   <string name="settings_interval_title">ຄວາມຖີ່</string>
-  <string name="settings_interval_summary">ໄລຍະຫ່າງສົ່ງຂໍ້ຄວາມເປັນວິນາທີ</string>
   <string name="settings_status_title">ສະຖານະໃຊ້ງານ</string>
   <string name="settings_status_off">ເລີ່ມໃຊ້ງານ</string>
   <string name="settings_status_on">ຢຸດໃຊ້ງານ</string>

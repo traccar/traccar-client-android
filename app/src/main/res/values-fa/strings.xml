@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">ردیاب Traccar</string>
+  <string name="app_logo">ردیاب Traccar</string>
+  <string name="shortcut_start">شروع ردیاب</string>
+  <string name="shortcut_stop">توقف ردیاب</string>
+  <string name="shortcut_sos">ارسال کمک</string>
+  <string name="settings_id_title">کد هویت دستگاه</string>
+  <string name="settings_address_title">آدرس سرور</string>
+  <string name="settings_address_summary">نام دامنه یا آی پی</string>
+  <string name="settings_port_title">پورت سرور</string>
+  <string name="settings_port_summary">پورت TCP سرور ردیاب</string>
+  <string name="settings_interval_title">تاخیر ارسال</string>
+  <string name="settings_status_title">وضعیت سرویس</string>
+  <string name="settings_status_off">شروع</string>
+  <string name="settings_status_on">توقف</string>
+  <string name="settings_status_off_summary">سرویس متوقف است</string>
+  <string name="settings_status_on_summary">سرویس در حال کار است</string>
+  <string name="settings_secure_title">فشرده سازی</string>
+  <string name="settings_secure_off">فعال</string>
+  <string name="settings_secure_on">غیر فعال</string>
+  <string name="settings_secure_off_summary">فشرده سازی غیر فعال است</string>
+  <string name="settings_secure_on_summary">فشرده سازی فعال است</string>
+  <string name="settings_provider_title">ارائه مکان</string>
+  <string name="settings_provider_summary">سورس اطلاعات مکان</string>
+  <string name="settings_provider_gps">ارائه GPS</string>
+  <string name="settings_provider_network">ارائه شبکه اپراتور</string>
+  <string name="settings_provider_mixed">ارائه ترکیبی</string>
+  <string name="settings_foreground_title">سرویس پیش زمینه</string>
+  <string name="settings_foreground_summary">افزایش اولویت سرویس</string>
+  <string name="menu_status">وضعیت</string>
+  <string name="menu_about">درباره</string>
+  <string name="menu_shortcuts">ایجاد میانبر</string>
+  <string name="menu_clear">پاک کردن</string>
+  <string name="about_description">ردیاب زنده GPS برای اندروید . سازگار با سرورهای Traccar و سایر سرورهای ردیاب</string>
+  <string name="about_license">این نرم افزار مجانی و سورس باز تحت لیسانس Apache  نگارش 2.0 و فعال در GitHub.</string>
+  <string name="about_web">برای کسب اطلاعات بیشتر به سایت زیر مراجعه نمایید.
+www.traccar.org/client</string>
+  <string name="status_service_create">سرویس ایجاد شد</string>
+  <string name="status_service_destroy">سرویس پایان یافت</string>
+  <string name="status_send_success">ارسال موفق</string>
+  <string name="status_send_fail">ارسال ناموفق</string>
+  <string name="status_location_update">به روز رسانی مکان</string>
+  <string name="status_connectivity_change">تغییرات در ارتباطات</string>
+  <string name="hidden_app_name">تنظیمات دستگاه</string>
+  <string name="hidden_alert">نرم افزار مخفی است . جهت نمایش آن با این شماره تماس بگیرید.
+8722227 (Traccar)</string>
+</resources>

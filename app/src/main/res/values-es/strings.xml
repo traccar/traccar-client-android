@@ -4,13 +4,13 @@
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar - Iniciar</string>
   <string name="shortcut_stop">Traccar - Detener</string>
+  <string name="shortcut_sos">Traccar - Socorro</string>
   <string name="settings_id_title">Identificador de Dispositivo</string>
   <string name="settings_address_title">Dirección del Servidor</string>
   <string name="settings_address_summary">Dominio o Dirección IP</string>
   <string name="settings_port_title">Puerto del Servidor</string>
   <string name="settings_port_summary">Puerto TCP del servidor de rastreo</string>
   <string name="settings_interval_title">Frecuencia de rastreo</string>
-  <string name="settings_interval_summary">Intervalo de los mensajes, en segundos</string>
   <string name="settings_status_title">Estado del servicio</string>
   <string name="settings_status_off">Activado</string>
   <string name="settings_status_on">Desactivado</string>
@@ -38,6 +38,7 @@
 www.traccar.org/client</string>
   <string name="status_service_create">Servicio creado</string>
   <string name="status_service_destroy">Servicio eliminado</string>
+  <string name="status_send_success">Enviado correctamente</string>
   <string name="status_send_fail">Error en el envío</string>
   <string name="status_location_update">Actualización de Posición</string>
   <string name="status_connectivity_change">Cambio en la conectividad</string>

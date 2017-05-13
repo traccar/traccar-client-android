@@ -10,7 +10,6 @@
   <string name="settings_port_title">Tenarport</string>
   <string name="settings_port_summary">TCP-port for sporingstenar</string>
   <string name="settings_interval_title">Frekvens</string>
-  <string name="settings_interval_summary">Beskjedintervall i sekundar</string>
   <string name="settings_status_title">Tenarstatus</string>
   <string name="settings_status_off">Start</string>
   <string name="settings_status_on">Stopp</string>

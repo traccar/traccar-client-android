@@ -4,13 +4,18 @@
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">เริ่ม Traccar</string>
   <string name="shortcut_stop">หยุด Traccar</string>
+  <string name="shortcut_sos">ขอความช่วยเหลือฉุกเฉิน</string>
   <string name="settings_id_title">หมายเลขอุปกรณ์</string>
   <string name="settings_address_title">ที่อยู่เซิร์ฟเวอร์</string>
   <string name="settings_address_summary">ชื่อโดเมน หรือ ที่อยู่ไอพี</string>
   <string name="settings_port_title">เซิร์ฟเวอร์พอร์ต</string>
   <string name="settings_port_summary">พอร์ต TCP เซิร์ฟเวอร์ติดตาม</string>
   <string name="settings_interval_title">ช่วงเวลาส่งข้อมูล</string>
-  <string name="settings_interval_summary">ช่วงเวลาส่งข้อมูลทุกกี่วินาที</string>
+  <string name="settings_interval_summary">รายงานช่วงวินาที</string>
+  <string name="settings_distance_title">ระยะทาง</string>
+  <string name="settings_distance_summary">การรายงานระยะทางเมตร</string>
+  <string name="settings_angle_title">มุม</string>
+  <string name="settings_angle_summary">รายงานในมุมองศา</string>
   <string name="settings_status_title">สถานะเซิร์ฟเวอร์</string>
   <string name="settings_status_off">เริ่มต้น</string>
   <string name="settings_status_on">สิ้นสุด</string>
@@ -37,6 +42,7 @@
   <string name="about_web">For more information visit\nwww.traccar.org/client</string>
   <string name="status_service_create">เริ่มทำงาน</string>
   <string name="status_service_destroy">เลิกการทำงาน</string>
+  <string name="status_send_success">ส่งข้อมูลเรียบร้อย</string>
   <string name="status_send_fail">ส่งข้อมูลล้มเหลว</string>
   <string name="status_location_update">ปรับปรุงตำแหน่ง</string>
   <string name="status_connectivity_change">เปลี่ยนแปลงการเชื่อมต่อ</string>

@@ -4,13 +4,18 @@
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar - Start</string>
   <string name="shortcut_stop">Traccar - Stop</string>
+  <string name="shortcut_sos">SOS</string>
   <string name="settings_id_title">Identifikator uređaja</string>
   <string name="settings_address_title">Adresa servera</string>
   <string name="settings_address_summary">Domen ime ili IP adresa</string>
   <string name="settings_port_title">Server port</string>
   <string name="settings_port_summary">TCP port servera</string>
   <string name="settings_interval_title">Učestalost</string>
-  <string name="settings_interval_summary">Interval podataka u sekundama</string>
+  <string name="settings_interval_summary">Interval javljanja u sekundama</string>
+  <string name="settings_distance_title">Razdaljina</string>
+  <string name="settings_distance_summary">Razdaljina u metrima</string>
+  <string name="settings_angle_title">Ugao</string>
+  <string name="settings_angle_summary">Izveštaj ugla u stepenima</string>
   <string name="settings_status_title">Status servisa</string>
   <string name="settings_status_off">Start</string>
   <string name="settings_status_on">Stop</string>
@@ -37,6 +42,7 @@
   <string name="about_web">Za više informacija www.traccar.org/client </string>
   <string name="status_service_create">Servis kreiran</string>
   <string name="status_service_destroy">Servis uništen</string>
+  <string name="status_send_success">Slanne uspešno</string>
   <string name="status_send_fail">Slanje neuspešno</string>
   <string name="status_location_update">Ažuriranje lokacije</string>
   <string name="status_connectivity_change">Promenjena konekcija</string>

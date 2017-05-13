@@ -4,13 +4,18 @@
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar - Štart</string>
   <string name="shortcut_stop">Traccar - Stop</string>
+  <string name="shortcut_sos">Traccar - SOS</string>
   <string name="settings_id_title">Identifikátor zariadenia</string>
   <string name="settings_address_title">Adresa servera</string>
   <string name="settings_address_summary">Názov domény alebo IP adresa</string>
   <string name="settings_port_title">Port servera</string>
   <string name="settings_port_summary">Sledovanie TCP portu servera</string>
   <string name="settings_interval_title">Frekvencia</string>
-  <string name="settings_interval_summary">Interval správ v sekundách</string>
+  <string name="settings_interval_summary">Interval odosielania v sekundách</string>
+  <string name="settings_distance_title">Vzdialenosť</string>
+  <string name="settings_distance_summary">Interval vzdialenosti v metroch</string>
+  <string name="settings_angle_title">Uhol</string>
+  <string name="settings_angle_summary">Interval natočenia v stupňoch</string>
   <string name="settings_status_title">Stav služby</string>
   <string name="settings_status_off">Štart</string>
   <string name="settings_status_on">Stop</string>
@@ -37,6 +42,7 @@
   <string name="about_web">Pre viac informácií navštívte visit\nwww.traccar.org/client</string>
   <string name="status_service_create">Servis vytvoril</string>
   <string name="status_service_destroy">Servis odstránený</string>
+  <string name="status_send_success">Úspešne poslané</string>
   <string name="status_send_fail">Odoslanie zlyhalo</string>
   <string name="status_location_update">Aktualizácia polohy</string>
   <string name="status_connectivity_change">Zmena konektivity</string>

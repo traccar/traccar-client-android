@@ -10,7 +10,6 @@
   <string name="settings_port_title">Serverin portti</string>
   <string name="settings_port_summary">Jäljityspalvelimen TCP-portti</string>
   <string name="settings_interval_title">Taajuus</string>
-  <string name="settings_interval_summary">Viestien aikaväli sekunneissa</string>
   <string name="settings_status_title">Palvelun tila</string>
   <string name="settings_status_off">Aloita</string>
   <string name="settings_status_on">Pysäytä</string>

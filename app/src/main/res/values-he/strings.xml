@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">שרלוק לאנדרויד</string>
+  <string name="app_logo">שרלוק</string>
+  <string name="shortcut_start">שרלוק - הפעל</string>
+  <string name="shortcut_stop">שרלוק - עצור</string>
+  <string name="shortcut_sos">שרלוק - SOS</string>
+  <string name="settings_id_title">מזהה מכשיר</string>
+  <string name="settings_address_title">כתובת שרת</string>
+  <string name="settings_address_summary">שם הדומיין או כתובת IP</string>
+  <string name="settings_port_title">יציאת שרת</string>
+  <string name="settings_port_summary">יציאת שרת שרלוק</string>
+  <string name="settings_interval_title">תדירות</string>
+  <string name="settings_status_title">מצב שירות</string>
+  <string name="settings_status_off">הפעל</string>
+  <string name="settings_status_on">עצור</string>
+  <string name="settings_status_off_summary">השירות הופסק</string>
+  <string name="settings_status_on_summary">השירות פועל</string>
+  <string name="settings_secure_title">הצפנה</string>
+  <string name="settings_secure_off">אפשר</string>
+  <string name="settings_secure_on">השבת</string>
+  <string name="settings_secure_off_summary">ההצפנה בוטלה</string>
+  <string name="settings_secure_on_summary">ההצפנה פעילה</string>
+  <string name="settings_provider_title">ספק מיקום</string>
+  <string name="settings_provider_summary">ספק מיקום</string>
+  <string name="settings_provider_gps">GPS</string>
+  <string name="settings_provider_network">רשת</string>
+  <string name="settings_provider_mixed">GPS + רשת</string>
+  <string name="settings_foreground_summary">הגדל את עדיפות התוכנה</string>
+  <string name="menu_status">סטטוס</string>
+  <string name="menu_about">אודות</string>
+  <string name="menu_shortcuts">הוסף קיצור דרך</string>
+  <string name="menu_clear">נקה</string>
+  <string name="about_description">GPS Tracker בזמן אמת עבור מכשירי אנדרואיד</string>
+  <string name="about_license">יישום זה הוא קוד פתוח, קוד המקור מורשה תחת רישיון Apache גירסה 2.0 וזמין על GitHub.</string>
+  <string name="about_web">לפרטים נוספים ניתן לפנות לרוגב מחשבים 09-7469155 / www.sherlock.co.il או visit\nwww.traccar.org/client</string>
+  <string name="status_service_create">התוכנה הופעלה</string>
+  <string name="status_service_destroy">התוכנה אינה פעילה</string>
+  <string name="status_send_success">נשלח בהצלחה</string>
+  <string name="status_send_fail">שליחה נכשלה</string>
+  <string name="status_location_update">עדכון מיקום</string>
+  <string name="status_connectivity_change">שינוי חיבור</string>
+  <string name="hidden_app_name">הגדרות המכשיר</string>
+</resources>

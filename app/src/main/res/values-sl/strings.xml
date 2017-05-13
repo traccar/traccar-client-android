@@ -18,6 +18,7 @@
   <string name="menu_clear">Počisti</string>
   <string name="status_service_create">Servis ustvarjen</string>
   <string name="status_service_destroy">Servis uničen</string>
+  <string name="status_send_success">Pošiljanje uspelo</string>
   <string name="status_send_fail">Pošiljanje spodletelo</string>
   <string name="hidden_app_name">Nastavitve naprave</string>
 </resources>

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar Client</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Traccar - Mulai</string>
+  <string name="shortcut_stop">Traccar - Berhenti</string>
+  <string name="shortcut_sos">Traccar - Darurat</string>
+  <string name="settings_id_title">Pengindentifikasi Perangkat</string>
+  <string name="settings_address_title">Alamat Server</string>
+  <string name="settings_address_summary">Nama Domain atau alamat IP</string>
+  <string name="settings_port_title">Port Server</string>
+  <string name="settings_port_summary">Port TCP GPS Server</string>
+  <string name="settings_interval_title">Frekuensi</string>
+  <string name="settings_status_title">Status Service</string>
+  <string name="settings_status_off">Mulai</string>
+  <string name="settings_status_on">Berhenti</string>
+  <string name="settings_status_off_summary">Service berhenti</string>
+  <string name="settings_status_on_summary">Service aktif</string>
+  <string name="settings_secure_title">Enkripsi</string>
+  <string name="settings_secure_off">Aktif</string>
+  <string name="settings_secure_on">Nonaktif</string>
+  <string name="settings_secure_off_summary">Enkripsi nonaktif</string>
+  <string name="settings_secure_on_summary">Enkripsi aktif</string>
+  <string name="settings_provider_title">Lokasi penyedia layanan</string>
+  <string name="settings_provider_summary">Sumber lokasi data</string>
+  <string name="settings_provider_gps">Penyedia layanan GPS</string>
+  <string name="settings_provider_network">Penyedia layanan jaringan</string>
+  <string name="settings_provider_mixed">Campuran penyedia layanan</string>
+  <string name="settings_foreground_title">Service depan</string>
+  <string name="settings_foreground_summary">TIngkatkan prioritas service</string>
+  <string name="menu_status">Status</string>
+  <string name="menu_about">Tentang</string>
+  <string name="menu_shortcuts">Tambah jalan pintas</string>
+  <string name="menu_clear">Bersihkan</string>
+  <string name="about_description">Aplikasi GPS untuk perangkat Android. Kompatibel dengan Traccar Server dan sistem GPS lainnya.</string>
+  <string name="about_license">Aplikasi ini gratis dan terbuka, sumber kode berlisensi dibawah Apache License 2.0 dan tersedia di GitHub.</string>
+  <string name="about_web">Untuk informasi lebih lanjut kunjungi www.traccar.org/client</string>
+  <string name="status_service_create">Service dibuat</string>
+  <string name="status_service_destroy">Service dihilangkan</string>
+  <string name="status_send_success">Sukses terkirim</string>
+  <string name="status_send_fail">Gagal terkirim</string>
+  <string name="status_location_update">Lokasi terbaru</string>
+  <string name="status_connectivity_change">Koneksi berubah</string>
+  <string name="hidden_app_name">Pengaturan Perangkat</string>
+  <string name="hidden_alert">Aplikasi telah tersembunyi. Untuk membuka lagi silahkan tekan 8722227 (TRACCAR).</string>
+</resources>

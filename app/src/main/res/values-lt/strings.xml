@@ -10,7 +10,6 @@
   <string name="settings_port_title">Serverio prievadas</string>
   <string name="settings_port_summary">Serverio TCP prievadas</string>
   <string name="settings_interval_title">Dažnumas</string>
-  <string name="settings_interval_summary">Siuntimo intervalas sekundėmis</string>
   <string name="settings_status_title">Tarnybos būklė</string>
   <string name="settings_status_off">Pradėti</string>
   <string name="settings_status_on">Stabdyti</string>

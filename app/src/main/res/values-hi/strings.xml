@@ -10,7 +10,6 @@
   <string name="settings_port_title">सर्वर पोर्ट</string>
   <string name="settings_port_summary">ट्रैकिंग सर्वर का टीसीपी पोर्ट</string>
   <string name="settings_interval_title">फ्रीक्वेंसी / आवृत्ति</string>
-  <string name="settings_interval_summary">सैकंड्स में संदेश अंतराल </string>
   <string name="settings_status_title">सेवा की स्थिति</string>
   <string name="settings_status_off">आरम्भ</string>
   <string name="settings_status_on">रोकें</string>

@@ -1,16 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar Klient</string>
+  <string name="app_name">Traccar Client</string>
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar - Start</string>
   <string name="shortcut_stop">Traccar - Stop</string>
+  <string name="shortcut_sos">Traccar - SOS</string>
   <string name="settings_id_title">Gerätekennung</string>
   <string name="settings_address_title">Serveradresse</string>
   <string name="settings_address_summary">Domain oder IP Adresse</string>
   <string name="settings_port_title">Serverport</string>
   <string name="settings_port_summary">Port des Ortungsservers</string>
   <string name="settings_interval_title">Frequenz</string>
-  <string name="settings_interval_summary">Intervall in Sekunden</string>
+  <string name="settings_interval_summary">Meldung nach Zeit in Sekunden</string>
+  <string name="settings_distance_title">Entfernung</string>
+  <string name="settings_distance_summary">Meldung nach Entfernung in Metern</string>
+  <string name="settings_angle_title">Winkel</string>
+  <string name="settings_angle_summary">Meldung nach Winkel in Grad</string>
   <string name="settings_status_title">Dienststatus</string>
   <string name="settings_status_off">Start</string>
   <string name="settings_status_on">Stop</string>
@@ -22,9 +27,9 @@
   <string name="settings_secure_off_summary">Verschlüsselung aktiviert </string>
   <string name="settings_secure_on_summary">Verschlüsselung deaktiviert</string>
   <string name="settings_provider_title">Datenherkunft</string>
-  <string name="settings_provider_summary">Quelle der Positionen</string>
-  <string name="settings_provider_gps">GPS</string>
-  <string name="settings_provider_network">Netzwerk</string>
+  <string name="settings_provider_summary">Quelle der Positionsdaten</string>
+  <string name="settings_provider_gps">GPS-Provider</string>
+  <string name="settings_provider_network">Netzwerk-Provider</string>
   <string name="settings_provider_mixed">Gemischt</string>
   <string name="settings_foreground_title">Vordergrund Service</string>
   <string name="settings_foreground_summary">Servicepriorität erhöhen</string>
@@ -34,9 +39,10 @@
   <string name="menu_clear">Leeren</string>
   <string name="about_description">Echtzeit GPS Ortung für Android Geräte. Kompatibel mit Traccar Server und anderen Ortungsservern.</string>
   <string name="about_license">Dieses Programm ist frei und Open Source. Es ist unter Apache Lizenz Version 2.0 lizenziert und ist auf GitHub verfügbar.</string>
-  <string name="about_web">Für weitere Informationen besuche uns auf www.traccar.org/client</string>
+  <string name="about_web">Für weitere Informationen besuchen Sie www.traccar.org/client</string>
   <string name="status_service_create">Dienst installiert</string>
   <string name="status_service_destroy">Dienst gestoppt</string>
+  <string name="status_send_success">Erfolgreich gesendet</string>
   <string name="status_send_fail">Übertragung fehlerhaft</string>
   <string name="status_location_update">Positionsupdate</string>
   <string name="status_connectivity_change">Anschlusswechsel</string>

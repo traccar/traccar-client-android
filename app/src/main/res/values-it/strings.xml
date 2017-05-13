@@ -4,13 +4,18 @@
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Traccar - Start</string>
   <string name="shortcut_stop">Traccar - Stop</string>
+  <string name="shortcut_sos">Traccar - SOS</string>
   <string name="settings_id_title">Identificativo dispositivo</string>
   <string name="settings_address_title">Indirizzo server</string>
   <string name="settings_address_summary">Nome del dominio o indirizzo IP</string>
   <string name="settings_port_title">Porta server</string>
   <string name="settings_port_summary">Porta TCP del Tracking server</string>
   <string name="settings_interval_title">Frequenza</string>
-  <string name="settings_interval_summary">Intervallo in secondi tra i messaggi</string>
+  <string name="settings_interval_summary">Segnalazione intervallo in secondi</string>
+  <string name="settings_distance_title">Distanza</string>
+  <string name="settings_distance_summary">Segnalazione distanza in metri</string>
+  <string name="settings_angle_title">Angolo</string>
+  <string name="settings_angle_summary">Segnalazione angolo in gradi</string>
   <string name="settings_status_title">Stato del servizio</string>
   <string name="settings_status_off">Start</string>
   <string name="settings_status_on">Stop</string>
@@ -37,6 +42,7 @@
   <string name="about_web">Per maggiori informazioni visitate \nwww.traccar.org/client</string>
   <string name="status_service_create">Servizio creato</string>
   <string name="status_service_destroy">Servizio distrutto</string>
+  <string name="status_send_success">Invio riuscito</string>
   <string name="status_send_fail">Invio fallito</string>
   <string name="status_location_update">Aggiornamento posizione</string>
   <string name="status_connectivity_change">Connessione cambiata</string>

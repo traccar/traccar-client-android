@@ -10,7 +10,6 @@
   <string name="settings_port_title">සර්වර් port</string>
   <string name="settings_port_summary">Tracking server TCP port</string>
   <string name="settings_interval_title">සංඛ්‍යාතය</string>
-  <string name="settings_interval_summary">Messages interval in seconds</string>
   <string name="settings_status_title">සේවා තත්වය</string>
   <string name="settings_status_off">ඇරැඹීම</string>
   <string name="settings_status_on">නැවතීම</string>

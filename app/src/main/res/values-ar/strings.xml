@@ -10,7 +10,6 @@
   <string name="settings_port_title">منفذ الخادم</string>
   <string name="settings_port_summary">تعقب منفذ خادم تي سي بي</string>
   <string name="settings_interval_title">تردد</string>
-  <string name="settings_interval_summary">فترة الرسائل بالثواني</string>
   <string name="settings_status_title">حالة الخدمة</string>
   <string name="settings_status_off">بدء</string>
   <string name="settings_status_on">إيقاف</string>

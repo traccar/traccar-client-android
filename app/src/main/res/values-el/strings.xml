@@ -10,7 +10,6 @@
   <string name="settings_port_title">Θύρα εξυπηρετητή</string>
   <string name="settings_port_summary">TCP θύρα εξυπηρετητή</string>
   <string name="settings_interval_title">Συχνότητα</string>
-  <string name="settings_interval_summary">Διάστημα μηνυμάτων σε δευτεόλεπτα</string>
   <string name="settings_status_title">Κατάσταση υπηρεσίας</string>
   <string name="settings_status_off">Εκκίνηση</string>
   <string name="settings_status_on">Παύση</string>
