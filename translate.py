@@ -25,11 +25,11 @@ def request(url):
     req.add_header("Authorization", "Basic %s" % auth)
     return urllib2.urlopen(req)
 
-resource = json.load(request("https://www.transifex.com/api/2/project/traccar/resource/client-android/?details"))
+resource = json.load(request("https://www.transifex.com/api/2/project/traccar/resource/client/?details"))
 
 for language in resource["available_languages"]:
     code = language["code"]
-    data = request("https://www.transifex.com/api/2/project/traccar/resource/client-android/translation/" + code + "?file")
+    data = request("https://www.transifex.com/api/2/project/traccar/resource/client/translation/" + code + "?file")
     if code == "en":
         filename = path + "values/strings.xml"
     else:
