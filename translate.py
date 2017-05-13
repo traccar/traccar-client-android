@@ -33,7 +33,7 @@ for language in resource["available_languages"]:
     if code == "en":
         filename = path + "values/strings.xml"
     else:
-        filename = path + "values-" + code.replace("_", "-") + "/strings.xml"
+        filename = path + "values-" + code.replace("_", "-r") + "/strings.xml"
     if not os.path.exists(os.path.dirname(filename)):
         os.makedirs(os.path.dirname(filename))
     file = open(filename, "wb")
