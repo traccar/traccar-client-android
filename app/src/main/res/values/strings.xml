@@ -33,6 +33,9 @@
   <string name="settings_provider_mixed">Mixed provider</string>
   <string name="settings_foreground_title">Foreground service</string>
   <string name="settings_foreground_summary">Increase service priority</string>
+  <string name="error_invalid_address">Invalid server address</string>
+  <string name="error_invalid_port">Invalid server port</string>
+  <string name="error_invalid_frequency">Invalid frequency value</string>
   <string name="menu_status">Status</string>
   <string name="menu_about">About</string>
   <string name="menu_shortcuts">Add shortcuts</string>
