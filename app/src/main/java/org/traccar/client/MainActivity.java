@@ -16,14 +16,17 @@
 package org.traccar.client;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -32,6 +35,8 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.TwoStatePreference;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -61,6 +66,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
+    private Object message;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -250,6 +256,20 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
     }
 
+    private void promptForEnablingLocationService(final Activity activity)
+    {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setMessage(R.string.prompt_location_service)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface d, int id) {
+                                activity.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                                d.dismiss();
+                            }
+                        });
+        builder.create().show();
+    }
+
     private void startTrackingService(boolean checkPermission, boolean permission) {
         if (checkPermission) {
             Set<String> missingPermissions = new HashSet<>();
@@ -275,6 +295,9 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             startService(new Intent(this, TrackingService.class));
             alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                     15000, 15000, alarmIntent);
+            if (TextUtils.isEmpty(Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED))) {
+                promptForEnablingLocationService(this);
+            }
         } else {
             sharedPreferences.edit().putBoolean(KEY_STATUS, false).commit();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -306,5 +329,4 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             startTrackingService(false, granted);
         }
     }
-
 }
