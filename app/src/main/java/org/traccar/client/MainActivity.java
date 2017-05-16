@@ -119,6 +119,23 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             }
         });
 
+        Preference.OnPreferenceChangeListener numberValidationListener = new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (newValue != null) {
+                    try {
+                        int value = Integer.parseInt((String) newValue);
+                        return value >= 0;
+                    } catch (NumberFormatException e) {
+                        Log.w(TAG, e);
+                    }
+                }
+                return false;
+            }
+        };
+        findPreference(KEY_DISTANCE).setOnPreferenceChangeListener(numberValidationListener);
+        findPreference(KEY_ANGLE).setOnPreferenceChangeListener(numberValidationListener);
+
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, AutostartReceiver.class), 0);
 
