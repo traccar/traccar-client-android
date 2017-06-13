@@ -19,14 +19,12 @@ import android.net.Uri;
 
 public class ProtocolFormatter {
 
-    public static String formatRequest(String address, int port, boolean secure, Position position) {
-        return formatRequest(address, port, secure, position, null);
+    public static String formatRequest(String url, Position position) {
+        return formatRequest(url, position, null);
     }
 
-    public static String formatRequest(String address, int port, boolean secure, Position position, String alarm) {
-
-        Uri.Builder builder = new Uri.Builder();
-        builder.scheme(secure ? "https" : "http").encodedAuthority(address + ':' + port)
+    public static String formatRequest(String url, Position position, String alarm) {
+        Uri serverUrl = Uri.parse(url).buildUpon()
                 .appendQueryParameter("id", position.getDeviceId())
                 .appendQueryParameter("timestamp", String.valueOf(position.getTime().getTime() / 1000))
                 .appendQueryParameter("lat", String.valueOf(position.getLatitude()))
@@ -34,13 +32,19 @@ public class ProtocolFormatter {
                 .appendQueryParameter("speed", String.valueOf(position.getSpeed()))
                 .appendQueryParameter("bearing", String.valueOf(position.getCourse()))
                 .appendQueryParameter("altitude", String.valueOf(position.getAltitude()))
-                .appendQueryParameter("batt", String.valueOf(position.getBattery()));
+                .appendQueryParameter("batt", String.valueOf(position.getBattery()))
+                .build();
 
-        if (alarm != null) {
-            builder.appendQueryParameter("alarm", alarm);
+        if (alarm != null && alarm.trim().length() != 0) {
+            serverUrl = serverUrl.buildUpon().appendQueryParameter("alarm", alarm).build();
         }
-
-        return builder.build().toString();
+        int port = serverUrl.getPort();
+        if (port < 0 || port > 65535) {
+            port = 5055;
+            String host = serverUrl.getHost();
+            serverUrl = serverUrl.buildUpon().encodedAuthority(host + ":" + port).build();
+        }
+        return serverUrl.toString();
     }
 
 }

@@ -64,10 +64,7 @@ public class ShortcutActivity extends Activity {
                     location, PositionProvider.getBatteryLevel(this));
 
             String request = ProtocolFormatter.formatRequest(
-                    preferences.getString(MainActivity.KEY_ADDRESS, null),
-                    Integer.parseInt(preferences.getString(MainActivity.KEY_PORT, null)),
-                    preferences.getBoolean(MainActivity.KEY_SECURE, false),
-                    position, ALARM_SOS);
+                    preferences.getString(MainActivity.KEY_URL, null), position, ALARM_SOS);
 
             RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
                 @Override
