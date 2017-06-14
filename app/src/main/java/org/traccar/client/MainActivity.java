@@ -84,7 +84,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         findPreference(KEY_URL).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                return (newValue != null) && setServerURL(newValue.toString());
+                return (newValue != null) && validateServerURL(newValue.toString());
             }
         });
 
@@ -289,7 +289,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         }
     }
 
-    private boolean setServerURL(String userUrl) {
+    private boolean validateServerURL(String userUrl) {
         EditTextPreference preference = (EditTextPreference) findPreference(KEY_URL);
 
         if (userUrl == null || userUrl.trim().length() == 0) {
@@ -298,7 +298,9 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             findPreference(KEY_STATUS).setEnabled(true);
             return false;
         }
-        if (URLUtil.isValidUrl(userUrl) && (URLUtil.isHttpUrl(userUrl) || URLUtil.isHttpsUrl(userUrl))) {
+        int port = Uri.parse(userUrl).getPort();
+        if (URLUtil.isValidUrl(userUrl) && (port >= -1 && port <= 65535)
+                && (URLUtil.isHttpUrl(userUrl) || URLUtil.isHttpsUrl(userUrl))) {
             preference.setSummary(R.string.settings_url_summary);
             findPreference(KEY_STATUS).setEnabled(true);
         } else {

@@ -40,7 +40,7 @@ public class ProtocolFormatter {
         }
 
         int port = serverUrl.getPort();
-        if (port < 0 || port > 65535) {
+        if (port == -1) {
             builder.encodedAuthority(serverUrl.getHost() + ":" + 5055);
         }
         return builder.build().toString();
