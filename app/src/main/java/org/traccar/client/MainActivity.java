@@ -290,13 +290,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     }
 
     private boolean validateServerURL(String userUrl) {
-        if (userUrl == null || userUrl.trim().length() == 0) {
-            EditTextPreference preference = (EditTextPreference) findPreference(KEY_URL);
-            preference.setText(getString(R.string.settings_url_default_value));
-            return false;
-        }
         int port = Uri.parse(userUrl).getPort();
-        if (URLUtil.isValidUrl(userUrl) && (port >= -1 && port <= 65535)
+        if (URLUtil.isValidUrl(userUrl) && (port == -1 || (port > 0 && port <= 65535))
                 && (URLUtil.isHttpUrl(userUrl) || URLUtil.isHttpsUrl(userUrl))) {
             return true;
         }
