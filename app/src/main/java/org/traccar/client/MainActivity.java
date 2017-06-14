@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -35,6 +36,8 @@ import android.preference.TwoStatePreference;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.URLUtil;
+import android.widget.Toast;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -46,9 +49,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final String KEY_DEVICE = "id";
-    public static final String KEY_ADDRESS = "address";
-    public static final String KEY_PORT = "port";
-    public static final String KEY_SECURE = "secure";
+    public static final String KEY_URL = "url";
     public static final String KEY_INTERVAL = "interval";
     public static final String KEY_DISTANCE = "distance";
     public static final String KEY_ANGLE = "angle";
@@ -65,12 +66,12 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (BuildConfig.HIDDEN_APP) {
             removeLauncherIcon();
         }
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        migrateLegacyPreferences(sharedPreferences);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
 
@@ -80,30 +81,13 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
                 return newValue != null && !newValue.equals("");
             }
         });
-        findPreference(KEY_ADDRESS).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+        findPreference(KEY_URL).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
-                    return newValue != null && Patterns.DOMAIN_NAME.matcher((String) newValue).matches();
-                } else {
-                    return newValue != null && !((String) newValue).isEmpty();
-                }
+                return (newValue != null) && validateServerURL(newValue.toString());
             }
         });
-        findPreference(KEY_PORT).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (newValue != null) {
-                    try {
-                        int value = Integer.parseInt((String) newValue);
-                        return value > 0 && value <= 65536;
-                    } catch (NumberFormatException e) {
-                        Log.w(TAG, e);
-                    }
-                }
-                return false;
-            }
-        });
+
         findPreference(KEY_INTERVAL).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -194,9 +178,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     private void setPreferencesEnabled(boolean enabled) {
         findPreference(KEY_DEVICE).setEnabled(enabled);
-        findPreference(KEY_ADDRESS).setEnabled(enabled);
-        findPreference(KEY_PORT).setEnabled(enabled);
-        findPreference(KEY_SECURE).setEnabled(enabled);
+        findPreference(KEY_URL).setEnabled(enabled);
         findPreference(KEY_INTERVAL).setEnabled(enabled);
         findPreference(KEY_DISTANCE).setEnabled(enabled);
         findPreference(KEY_ANGLE).setEnabled(enabled);
@@ -307,4 +289,33 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         }
     }
 
+    private boolean validateServerURL(String userUrl) {
+        int port = Uri.parse(userUrl).getPort();
+        if (URLUtil.isValidUrl(userUrl) && (port == -1 || (port > 0 && port <= 65535))
+                && (URLUtil.isHttpUrl(userUrl) || URLUtil.isHttpsUrl(userUrl))) {
+            return true;
+        }
+        Toast.makeText(MainActivity.this, R.string.error_msg_invalid_url, Toast.LENGTH_LONG).show();
+        return false;
+    }
+
+    private void migrateLegacyPreferences(SharedPreferences preferences) {
+        String port = preferences.getString("port", null);
+        if (port != null) {
+            Log.d(TAG, "migrateLegacyPreferences: migrating to URL preference");
+
+            String host = preferences.getString("address", getString(R.string.settings_url_default_value));
+            String scheme = preferences.getBoolean("secure", false) ? "https" : "http";
+
+            Uri.Builder builder = new Uri.Builder();
+            builder.scheme(scheme).encodedAuthority(host + ":" + port).build();
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString(KEY_URL, builder.toString());
+
+            editor.remove("port");
+            editor.remove("address");
+            editor.remove("secure");
+            editor.commit();
+        }
+    }
 }
