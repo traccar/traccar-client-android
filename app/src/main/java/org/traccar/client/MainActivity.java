@@ -290,25 +290,18 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     }
 
     private boolean validateServerURL(String userUrl) {
-        EditTextPreference preference = (EditTextPreference) findPreference(KEY_URL);
-
         if (userUrl == null || userUrl.trim().length() == 0) {
+            EditTextPreference preference = (EditTextPreference) findPreference(KEY_URL);
             preference.setText(getString(R.string.settings_url_default_value));
-            preference.setSummary(R.string.settings_url_summary);
-            findPreference(KEY_STATUS).setEnabled(true);
             return false;
         }
         int port = Uri.parse(userUrl).getPort();
         if (URLUtil.isValidUrl(userUrl) && (port >= -1 && port <= 65535)
                 && (URLUtil.isHttpUrl(userUrl) || URLUtil.isHttpsUrl(userUrl))) {
-            preference.setSummary(R.string.settings_url_summary);
-            findPreference(KEY_STATUS).setEnabled(true);
-        } else {
-            preference.setSummary(R.string.error_invalid_url_summary);
-            findPreference(KEY_STATUS).setEnabled(false);
-            Toast.makeText(MainActivity.this, R.string.error_msg_invalid_url, Toast.LENGTH_LONG).show();
+            return true;
         }
-        return true;
+        Toast.makeText(MainActivity.this, R.string.error_msg_invalid_url, Toast.LENGTH_LONG).show();
+        return false;
     }
 
     private void migrateLegacyPreferences(SharedPreferences preferences) {

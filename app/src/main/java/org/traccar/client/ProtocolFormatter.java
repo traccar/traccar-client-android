@@ -38,7 +38,6 @@ public class ProtocolFormatter {
         if (alarm != null) {
             builder.appendQueryParameter("alarm", alarm);
         }
-
         int port = serverUrl.getPort();
         if (port == -1) {
             builder.encodedAuthority(serverUrl.getHost() + ":" + 5055);
