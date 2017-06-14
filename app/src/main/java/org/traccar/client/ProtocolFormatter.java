@@ -24,7 +24,8 @@ public class ProtocolFormatter {
     }
 
     public static String formatRequest(String url, Position position, String alarm) {
-        Uri serverUrl = Uri.parse(url).buildUpon()
+        Uri serverUrl = Uri.parse(url);
+        Uri.Builder builder = serverUrl.buildUpon()
                 .appendQueryParameter("id", position.getDeviceId())
                 .appendQueryParameter("timestamp", String.valueOf(position.getTime().getTime() / 1000))
                 .appendQueryParameter("lat", String.valueOf(position.getLatitude()))
@@ -32,19 +33,16 @@ public class ProtocolFormatter {
                 .appendQueryParameter("speed", String.valueOf(position.getSpeed()))
                 .appendQueryParameter("bearing", String.valueOf(position.getCourse()))
                 .appendQueryParameter("altitude", String.valueOf(position.getAltitude()))
-                .appendQueryParameter("batt", String.valueOf(position.getBattery()))
-                .build();
+                .appendQueryParameter("batt", String.valueOf(position.getBattery()));
 
-        if (alarm != null && alarm.trim().length() != 0) {
-            serverUrl = serverUrl.buildUpon().appendQueryParameter("alarm", alarm).build();
+        if (alarm != null) {
+            builder.appendQueryParameter("alarm", alarm);
         }
+
         int port = serverUrl.getPort();
         if (port < 0 || port > 65535) {
-            port = 5055;
-            String host = serverUrl.getHost();
-            serverUrl = serverUrl.buildUpon().encodedAuthority(host + ":" + port).build();
+            builder.encodedAuthority(serverUrl.getHost() + ":" + 5055);
         }
-        return serverUrl.toString();
+        return builder.build().toString();
     }
-
 }

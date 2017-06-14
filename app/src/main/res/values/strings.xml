@@ -27,7 +27,6 @@
   <string name="settings_provider_mixed">Mixed provider</string>
   <string name="settings_foreground_title">Foreground service</string>
   <string name="settings_foreground_summary">Increase service priority</string>
-  <string name="settings_invalid_url_summary">Invalid server URL</string>
   <string name="menu_status">Status</string>
   <string name="menu_about">About</string>
   <string name="menu_shortcuts">Add shortcuts</string>
@@ -43,5 +42,6 @@
   <string name="status_connectivity_change">Connectivity change</string>
   <string name="hidden_app_name">Device Settings</string>
   <string name="hidden_alert">The app has been hidden. To open it again please dial 8722227 (TRACCAR).</string>
-  <string name="msg_invalid_url">Please enter a valid http:// or https:// URL</string>
+  <string name="error_msg_invalid_url">Please enter a valid http:// or https:// URL</string>
+  <string name="error_invalid_url_summary">Invalid server URL</string>
 </resources>

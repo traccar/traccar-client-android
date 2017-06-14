@@ -39,8 +39,6 @@ import android.view.MenuItem;
 import android.webkit.URLUtil;
 import android.widget.Toast;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -73,7 +71,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         }
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        migratePreferencesIfNecessary(sharedPreferences);
+        migrateLegacyPreferences(sharedPreferences);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
 
@@ -304,17 +302,17 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             preference.setSummary(R.string.settings_url_summary);
             findPreference(KEY_STATUS).setEnabled(true);
         } else {
-            preference.setSummary(R.string.settings_invalid_url_summary);
+            preference.setSummary(R.string.error_invalid_url_summary);
             findPreference(KEY_STATUS).setEnabled(false);
-            Toast.makeText(MainActivity.this, R.string.msg_invalid_url, Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, R.string.error_msg_invalid_url, Toast.LENGTH_LONG).show();
         }
         return true;
     }
 
-    private void migratePreferencesIfNecessary(SharedPreferences preferences) {
+    private void migrateLegacyPreferences(SharedPreferences preferences) {
         String port = preferences.getString("port", null);
         if (port != null) {
-            Log.d(TAG, "migratePreferencesIfNecessary: migrating to URL preference");
+            Log.d(TAG, "migrateLegacyPreferences: migrating to URL preference");
 
             String host = preferences.getString("address", getString(R.string.settings_url_default_value));
             String scheme = preferences.getBoolean("secure", false) ? "https" : "http";
@@ -327,11 +325,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             editor.remove("port");
             editor.remove("address");
             editor.remove("secure");
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD) {
-                editor.commit();
-            } else {
-                editor.apply();
-            }
+            editor.commit();
         }
     }
 }
