@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="about_margin">20dp</dimen>
-    <dimen name="about_spacing">15dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
 </resources>
