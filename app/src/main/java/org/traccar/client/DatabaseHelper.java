@@ -27,7 +27,7 @@ import java.util.Date;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "traccar.db";
 
     public interface DatabaseHandler<T> {
@@ -79,6 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "altitude REAL," +
                 "speed REAL," +
                 "course REAL," +
+                "accuracy REAL," +
                 "battery REAL)");
     }
 
@@ -97,6 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("altitude", position.getAltitude());
         values.put("speed", position.getSpeed());
         values.put("course", position.getCourse());
+        values.put("accuracy", position.getCourse());
         values.put("battery", position.getBattery());
 
         db.insertOrThrow("position", null, values);
@@ -129,6 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 position.setAltitude(cursor.getDouble(cursor.getColumnIndex("altitude")));
                 position.setSpeed(cursor.getDouble(cursor.getColumnIndex("speed")));
                 position.setCourse(cursor.getDouble(cursor.getColumnIndex("course")));
+                position.setAccuracy(cursor.getDouble(cursor.getColumnIndex("accuracy")));
                 position.setBattery(cursor.getDouble(cursor.getColumnIndex("battery")));
 
             } else {

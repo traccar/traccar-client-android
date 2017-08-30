@@ -16,6 +16,7 @@
 package org.traccar.client;
 
 import android.location.Location;
+import android.location.LocationManager;
 
 import java.util.Date;
 
@@ -32,6 +33,9 @@ public class Position {
         altitude = location.getAltitude();
         speed = location.getSpeed() * 1.943844; // speed in knots
         course = location.getBearing();
+        if (location.getProvider() != null && !location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
+            accuracy = location.getAccuracy();
+        }
         this.battery = battery;
     }
 
@@ -113,6 +117,16 @@ public class Position {
 
     public void setCourse(double course) {
         this.course = course;
+    }
+
+    private double accuracy;
+
+    public double getAccuracy() {
+        return accuracy;
+    }
+
+    public void setAccuracy(double accuracy) {
+        this.accuracy = accuracy;
     }
 
     private double battery;
