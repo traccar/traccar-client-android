@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
 
     <application
-        android:label="@string/hidden_app_name"
-        tools:replace="android:label">
+        android:name="org.traccar.client.GoogleMainApplication"
+        tools:replace="android:name">
 
         <receiver android:name="org.traccar.client.DialLaunchReceiver" >
             <intent-filter>
