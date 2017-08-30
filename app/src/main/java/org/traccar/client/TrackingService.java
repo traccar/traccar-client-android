@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 public class TrackingService extends Service {
@@ -72,7 +73,7 @@ public class TrackingService extends Service {
         trackingController.start();
 
         startForeground(NOTIFICATION_ID, createNotification(this));
-        startService(new Intent(this, HideNotificationService.class));
+        ContextCompat.startForegroundService(this, new Intent(this, HideNotificationService.class));
     }
 
     @Override

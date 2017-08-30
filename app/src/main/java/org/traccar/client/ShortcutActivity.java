@@ -22,6 +22,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -94,13 +95,13 @@ public class ShortcutActivity extends AppCompatActivity {
             switch (action) {
                 case EXTRA_ACTION_START:
                     PreferenceManager.getDefaultSharedPreferences(this)
-                            .edit().putBoolean(MainFragment.KEY_STATUS, true).commit();
-                    startService(new Intent(this, TrackingService.class));
+                            .edit().putBoolean(MainFragment.KEY_STATUS, true).apply();
+                    ContextCompat.startForegroundService(this, new Intent(this, TrackingService.class));
                     Toast.makeText(this, R.string.status_service_create, Toast.LENGTH_SHORT).show();
                     break;
                 case EXTRA_ACTION_STOP:
                     PreferenceManager.getDefaultSharedPreferences(this)
-                            .edit().putBoolean(MainFragment.KEY_STATUS, false).commit();
+                            .edit().putBoolean(MainFragment.KEY_STATUS, false).apply();
                     stopService(new Intent(this, TrackingService.class));
                     Toast.makeText(this, R.string.status_service_destroy, Toast.LENGTH_SHORT).show();
                     break;

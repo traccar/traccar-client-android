@@ -51,6 +51,8 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
 
     private static final String TAG = MainFragment.class.getSimpleName();
 
+    private static final int ALARM_MANAGER_INTERVAL = 15000;
+
     public static final String KEY_DEVICE = "id";
     public static final String KEY_URL = "url";
     public static final String KEY_INTERVAL = "interval";
@@ -259,9 +261,9 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
 
         if (permission) {
             setPreferencesEnabled(false);
-            getActivity().startService(new Intent(getActivity(), TrackingService.class));
+            ContextCompat.startForegroundService(getActivity(), new Intent(getActivity(), TrackingService.class));
             alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    15000, 15000, alarmIntent);
+                    ALARM_MANAGER_INTERVAL, ALARM_MANAGER_INTERVAL, alarmIntent);
         } else {
             sharedPreferences.edit().putBoolean(KEY_STATUS, false).apply();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
