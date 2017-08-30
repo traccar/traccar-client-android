@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:defaultValue="false"
         android:key="status"
         android:summaryOff="@string/settings_status_off_summary"
         android:summaryOn="@string/settings_status_on_summary"
+        android:switchTextOff="@string/settings_status_off"
+        android:switchTextOn="@string/settings_status_on"
         android:title="@string/settings_status_title" />
 
     <EditTextPreference
