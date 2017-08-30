@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.traccar.client">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -14,14 +15,12 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/TraccarTheme"
+        android:theme="@style/AppTheme"
         android:name=".MainApplication">
 
-        <activity android:name=".MainFragment" android:launchMode="singleTask" />
+        <activity android:name=".MainActivity" android:launchMode="singleTask" />
 
-        <activity-alias
-            android:name=".Launcher"
-            android:targetActivity=".MainFragment">
+        <activity-alias android:name=".Launcher" android:targetActivity=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -32,8 +31,7 @@
 
         <activity android:name=".AboutActivity"/>
 
-        <activity
-            android:name=".ShortcutActivity">
+        <activity android:name=".ShortcutActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

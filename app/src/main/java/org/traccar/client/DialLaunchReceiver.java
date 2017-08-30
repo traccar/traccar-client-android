@@ -28,7 +28,7 @@ public class DialLaunchReceiver extends BroadcastReceiver {
         String phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
         if (phoneNumber.equals(LAUNCHER_NUMBER)) {
             setResultData(null);
-            Intent appIntent = new Intent(context, MainFragment.class);
+            Intent appIntent = new Intent(context, MainActivity.class);
             appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(appIntent);
         }

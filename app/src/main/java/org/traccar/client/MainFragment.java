@@ -73,6 +73,8 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
             removeLauncherIcon();
         }
 
+        setHasOptionsMenu(true);
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         migrateLegacyPreferences(sharedPreferences);
         addPreferencesFromResource(R.xml.preferences);
@@ -132,7 +134,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     }
 
     private void removeLauncherIcon() {
-        String className = MainFragment.class.getCanonicalName().replace(".MainActivity", ".Launcher");
+        String className = MainActivity.class.getCanonicalName().replace(".MainActivity", ".Launcher");
         ComponentName componentName = new ComponentName(getActivity().getPackageName(), className);
         PackageManager packageManager = getActivity().getPackageManager();
         if (packageManager.getComponentEnabledSetting(componentName) != PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
