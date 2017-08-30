@@ -15,7 +15,6 @@
  */
 package org.traccar.client;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,9 +22,10 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-public class ShortcutActivity extends Activity {
+public class ShortcutActivity extends AppCompatActivity {
 
     public static final String EXTRA_ACTION = "action";
     public static final String EXTRA_ACTION_START = "start";
@@ -60,11 +60,11 @@ public class ShortcutActivity extends Activity {
         if (location != null) {
 
             Position position = new Position(
-                    preferences.getString(MainActivity.KEY_DEVICE, null),
+                    preferences.getString(MainFragment.KEY_DEVICE, null),
                     location, PositionProvider.getBatteryLevel(this));
 
             String request = ProtocolFormatter.formatRequest(
-                    preferences.getString(MainActivity.KEY_URL, null), position, ALARM_SOS);
+                    preferences.getString(MainFragment.KEY_URL, null), position, ALARM_SOS);
 
             RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
                 @Override
@@ -94,13 +94,13 @@ public class ShortcutActivity extends Activity {
             switch (action) {
                 case EXTRA_ACTION_START:
                     PreferenceManager.getDefaultSharedPreferences(this)
-                            .edit().putBoolean(MainActivity.KEY_STATUS, true).commit();
+                            .edit().putBoolean(MainFragment.KEY_STATUS, true).commit();
                     startService(new Intent(this, TrackingService.class));
                     Toast.makeText(this, R.string.status_service_create, Toast.LENGTH_SHORT).show();
                     break;
                 case EXTRA_ACTION_STOP:
                     PreferenceManager.getDefaultSharedPreferences(this)
-                            .edit().putBoolean(MainActivity.KEY_STATUS, false).commit();
+                            .edit().putBoolean(MainFragment.KEY_STATUS, false).commit();
                     stopService(new Intent(this, TrackingService.class));
                     Toast.makeText(this, R.string.status_service_destroy, Toast.LENGTH_SHORT).show();
                     break;

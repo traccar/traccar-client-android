@@ -35,9 +35,8 @@ public class TrackingService extends Service {
 
     private TrackingController trackingController;
 
-    @SuppressWarnings("deprecation")
     private static Notification createNotification(Context context) {
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainFragment.class), 0);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 
@@ -94,10 +93,8 @@ public class TrackingService extends Service {
         trackingController = new TrackingController(this);
         trackingController.start();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
-            startForeground(NOTIFICATION_ID, createNotification(this));
-            startService(new Intent(this, HideNotificationService.class));
-        }
+        startForeground(NOTIFICATION_ID, createNotification(this));
+        startService(new Intent(this, HideNotificationService.class));
     }
 
     @Override
@@ -105,18 +102,12 @@ public class TrackingService extends Service {
         return null;
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onStart(Intent intent, int startId) {
-        if (intent != null) {
-            AutostartReceiver.completeWakefulIntent(intent);
-        }
-    }
-
     @TargetApi(Build.VERSION_CODES.ECLAIR)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        onStart(intent, startId);
+        if (intent != null) {
+            AutostartReceiver.completeWakefulIntent(intent);
+        }
         return START_STICKY;
     }
 
@@ -125,9 +116,7 @@ public class TrackingService extends Service {
         Log.i(TAG, "service destroy");
         StatusActivity.addMessage(getString(R.string.status_service_destroy));
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
-            stopForeground(true);
-        }
+        stopForeground(true);
 
         if (trackingController != null) {
             trackingController.stop();

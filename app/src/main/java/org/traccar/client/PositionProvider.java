@@ -15,7 +15,6 @@
  */
 package org.traccar.client;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -23,7 +22,6 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.BatteryManager;
-import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -58,10 +56,10 @@ public abstract class PositionProvider {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
-        deviceId = preferences.getString(MainActivity.KEY_DEVICE, null);
-        interval = Long.parseLong(preferences.getString(MainActivity.KEY_INTERVAL, null)) * 1000;
-        distance = Integer.parseInt(preferences.getString(MainActivity.KEY_DISTANCE, null));
-        angle = Integer.parseInt(preferences.getString(MainActivity.KEY_ANGLE, null));
+        deviceId = preferences.getString(MainFragment.KEY_DEVICE, null);
+        interval = Long.parseLong(preferences.getString(MainFragment.KEY_INTERVAL, null)) * 1000;
+        distance = Integer.parseInt(preferences.getString(MainFragment.KEY_DISTANCE, null));
+        angle = Integer.parseInt(preferences.getString(MainFragment.KEY_ANGLE, null));
 
         if (distance > 0 || angle > 0) {
             requestInterval = MINIMUM_INTERVAL;
@@ -69,7 +67,7 @@ public abstract class PositionProvider {
             requestInterval = interval;
         }
 
-        type = preferences.getString(MainActivity.KEY_PROVIDER, "gps");
+        type = preferences.getString(MainFragment.KEY_PROVIDER, "gps");
     }
 
     public abstract void startUpdates();
@@ -89,16 +87,11 @@ public abstract class PositionProvider {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.ECLAIR)
     public static double getBatteryLevel(Context context) {
-        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.ECLAIR) {
-            Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-            int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-            int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1);
-            return (level * 100.0) / scale;
-        } else {
-            return 0;
-        }
+        Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+        int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1);
+        return (level * 100.0) / scale;
     }
 
 }

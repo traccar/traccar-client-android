@@ -1,56 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:layout_margin="@dimen/about_margin"
+    android:layout_toRightOf="@+id/logo"
+    android:layout_toEndOf="@+id/logo"
+    android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/logo"
+    <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/about_margin"
-        android:layout_marginStart="@dimen/about_margin"
-        android:layout_marginTop="@dimen/about_margin"
-        android:src="@drawable/logo"
-        android:contentDescription="@string/app_logo" />
+        android:layout_marginBottom="@dimen/about_spacing"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_margin="@dimen/about_margin"
-        android:layout_toRightOf="@+id/logo"
-        android:layout_toEndOf="@+id/logo"
-        android:orientation="vertical" >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/about_spacing"
+        android:text="@string/about_description" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/about_spacing"
-            android:text="@string/app_name"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/about_spacing"
-            android:text="@string/about_description" />
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/about_spacing"
-            android:text="@string/about_license" />
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/about_spacing"
-            android:text="@string/about_web"
-            android:autoLink="web" />
-        
-    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/about_spacing"
+        android:text="@string/about_license" />
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/about_spacing"
+        android:text="@string/about_web"
+        android:autoLink="web" />
+
+</LinearLayout>

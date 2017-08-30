@@ -17,11 +17,11 @@
         android:theme="@style/TraccarTheme"
         android:name=".MainApplication">
 
-        <activity android:name=".MainActivity" android:launchMode="singleTask" />
+        <activity android:name=".MainFragment" android:launchMode="singleTask" />
 
         <activity-alias
             android:name=".Launcher"
-            android:targetActivity=".MainActivity">
+            android:targetActivity=".MainFragment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

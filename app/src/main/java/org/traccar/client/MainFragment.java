@@ -20,6 +20,7 @@ import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -30,11 +31,14 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.TwoStatePreference;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.URLUtil;
 import android.widget.Toast;
@@ -43,10 +47,9 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-@SuppressWarnings("deprecation")
-public class MainActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
+public class MainFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = MainFragment.class.getSimpleName();
 
     public static final String KEY_DEVICE = "id";
     public static final String KEY_URL = "url";
@@ -70,7 +73,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             removeLauncherIcon();
         }
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         migrateLegacyPreferences(sharedPreferences);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
@@ -120,8 +123,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         findPreference(KEY_DISTANCE).setOnPreferenceChangeListener(numberValidationListener);
         findPreference(KEY_ANGLE).setOnPreferenceChangeListener(numberValidationListener);
 
-        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, AutostartReceiver.class), 0);
+        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, new Intent(getActivity(), AutostartReceiver.class), 0);
 
         if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
             startTrackingService(true, false);
@@ -129,14 +132,14 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     }
 
     private void removeLauncherIcon() {
-        String className = MainActivity.class.getCanonicalName().replace(".MainActivity", ".Launcher");
-        ComponentName componentName = new ComponentName(getPackageName(), className);
-        PackageManager packageManager = getPackageManager();
+        String className = MainFragment.class.getCanonicalName().replace(".MainActivity", ".Launcher");
+        ComponentName componentName = new ComponentName(getActivity().getPackageName(), className);
+        PackageManager packageManager = getActivity().getPackageManager();
         if (packageManager.getComponentEnabledSetting(componentName) != PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
             packageManager.setComponentEnabledSetting(
                     componentName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setIcon(android.R.drawable.ic_dialog_alert);
             builder.setMessage(getString(R.string.hidden_alert));
             builder.setPositiveButton(android.R.string.ok, null);
@@ -146,32 +149,32 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     private void addShortcuts(String action, int name) {
         Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
-        shortcutIntent.setComponent(new ComponentName(getPackageName(), ShortcutActivity.class.getCanonicalName()));
+        shortcutIntent.setComponent(new ComponentName(getActivity().getPackageName(), ShortcutActivity.class.getCanonicalName()));
         shortcutIntent.putExtra(ShortcutActivity.EXTRA_ACTION, action);
         Intent installShortCutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
         installShortCutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
         installShortCutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(name));
         installShortCutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
-                Intent.ShortcutIconResource.fromContext(this, R.mipmap.ic_launcher));
+                Intent.ShortcutIconResource.fromContext(getActivity(), R.mipmap.ic_launcher));
 
-        sendBroadcast(installShortCutIntent);
+        getActivity().sendBroadcast(installShortCutIntent);
     }
 
     private boolean hasPermission(String permission) {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
             return true;
         }
-        return checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+        return ContextCompat.checkSelfPermission(getActivity(), permission) == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
@@ -199,15 +202,15 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.status) {
-            startActivity(new Intent(this, StatusActivity.class));
+            startActivity(new Intent(getActivity(), StatusActivity.class));
             return true;
         } else if (item.getItemId() == R.id.shortcuts) {
             addShortcuts(ShortcutActivity.EXTRA_ACTION_START, R.string.shortcut_start);
@@ -215,18 +218,18 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             addShortcuts(ShortcutActivity.EXTRA_ACTION_SOS, R.string.shortcut_sos);
             return true;
         } else if (item.getItemId() == R.id.about) {
-            startActivity(new Intent(this, AboutActivity.class));
+            startActivity(new Intent(getActivity(), AboutActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void initPreferences() {
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        PreferenceManager.setDefaultValues(getActivity(), R.xml.preferences, false);
 
         if (!sharedPreferences.contains(KEY_DEVICE)) {
             String id = String.valueOf(new Random().nextInt(900000) + 100000);
-            sharedPreferences.edit().putString(KEY_DEVICE, id).commit();
+            sharedPreferences.edit().putString(KEY_DEVICE, id).apply();
             ((EditTextPreference) findPreference(KEY_DEVICE)).setText(id);
         }
         findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
@@ -254,11 +257,11 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
         if (permission) {
             setPreferencesEnabled(false);
-            startService(new Intent(this, TrackingService.class));
+            getActivity().startService(new Intent(getActivity(), TrackingService.class));
             alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                     15000, 15000, alarmIntent);
         } else {
-            sharedPreferences.edit().putBoolean(KEY_STATUS, false).commit();
+            sharedPreferences.edit().putBoolean(KEY_STATUS, false).apply();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                 TwoStatePreference preference = (TwoStatePreference) findPreference(KEY_STATUS);
                 preference.setChecked(false);
@@ -271,12 +274,12 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     private void stopTrackingService() {
         alarmManager.cancel(alarmIntent);
-        stopService(new Intent(this, TrackingService.class));
+        getActivity().stopService(new Intent(getActivity(), TrackingService.class));
         setPreferencesEnabled(true);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSIONS_REQUEST_LOCATION) {
             boolean granted = true;
             for (int result : grantResults) {
@@ -295,14 +298,14 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
                 && (URLUtil.isHttpUrl(userUrl) || URLUtil.isHttpsUrl(userUrl))) {
             return true;
         }
-        Toast.makeText(MainActivity.this, R.string.error_msg_invalid_url, Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), R.string.error_msg_invalid_url, Toast.LENGTH_LONG).show();
         return false;
     }
 
     private void migrateLegacyPreferences(SharedPreferences preferences) {
         String port = preferences.getString("port", null);
         if (port != null) {
-            Log.d(TAG, "migrateLegacyPreferences: migrating to URL preference");
+            Log.d(TAG, "Migrating to URL preference");
 
             String host = preferences.getString("address", getString(R.string.settings_url_default_value));
             String scheme = preferences.getBoolean("secure", false) ? "https" : "http";
@@ -315,7 +318,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             editor.remove("port");
             editor.remove("address");
             editor.remove("secure");
-            editor.commit();
+            editor.apply();
         }
     }
+
 }

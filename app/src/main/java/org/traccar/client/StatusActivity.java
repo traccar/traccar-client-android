@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2013 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2017 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,19 +21,20 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-import android.app.ListActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class StatusActivity extends ListActivity {
+public class StatusActivity extends AppCompatActivity {
 
     private static final int LIMIT = 20;
 
-    private static final LinkedList<String> messages = new LinkedList<String>();
-    private static final Set<ArrayAdapter<String>> adapters = new HashSet<ArrayAdapter<String>>();
+    private static final LinkedList<String> messages = new LinkedList<>();
+    private static final Set<ArrayAdapter<String>> adapters = new HashSet<>();
 
     private static void notifyAdapters() {
         for (ArrayAdapter<String> adapter : adapters) {
@@ -62,8 +63,9 @@ public class StatusActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.status);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, messages);
-        setListAdapter(adapter);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, messages);
+        ListView listView = findViewById(android.R.id.list);
+        listView.setAdapter(adapter);
         adapters.add(adapter);
     }
 
