@@ -2,25 +2,20 @@
 <resources>
   <string name="app_name">Traccar Yönetim</string>
   <string name="app_logo">Traccar</string>
-  <string name="shortcut_start">Traccar - Başlat</string>
-  <string name="shortcut_stop">Traccar - Durdur</string>
-  <string name="shortcut_sos">Traccar-SOS</string>
   <string name="settings_id_title">Cihaz Kimliği</string>
-  <string name="settings_address_title">Sunucu Adresi</string>
-  <string name="settings_address_summary">Alanadı veya IP adresi</string>
-  <string name="settings_port_title">Sunucu Portu</string>
-  <string name="settings_port_summary">İzleme Sunucusu TCP portu</string>
+  <string name="settings_url_title">Sunucu adresi</string>
+  <string name="settings_url_summary">Takip sunucusu adresi</string>
   <string name="settings_interval_title">Sıklık</string>
+  <string name="settings_interval_summary">Saniye cinsinden bildirim döngüsü</string>
+  <string name="settings_distance_title">Mesafe</string>
+  <string name="settings_distance_summary">Metre cinsinden mesafe bildirimi</string>
+  <string name="settings_angle_title">Açı</string>
+  <string name="settings_angle_summary">Derece cinsinden açı bildirimi</string>
   <string name="settings_status_title">Servis Durumu</string>
   <string name="settings_status_off">Başlat</string>
   <string name="settings_status_on">Durdur</string>
   <string name="settings_status_off_summary">Servis Durdu</string>
   <string name="settings_status_on_summary">Servis Çalışıyor</string>
-  <string name="settings_secure_title">Şifreleme</string>
-  <string name="settings_secure_off">Etkinleştir</string>
-  <string name="settings_secure_on">Engelle</string>
-  <string name="settings_secure_off_summary">Şifreleme Yok</string>
-  <string name="settings_secure_on_summary">Şifreleme</string>
   <string name="settings_provider_title">Yer sağlayıcı</string>
   <string name="settings_provider_summary">Yer bilgisi kaynağı</string>
   <string name="settings_provider_gps">GPS sağlayıcı</string>
@@ -35,12 +30,11 @@
   <string name="about_description">Android cihazlar için gerçek zamanlı takip uygulaması. Traccar sunucuları ve diğer takip sistemleriyle uyumlu.</string>
   <string name="about_license">Bu uygulama ücretsiz ve acık kaynaklıdır , kaynak kodu lisansı Apache License Version 2.0 altında lisanslı ve GitHub üzerinden ulaşılabilir.</string>
   <string name="about_web">Daha fazla bilgi için http:\\www.traccar.org/client adresini ziyaret edin.</string>
-  <string name="status_service_create">Servis oluşturuldu</string>
-  <string name="status_service_destroy">Servis kaldırıldı.</string>
   <string name="status_send_success">Gönderme başarılı</string>
   <string name="status_send_fail">Gönderme başarısız</string>
   <string name="status_location_update">Yer güncellendi</string>
   <string name="status_connectivity_change">Bağlantı değişimi</string>
   <string name="hidden_app_name">Cihaz Ayarları</string>
   <string name="hidden_alert">Bu uygulama arkaplanda gizli olarak çalışmaktadır. Tekrar görmek için lütfen 8722227 tuşlayın. Arayın. (TRACCAR)</string>
+  <string name="error_msg_invalid_url">Lütfen geçerli bir adres girin http:// veya https://</string>
 </resources>

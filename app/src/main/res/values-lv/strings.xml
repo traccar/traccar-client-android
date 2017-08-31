@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar klients</string>
+  <string name="app_logo">Traccar</string>
+  <string name="settings_id_title">Ierīces identifikators</string>
+  <string name="settings_url_title">Servera URL</string>
+  <string name="settings_url_summary">Traccar servera URL</string>
+  <string name="settings_interval_title">Biežums</string>
+  <string name="settings_interval_summary">Atskaites biežums sekundēs</string>
+  <string name="settings_distance_title">Distance</string>
+  <string name="settings_distance_summary">Atskaites biežums metros</string>
+  <string name="settings_angle_title">Leņķis</string>
+  <string name="settings_angle_summary">Atskaites leņķis grādos</string>
+  <string name="settings_status_title">Servisa statuss</string>
+  <string name="settings_status_off">Start</string>
+  <string name="settings_status_on">Stop</string>
+  <string name="settings_status_off_summary">Serviss apturēts</string>
+  <string name="settings_status_on_summary">Serviss darbojas</string>
+  <string name="settings_provider_title">Vietas provaiders</string>
+  <string name="settings_provider_summary">Datu atrašanās vietas avots</string>
+  <string name="settings_provider_gps">GPS provaiders</string>
+  <string name="settings_provider_network">Tīkla provaiders</string>
+  <string name="settings_provider_mixed">Miksets provaiders</string>
+  <string name="settings_foreground_title">Zināšanu servis</string>
+  <string name="settings_foreground_summary">Paaugstināt servisa prioritāti</string>
+  <string name="menu_status">Statuss</string>
+  <string name="menu_about">Par</string>
+  <string name="menu_shortcuts">Pievienot saīsnes</string>
+  <string name="menu_clear">Notīrīt</string>
+  <string name="about_description">Reāllaika GPS sekošanas ierīce Android ierīcēm. Savietojams ar Traccar Server un citām izsekošanas sistēmām.</string>
+  <string name="about_license">Šī lietotne ir bezmaksas un atvērtā koda, avota kods ir licencēts Apache Licence 2.0 versijā un ir pieejams GitHub.</string>
+  <string name="about_web">Lai iegūtu papildinformāciju, apmeklējiet vietni\nwww.traccar.org/client</string>
+  <string name="status_send_success">Sūtīšana veiksmīga</string>
+  <string name="status_send_fail">Nosūtīt neizdevās</string>
+  <string name="status_location_update">Lokacijas atjaunināšana</string>
+  <string name="status_connectivity_change">Savienojuma maiņa</string>
+  <string name="hidden_app_name">Ierīces iestatījumi</string>
+  <string name="hidden_alert">Lietotne ir paslēpta. Zvaniet 8722227 (TRACCAR), lai to atkal parādītu.</string>
+  <string name="error_msg_invalid_url">Lūdzu ievadiet derīgu http:// vai https:// URL</string>
+</resources>

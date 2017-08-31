@@ -2,14 +2,15 @@
 <resources>
   <string name="app_name">عميل Traccar</string>
   <string name="app_logo">Traccar</string>
-  <string name="shortcut_start">Traccar - بدء</string>
-  <string name="shortcut_stop">Traccar - إيقاف</string>
   <string name="settings_id_title">معرف الجهاز</string>
-  <string name="settings_address_title">عنوان الخادم</string>
-  <string name="settings_address_summary">اسم النطاق أو عنوان بروتوكول الإنترنت</string>
-  <string name="settings_port_title">منفذ الخادم</string>
-  <string name="settings_port_summary">تعقب منفذ خادم تي سي بي</string>
+  <string name="settings_url_title">رابط الخادم</string>
+  <string name="settings_url_summary">رابط خادم التتبع</string>
   <string name="settings_interval_title">تردد</string>
+  <string name="settings_interval_summary">فترة التقرير بالثواني</string>
+  <string name="settings_distance_title">المسافة</string>
+  <string name="settings_distance_summary">مسافة التقرير بالميتر</string>
+  <string name="settings_angle_title">الزاوية</string>
+  <string name="settings_angle_summary">زاوية التقرير بالدرجات</string>
   <string name="settings_status_title">حالة الخدمة</string>
   <string name="settings_status_off">بدء</string>
   <string name="settings_status_on">إيقاف</string>
@@ -29,11 +30,11 @@
   <string name="about_description">محدد الموقع في الوقت الفعلي لأجهزة Android. متوافق مع خادم Traccar ونظم تعقب أخرى </string>
   <string name="about_license">هذا التطبيق مجاني ومفتوح المصدر، الكود المصدري مرخص تحت رخصة Apache الإصدار 2.0 و متاح على GitHub.</string>
   <string name="about_web">لمزيد من المعلومات زر \nwww.traccar.org/client</string>
-  <string name="status_service_create">تم إنشاء الخدمة</string>
-  <string name="status_service_destroy">تم تدمير الخدمة</string>
+  <string name="status_send_success">تم الإرسال بنجاح</string>
   <string name="status_send_fail">فشل الإرسال</string>
   <string name="status_location_update">تحديث الموقع</string>
   <string name="status_connectivity_change">تغير الارتباط</string>
   <string name="hidden_app_name">إعدادات الجهاز</string>
   <string name="hidden_alert">تم إخفاء التطبيق. لفتحه مجددا رجاءا اتصل بـ8722227 (TRACCAR).</string>
+  <string name="error_msg_invalid_url">أرجو إدخال رابط صحيح http:// أو https://</string>
 </resources>

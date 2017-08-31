@@ -2,24 +2,20 @@
 <resources>
   <string name="app_name">Traccar Klient</string>
   <string name="app_logo">Traccar</string>
-  <string name="shortcut_start">Traccar - Start</string>
-  <string name="shortcut_stop">Traccar - Stopp</string>
   <string name="settings_id_title">Enhetsidentifikasjon</string>
-  <string name="settings_address_title">Tjeneradresse</string>
-  <string name="settings_address_summary">Domenenavn eller IP-adresse</string>
-  <string name="settings_port_title">Tjenerport</string>
-  <string name="settings_port_summary">TCP-port til sporingstjener</string>
+  <string name="settings_url_title">Tjener-nettadresse</string>
+  <string name="settings_url_summary">Sproringstjener-nettadresse</string>
   <string name="settings_interval_title">Frekvens</string>
+  <string name="settings_interval_summary">Rapporteringsintervall i sekunder</string>
+  <string name="settings_distance_title">Avstand</string>
+  <string name="settings_distance_summary">Rapporteringsdistanse i meter</string>
+  <string name="settings_angle_title">Vinkel</string>
+  <string name="settings_angle_summary">Rapporteringsvinkel i grader</string>
   <string name="settings_status_title">Tjeneste-status</string>
   <string name="settings_status_off">Start</string>
   <string name="settings_status_on">Stopp</string>
   <string name="settings_status_off_summary">Tjenesten stoppet</string>
   <string name="settings_status_on_summary">Tjenesten kjører</string>
-  <string name="settings_secure_title">Kryptering</string>
-  <string name="settings_secure_off">Aktiver</string>
-  <string name="settings_secure_on">Deaktiver</string>
-  <string name="settings_secure_off_summary">Krytpering deaktivert</string>
-  <string name="settings_secure_on_summary">Kryptering aktivert</string>
   <string name="settings_provider_title">Lokaliseringsleverandør</string>
   <string name="settings_provider_summary">Kilde for lokaliseringsdata</string>
   <string name="settings_provider_gps">GPS-lokalisering</string>
@@ -34,11 +30,11 @@
   <string name="about_description">Sanntids GPS-sporing for Android-enheter. Kompatibel med Traccar Server og andre sporingssystemer.</string>
   <string name="about_license">Dette programmet har fri og åpen kildekode; kildekoden er lisensiert under Apache License Version 2.0 og er tilgjengelig på GitHub.</string>
   <string name="about_web">For mer informasjon besøk\nwww.traccar.org/client</string>
-  <string name="status_service_create">Tjeneste opprettet</string>
-  <string name="status_service_destroy">Tjeneste ødelagt</string>
+  <string name="status_send_success">Sending vellykket</string>
   <string name="status_send_fail">Sending mislyktes</string>
   <string name="status_location_update">Plassering oppdatert</string>
   <string name="status_connectivity_change">Tilkobling forandret</string>
   <string name="hidden_app_name">Enhetsinnstillinger</string>
   <string name="hidden_alert">App\'en har blitt gjemt. For å åpne igjen, vennligst tast (ring) 8722227 (TRACCAR).</string>
+  <string name="error_msg_invalid_url">Vennligst skriv korrekt nettadresse som http:// eller https://</string>
 </resources>

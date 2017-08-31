@@ -2,25 +2,20 @@
 <resources>
   <string name="app_name">Traccar Клиент</string>
   <string name="app_logo">Traccar</string>
-  <string name="shortcut_start">Traccar - Старт</string>
-  <string name="shortcut_stop">Traccar - Стоп</string>
-  <string name="shortcut_sos">Traccar - SOS</string>
   <string name="settings_id_title">Идентификатор устройства</string>
-  <string name="settings_address_title">Адрес сервера</string>
-  <string name="settings_address_summary">Домен или IP адрес</string>
-  <string name="settings_port_title">Порт сервера</string>
-  <string name="settings_port_summary">TCP порт мониторингового сервера</string>
+  <string name="settings_url_title">URL сервера</string>
+  <string name="settings_url_summary">URL телематического сервера</string>
   <string name="settings_interval_title">Частота</string>
+  <string name="settings_interval_summary">Отчетный интервал в секундах</string>
+  <string name="settings_distance_title">Расстояние</string>
+  <string name="settings_distance_summary">Отчетное расстояние в метрах</string>
+  <string name="settings_angle_title">Угол</string>
+  <string name="settings_angle_summary">Отчетный угол в градусах</string>
   <string name="settings_status_title">Состояние сервиса</string>
   <string name="settings_status_off">Старт</string>
   <string name="settings_status_on">Стоп</string>
   <string name="settings_status_off_summary">Сервис остановлен</string>
   <string name="settings_status_on_summary">Сервис запущен</string>
-  <string name="settings_secure_title">Шифрование</string>
-  <string name="settings_secure_off">Доступный</string>
-  <string name="settings_secure_on">Недоступный</string>
-  <string name="settings_secure_off_summary">Шифрование недоступно</string>
-  <string name="settings_secure_on_summary">Шифрование включено</string>
   <string name="settings_provider_title">Провайдер местоположения</string>
   <string name="settings_provider_summary">Источник данных о местоположении</string>
   <string name="settings_provider_gps">GPS провайдер</string>
@@ -35,12 +30,11 @@
   <string name="about_description">Трекер для Android устройств. Совместим с Traccar сервером и другими мониторинговыми системами.</string>
   <string name="about_license">Это приложение распростаняется бесплатно, исходный код распростаняется по лицензии Apache License Version 2.0 и доступен на GitHub.</string>
   <string name="about_web">Для получения дополнительной информации посетите\nwww.traccar.org/client</string>
-  <string name="status_service_create">Сервис создан</string>
-  <string name="status_service_destroy">Сервис удален</string>
   <string name="status_send_success">Отправка успешна</string>
   <string name="status_send_fail">Ошибка отправки</string>
   <string name="status_location_update">Обновление местоположения</string>
   <string name="status_connectivity_change">Изменение подключения</string>
   <string name="hidden_app_name">Настройки устройтва</string>
   <string name="hidden_alert">Приложение было спрятано. Чтобы открыть позвоните на номер 8722227 (TRACCAR).</string>
+  <string name="error_msg_invalid_url">Пожалуйста, введите верный http:// или https:// URL</string>
 </resources>
