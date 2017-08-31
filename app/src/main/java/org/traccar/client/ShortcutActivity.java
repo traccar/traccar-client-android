@@ -87,7 +87,7 @@ public class ShortcutActivity extends AppCompatActivity {
     }
 
     private void setShortcutResult(String label, @DrawableRes int iconResId, String action) {
-        Intent intent = new Intent(Intent.ACTION_MAIN, null, this, ShortcutActivity.class);
+        Intent intent = new Intent(Intent.ACTION_DEFAULT, null, this, ShortcutActivity.class);
         intent.putExtra(EXTRA_ACTION, action);
 
         ShortcutInfoCompat shortcut = new ShortcutInfoCompat.Builder(this, action)

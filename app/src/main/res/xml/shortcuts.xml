@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:targetApi="n_mr1">
+
+    <shortcut
+        android:shortcutId="start"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_start">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="org.traccar.client"
+            android:targetClass="org.traccar.client.ShortcutActivity">
+            <extra
+                android:name="action"
+                android:value="start" />
+        </intent>
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="stop"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_stop">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="org.traccar.client"
+            android:targetClass="org.traccar.client.ShortcutActivity">
+            <extra
+                android:name="action"
+                android:value="stop" />
+        </intent>
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="sos"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_sos">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="org.traccar.client"
+            android:targetClass="org.traccar.client.ShortcutActivity">
+            <extra
+                android:name="action"
+                android:value="sos" />
+        </intent>
+    </shortcut>
+
+</shortcuts>
