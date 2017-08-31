@@ -3,17 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
-
     <application
         android:name="org.traccar.client.GoogleMainApplication"
         tools:replace="android:name">
-
-        <receiver android:name="org.traccar.client.DialLaunchReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
-            </intent-filter>
-        </receiver>
 
     </application>
 
