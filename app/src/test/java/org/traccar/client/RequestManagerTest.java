@@ -1,6 +1,7 @@
 
 package org.traccar.client;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -12,6 +13,7 @@ import static org.junit.Assert.assertTrue;
 @Config(constants = BuildConfig.class, sdk = 21)
 public class RequestManagerTest {
 
+    @Ignore
     @Test
     public void testSendRequest() throws Exception {
 
