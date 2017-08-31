@@ -6,12 +6,7 @@
     <item
         android:id="@+id/status"
         android:title="@string/menu_status"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/shortcuts"
-        android:title="@string/menu_shortcuts"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/about"

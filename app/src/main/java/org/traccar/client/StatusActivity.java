@@ -62,7 +62,7 @@ public class StatusActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.status);
+        setContentView(R.layout.list);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, messages);
         ListView listView = findViewById(android.R.id.list);
         listView.setAdapter(adapter);

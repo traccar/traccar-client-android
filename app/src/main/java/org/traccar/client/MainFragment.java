@@ -151,19 +151,6 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         }
     }
 
-    private void addShortcuts(String action, int name) {
-        Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
-        shortcutIntent.setComponent(new ComponentName(getActivity().getPackageName(), ShortcutActivity.class.getCanonicalName()));
-        shortcutIntent.putExtra(ShortcutActivity.EXTRA_ACTION, action);
-        Intent installShortCutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-        installShortCutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-        installShortCutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(name));
-        installShortCutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
-                Intent.ShortcutIconResource.fromContext(getActivity(), R.mipmap.ic_launcher));
-
-        getActivity().sendBroadcast(installShortCutIntent);
-    }
-
     private boolean hasPermission(String permission) {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
             return true;
@@ -215,11 +202,6 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.status) {
             startActivity(new Intent(getActivity(), StatusActivity.class));
-            return true;
-        } else if (item.getItemId() == R.id.shortcuts) {
-            addShortcuts(ShortcutActivity.EXTRA_ACTION_START, R.string.shortcut_start);
-            addShortcuts(ShortcutActivity.EXTRA_ACTION_STOP, R.string.shortcut_stop);
-            addShortcuts(ShortcutActivity.EXTRA_ACTION_SOS, R.string.shortcut_sos);
             return true;
         } else if (item.getItemId() == R.id.about) {
             startActivity(new Intent(getActivity(), AboutActivity.class));
