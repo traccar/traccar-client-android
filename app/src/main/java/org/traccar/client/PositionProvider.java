@@ -56,10 +56,10 @@ public abstract class PositionProvider {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
-        deviceId = preferences.getString(MainFragment.KEY_DEVICE, null);
-        interval = Long.parseLong(preferences.getString(MainFragment.KEY_INTERVAL, null)) * 1000;
-        distance = Integer.parseInt(preferences.getString(MainFragment.KEY_DISTANCE, null));
-        angle = Integer.parseInt(preferences.getString(MainFragment.KEY_ANGLE, null));
+        deviceId = preferences.getString(MainFragment.KEY_DEVICE, "undefined");
+        interval = Long.parseLong(preferences.getString(MainFragment.KEY_INTERVAL, "600")) * 1000;
+        distance = Integer.parseInt(preferences.getString(MainFragment.KEY_DISTANCE, "0"));
+        angle = Integer.parseInt(preferences.getString(MainFragment.KEY_ANGLE, "0"));
 
         if (distance > 0 || angle > 0) {
             requestInterval = MINIMUM_INTERVAL;
