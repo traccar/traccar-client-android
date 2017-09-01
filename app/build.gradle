@@ -9,8 +9,8 @@ android {
         buildConfigField "boolean", "HIDDEN_APP", "false"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 37
-        versionName '5.0'
+        versionCode 38
+        versionName '5.1'
     }
 
     lintOptions {
