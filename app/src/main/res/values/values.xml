@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="settings_url_default_value" translatable="false">http://demo.traccar.org:5055</string>
+
     <string-array name="settings_provider_values" translatable="false">
         <item>gps</item>
         <item>network</item>

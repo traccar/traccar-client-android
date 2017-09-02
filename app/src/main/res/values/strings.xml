@@ -9,7 +9,6 @@
   <string name="settings_id_title">Device identifier</string>
   <string name="settings_url_title">Server URL</string>
   <string name="settings_url_summary">Tracking server URL</string>
-  <string name="settings_url_default_value" translatable="false">http://demo.traccar.org:5055</string>
   <string name="settings_interval_title">Frequency</string>
   <string name="settings_interval_summary">Reporting interval in seconds</string>
   <string name="settings_distance_title">Distance</string>

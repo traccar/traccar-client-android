@@ -66,7 +66,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         networkManager = new NetworkManager(context, this);
         isOnline = networkManager.isOnline();
 
-        url = preferences.getString(MainFragment.KEY_URL, null);
+        url = preferences.getString(MainFragment.KEY_URL, context.getString(R.string.settings_url_default_value));
 
         PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());

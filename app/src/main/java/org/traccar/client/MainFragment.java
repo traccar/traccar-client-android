@@ -78,7 +78,6 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         setHasOptionsMenu(true);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        migrateLegacyPreferences(sharedPreferences);
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
 
@@ -286,26 +285,6 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         }
         Toast.makeText(getActivity(), R.string.error_msg_invalid_url, Toast.LENGTH_LONG).show();
         return false;
-    }
-
-    private void migrateLegacyPreferences(SharedPreferences preferences) {
-        String port = preferences.getString("port", null);
-        if (port != null) {
-            Log.d(TAG, "Migrating to URL preference");
-
-            String host = preferences.getString("address", getString(R.string.settings_url_default_value));
-            String scheme = preferences.getBoolean("secure", false) ? "https" : "http";
-
-            Uri.Builder builder = new Uri.Builder();
-            builder.scheme(scheme).encodedAuthority(host + ":" + port).build();
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(KEY_URL, builder.toString());
-
-            editor.remove("port");
-            editor.remove("address");
-            editor.remove("secure");
-            editor.apply();
-        }
     }
 
 }
