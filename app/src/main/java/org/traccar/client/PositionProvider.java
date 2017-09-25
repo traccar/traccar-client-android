@@ -89,9 +89,12 @@ public abstract class PositionProvider {
 
     public static double getBatteryLevel(Context context) {
         Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-        int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1);
-        return (level * 100.0) / scale;
+        if (batteryIntent != null) {
+            int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+            int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1);
+            return (level * 100.0) / scale;
+        }
+        return 0;
     }
 
 }
