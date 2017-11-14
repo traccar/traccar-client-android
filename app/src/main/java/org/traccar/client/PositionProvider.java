@@ -77,7 +77,7 @@ public abstract class PositionProvider {
     protected void updateLocation(Location location) {
         if (location != null && (lastLocation == null
                 || location.getTime() - lastLocation.getTime() >= interval
-                || distance > 0 && DistanceCalculator.distance(location.getLatitude(), location.getLongitude(), lastLocation.getLatitude(), location.getLongitude()) >= distance
+                || distance > 0 && DistanceCalculator.distance(location.getLatitude(), location.getLongitude(), lastLocation.getLatitude(), lastLocation.getLongitude()) >= distance
                 || angle > 0 && Math.abs(location.getBearing() - lastLocation.getBearing()) >= angle)) {
             Log.i(TAG, "location new");
             lastLocation = location;
