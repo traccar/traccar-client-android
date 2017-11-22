@@ -58,7 +58,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     public static final String KEY_INTERVAL = "interval";
     public static final String KEY_DISTANCE = "distance";
     public static final String KEY_ANGLE = "angle";
-    public static final String KEY_PROVIDER = "provider";
+    public static final String KEY_ACCURACY = "accuracy";
     public static final String KEY_STATUS = "status";
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
@@ -175,7 +175,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         findPreference(KEY_INTERVAL).setEnabled(enabled);
         findPreference(KEY_DISTANCE).setEnabled(enabled);
         findPreference(KEY_ANGLE).setEnabled(enabled);
-        findPreference(KEY_PROVIDER).setEnabled(enabled);
+        findPreference(KEY_ACCURACY).setEnabled(enabled);
     }
 
     @Override
@@ -247,13 +247,8 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
                     ALARM_MANAGER_INTERVAL, ALARM_MANAGER_INTERVAL, alarmIntent);
         } else {
             sharedPreferences.edit().putBoolean(KEY_STATUS, false).apply();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                TwoStatePreference preference = (TwoStatePreference) findPreference(KEY_STATUS);
-                preference.setChecked(false);
-            } else {
-                CheckBoxPreference preference = (CheckBoxPreference) findPreference(KEY_STATUS);
-                preference.setChecked(false);
-            }
+            TwoStatePreference preference = (TwoStatePreference) findPreference(KEY_STATUS);
+            preference.setChecked(false);
         }
     }
 

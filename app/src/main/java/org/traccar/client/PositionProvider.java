@@ -15,19 +15,24 @@
  */
 package org.traccar.client;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.BatteryManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-public abstract class PositionProvider {
+import com.mapzen.android.lost.api.LocationListener;
+import com.mapzen.android.lost.api.LocationRequest;
+import com.mapzen.android.lost.api.LocationServices;
+import com.mapzen.android.lost.api.LostApiClient;
 
-    protected static final String TAG = PositionProvider.class.getSimpleName();
+public class PositionProvider implements LostApiClient.ConnectionCallbacks, LocationListener {
+
+    private static final String TAG = PositionProvider.class.getSimpleName();
 
     private static final int MINIMUM_INTERVAL = 1000;
 
@@ -38,14 +43,13 @@ public abstract class PositionProvider {
     private final PositionListener listener;
 
     private final Context context;
-    protected final LocationManager locationManager;
+    private SharedPreferences preferences;
+    private LostApiClient apiClient;
 
     private String deviceId;
-    protected String type;
-    protected long requestInterval;
-    protected long interval;
-    protected double distance;
-    protected double angle;
+    private long interval;
+    private double distance;
+    private double angle;
 
     private Location lastLocation;
 
@@ -53,28 +57,42 @@ public abstract class PositionProvider {
         this.context = context;
         this.listener = listener;
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         deviceId = preferences.getString(MainFragment.KEY_DEVICE, "undefined");
         interval = Long.parseLong(preferences.getString(MainFragment.KEY_INTERVAL, "600")) * 1000;
         distance = Integer.parseInt(preferences.getString(MainFragment.KEY_DISTANCE, "0"));
         angle = Integer.parseInt(preferences.getString(MainFragment.KEY_ANGLE, "0"));
-
-        if (distance > 0 || angle > 0) {
-            requestInterval = MINIMUM_INTERVAL;
-        } else {
-            requestInterval = interval;
-        }
-
-        type = preferences.getString(MainFragment.KEY_PROVIDER, "gps");
     }
 
-    public abstract void startUpdates();
+    public void startUpdates() {
+        apiClient = new LostApiClient.Builder(context).addConnectionCallbacks(this).build();
+        apiClient.connect();
+    }
 
-    public abstract void stopUpdates();
+    private int getPriority(String accuracy) {
+        switch (accuracy) {
+            case "high":
+                return LocationRequest.PRIORITY_HIGH_ACCURACY;
+            case "low":
+                return LocationRequest.PRIORITY_LOW_POWER;
+            default:
+                return LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
+        }
+    }
 
-    protected void updateLocation(Location location) {
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onConnected() {
+        LocationRequest request = LocationRequest.create()
+                .setPriority(getPriority(preferences.getString(MainFragment.KEY_ACCURACY, "medium")))
+                .setInterval(distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval);
+
+        LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, request, this);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
         if (location != null && (lastLocation == null
                 || location.getTime() - lastLocation.getTime() >= interval
                 || distance > 0 && DistanceCalculator.distance(location.getLatitude(), location.getLongitude(), lastLocation.getLatitude(), lastLocation.getLongitude()) >= distance
@@ -85,6 +103,15 @@ public abstract class PositionProvider {
         } else {
             Log.i(TAG, location != null ? "location ignored" : "location nil");
         }
+    }
+
+    @Override
+    public void onConnectionSuspended() {
+        Log.i(TAG, "lost client suspended");
+    }
+
+    public void stopUpdates() {
+        apiClient.disconnect();
     }
 
     public static double getBatteryLevel(Context context) {

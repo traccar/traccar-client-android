@@ -57,11 +57,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         this.context = context;
         handler = new Handler();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        if (preferences.getString(MainFragment.KEY_PROVIDER, "gps").equals("mixed")) {
-            positionProvider = new MixedPositionProvider(context, this);
-        } else {
-            positionProvider = new SimplePositionProvider(context, this);
-        }
+        positionProvider = new PositionProvider(context, this);
         databaseHelper = new DatabaseHelper(context);
         networkManager = new NetworkManager(context, this);
         isOnline = networkManager.isOnline();

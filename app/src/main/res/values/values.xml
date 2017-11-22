@@ -3,16 +3,16 @@
 
     <string name="settings_url_default_value" translatable="false">http://demo.traccar.org:5055</string>
 
-    <string-array name="settings_provider_values" translatable="false">
-        <item>gps</item>
-        <item>network</item>
-        <item>mixed</item>
+    <string-array name="settings_accuracy_values" translatable="false">
+        <item>high</item>
+        <item>medium</item>
+        <item>low</item>
     </string-array>
 
-    <string-array name="settings_provider_names">
-        <item>@string/settings_provider_gps</item>
-        <item>@string/settings_provider_network</item>
-        <item>@string/settings_provider_mixed</item>
+    <string-array name="settings_accuracy_names">
+        <item>@string/settings_accuracy_high</item>
+        <item>@string/settings_accuracy_medium</item>
+        <item>@string/settings_accuracy_low</item>
     </string-array>
 
 </resources>

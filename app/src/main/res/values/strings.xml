@@ -20,11 +20,11 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Service stopped</string>
   <string name="settings_status_on_summary">Service running</string>
-  <string name="settings_provider_title">Location provider</string>
-  <string name="settings_provider_summary">Source of location data</string>
-  <string name="settings_provider_gps">GPS provider</string>
-  <string name="settings_provider_network">Network provider</string>
-  <string name="settings_provider_mixed">Mixed provider</string>
+  <string name="settings_accuracy_title">Location accuracy</string>
+  <string name="settings_accuracy_summary">Desired location accuracy</string>
+  <string name="settings_accuracy_high">High</string>
+  <string name="settings_accuracy_medium">Medium</string>
+  <string name="settings_accuracy_low">Low</string>
   <string name="settings_foreground_title">Foreground service</string>
   <string name="settings_foreground_summary">Increase service priority</string>
   <string name="menu_status">Status</string>

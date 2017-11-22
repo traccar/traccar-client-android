@@ -15,11 +15,9 @@
  */
 package org.traccar.client;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.DrawableRes;
@@ -34,7 +32,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ShortcutActivity extends AppCompatActivity {
+import com.mapzen.android.lost.api.LocationServices;
+import com.mapzen.android.lost.api.LostApiClient;
+
+public class ShortcutActivity extends AppCompatActivity implements LostApiClient.ConnectionCallbacks {
 
     public static final String EXTRA_ACTION = "action";
     public static final String ACTION_START = "start";
@@ -42,6 +43,8 @@ public class ShortcutActivity extends AppCompatActivity {
     public static final String ACTION_SOS = "sos";
 
     private static final String ALARM_SOS = "sos";
+
+    private LostApiClient apiClient;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,16 +102,16 @@ public class ShortcutActivity extends AppCompatActivity {
         setResult(RESULT_OK, ShortcutManagerCompat.createShortcutResultIntent(this, shortcut));
     }
 
-    @SuppressWarnings("MissingPermission")
     private void sendAlarm() {
+        apiClient = new LostApiClient.Builder(this).addConnectionCallbacks(this).build();
+    }
+
+    @SuppressWarnings("MissingPermission")
+    @Override
+    public void onConnected() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (location == null) {
-            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        }
+        Location location = LocationServices.FusedLocationApi.getLastLocation(apiClient);
 
         if (location != null) {
 
@@ -133,6 +136,12 @@ public class ShortcutActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, R.string.status_send_fail, Toast.LENGTH_SHORT).show();
         }
+
+        apiClient.disconnect();
+    }
+
+    @Override
+    public void onConnectionSuspended() {
     }
 
     private boolean executeAction(Intent intent) {
