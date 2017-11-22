@@ -111,6 +111,8 @@ public class PositionProvider implements LostApiClient.ConnectionCallbacks, Loca
     }
 
     public void stopUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(apiClient, this);
+
         apiClient.disconnect();
     }
 
