@@ -37,10 +37,13 @@ public class TrackingService extends Service {
     private static Notification createNotification(Context context) {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
         return new NotificationCompat.Builder(context, MainApplication.PRIMARY_CHANNEL)
-                .setContentTitle(context.getString(R.string.app_name))
-                .setContentText(context.getString(R.string.settings_status_on_summary))
+                .setContentTitle(context.getString(R.string.settings_status_on_summary))
+                .setTicker(context.getString(R.string.settings_status_on_summary))
                 .setContentIntent(pendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_MIN)
+                .setSmallIcon(R.drawable.ic_stat_notify)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setCategory(Notification.CATEGORY_SERVICE)
+                .setColor(ContextCompat.getColor(context, R.color.primary_dark))
                 .build();
     }
 
