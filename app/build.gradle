@@ -11,6 +11,7 @@ android {
         targetSdkVersion 27
         versionCode 45
         versionName '5.8'
+        vectorDrawables.useSupportLibrary = true
     }
 
     lintOptions {
