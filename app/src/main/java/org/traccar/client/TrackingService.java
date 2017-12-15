@@ -35,16 +35,22 @@ public class TrackingService extends Service {
     private TrackingController trackingController;
 
     private static Notification createNotification(Context context) {
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
-        return new NotificationCompat.Builder(context, MainApplication.PRIMARY_CHANNEL)
-                .setContentTitle(context.getString(R.string.settings_status_on_summary))
-                .setTicker(context.getString(R.string.settings_status_on_summary))
-                .setContentIntent(pendingIntent)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, MainApplication.PRIMARY_CHANNEL)
                 .setSmallIcon(R.drawable.ic_stat_notify)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
-                .setCategory(Notification.CATEGORY_SERVICE)
-                .setColor(ContextCompat.getColor(context, R.color.primary_dark))
-                .build();
+                .setCategory(Notification.CATEGORY_SERVICE);
+        Intent intent;
+        if (!BuildConfig.HIDDEN_APP) {
+            intent = new Intent(context, MainActivity.class);
+            builder
+                .setContentTitle(context.getString(R.string.settings_status_on_summary))
+                .setTicker(context.getString(R.string.settings_status_on_summary))
+                .setColor(ContextCompat.getColor(context, R.color.primary_dark));
+        } else {
+            intent = new Intent(android.provider.Settings.ACTION_SETTINGS);
+        }
+        builder.setContentIntent(PendingIntent.getActivity(context, 0, intent, 0));
+        return builder.build();
     }
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)
