@@ -39,15 +39,17 @@ public class TrackingService extends Service {
                 .setSmallIcon(R.drawable.ic_stat_notify)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setCategory(Notification.CATEGORY_SERVICE);
-
+        Intent intent;
         if (!BuildConfig.HIDDEN_APP) {
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
+            intent = new Intent(context, MainActivity.class);
             builder
                 .setContentTitle(context.getString(R.string.settings_status_on_summary))
                 .setTicker(context.getString(R.string.settings_status_on_summary))
-                .setContentIntent(pendingIntent)
                 .setColor(ContextCompat.getColor(context, R.color.primary_dark));
+        } else {
+            intent = new Intent(android.provider.Settings.ACTION_SETTINGS);
         }
+        builder.setContentIntent(PendingIntent.getActivity(context, 0, intent, 0));
         return builder.build();
     }
 
