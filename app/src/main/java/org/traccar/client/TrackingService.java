@@ -35,16 +35,20 @@ public class TrackingService extends Service {
     private TrackingController trackingController;
 
     private static Notification createNotification(Context context) {
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
-        return new NotificationCompat.Builder(context, MainApplication.PRIMARY_CHANNEL)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, MainApplication.PRIMARY_CHANNEL)
+                .setSmallIcon(R.drawable.ic_stat_notify)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setCategory(Notification.CATEGORY_SERVICE);
+
+        if (!BuildConfig.HIDDEN_APP) {
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
+            builder
                 .setContentTitle(context.getString(R.string.settings_status_on_summary))
                 .setTicker(context.getString(R.string.settings_status_on_summary))
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.ic_stat_notify)
-                .setPriority(NotificationCompat.PRIORITY_LOW)
-                .setCategory(Notification.CATEGORY_SERVICE)
-                .setColor(ContextCompat.getColor(context, R.color.primary_dark))
-                .build();
+                .setColor(ContextCompat.getColor(context, R.color.primary_dark));
+        }
+        return builder.build();
     }
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)
