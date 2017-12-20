@@ -53,7 +53,6 @@ public class TrackingService extends Service {
         return builder.build();
     }
 
-    @TargetApi(Build.VERSION_CODES.ECLAIR)
     public static class HideNotificationService extends Service {
         @Override
         public IBinder onBind(Intent intent) {
