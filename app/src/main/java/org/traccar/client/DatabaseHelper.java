@@ -98,7 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("altitude", position.getAltitude());
         values.put("speed", position.getSpeed());
         values.put("course", position.getCourse());
-        values.put("accuracy", position.getCourse());
+        values.put("accuracy", position.getAccuracy());
         values.put("battery", position.getBattery());
 
         db.insertOrThrow("position", null, values);
