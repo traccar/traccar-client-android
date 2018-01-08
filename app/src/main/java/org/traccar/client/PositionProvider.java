@@ -53,6 +53,8 @@ public class PositionProvider implements LostApiClient.ConnectionCallbacks, Loca
 
     private Location lastLocation;
 
+    private boolean started;
+
     public PositionProvider(Context context, PositionListener listener) {
         this.context = context;
         this.listener = listener;
@@ -66,6 +68,7 @@ public class PositionProvider implements LostApiClient.ConnectionCallbacks, Loca
     }
 
     public void startUpdates() {
+        started = true;
         apiClient = new LostApiClient.Builder(context).addConnectionCallbacks(this).build();
         apiClient.connect();
     }
@@ -84,11 +87,14 @@ public class PositionProvider implements LostApiClient.ConnectionCallbacks, Loca
     @SuppressLint("MissingPermission")
     @Override
     public void onConnected() {
-        LocationRequest request = LocationRequest.create()
-                .setPriority(getPriority(preferences.getString(MainFragment.KEY_ACCURACY, "medium")))
-                .setInterval(distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval);
-
-        LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, request, this);
+        if (started) {
+            LocationRequest request = LocationRequest.create()
+                    .setPriority(getPriority(preferences.getString(MainFragment.KEY_ACCURACY, "medium")))
+                    .setInterval(distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval);
+            LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, request, this);
+        } else {
+            apiClient.disconnect();
+        }
     }
 
     @Override
@@ -111,9 +117,11 @@ public class PositionProvider implements LostApiClient.ConnectionCallbacks, Loca
     }
 
     public void stopUpdates() {
-        LocationServices.FusedLocationApi.removeLocationUpdates(apiClient, this);
-
-        apiClient.disconnect();
+        if (apiClient.isConnected()) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(apiClient, this);
+            apiClient.disconnect();
+        }
+        started = false;
     }
 
     public static double getBatteryLevel(Context context) {
