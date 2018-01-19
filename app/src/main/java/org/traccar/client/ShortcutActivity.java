@@ -104,6 +104,7 @@ public class ShortcutActivity extends AppCompatActivity implements LostApiClient
 
     private void sendAlarm() {
         apiClient = new LostApiClient.Builder(this).addConnectionCallbacks(this).build();
+        apiClient.connect();
     }
 
     @SuppressWarnings("MissingPermission")
