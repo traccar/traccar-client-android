@@ -100,7 +100,8 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     @Override
     public void onNetworkUpdate(boolean isOnline) {
-        StatusActivity.addMessage(context.getString(R.string.status_connectivity_change));
+        int message = isOnline ? R.string.status_network_online : R.string.status_network_offline;
+        StatusActivity.addMessage(context.getString(message));
         if (!this.isOnline && isOnline) {
             read();
         }
