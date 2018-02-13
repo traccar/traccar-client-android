@@ -7,7 +7,7 @@
     <shortcut
         android:shortcutId="start"
         android:enabled="true"
-        android:icon="@mipmap/ic_start"
+        android:icon="@drawable/ic_start"
         android:shortcutShortLabel="@string/shortcut_start">
         <intent
             android:action="android.intent.action.VIEW"
@@ -22,7 +22,7 @@
     <shortcut
         android:shortcutId="stop"
         android:enabled="true"
-        android:icon="@mipmap/ic_stop"
+        android:icon="@drawable/ic_stop"
         android:shortcutShortLabel="@string/shortcut_stop">
         <intent
             android:action="android.intent.action.VIEW"
@@ -37,7 +37,7 @@
     <shortcut
         android:shortcutId="sos"
         android:enabled="true"
-        android:icon="@mipmap/ic_sos"
+        android:icon="@drawable/ic_sos"
         android:shortcutShortLabel="@string/shortcut_sos">
         <intent
             android:action="android.intent.action.VIEW"
