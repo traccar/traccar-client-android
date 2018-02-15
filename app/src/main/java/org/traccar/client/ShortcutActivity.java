@@ -68,13 +68,13 @@ public class ShortcutActivity extends AppCompatActivity implements LostApiClient
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     switch (position) {
                         case 0:
-                            setShortcutResult(items[position], R.drawable.ic_start, ACTION_START);
+                            setShortcutResult(items[position], R.mipmap.ic_start, ACTION_START);
                             break;
                         case 1:
-                            setShortcutResult(items[position], R.drawable.ic_stop, ACTION_STOP);
+                            setShortcutResult(items[position], R.mipmap.ic_stop, ACTION_STOP);
                             break;
                         case 2:
-                            setShortcutResult(items[position], R.drawable.ic_sos, ACTION_SOS);
+                            setShortcutResult(items[position], R.mipmap.ic_sos, ACTION_SOS);
                             break;
                     }
                     finish();
