@@ -29,16 +29,17 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:design:27.0.2'
+    compile 'com.android.support:design:27.1.0'
     compile 'com.mapzen.android:lost:3.0.4'
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.6.1'
     googleCompile 'com.google.firebase:firebase-core:11.8.0'
-    googleCompile 'com.google.firebase:firebase-crash:11.8.0'
+    googleCompile 'com.crashlytics.sdk.android:crashlytics:2.9.1'
 }
 
 if (getGradle().getStartParameter().getTaskRequests().toString().contains("Google")) {
     apply plugin: 'com.google.gms.google-services'
+    apply plugin: 'io.fabric'
 
     task copyJson(type: Copy) {
         from '../../traccar-shared/google-services'
