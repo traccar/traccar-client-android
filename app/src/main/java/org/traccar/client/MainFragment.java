@@ -150,13 +150,6 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         }
     }
 
-    private boolean hasPermission(String permission) {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            return true;
-        }
-        return ContextCompat.checkSelfPermission(getActivity(), permission) == PackageManager.PERMISSION_GRANTED;
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -223,10 +216,10 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     private void startTrackingService(boolean checkPermission, boolean permission) {
         if (checkPermission) {
             Set<String> missingPermissions = new HashSet<>();
-            if (!hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 missingPermissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
             }
-            if (!hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 missingPermissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
             }
             if (missingPermissions.isEmpty()) {

@@ -21,6 +21,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
@@ -77,8 +78,11 @@ public class TrackingService extends Service {
         Log.i(TAG, "service create");
         StatusActivity.addMessage(getString(R.string.status_service_create));
 
-        trackingController = new TrackingController(this);
-        trackingController.start();
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            trackingController = new TrackingController(this);
+            trackingController.start();
+        }
 
         startForeground(NOTIFICATION_ID, createNotification(this));
         ContextCompat.startForegroundService(this, new Intent(this, HideNotificationService.class));
