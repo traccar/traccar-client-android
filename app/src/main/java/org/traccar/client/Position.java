@@ -37,6 +37,7 @@ public class Position {
             accuracy = location.getAccuracy();
         }
         this.battery = battery;
+        this.mock = location.isFromMockProvider();
     }
 
     private long id;
@@ -137,6 +138,16 @@ public class Position {
 
     public void setBattery(double battery) {
         this.battery = battery;
+    }
+
+    private boolean mock;
+
+    public boolean getMock() {
+        return mock;
+    }
+
+    public void setMock(boolean mock) {
+        this.mock = mock;
     }
 
 }

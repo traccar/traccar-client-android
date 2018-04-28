@@ -80,7 +80,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "speed REAL," +
                 "course REAL," +
                 "accuracy REAL," +
-                "battery REAL)");
+                "battery REAL," +
+                "mock INTEGER)");
     }
 
     @Override
@@ -100,6 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("course", position.getCourse());
         values.put("accuracy", position.getAccuracy());
         values.put("battery", position.getBattery());
+        values.put("mock", position.getMock() ? 1 : 0);
 
         db.insertOrThrow("position", null, values);
     }
@@ -133,6 +135,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 position.setCourse(cursor.getDouble(cursor.getColumnIndex("course")));
                 position.setAccuracy(cursor.getDouble(cursor.getColumnIndex("accuracy")));
                 position.setBattery(cursor.getDouble(cursor.getColumnIndex("battery")));
+                position.setMock(cursor.getInt(cursor.getColumnIndex("mock")) > 0);
 
             } else {
                 return null;
