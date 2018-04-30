@@ -29,12 +29,12 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:design:27.1.0'
-    compile 'com.mapzen.android:lost:3.0.4'
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:3.6.1'
-    googleCompile 'com.google.firebase:firebase-core:11.8.0'
-    googleCompile 'com.crashlytics.sdk.android:crashlytics:2.9.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.mapzen.android:lost:3.0.4'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.robolectric:robolectric:3.6.1'
+    googleImplementation 'com.google.firebase:firebase-core:15.0.0'
+    googleImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.1'
 }
 
 if (getGradle().getStartParameter().getTaskRequests().toString().contains("Google")) {
