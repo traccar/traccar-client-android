@@ -15,11 +15,13 @@
  */
 package org.traccar.client;
 
+import android.annotation.TargetApi;
 import android.location.Location;
 import android.location.LocationManager;
 
 import java.util.Date;
 
+@TargetApi(18)
 public class Position {
 
     public Position() {
@@ -37,7 +39,7 @@ public class Position {
             accuracy = location.getAccuracy();
         }
         this.battery = battery;
-        this.mock = location.isFromMockProvider();
+        this.mock = (android.os.Build.VERSION.SDK_INT >= 18) && location.isFromMockProvider();
     }
 
     private long id;
