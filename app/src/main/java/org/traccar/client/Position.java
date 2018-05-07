@@ -26,8 +26,9 @@ public class Position {
     public Position() {
     }
 
-    public Position(String deviceId, Location location, double battery) {
+    public Position(String deviceId, String driverUniqueId, Location location, double battery) {
         this.deviceId = deviceId;
+        this.driverUniqueId = driverUniqueId;
         time = new Date(location.getTime());
         latitude = location.getLatitude();
         longitude = location.getLongitude();
@@ -61,6 +62,16 @@ public class Position {
 
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
+    }
+
+    private String driverUniqueId;
+
+    public String getDriverUniqueId() {
+        return driverUniqueId;
+    }
+
+    public void setDriverUniqueId(String driverUniqueId) {
+        this.driverUniqueId = driverUniqueId;
     }
 
     private Date time;

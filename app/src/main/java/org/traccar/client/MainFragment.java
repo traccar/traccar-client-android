@@ -54,6 +54,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     private static final int ALARM_MANAGER_INTERVAL = 15000;
 
     public static final String KEY_DEVICE = "id";
+    public static final String KEY_DRIVER_UNIQUE_ID = "driverUniqueId";
     public static final String KEY_URL = "url";
     public static final String KEY_INTERVAL = "interval";
     public static final String KEY_DISTANCE = "distance";
@@ -82,6 +83,12 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         initPreferences();
 
         findPreference(KEY_DEVICE).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                return newValue != null && !newValue.equals("");
+            }
+        });
+        findPreference(KEY_DRIVER_UNIQUE_ID).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 return newValue != null && !newValue.equals("");
@@ -164,6 +171,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
 
     private void setPreferencesEnabled(boolean enabled) {
         findPreference(KEY_DEVICE).setEnabled(enabled);
+        findPreference(KEY_DRIVER_UNIQUE_ID).setEnabled(enabled);
         findPreference(KEY_URL).setEnabled(enabled);
         findPreference(KEY_INTERVAL).setEnabled(enabled);
         findPreference(KEY_DISTANCE).setEnabled(enabled);
@@ -181,6 +189,8 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
             }
         } else if (key.equals(KEY_DEVICE)) {
             findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
+        } else if (key.equals(KEY_DRIVER_UNIQUE_ID)) {
+            findPreference(KEY_DRIVER_UNIQUE_ID).setSummary(sharedPreferences.getString(KEY_DRIVER_UNIQUE_ID, null));
         }
     }
 
@@ -211,6 +221,13 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
             ((EditTextPreference) findPreference(KEY_DEVICE)).setText(id);
         }
         findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
+
+        if (!sharedPreferences.contains(KEY_DRIVER_UNIQUE_ID)) {
+            String id = String.valueOf(new Random().nextInt(900000) + 100000);
+            sharedPreferences.edit().putString(KEY_DRIVER_UNIQUE_ID, id).apply();
+            ((EditTextPreference) findPreference(KEY_DRIVER_UNIQUE_ID)).setText(id);
+        }
+        findPreference(KEY_DRIVER_UNIQUE_ID).setSummary(sharedPreferences.getString(KEY_DRIVER_UNIQUE_ID, null));
     }
 
     private void startTrackingService(boolean checkPermission, boolean permission) {

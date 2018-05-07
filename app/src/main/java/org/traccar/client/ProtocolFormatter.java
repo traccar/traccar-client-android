@@ -27,6 +27,7 @@ public class ProtocolFormatter {
         Uri serverUrl = Uri.parse(url);
         Uri.Builder builder = serverUrl.buildUpon()
                 .appendQueryParameter("id", position.getDeviceId())
+                .appendQueryParameter("driverUniqueId", position.getDriverUniqueId())
                 .appendQueryParameter("timestamp", String.valueOf(position.getTime().getTime() / 1000))
                 .appendQueryParameter("lat", String.valueOf(position.getLatitude()))
                 .appendQueryParameter("lon", String.valueOf(position.getLongitude()))

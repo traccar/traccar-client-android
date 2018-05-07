@@ -3,6 +3,7 @@
   <string name="app_name">Client Traccar</string>
   <string name="app_logo">Traccar</string>
   <string name="settings_id_title">Identifiant de l\'appareil</string>
+  <string name="settings_driver_unique_id_title">Identifiant du conducteur</string>
   <string name="settings_url_title">URL du serveur</string>
   <string name="settings_url_summary">URL du serveur de suivi</string>
   <string name="settings_interval_title">Fréquence</string>

@@ -7,6 +7,7 @@
   <string name="shortcut_sos">Send SOS</string>
   <string name="channel_default">Primary Channel</string>
   <string name="settings_id_title">Device identifier</string>
+  <string name="settings_driver_unique_id_title">Driver identifier</string>
   <string name="settings_url_title">Server URL</string>
   <string name="settings_url_summary">Tracking server URL</string>
   <string name="settings_interval_title">Frequency</string>

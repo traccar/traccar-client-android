@@ -48,6 +48,7 @@ public class PositionProvider implements LocationListener {
     private LocationManager locationManager;
 
     private String deviceId;
+    private String driverUniqueId;
     private long interval;
     private double distance;
     private double angle;
@@ -63,6 +64,7 @@ public class PositionProvider implements LocationListener {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         deviceId = preferences.getString(MainFragment.KEY_DEVICE, "undefined");
+        driverUniqueId = preferences.getString(MainFragment.KEY_DRIVER_UNIQUE_ID, "undefined");
         interval = Long.parseLong(preferences.getString(MainFragment.KEY_INTERVAL, "600")) * 1000;
         distance = Integer.parseInt(preferences.getString(MainFragment.KEY_DISTANCE, "0"));
         angle = Integer.parseInt(preferences.getString(MainFragment.KEY_ANGLE, "0"));
@@ -107,7 +109,7 @@ public class PositionProvider implements LocationListener {
                 || angle > 0 && Math.abs(location.getBearing() - lastLocation.getBearing()) >= angle)) {
             Log.i(TAG, "location new");
             lastLocation = location;
-            listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel(context)));
+            listener.onPositionUpdate(new Position(deviceId, driverUniqueId, location, getBatteryLevel(context)));
         } else {
             Log.i(TAG, location != null ? "location ignored" : "location nil");
         }
