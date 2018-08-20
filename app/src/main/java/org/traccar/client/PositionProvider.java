@@ -101,7 +101,7 @@ public class PositionProvider implements LostApiClient.ConnectionCallbacks, Loca
     public void onLocationChanged(Location location) {
         if (location != null && (lastLocation == null
                 || location.getTime() - lastLocation.getTime() >= interval
-                || distance > 0 && DistanceCalculator.distance(location.getLatitude(), location.getLongitude(), lastLocation.getLatitude(), lastLocation.getLongitude()) >= distance
+                || distance > 0 && location.distanceTo(lastLocation) >= distance
                 || angle > 0 && Math.abs(location.getBearing() - lastLocation.getBearing()) >= angle)) {
             Log.i(TAG, "location new");
             lastLocation = location;
