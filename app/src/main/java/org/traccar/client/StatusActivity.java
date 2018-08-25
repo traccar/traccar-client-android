@@ -43,7 +43,7 @@ public class StatusActivity extends AppCompatActivity {
     }
 
     public static void addMessage(String message) {
-        DateFormat format = DateFormat.getTimeInstance(DateFormat.SHORT);
+        DateFormat format = DateFormat.getTimeInstance(DateFormat.MEDIUM);
         message = format.format(new Date()) + " - " + message;
         messages.add(message);
         while (messages.size() > LIMIT) {
