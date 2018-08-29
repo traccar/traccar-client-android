@@ -15,15 +15,24 @@
  */
 package org.traccar.client;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 
 public class ProtocolFormatter {
 
-    public static String formatRequest(String url, Position position) {
-        return formatRequest(url, position, null);
+    public static final String KEY_INTERVAL = "interval";
+
+    public static String formatRequest(Context context, String url, Position position) {
+        return formatRequest(context, url, position, null);
     }
 
-    public static String formatRequest(String url, Position position, String alarm) {
+    public static String formatRequest(Context context, String url, Position position, String alarm) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        int interval = Integer.parseInt(preferences.getString(KEY_INTERVAL, "600")) + 5;
+
         Uri serverUrl = Uri.parse(url);
         Uri.Builder builder = serverUrl.buildUpon()
                 .appendQueryParameter("id", position.getDeviceId())
@@ -34,7 +43,8 @@ public class ProtocolFormatter {
                 .appendQueryParameter("bearing", String.valueOf(position.getCourse()))
                 .appendQueryParameter("altitude", String.valueOf(position.getAltitude()))
                 .appendQueryParameter("accuracy", String.valueOf(position.getAccuracy()))
-                .appendQueryParameter("batt", String.valueOf(position.getBattery()));
+                .appendQueryParameter("batt", String.valueOf(position.getBattery()))
+                .appendQueryParameter("reportInterval", String.valueOf(interval * 1000));
 
         if (position.getMock()) {
             builder.appendQueryParameter("mock", String.valueOf(position.getMock()));
