@@ -27,25 +27,26 @@ public class Position {
 
     public Position(String deviceId, Location location, double battery) {
         this.deviceId = deviceId;
-        time = new Date(location.getTime());
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
+        this.time = new Date(location.getTime());
+        this.latitude = location.getLatitude();
+        this.longitude = location.getLongitude();
         if (location.hasAltitude()) {
-            altitude = location.getAltitude();
+            this.altitude = location.getAltitude();
         }
         if (location.hasSpeed()) {
-            speed = location.getSpeed() * 1.943844F; // speed in knots
+            this.speed = location.getSpeed() * 1.943844F; // speed in knots
         }
         if (location.hasBearing()) {
-            course = location.getBearing();
+            this.course = location.getBearing();
         }
         if (location.hasAccuracy()) {
-            accuracy = location.getAccuracy();
+            this.accuracy = location.getAccuracy();
         }
         this.battery = battery;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             this.mock = location.isFromMockProvider();
         }
+        this.provider = location.getProvider();
     }
 
     private long id;
@@ -157,5 +158,11 @@ public class Position {
     public void setMock(boolean mock) {
         this.mock = mock;
     }
+
+    private String provider;
+
+    public String getProvider() { return provider; }
+
+    public void setProvider(String provider) { this.provider = provider; }
 
 }

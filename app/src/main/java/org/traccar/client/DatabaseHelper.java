@@ -27,7 +27,7 @@ import java.util.Date;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "traccar.db";
 
     public interface DatabaseHandler<T> {
@@ -81,7 +81,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "course REAL," +
                 "accuracy REAL," +
                 "battery REAL," +
-                "mock INTEGER)");
+                "mock INTEGER," +
+                "provider TEXT)");
     }
 
     @Override
@@ -115,6 +116,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         values.put("battery", position.getBattery());
         values.put("mock", position.getMock() ? 1 : 0);
+        if (position.getProvider() != null) {
+            values.put("provider", position.getProvider());
+        }
 
         db.insertOrThrow("position", null, values);
     }
@@ -157,6 +161,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
                 position.setBattery(cursor.getDouble(cursor.getColumnIndex("battery")));
                 position.setMock(cursor.getInt(cursor.getColumnIndex("mock")) > 0);
+                if (!cursor.isNull(cursor.getColumnIndex("provider"))) {
+                    position.setProvider(cursor.getString(cursor.getColumnIndex("provider")));
+                }
 
             } else {
                 return null;

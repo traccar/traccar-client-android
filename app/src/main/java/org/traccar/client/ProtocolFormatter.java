@@ -52,6 +52,10 @@ public class ProtocolFormatter {
             builder.appendQueryParameter("mock", String.valueOf(position.getMock()));
         }
 
+        if (position.getProvider() != null) {
+            builder.appendQueryParameter("provider", position.getProvider());
+        }
+
         if (alarm != null) {
             builder.appendQueryParameter("alarm", alarm);
         }
