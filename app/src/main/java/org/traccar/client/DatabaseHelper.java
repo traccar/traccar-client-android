@@ -90,6 +90,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS position;");
+        onCreate(db);
+    }
+
     public void insertPosition(Position position) {
         ContentValues values = new ContentValues();
         values.put("deviceId", position.getDeviceId());
