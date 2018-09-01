@@ -110,35 +110,34 @@ public class ShortcutActivity extends AppCompatActivity implements LostApiClient
     @SuppressWarnings("MissingPermission")
     @Override
     public void onConnected() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (LocationServices.FusedLocationApi.getLocationAvailability(apiClient).isLocationAvailable()) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            Location location = LocationServices.FusedLocationApi.getLastLocation(apiClient);
 
-        Location location = LocationServices.FusedLocationApi.getLastLocation(apiClient);
+            if (location != null) {
+                Position position = new Position(
+                        preferences.getString(MainFragment.KEY_DEVICE, null),
+                        location, PositionProvider.getBatteryLevel(this));
+                String request = ProtocolFormatter.formatRequest(
+                        preferences.getString(MainFragment.KEY_URL, null), position, ALARM_SOS);
 
-        if (location != null) {
-
-            Position position = new Position(
-                    preferences.getString(MainFragment.KEY_DEVICE, null),
-                    location, PositionProvider.getBatteryLevel(this));
-
-            String request = ProtocolFormatter.formatRequest(
-                    preferences.getString(MainFragment.KEY_URL, null), position, ALARM_SOS);
-
-            RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
-                @Override
-                public void onComplete(boolean success) {
-                    if (success) {
-                        Toast.makeText(ShortcutActivity.this, R.string.status_send_success, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(ShortcutActivity.this, R.string.status_send_fail, Toast.LENGTH_SHORT).show();
+                RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
+                    @Override
+                    public void onComplete(boolean success) {
+                        if (success) {
+                            Toast.makeText(ShortcutActivity.this, R.string.status_send_success, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ShortcutActivity.this, R.string.status_send_fail, Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-            });
-
+                });
+            } else {
+                Toast.makeText(this, R.string.status_send_fail, Toast.LENGTH_SHORT).show();
+            }
+            apiClient.disconnect();
         } else {
             Toast.makeText(this, R.string.status_send_fail, Toast.LENGTH_SHORT).show();
         }
-
-        apiClient.disconnect();
     }
 
     @Override
