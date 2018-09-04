@@ -7,12 +7,14 @@
         <item>high</item>
         <item>medium</item>
         <item>low</item>
+        <item>no</item>
     </string-array>
 
     <string-array name="settings_accuracy_names">
         <item>@string/settings_accuracy_high</item>
         <item>@string/settings_accuracy_medium</item>
         <item>@string/settings_accuracy_low</item>
+        <item>@string/settings_accuracy_no</item>
     </string-array>
 
 </resources>
