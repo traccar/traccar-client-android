@@ -79,6 +79,8 @@ public class PositionProvider implements LostApiClient.ConnectionCallbacks, Loca
                 return LocationRequest.PRIORITY_HIGH_ACCURACY;
             case "low":
                 return LocationRequest.PRIORITY_LOW_POWER;
+            case "no":
+                return LocationRequest.PRIORITY_NO_POWER;
             default:
                 return LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
         }

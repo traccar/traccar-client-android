@@ -25,6 +25,7 @@
   <string name="settings_accuracy_high">High</string>
   <string name="settings_accuracy_medium">Medium</string>
   <string name="settings_accuracy_low">Low</string>
+  <string name="settings_accuracy_no">Get location from other applications</string>
   <string name="settings_foreground_title">Foreground service</string>
   <string name="settings_foreground_summary">Increase service priority</string>
   <string name="menu_status">Status</string>
