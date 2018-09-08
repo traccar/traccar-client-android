@@ -27,7 +27,7 @@ import java.util.Date;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "traccar.db";
 
     public interface DatabaseHandler<T> {
@@ -81,6 +81,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "course REAL," +
                 "accuracy REAL," +
                 "battery REAL," +
+                "temperature REAL," +
                 "mock INTEGER)");
     }
 
@@ -106,6 +107,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("course", position.getCourse());
         values.put("accuracy", position.getAccuracy());
         values.put("battery", position.getBattery());
+        if (position.getTemperature() != null) {
+            values.put("temperature", position.getTemperature());
+        }
         values.put("mock", position.getMock() ? 1 : 0);
 
         db.insertOrThrow("position", null, values);
@@ -140,6 +144,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 position.setCourse(cursor.getDouble(cursor.getColumnIndex("course")));
                 position.setAccuracy(cursor.getDouble(cursor.getColumnIndex("accuracy")));
                 position.setBattery(cursor.getDouble(cursor.getColumnIndex("battery")));
+                if (!cursor.isNull(cursor.getColumnIndex("temperature"))) {
+                    position.setTemperature(cursor.getFloat(cursor.getColumnIndex("temperature")));
+                }
                 position.setMock(cursor.getInt(cursor.getColumnIndex("mock")) > 0);
 
             } else {
