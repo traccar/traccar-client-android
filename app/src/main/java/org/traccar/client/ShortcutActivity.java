@@ -136,7 +136,7 @@ public class ShortcutActivity extends AppCompatActivity implements LostApiClient
             }
             apiClient.disconnect();
         } else {
-            Toast.makeText(this, R.string.status_send_fail, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.status_location_unavailable, Toast.LENGTH_SHORT).show();
         }
     }
 
