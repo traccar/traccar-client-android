@@ -15,10 +15,16 @@
  */
 package org.traccar.client;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
@@ -32,10 +38,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.mapzen.android.lost.api.LocationServices;
-import com.mapzen.android.lost.api.LostApiClient;
-
-public class ShortcutActivity extends AppCompatActivity implements LostApiClient.ConnectionCallbacks {
+public class ShortcutActivity extends AppCompatActivity {
 
     public static final String EXTRA_ACTION = "action";
     public static final String ACTION_START = "start";
@@ -43,8 +46,6 @@ public class ShortcutActivity extends AppCompatActivity implements LostApiClient
     public static final String ACTION_SOS = "sos";
 
     private static final String ALARM_SOS = "sos";
-
-    private LostApiClient apiClient;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,47 +103,59 @@ public class ShortcutActivity extends AppCompatActivity implements LostApiClient
         setResult(RESULT_OK, ShortcutManagerCompat.createShortcutResultIntent(this, shortcut));
     }
 
+    @SuppressWarnings("MissingPermission")
     private void sendAlarm() {
-        apiClient = new LostApiClient.Builder(this).addConnectionCallbacks(this).build();
-        apiClient.connect();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        Criteria criteria = PositionProvider.getCriteria(
+                preferences.getString(MainFragment.KEY_ACCURACY, "medium"));
+
+        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, true));
+        if (location != null) {
+            sendAlarmLocation(location);
+        } else {
+            locationManager.requestSingleUpdate(criteria, new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    sendAlarmLocation(location);
+                }
+
+                @Override
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+                }
+
+                @Override
+                public void onProviderEnabled(String provider) {
+                }
+
+                @Override
+                public void onProviderDisabled(String provider) {
+                }
+            }, Looper.myLooper());
+        }
     }
 
-    @SuppressWarnings("MissingPermission")
-    @Override
-    public void onConnected() {
+    private void sendAlarmLocation(Location location) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        Location location = LocationServices.FusedLocationApi.getLastLocation(apiClient);
+        Position position = new Position(
+                preferences.getString(MainFragment.KEY_DEVICE, null),
+                location, PositionProvider.getBatteryLevel(this));
 
-        if (location != null) {
+        String request = ProtocolFormatter.formatRequest(
+                preferences.getString(MainFragment.KEY_URL, null), position, ALARM_SOS);
 
-            Position position = new Position(
-                    preferences.getString(MainFragment.KEY_DEVICE, null),
-                    location, PositionProvider.getBatteryLevel(this));
-
-            String request = ProtocolFormatter.formatRequest(
-                    preferences.getString(MainFragment.KEY_URL, null), position, ALARM_SOS);
-
-            RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
-                @Override
-                public void onComplete(boolean success) {
-                    if (success) {
-                        Toast.makeText(ShortcutActivity.this, R.string.status_send_success, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(ShortcutActivity.this, R.string.status_send_fail, Toast.LENGTH_SHORT).show();
-                    }
+        RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
+            @Override
+            public void onComplete(boolean success) {
+                if (success) {
+                    Toast.makeText(ShortcutActivity.this, R.string.status_send_success, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ShortcutActivity.this, R.string.status_send_fail, Toast.LENGTH_SHORT).show();
                 }
-            });
-
-        } else {
-            Toast.makeText(this, R.string.status_send_fail, Toast.LENGTH_SHORT).show();
-        }
-
-        apiClient.disconnect();
-    }
-
-    @Override
-    public void onConnectionSuspended() {
+            }
+        });
     }
 
     private boolean executeAction(Intent intent) {
@@ -168,7 +181,12 @@ public class ShortcutActivity extends AppCompatActivity implements LostApiClient
                     Toast.makeText(this, R.string.status_service_destroy, Toast.LENGTH_SHORT).show();
                     break;
                 case ACTION_SOS:
-                    sendAlarm();
+                    if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                            && ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        sendAlarm();
+                    } else {
+                        Toast.makeText(this, R.string.status_send_fail, Toast.LENGTH_SHORT).show();
+                    }
                     break;
             }
             finish();
