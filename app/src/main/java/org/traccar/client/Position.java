@@ -25,7 +25,7 @@ public class Position {
     public Position() {
     }
 
-    public Position(String deviceId, Location location, double battery) {
+    public Position(String deviceId, Location location, double battery, String setting, long interval, Long delta) {
         this.deviceId = deviceId;
         this.time = new Date(location.getTime());
         this.latitude = location.getLatitude();
@@ -47,6 +47,9 @@ public class Position {
             this.mock = location.isFromMockProvider();
         }
         this.provider = location.getProvider();
+        this.setting = setting;
+        this.interval = interval;
+        this.delta = delta;
     }
 
     private long id;
@@ -161,8 +164,30 @@ public class Position {
 
     private String provider;
 
-    public String getProvider() { return provider; }
+    public String getProvider() {
+        return provider;
+    }
 
-    public void setProvider(String provider) { this.provider = provider; }
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+    private String setting;
+
+    public String getSetting() { return setting; }
+
+    public void setSetting(String setting) { this.setting = setting; }
+
+    private long interval;
+
+    public long getInterval() { return interval; }
+
+    public void setInterval(long interval) { this.interval = interval; }
+
+    private Long delta;
+
+    public Long getDelta() { return delta; }
+
+    public void setDelta(long delta) { this.delta = delta; }
 
 }

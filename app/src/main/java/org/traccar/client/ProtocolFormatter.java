@@ -56,6 +56,13 @@ public class ProtocolFormatter {
             builder.appendQueryParameter("provider", position.getProvider());
         }
 
+        builder.appendQueryParameter("setting", position.getSetting())
+                .appendQueryParameter("interval", String.valueOf(position.getInterval()));
+
+        if (position.getDelta() != null) {
+            builder.appendQueryParameter("delta", String.valueOf(position.getDelta()));
+        }
+
         if (alarm != null) {
             builder.appendQueryParameter("alarm", alarm);
         }
