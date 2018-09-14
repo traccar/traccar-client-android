@@ -78,14 +78,17 @@ public class TrackingService extends Service {
         Log.i(TAG, "service create");
         StatusActivity.addMessage(getString(R.string.status_service_create));
 
+        startForeground(NOTIFICATION_ID, createNotification(this));
+
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             trackingController = new TrackingController(this);
             trackingController.start();
         }
 
-        startForeground(NOTIFICATION_ID, createNotification(this));
-        ContextCompat.startForegroundService(this, new Intent(this, HideNotificationService.class));
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            ContextCompat.startForegroundService(this, new Intent(this, HideNotificationService.class));
+        }
     }
 
     @Override
