@@ -111,28 +111,32 @@ public class ShortcutActivity extends AppCompatActivity {
         Criteria criteria = PositionProvider.getCriteria(
                 preferences.getString(MainFragment.KEY_ACCURACY, "medium"));
 
-        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, true));
-        if (location != null) {
-            sendAlarmLocation(location);
-        } else {
-            locationManager.requestSingleUpdate(criteria, new LocationListener() {
-                @Override
-                public void onLocationChanged(Location location) {
-                    sendAlarmLocation(location);
-                }
+        try {
+            Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, true));
+            if (location != null) {
+                sendAlarmLocation(location);
+            } else {
+                locationManager.requestSingleUpdate(criteria, new LocationListener() {
+                    @Override
+                    public void onLocationChanged(Location location) {
+                        sendAlarmLocation(location);
+                    }
 
-                @Override
-                public void onStatusChanged(String provider, int status, Bundle extras) {
-                }
+                    @Override
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
+                    }
 
-                @Override
-                public void onProviderEnabled(String provider) {
-                }
+                    @Override
+                    public void onProviderEnabled(String provider) {
+                    }
 
-                @Override
-                public void onProviderDisabled(String provider) {
-                }
-            }, Looper.myLooper());
+                    @Override
+                    public void onProviderDisabled(String provider) {
+                    }
+                }, Looper.myLooper());
+            }
+        } catch (RuntimeException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 

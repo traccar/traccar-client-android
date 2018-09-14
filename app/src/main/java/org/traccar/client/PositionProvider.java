@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 public class PositionProvider implements LocationListener {
 
@@ -69,10 +70,14 @@ public class PositionProvider implements LocationListener {
 
     @SuppressLint("MissingPermission")
     public void startUpdates() {
-        locationManager.requestLocationUpdates(
-                distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval, 0,
-                getCriteria(preferences.getString(MainFragment.KEY_ACCURACY, "medium")),
-                this, Looper.myLooper());
+        try {
+            locationManager.requestLocationUpdates(
+                    distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval, 0,
+                    getCriteria(preferences.getString(MainFragment.KEY_ACCURACY, "medium")),
+                    this, Looper.myLooper());
+        } catch (RuntimeException e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     public static Criteria getCriteria(String accuracy) {
