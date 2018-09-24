@@ -27,7 +27,7 @@ import java.util.Date;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "traccar.db";
 
     public interface DatabaseHandler<T> {
@@ -81,7 +81,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "course REAL," +
                 "accuracy REAL," +
                 "battery REAL," +
-                "mock INTEGER)");
+                "mock INTEGER," +
+                "provider TEXT," +
+                "setting TEXT," +
+                "interval INTEGER," +
+                "delta INTEGER)");
     }
 
     @Override
@@ -101,12 +105,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("time", position.getTime().getTime());
         values.put("latitude", position.getLatitude());
         values.put("longitude", position.getLongitude());
-        values.put("altitude", position.getAltitude());
-        values.put("speed", position.getSpeed());
-        values.put("course", position.getCourse());
-        values.put("accuracy", position.getAccuracy());
+        if (position.getAltitude() != null) {
+            values.put("altitude", position.getAltitude());
+        }
+        if (position.getSpeed() != null) {
+            values.put("speed", position.getSpeed());
+        }
+        if (position.getCourse() != null) {
+            values.put("course", position.getCourse());
+        }
+        if (position.getAccuracy() != null) {
+            values.put("accuracy", position.getAccuracy());
+        }
         values.put("battery", position.getBattery());
         values.put("mock", position.getMock() ? 1 : 0);
+        if (position.getProvider() != null) {
+            values.put("provider", position.getProvider());
+        }
+        values.put("setting", position.getSetting());
+        values.put("interval", position.getInterval());
+        if (position.getDelta() != null) {
+            values.put("delta", position.getDelta());
+        }
 
         db.insertOrThrow("position", null, values);
     }
@@ -135,12 +155,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 position.setTime(new Date(cursor.getLong(cursor.getColumnIndex("time"))));
                 position.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
                 position.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
-                position.setAltitude(cursor.getDouble(cursor.getColumnIndex("altitude")));
-                position.setSpeed(cursor.getDouble(cursor.getColumnIndex("speed")));
-                position.setCourse(cursor.getDouble(cursor.getColumnIndex("course")));
-                position.setAccuracy(cursor.getDouble(cursor.getColumnIndex("accuracy")));
+                if (!cursor.isNull(cursor.getColumnIndex("altitude"))) {
+                    position.setAltitude(cursor.getDouble(cursor.getColumnIndex("altitude")));
+                }
+                if (!cursor.isNull(cursor.getColumnIndex("speed"))) {
+                    position.setSpeed(cursor.getFloat(cursor.getColumnIndex("speed")));
+                }
+                if (!cursor.isNull(cursor.getColumnIndex("course"))) {
+                    position.setCourse(cursor.getFloat(cursor.getColumnIndex("course")));
+                }
+                if (!cursor.isNull(cursor.getColumnIndex("accuracy"))) {
+                    position.setAccuracy(cursor.getFloat(cursor.getColumnIndex("accuracy")));
+                }
                 position.setBattery(cursor.getDouble(cursor.getColumnIndex("battery")));
                 position.setMock(cursor.getInt(cursor.getColumnIndex("mock")) > 0);
+                if (!cursor.isNull(cursor.getColumnIndex("provider"))) {
+                    position.setProvider(cursor.getString(cursor.getColumnIndex("provider")));
+                }
+                position.setSetting(cursor.getString(cursor.getColumnIndex("setting")));
+                position.setInterval(cursor.getLong(cursor.getColumnIndex("interval")));
+                if (!cursor.isNull(cursor.getColumnIndex("delta"))) {
+                    position.setDelta(cursor.getLong(cursor.getColumnIndex("delta")));
+                }
 
             } else {
                 return null;

@@ -35,6 +35,9 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
         System.setProperty("http.keepAliveDuration", String.valueOf(30 * 60 * 1000));
+        String userAgent = String.format("Traccar/%s (SDK %s; %s), %s", BuildConfig.VERSION_NAME,
+                Build.VERSION.SDK, BuildConfig.FLAVOR, System.getProperty("http.agent"));
+        System.setProperty("http.agent", userAgent);
 
         migrateLegacyPreferences(PreferenceManager.getDefaultSharedPreferences(this));
 

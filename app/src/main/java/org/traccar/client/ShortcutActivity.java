@@ -32,6 +32,7 @@ import android.support.v4.content.pm.ShortcutInfoCompat;
 import android.support.v4.content.pm.ShortcutManagerCompat;
 import android.support.v4.graphics.drawable.IconCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -39,6 +40,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class ShortcutActivity extends AppCompatActivity {
+
+    private static final String TAG = ShortcutActivity.class.getSimpleName();
 
     public static final String EXTRA_ACTION = "action";
     public static final String ACTION_START = "start";
@@ -145,7 +148,9 @@ public class ShortcutActivity extends AppCompatActivity {
 
         Position position = new Position(
                 preferences.getString(MainFragment.KEY_DEVICE, null),
-                location, PositionProvider.getBatteryLevel(this));
+                location, PositionProvider.getBatteryLevel(this),
+                preferences.getString(MainFragment.KEY_ACCURACY, null),
+                preferences.getLong(MainFragment.KEY_INTERVAL, 0) * 1000, null);
 
         String request = ProtocolFormatter.formatRequest(
                 preferences.getString(MainFragment.KEY_URL, null), position, ALARM_SOS);

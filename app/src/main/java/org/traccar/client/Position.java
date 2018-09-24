@@ -16,7 +16,6 @@
 package org.traccar.client;
 
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 
 import java.util.Date;
@@ -26,21 +25,31 @@ public class Position {
     public Position() {
     }
 
-    public Position(String deviceId, Location location, double battery) {
+    public Position(String deviceId, Location location, double battery, String setting, long interval, Long delta) {
         this.deviceId = deviceId;
-        time = new Date(location.getTime());
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
-        altitude = location.getAltitude();
-        speed = location.getSpeed() * 1.943844; // speed in knots
-        course = location.getBearing();
-        if (location.getProvider() != null && !location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
-            accuracy = location.getAccuracy();
+        this.time = new Date(location.getTime());
+        this.latitude = location.getLatitude();
+        this.longitude = location.getLongitude();
+        if (location.hasAltitude()) {
+            this.altitude = location.getAltitude();
+        }
+        if (location.hasSpeed()) {
+            this.speed = location.getSpeed() * 1.943844F; // speed in knots
+        }
+        if (location.hasBearing()) {
+            this.course = location.getBearing();
+        }
+        if (location.hasAccuracy()) {
+            this.accuracy = location.getAccuracy();
         }
         this.battery = battery;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             this.mock = location.isFromMockProvider();
         }
+        this.provider = location.getProvider();
+        this.setting = setting;
+        this.interval = interval;
+        this.delta = delta;
     }
 
     private long id;
@@ -93,9 +102,9 @@ public class Position {
         this.longitude = longitude;
     }
 
-    private double altitude;
+    private Double altitude;
 
-    public double getAltitude() {
+    public Double getAltitude() {
         return altitude;
     }
 
@@ -103,33 +112,33 @@ public class Position {
         this.altitude = altitude;
     }
 
-    private double speed;
+    private Float speed;
 
-    public double getSpeed() {
+    public Float getSpeed() {
         return speed;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(float speed) {
         this.speed = speed;
     }
 
-    private double course;
+    private Float course;
 
-    public double getCourse() {
+    public Float getCourse() {
         return course;
     }
 
-    public void setCourse(double course) {
+    public void setCourse(float course) {
         this.course = course;
     }
 
-    private double accuracy;
+    private Float accuracy;
 
-    public double getAccuracy() {
+    public Float getAccuracy() {
         return accuracy;
     }
 
-    public void setAccuracy(double accuracy) {
+    public void setAccuracy(float accuracy) {
         this.accuracy = accuracy;
     }
 
@@ -152,5 +161,33 @@ public class Position {
     public void setMock(boolean mock) {
         this.mock = mock;
     }
+
+    private String provider;
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+    private String setting;
+
+    public String getSetting() { return setting; }
+
+    public void setSetting(String setting) { this.setting = setting; }
+
+    private long interval;
+
+    public long getInterval() { return interval; }
+
+    public void setInterval(long interval) { this.interval = interval; }
+
+    private Long delta;
+
+    public Long getDelta() { return delta; }
+
+    public void setDelta(long delta) { this.delta = delta; }
 
 }
