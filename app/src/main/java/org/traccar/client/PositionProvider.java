@@ -72,7 +72,7 @@ public class PositionProvider implements LocationListener {
     public void startUpdates() {
         try {
             locationManager.requestLocationUpdates(
-                    distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval, 0,
+                    (distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval) >> 1, 0,
                     getCriteria(preferences.getString(MainFragment.KEY_ACCURACY, "medium")),
                     this, Looper.myLooper());
         } catch (RuntimeException e) {
