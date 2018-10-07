@@ -34,7 +34,7 @@ public class ProtocolFormatter {
                 .appendQueryParameter("bearing", String.valueOf(position.getCourse()))
                 .appendQueryParameter("altitude", String.valueOf(position.getAltitude()))
                 .appendQueryParameter("accuracy", String.valueOf(position.getAccuracy()))
-                .appendQueryParameter("batt", String.valueOf(position.getBattery()));
+                .appendQueryParameter("batteryLevel", String.valueOf(position.getBattery()));
 
         if (position.getMock()) {
             builder.appendQueryParameter("mock", String.valueOf(position.getMock()));
