@@ -20,16 +20,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 public class PositionProvider implements LocationListener {
 
@@ -70,33 +67,20 @@ public class PositionProvider implements LocationListener {
 
     @SuppressLint("MissingPermission")
     public void startUpdates() {
-        try {
-            locationManager.requestLocationUpdates(
-                    distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval, 0,
-                    getCriteria(preferences.getString(MainFragment.KEY_ACCURACY, "medium")),
-                    this, Looper.myLooper());
-        } catch (RuntimeException e) {
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
+        locationManager.requestLocationUpdates(
+                getProvider(preferences.getString(MainFragment.KEY_ACCURACY, "medium")),
+                distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval, 0, this);
     }
 
-    public static Criteria getCriteria(String accuracy) {
-        Criteria criteria = new Criteria();
+    public static String getProvider(String accuracy) {
         switch (accuracy) {
             case "high":
-                criteria.setHorizontalAccuracy(Criteria.ACCURACY_HIGH);
-                criteria.setPowerRequirement(Criteria.POWER_HIGH);
-                break;
+                return LocationManager.GPS_PROVIDER;
             case "low":
-                criteria.setHorizontalAccuracy(Criteria.ACCURACY_LOW);
-                criteria.setPowerRequirement(Criteria.POWER_LOW);
-                break;
+                return LocationManager.PASSIVE_PROVIDER;
             default:
-                criteria.setHorizontalAccuracy(Criteria.ACCURACY_MEDIUM);
-                criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
-                break;
+                return LocationManager.NETWORK_PROVIDER;
         }
-        return criteria;
     }
 
     @Override
