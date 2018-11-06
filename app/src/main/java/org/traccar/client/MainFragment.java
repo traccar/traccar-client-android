@@ -215,19 +215,11 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
 
     private void startTrackingService(boolean checkPermission, boolean permission) {
         if (checkPermission) {
-            Set<String> missingPermissions = new HashSet<>();
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                missingPermissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
-            }
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                missingPermissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-            }
-            if (missingPermissions.isEmpty()) {
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 permission = true;
             } else {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestPermissions(missingPermissions.toArray(new String[missingPermissions.size()]),
-                            PERMISSIONS_REQUEST_LOCATION);
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_LOCATION);
                 }
                 return;
             }
