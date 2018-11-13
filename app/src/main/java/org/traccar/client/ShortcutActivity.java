@@ -145,6 +145,7 @@ public class ShortcutActivity extends AppCompatActivity {
 
         Position position = new Position(
                 preferences.getString(MainFragment.KEY_DEVICE, null),
+                preferences.getString(MainFragment.KEY_DRIVER_UNIQUE_ID, null),
                 location, PositionProvider.getBatteryLevel(this));
 
         String request = ProtocolFormatter.formatRequest(

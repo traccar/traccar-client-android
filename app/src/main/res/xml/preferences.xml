@@ -15,6 +15,12 @@
         android:title="@string/settings_id_title" />
 
     <EditTextPreference
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="driverUniqueId"
+        android:title="@string/settings_driver_unique_id_title" />
+
+    <EditTextPreference
         android:defaultValue="@string/settings_url_default_value"
         android:key="url"
         android:summary="@string/settings_url_summary"

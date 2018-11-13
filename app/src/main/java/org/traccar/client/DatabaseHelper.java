@@ -27,7 +27,7 @@ import java.util.Date;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "traccar.db";
 
     public interface DatabaseHandler<T> {
@@ -73,6 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE position (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "deviceId TEXT," +
+                "driverUniqueId TEXT," +
                 "time INTEGER," +
                 "latitude REAL," +
                 "longitude REAL," +
@@ -98,6 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void insertPosition(Position position) {
         ContentValues values = new ContentValues();
         values.put("deviceId", position.getDeviceId());
+        values.put("driverUniqueId", position.getDriverUniqueId());
         values.put("time", position.getTime().getTime());
         values.put("latitude", position.getLatitude());
         values.put("longitude", position.getLongitude());
@@ -132,6 +134,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 position.setId(cursor.getLong(cursor.getColumnIndex("id")));
                 position.setDeviceId(cursor.getString(cursor.getColumnIndex("deviceId")));
+                position.setDriverUniqueId(cursor.getString(cursor.getColumnIndex("driverUniqueId")));
                 position.setTime(new Date(cursor.getLong(cursor.getColumnIndex("time"))));
                 position.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
                 position.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
