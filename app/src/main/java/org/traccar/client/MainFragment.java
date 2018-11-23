@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -60,6 +61,8 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     public static final String KEY_ANGLE = "angle";
     public static final String KEY_ACCURACY = "accuracy";
     public static final String KEY_STATUS = "status";
+
+    public static final String[] PREFS_KEYS = {KEY_DEVICE, KEY_URL, KEY_INTERVAL, KEY_DISTANCE, KEY_ANGLE, KEY_ACCURACY};
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
 
@@ -125,6 +128,8 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         };
         findPreference(KEY_DISTANCE).setOnPreferenceChangeListener(numberValidationListener);
         findPreference(KEY_ANGLE).setOnPreferenceChangeListener(numberValidationListener);
+
+        processConfigIntent();
 
         alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
         alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, new Intent(getActivity(), AutostartReceiver.class), 0);
@@ -267,4 +272,38 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         return false;
     }
 
+    private void processConfigIntent() {
+        Intent intent = getActivity().getIntent();
+        if (intent != null) {
+            Uri data = intent.getData();
+            if (data != null && !data.getQueryParameterNames().isEmpty()) {
+                String msg = "";
+                boolean allNulls = true;
+                final SharedPreferences.Editor editor = sharedPreferences.edit();
+                for (String key : PREFS_KEYS) {
+                    String val = data.getQueryParameter(key);
+                    if (val != null) {
+                        allNulls = false;
+                        msg += key + ": " + val + "\n";
+                        editor.putString(key, val);
+                        findPreference(key).setSummary(val);
+                    }
+                }
+                if (!allNulls) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle(R.string.dialog_title_settings_request)
+                        .setMessage(getString(R.string.dialog_msg_announce) + msg)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                editor.commit();
+                                Toast.makeText(getActivity(), R.string.ok_settings_written, Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .show();
+                }
+            }
+        }
+    }
 }
