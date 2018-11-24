@@ -26,7 +26,7 @@ public class Position {
     public Position() {
     }
 
-    public Position(String deviceId, Location location, double battery) {
+    public Position(String deviceId, Location location, double battery, Float temperature) {
         this.deviceId = deviceId;
         time = new Date(location.getTime());
         latitude = location.getLatitude();
@@ -41,6 +41,7 @@ public class Position {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             this.mock = location.isFromMockProvider();
         }
+        this.temperature = temperature;
     }
 
     private long id;
@@ -153,4 +154,13 @@ public class Position {
         this.mock = mock;
     }
 
+    private Float temperature;
+
+    public Float getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(float temperature) {
+        this.temperature = temperature;
+    }
 }

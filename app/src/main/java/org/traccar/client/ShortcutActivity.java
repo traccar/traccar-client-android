@@ -145,7 +145,9 @@ public class ShortcutActivity extends AppCompatActivity {
 
         Position position = new Position(
                 preferences.getString(MainFragment.KEY_DEVICE, null),
-                location, PositionProvider.getBatteryLevel(this));
+                location, PositionProvider.getBatteryLevel(this),
+                preferences.contains(MainFragment.KEY_TEMPERATURE) ?
+                        preferences.getFloat(MainFragment.KEY_TEMPERATURE, 0) : null);
 
         String request = ProtocolFormatter.formatRequest(
                 preferences.getString(MainFragment.KEY_URL, null), position, ALARM_SOS);

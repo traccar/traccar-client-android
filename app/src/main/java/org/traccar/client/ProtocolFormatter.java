@@ -36,6 +36,10 @@ public class ProtocolFormatter {
                 .appendQueryParameter("accuracy", String.valueOf(position.getAccuracy()))
                 .appendQueryParameter("batt", String.valueOf(position.getBattery()));
 
+        if (position.getTemperature() != null) {
+            builder.appendQueryParameter("temp1", String.valueOf(position.getTemperature()));
+        }
+
         if (position.getMock()) {
             builder.appendQueryParameter("mock", String.valueOf(position.getMock()));
         }

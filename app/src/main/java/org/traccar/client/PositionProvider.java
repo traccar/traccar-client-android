@@ -16,20 +16,30 @@
 package org.traccar.client;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.location.Criteria;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
-public class PositionProvider implements LocationListener {
+import static android.content.Context.SENSOR_SERVICE;
+import static android.hardware.Sensor.REPORTING_MODE_ON_CHANGE;
+
+public class PositionProvider implements LocationListener, SensorEventListener {
 
     private static final String TAG = PositionProvider.class.getSimpleName();
 
@@ -52,6 +62,10 @@ public class PositionProvider implements LocationListener {
 
     private Location lastLocation;
 
+    private SensorManager sensorManager;
+    private Sensor temperatureSensor;
+    private Float temperature;
+
     public PositionProvider(Context context, PositionListener listener) {
         this.context = context;
         this.listener = listener;
@@ -64,8 +78,17 @@ public class PositionProvider implements LocationListener {
         interval = Long.parseLong(preferences.getString(MainFragment.KEY_INTERVAL, "600")) * 1000;
         distance = Integer.parseInt(preferences.getString(MainFragment.KEY_DISTANCE, "0"));
         angle = Integer.parseInt(preferences.getString(MainFragment.KEY_ANGLE, "0"));
+        if (preferences.contains(MainFragment.KEY_TEMPERATURE)) {
+            temperature = preferences.getFloat(MainFragment.KEY_TEMPERATURE, 0);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sensorManager = (SensorManager) context.getSystemService(SENSOR_SERVICE);
+            temperatureSensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+        }
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("MissingPermission")
     public void startUpdates() {
         try {
@@ -74,6 +97,9 @@ public class PositionProvider implements LocationListener {
                     distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval, 0, this);
         } catch (RuntimeException e) {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        if (temperatureSensor != null) {
+            sensorManager.registerListener(this, temperatureSensor, REPORTING_MODE_ON_CHANGE);
         }
     }
 
@@ -96,7 +122,7 @@ public class PositionProvider implements LocationListener {
                 || angle > 0 && Math.abs(location.getBearing() - lastLocation.getBearing()) >= angle)) {
             Log.i(TAG, "location new");
             lastLocation = location;
-            listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel(context)));
+            listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel(context), temperature));
         } else {
             Log.i(TAG, location != null ? "location ignored" : "location nil");
         }
@@ -116,6 +142,9 @@ public class PositionProvider implements LocationListener {
 
     public void stopUpdates() {
         locationManager.removeUpdates(this);
+        if (sensorManager != null) {
+            sensorManager.unregisterListener(this);
+        }
     }
 
     public static double getBatteryLevel(Context context) {
@@ -126,6 +155,18 @@ public class PositionProvider implements LocationListener {
             return (level * 100.0) / scale;
         }
         return 0;
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
+            temperature = event.values[0];
+            preferences.edit().putFloat(MainFragment.KEY_TEMPERATURE, temperature).apply();
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
 }

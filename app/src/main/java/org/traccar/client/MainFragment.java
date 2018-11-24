@@ -60,6 +60,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     public static final String KEY_ANGLE = "angle";
     public static final String KEY_ACCURACY = "accuracy";
     public static final String KEY_STATUS = "status";
+    public static final String KEY_TEMPERATURE = "temperature";
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
 
