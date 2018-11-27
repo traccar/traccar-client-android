@@ -145,12 +145,14 @@ public class ShortcutActivity extends AppCompatActivity {
 
         Position position = new Position(
                 preferences.getString(MainFragment.KEY_DEVICE, null),
-                location, PositionProvider.getBatteryLevel(this));
+                location, PositionProvider.getBatteryLevel(this),
+                preferences.getString(MainFragment.KEY_AUTH, "")
+        );
 
         String request = ProtocolFormatter.formatRequest(
                 preferences.getString(MainFragment.KEY_URL, null), position, ALARM_SOS);
 
-        RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
+        RequestManager.sendRequestAsync(request, position.getAuth(), new RequestManager.RequestHandler() {
             @Override
             public void onComplete(boolean success) {
                 if (success) {

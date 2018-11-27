@@ -16,6 +16,7 @@
 package org.traccar.client;
 
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.IOException;
@@ -34,14 +35,16 @@ public class RequestManager {
     private static class RequestAsyncTask extends AsyncTask<String, Void, Boolean> {
 
         private RequestHandler handler;
+        private String authorization;
 
-        public RequestAsyncTask(RequestHandler handler) {
+        public RequestAsyncTask(RequestHandler handler, String authorization) {
             this.handler = handler;
+            this.authorization = authorization;
         }
 
         @Override
         protected Boolean doInBackground(String... request) {
-            return sendRequest(request[0]);
+            return sendRequest(request[0], authorization);
         }
 
         @Override
@@ -50,11 +53,17 @@ public class RequestManager {
         }
     }
 
-    public static boolean sendRequest(String request) {
+    public static boolean sendRequest(String request, String authorization) {
         InputStream inputStream = null;
+
+        final String basicAuth = TextUtils.isEmpty(authorization) ? "" : "Basic " + new String(authorization);
+
         try {
             URL url = new URL(request);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            if(!TextUtils.isEmpty(basicAuth)) {
+                connection.setRequestProperty("Authorization", basicAuth);
+            }
             connection.setReadTimeout(TIMEOUT);
             connection.setConnectTimeout(TIMEOUT);
             connection.setRequestMethod("POST");
@@ -75,8 +84,8 @@ public class RequestManager {
         }
     }
 
-    public static void sendRequestAsync(String request, RequestHandler handler) {
-        RequestAsyncTask task = new RequestAsyncTask(handler);
+    public static void sendRequestAsync(String request, final String Authorization, RequestHandler handler) {
+        RequestAsyncTask task = new RequestAsyncTask(handler, Authorization);
         task.execute(request);
     }
 

@@ -25,7 +25,7 @@ import android.util.Log;
 public class TrackingController implements PositionProvider.PositionListener, NetworkManager.NetworkHandler {
 
     private static final String TAG = TrackingController.class.getSimpleName();
-    private static final int RETRY_DELAY = 30 * 1000;
+    private static final int RETRY_DELAY1 = 30 * 1000;
     private static final int WAKE_LOCK_TIMEOUT = 120 * 1000;
 
     private boolean isOnline;
@@ -43,11 +43,11 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     private PowerManager.WakeLock wakeLock;
 
-    private void lock() {
+    private void wakeLock() {
         wakeLock.acquire(WAKE_LOCK_TIMEOUT);
     }
 
-    private void unlock() {
+    private void wakeUnlock() {
         if (wakeLock.isHeld()) {
             wakeLock.release();
         }
@@ -68,7 +68,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
     }
 
-    public void start() {
+    synchronized public void start() {
         if (isOnline) {
             read();
         }
@@ -80,7 +80,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         networkManager.start();
     }
 
-    public void stop() {
+    synchronized public void stop() {
         networkManager.stop();
         try {
             positionProvider.stopUpdates();
@@ -129,7 +129,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     private void write(Position position) {
         log("write", position);
-        lock();
+        wakeLock();
         databaseHelper.insertPositionAsync(position, new DatabaseHelper.DatabaseHandler<Void>() {
             @Override
             public void onComplete(boolean success, Void result) {
@@ -139,14 +139,14 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
                         isWaiting = false;
                     }
                 }
-                unlock();
+                wakeUnlock();
             }
         });
     }
 
-    private void read() {
+    synchronized private void read() {
         log("read", null);
-        lock();
+        wakeLock();
         databaseHelper.selectPositionAsync(new DatabaseHelper.DatabaseHandler<Position>() {
             @Override
             public void onComplete(boolean success, Position result) {
@@ -163,14 +163,14 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
                 } else {
                     retry();
                 }
-                unlock();
+                wakeUnlock();
             }
         });
     }
 
-    private void delete(Position position) {
+    synchronized private void delete(Position position) {
         log("delete", position);
-        lock();
+        wakeLock();
         databaseHelper.deletePositionAsync(position.getId(), new DatabaseHelper.DatabaseHandler<Void>() {
             @Override
             public void onComplete(boolean success, Void result) {
@@ -179,30 +179,32 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
                 } else {
                     retry();
                 }
-                unlock();
+                wakeUnlock();
             }
         });
     }
 
-    private void send(final Position position) {
+    synchronized private void send(final Position position) {
         log("send", position);
-        lock();
+        wakeLock();
         String request = ProtocolFormatter.formatRequest(url, position);
-        RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
+        RequestManager.sendRequestAsync(request, position.getAuth(), new RequestManager.RequestHandler() {
             @Override
             public void onComplete(boolean success) {
                 if (success) {
+                    StatusActivity.addMessage(context.getString(R.string.status_send_success)); //To record status correctly. Due to some of threshold combination cannot measure real status whether sent.
                     delete(position);
                 } else {
                     StatusActivity.addMessage(context.getString(R.string.status_send_fail));
                     retry();
                 }
-                unlock();
+                wakeUnlock();
             }
         });
     }
 
-    private void retry() {
+    synchronized private void retry() {
+        long interval = Long.parseLong(preferences.getString(MainFragment.KEY_INTERVAL, "600")) * 1000;
         log("retry", null);
         handler.postDelayed(new Runnable() {
             @Override
@@ -211,7 +213,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
                     read();
                 }
             }
-        }, RETRY_DELAY);
+        }, (interval > 0 ? Math.max(1, interval / 3) : 0));
     }
 
 }

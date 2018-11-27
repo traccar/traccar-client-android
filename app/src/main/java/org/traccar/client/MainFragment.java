@@ -34,6 +34,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.TwoStatePreference;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -60,6 +61,8 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     public static final String KEY_ANGLE = "angle";
     public static final String KEY_ACCURACY = "accuracy";
     public static final String KEY_STATUS = "status";
+    public static final String KEY_AUTH = "auth";
+    public static final String KEY_FORCING = "forceFrequency";
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
 
@@ -166,9 +169,11 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         findPreference(KEY_DEVICE).setEnabled(enabled);
         findPreference(KEY_URL).setEnabled(enabled);
         findPreference(KEY_INTERVAL).setEnabled(enabled);
+        findPreference(KEY_FORCING).setEnabled(enabled);
         findPreference(KEY_DISTANCE).setEnabled(enabled);
         findPreference(KEY_ANGLE).setEnabled(enabled);
         findPreference(KEY_ACCURACY).setEnabled(enabled);
+        findPreference(KEY_AUTH).setEnabled(enabled);
     }
 
     @Override

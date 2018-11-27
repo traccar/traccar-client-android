@@ -18,15 +18,21 @@ package org.traccar.client;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
+import android.util.Base64;
 
 import java.util.Date;
+
+import static android.util.Base64.NO_WRAP;
 
 public class Position {
 
     public Position() {
     }
 
-    public Position(String deviceId, Location location, double battery) {
+    public Position(final String deviceId,
+                    final Location location,
+                    final double battery,
+                    final String Authorization) {
         this.deviceId = deviceId;
         time = new Date(location.getTime());
         latitude = location.getLatitude();
@@ -41,6 +47,8 @@ public class Position {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             this.mock = location.isFromMockProvider();
         }
+
+        this.Auth = Base64.encodeToString(Authorization.getBytes(), NO_WRAP); //NO_WRAP is Android specific option.
     }
 
     private long id;
@@ -153,4 +161,13 @@ public class Position {
         this.mock = mock;
     }
 
+    private String Auth;
+
+    public String getAuth() {
+        return Auth;
+    }
+
+    public void setAuth(String auth) {
+        Auth = auth;
+    }
 }

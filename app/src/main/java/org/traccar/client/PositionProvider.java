@@ -50,7 +50,12 @@ public class PositionProvider implements LocationListener {
     private double distance;
     private double angle;
 
+    private String authorization;
+    private boolean isForceFrequency = false;
+
     private Location lastLocation;
+
+    private boolean isStarted = false;
 
     public PositionProvider(Context context, PositionListener listener) {
         this.context = context;
@@ -64,14 +69,31 @@ public class PositionProvider implements LocationListener {
         interval = Long.parseLong(preferences.getString(MainFragment.KEY_INTERVAL, "600")) * 1000;
         distance = Integer.parseInt(preferences.getString(MainFragment.KEY_DISTANCE, "0"));
         angle = Integer.parseInt(preferences.getString(MainFragment.KEY_ANGLE, "0"));
+        authorization = preferences.getString(MainFragment.KEY_AUTH, "");
+        isForceFrequency = preferences.getBoolean(MainFragment.KEY_FORCING, false);
     }
 
     @SuppressLint("MissingPermission")
-    public void startUpdates() {
+    synchronized public void startUpdates() {
+        if(isStarted){
+            return;
+        }
+        isStarted = true;
         try {
+			//Use this for Android OS specific efficiency
             locationManager.requestLocationUpdates(
                     getProvider(preferences.getString(MainFragment.KEY_ACCURACY, "medium")),
-                    distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval, 0, this);
+                    //distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval,
+                    interval, //<<-- This is important. There is no reason to get frequently since user set the interval
+                    isForceFrequency ? 0 : (float) distance, this);
+
+			/*
+			//Use this for common logic - more battery draining
+			locationManager.requestLocationUpdates(
+                    getProvider(preferences.getString(MainFragment.KEY_ACCURACY, "medium")),
+                    0,
+                    0.0f, this);
+			*/
         } catch (RuntimeException e) {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -90,15 +112,32 @@ public class PositionProvider implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        if (location != null && (lastLocation == null
-                || location.getTime() - lastLocation.getTime() >= interval
-                || distance > 0 && location.distanceTo(lastLocation) >= distance
-                || angle > 0 && Math.abs(location.getBearing() - lastLocation.getBearing()) >= angle)) {
+        double diffDistance = lastLocation != null ? location.distanceTo(lastLocation) : 0;
+        double diffBearing = lastLocation != null ? Math.abs(location.getBearing() - lastLocation.getBearing()) : 0;
+        if (location != null &&
+            (lastLocation == null
+                ||
+                (
+                    location.getTime() - lastLocation.getTime() >= interval
+                    &&
+                        (
+                            isForceFrequency
+                            ||
+                            (
+                                    distance > 0 ? diffDistance >= distance : true
+                                    ||
+                                    angle > 0 ? diffBearing >= angle : true
+                            )
+                        )
+                )
+            )
+         ) {
             Log.i(TAG, "location new");
             lastLocation = location;
-            listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel(context)));
+            listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel(context), authorization));
         } else {
             Log.i(TAG, location != null ? "location ignored" : "location nil");
+            StatusActivity.addMessage(context.getString(R.string.status_location_ignored));
         }
     }
 
@@ -114,8 +153,9 @@ public class PositionProvider implements LocationListener {
     public void onProviderDisabled(String provider) {
     }
 
-    public void stopUpdates() {
+    synchronized public void stopUpdates() {
         locationManager.removeUpdates(this);
+        isStarted = false;
     }
 
     public static double getBatteryLevel(Context context) {

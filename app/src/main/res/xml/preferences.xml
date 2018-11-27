@@ -35,6 +35,12 @@
         android:summary="@string/settings_interval_summary"
         android:title="@string/settings_interval_title" />
 
+    <CheckBoxPreference
+        android:title="@string/settings_force_interval_title"
+        android:defaultValue="false"
+        android:summary="@string/settings_force_interval_summary"
+        android:key="forceFrequency" />
+
     <EditTextPreference
         android:defaultValue="0"
         android:key="distance"
@@ -48,5 +54,12 @@
         android:numeric="integer"
         android:summary="@string/settings_angle_summary"
         android:title="@string/settings_angle_title" />
+
+    <EditTextPreference
+        android:defaultValue="@string/settings_auth_id_sample"
+        android:key="auth"
+        android:summary="@string/settings_auth_summary"
+        android:title="@string/settings_auth_title"
+        android:inputType="textPassword" />
 
 </PreferenceScreen>

@@ -35,10 +35,21 @@ public class StatusActivity extends AppCompatActivity {
 
     private static final LinkedList<String> messages = new LinkedList<>();
     private static final Set<ArrayAdapter<String>> adapters = new HashSet<>();
+    private static ListView listView;
 
     private static void notifyAdapters() {
-        for (ArrayAdapter<String> adapter : adapters) {
+        for (final ArrayAdapter<String> adapter : adapters) {
             adapter.notifyDataSetChanged();
+            /*
+            //If you want autoscrolling, uncomment this.
+            listView.post(new Runnable() {
+                @Override
+                public void run() {
+                    // Select the last row so it will scroll into view...
+                    listView.setSelection(adapter.getCount() - 1);
+                }
+            });
+            */
         }
     }
 
@@ -64,7 +75,7 @@ public class StatusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, messages);
-        ListView listView = findViewById(android.R.id.list);
+        listView = findViewById(android.R.id.list);
         listView.setAdapter(adapter);
         adapters.add(adapter);
     }

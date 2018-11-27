@@ -11,11 +11,16 @@
   <string name="settings_url_summary">Tracking server URL</string>
   <string name="settings_interval_title">Frequency</string>
   <string name="settings_interval_summary">Reporting interval in seconds</string>
+  <string name="settings_force_interval_title">Forcing frequency</string>
+  <string name="settings_force_interval_summary">Update location as frequency by ignoring distance and angle threshold</string>
   <string name="settings_distance_title">Distance</string>
   <string name="settings_distance_summary">Reporting distance in meters</string>
   <string name="settings_angle_title">Angle</string>
   <string name="settings_angle_summary">Reporting angle in degrees</string>
   <string name="settings_status_title">Service status</string>
+  <string name="settings_auth_summary">HTTP Basic Authorization format is \'id:pass\'</string>
+  <string name="settings_auth_title">Authorization</string>
+  <string name="settings_auth_id_sample"></string>
   <string name="settings_status_off">Start</string>
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Service stopped</string>
@@ -39,6 +44,7 @@
   <string name="status_send_success">Send successfully</string>
   <string name="status_send_fail">Send failed</string>
   <string name="status_location_update">Location update</string>
+  <string name="status_location_ignored">Location ignored</string>
   <string name="status_network_online">Network online</string>
   <string name="status_network_offline">Network offline</string>
   <string name="hidden_app_name">Device Settings</string>
