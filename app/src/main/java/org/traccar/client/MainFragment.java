@@ -29,7 +29,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -44,9 +43,10 @@ import android.view.MenuItem;
 import android.webkit.URLUtil;
 import android.widget.Toast;
 
-import java.util.HashSet;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Random;
-import java.util.Set;
 
 public class MainFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
@@ -129,7 +129,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         findPreference(KEY_DISTANCE).setOnPreferenceChangeListener(numberValidationListener);
         findPreference(KEY_ANGLE).setOnPreferenceChangeListener(numberValidationListener);
 
-        processConfigIntent();
+        processConfigIntent(getActivity().getIntent());
 
         alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
         alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, new Intent(getActivity(), AutostartReceiver.class), 0);
@@ -272,36 +272,51 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         return false;
     }
 
-    private void processConfigIntent() {
-        Intent intent = getActivity().getIntent();
+    private void processConfigIntent(Intent intent) {
         if (intent != null) {
             Uri data = intent.getData();
             if (data != null && !data.getQueryParameterNames().isEmpty()) {
-                String msg = "";
-                boolean allNulls = true;
+                StringBuilder msg = new StringBuilder();
+                boolean allValuesNull = true, noNewValues = true;
                 final SharedPreferences.Editor editor = sharedPreferences.edit();
+                final ArrayList<String> keyList = new ArrayList<>();
+                final ArrayList<String> valList = new ArrayList<>();
                 for (String key : PREFS_KEYS) {
                     String val = data.getQueryParameter(key);
-                    if (val != null) {
-                        allNulls = false;
-                        msg += key + ": " + val + "\n";
-                        editor.putString(key, val);
-                        findPreference(key).setSummary(val);
+                    if (val != null && !val.isEmpty()) {
+                        try {
+                            val = URLDecoder.decode(val, "UTF-8");
+                            if (!sharedPreferences.getString(key, "").equals(val)) {
+                                noNewValues = false;
+                            }
+                            keyList.add(key);
+                            valList.add(val);
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        allValuesNull = false;
+                        msg.append(key).append(": ").append(val).append("\n");
                     }
                 }
-                if (!allNulls) {
+                if (!allValuesNull && !noNewValues) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle(R.string.dialog_title_settings_request)
-                        .setMessage(getString(R.string.dialog_msg_announce) + msg)
+                        .setMessage(getString(R.string.dialog_msg_announce) + "\n\n" + msg)
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                editor.commit();
+                                for (int i = 0; i < keyList.size(); i++) {
+                                    editor.putString(keyList.get(i), valList.get(i));
+                                    findPreference(keyList.get(i)).setSummary(valList.get(i));
+                                }
+                                editor.apply();
                                 Toast.makeText(getActivity(), R.string.ok_settings_written, Toast.LENGTH_LONG).show();
                             }
                         })
                         .setNegativeButton(android.R.string.cancel, null)
                         .show();
+                }else if(!allValuesNull && noNewValues) {
+                    Toast.makeText(getActivity(), R.string.settings_identical, Toast.LENGTH_LONG).show();
                 }
             }
         }

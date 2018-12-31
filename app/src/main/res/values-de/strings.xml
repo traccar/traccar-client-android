@@ -43,4 +43,8 @@
   <string name="hidden_app_name">Geräteeinstellungen</string>
   <string name="hidden_alert">Die App wurde versteckt. Um sie wieder zu öffnen, wähle 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Bitte eine gültige http:// oder https:// URL eingeben</string>
+    <string name="dialog_title_settings_request">Einstellungen aktualisieren</string>
+  <string name="dialog_msg_announce">Diese Einstellungen werden neu gesetzt:</string>
+  <string name="ok_settings_written">Neue Einstellungen übernommen.</string>
+  <string name="settings_identical">Einstellungen nicht übernommen, identisch mit vorhandenen.</string>
 </resources>

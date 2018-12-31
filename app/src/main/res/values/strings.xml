@@ -47,4 +47,5 @@
   <string name="dialog_title_settings_request">Settings write request</string>
   <string name="dialog_msg_announce">These settings will be written:</string>
   <string name="ok_settings_written">New settings have been written.</string>
+    <string name="settings_identical">Settings not written, identical to existing ones.</string>
 </resources>
