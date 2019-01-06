@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 - 2017 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2013 - 2019 Anton Tananaev (anton.tananaev@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,48 +15,41 @@
  */
 package org.traccar.client;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.BatteryManager;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
-public class PositionProvider implements LocationListener {
+public abstract class PositionProvider {
 
     private static final String TAG = PositionProvider.class.getSimpleName();
 
-    private static final int MINIMUM_INTERVAL = 1000;
+    protected static final int MINIMUM_INTERVAL = 1000;
 
     public interface PositionListener {
         void onPositionUpdate(Position position);
+        void onPositionError(Throwable error);
     }
 
-    private final PositionListener listener;
+    protected final PositionListener listener;
 
-    private final Context context;
-    private SharedPreferences preferences;
-    private LocationManager locationManager;
+    protected final Context context;
+    protected SharedPreferences preferences;
 
-    private String deviceId;
-    private long interval;
-    private double distance;
-    private double angle;
+    protected String deviceId;
+    protected long interval;
+    protected double distance;
+    protected double angle;
 
-    private Location lastLocation;
+    protected Location lastLocation;
 
     public PositionProvider(Context context, PositionListener listener) {
         this.context = context;
         this.listener = listener;
-
-        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -66,30 +59,13 @@ public class PositionProvider implements LocationListener {
         angle = Integer.parseInt(preferences.getString(MainFragment.KEY_ANGLE, "0"));
     }
 
-    @SuppressLint("MissingPermission")
-    public void startUpdates() {
-        try {
-            locationManager.requestLocationUpdates(
-                    getProvider(preferences.getString(MainFragment.KEY_ACCURACY, "medium")),
-                    distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval, 0, this);
-        } catch (RuntimeException e) {
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    }
+    public abstract void startUpdates();
 
-    public static String getProvider(String accuracy) {
-        switch (accuracy) {
-            case "high":
-                return LocationManager.GPS_PROVIDER;
-            case "low":
-                return LocationManager.PASSIVE_PROVIDER;
-            default:
-                return LocationManager.NETWORK_PROVIDER;
-        }
-    }
+    public abstract void stopUpdates();
 
-    @Override
-    public void onLocationChanged(Location location) {
+    public abstract void requestSingleLocation();
+
+    protected void processLocation(Location location) {
         if (location != null && (lastLocation == null
                 || location.getTime() - lastLocation.getTime() >= interval
                 || distance > 0 && location.distanceTo(lastLocation) >= distance
@@ -102,23 +78,7 @@ public class PositionProvider implements LocationListener {
         }
     }
 
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-    }
-
-    public void stopUpdates() {
-        locationManager.removeUpdates(this);
-    }
-
-    public static double getBatteryLevel(Context context) {
+    protected static double getBatteryLevel(Context context) {
         Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         if (batteryIntent != null) {
             int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
