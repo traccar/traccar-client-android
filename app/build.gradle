@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.2'
 
     defaultConfig {
         applicationId "org.traccar.client"
@@ -37,9 +36,9 @@ android {
 dependencies {
     implementation 'com.android.support:design:28.0.0'
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.robolectric:robolectric:3.8'
-    googleImplementation 'com.google.firebase:firebase-core:16.0.5'
-    googleImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
+    testImplementation 'org.robolectric:robolectric:4.1'
+    googleImplementation 'com.google.firebase:firebase-core:16.0.6'
+    googleImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
 }
 
 if (getGradle().getStartParameter().getTaskRequests().toString().contains("Google")) {
