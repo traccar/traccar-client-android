@@ -13,7 +13,6 @@ import java.util.Date;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
 public class ProtocolFormatterTest {
 
     @Test

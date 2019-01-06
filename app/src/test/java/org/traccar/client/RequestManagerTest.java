@@ -10,7 +10,6 @@ import org.robolectric.annotation.Config;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
 public class RequestManagerTest {
 
     @Ignore
