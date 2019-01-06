@@ -20,7 +20,7 @@ import android.content.Context;
 public class PositionProviderFactory {
 
     public static PositionProvider create(Context context, PositionProvider.PositionListener listener) {
-        return new AndroidPositionProvider(context, listener);
+        return new GooglePositionProvider(context, listener);
     }
 
 }
