@@ -49,6 +49,7 @@ public class NetworkManager extends BroadcastReceiver {
     public void start() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        filter.addAction("com.ainawireless.intent.action.EMERG_DOWN");
         context.registerReceiver(this, filter);
     }
 
@@ -62,6 +63,12 @@ public class NetworkManager extends BroadcastReceiver {
             boolean isOnline = isOnline();
             Log.i(TAG, "network " + (isOnline ? "on" : "off"));
             handler.onNetworkUpdate(isOnline);
+        }
+        else if (intent.getAction().equals("com.ainawireless.intent.action.EMERG_DOWN")) {
+            Log.i(TAG, "EmergencyAlarmButton triggered!");
+            Intent intentOut = new Intent(Intent.ACTION_DEFAULT, null, this.context, ShortcutActivity.class);
+            intentOut.putExtra(ShortcutActivity.EXTRA_ACTION, ShortcutActivity.ACTION_SOS);
+            this.context.startActivity(intentOut);
         }
     }
 
