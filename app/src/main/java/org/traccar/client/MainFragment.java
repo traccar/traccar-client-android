@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2017 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ package org.traccar.client;
 
 import android.Manifest;
 import android.app.AlarmManager;
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
@@ -28,14 +27,14 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.TwoStatePreference;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,9 +42,7 @@ import android.view.MenuItem;
 import android.webkit.URLUtil;
 import android.widget.Toast;
 
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 public class MainFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 - 2017 Anton Tananaev (anton@traccar.org)
+ * Copyright 2019 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,11 @@
 package org.traccar.client;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
-public class AutostartReceiver extends WakefulBroadcastReceiver {
-    
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        if (sharedPreferences.getBoolean(MainFragment.KEY_STATUS, false)) {
-            startWakefulForegroundService(context, new Intent(context, TrackingService.class));
-        }
+public class PositionProviderFactory {
+
+    public static PositionProvider create(Context context, PositionProvider.PositionListener listener) {
+        return new GooglePositionProvider(context, listener);
     }
 
 }

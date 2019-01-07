@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2015 - 2019 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         this.context = context;
         handler = new Handler();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        positionProvider = new PositionProvider(context, this);
+        positionProvider = PositionProviderFactory.create(context, this);
         databaseHelper = new DatabaseHelper(context);
         networkManager = new NetworkManager(context, this);
         isOnline = networkManager.isOnline();
@@ -96,6 +96,10 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         if (position != null) {
             write(position);
         }
+    }
+
+    @Override
+    public void onPositionError(Throwable error) {
     }
 
     @Override

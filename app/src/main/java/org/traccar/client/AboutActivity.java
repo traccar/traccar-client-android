@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2017 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ package org.traccar.client;
 
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 

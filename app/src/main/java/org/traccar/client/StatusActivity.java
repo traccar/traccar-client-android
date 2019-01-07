@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2017 Anton Tananaev (anton.tananaev@gmail.com)
+ * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import java.util.LinkedList;
 import java.util.Set;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
