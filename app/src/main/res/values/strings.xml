@@ -44,4 +44,8 @@
   <string name="hidden_app_name">Device Settings</string>
   <string name="hidden_alert">The app has been hidden. To open it again please dial 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Please enter a valid http:// or https:// URL</string>
+  // Aina 15-Jan-2019, Emergency alert on broadcast
+  <string name="settings_broadcast" >com.ainawireless.intent.action.EMERG_DOWN</string>
+  <string name="settings_broadcast_summary">Add broadcast that triggers SOS</string>
+  <string name="settings_broadcast_title" >SOS broadcast</string>
 </resources>

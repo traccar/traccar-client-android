@@ -49,4 +49,12 @@
         android:summary="@string/settings_angle_summary"
         android:title="@string/settings_angle_title" />
 
+    // Aina 15-Jan-2019, Emergency alert on broadcast
+    <EditTextPreference
+        android:hint="@string/settings_broadcast"
+        android:key="broadcast"
+        android:summary="@string/settings_broadcast_summary"
+        android:title="@string/settings_broadcast_title"
+        android:defaultValue="@string/settings_broadcast"/>
+
 </PreferenceScreen>

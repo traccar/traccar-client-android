@@ -19,13 +19,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class NetworkManager extends BroadcastReceiver {
 
     private static final String TAG = NetworkManager.class.getSimpleName();
+    private String broadcast;
+    private SharedPreferences preferences;
 
     private Context context;
     private NetworkHandler handler;
@@ -47,11 +51,17 @@ public class NetworkManager extends BroadcastReceiver {
     }
 
     public void start() {
+        // Aina 15-Jan-2019, Emergency alert on broadcast
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        broadcast = preferences.getString(MainFragment.KEY_BROADCAST, context.getString(R.string.settings_broadcast));
         IntentFilter filter = new IntentFilter();
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        filter.addAction("com.ainawireless.intent.action.EMERG_DOWN");
+        filter.addAction(broadcast);
         context.registerReceiver(this, filter);
     }
+
+    //preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    //url = preferences.getString(MainFragment.KEY_URL, context.getString(R.string.settings_url_default_value));
 
     public void stop() {
         context.unregisterReceiver(this);
@@ -64,7 +74,8 @@ public class NetworkManager extends BroadcastReceiver {
             Log.i(TAG, "network " + (isOnline ? "on" : "off"));
             handler.onNetworkUpdate(isOnline);
         }
-        else if (intent.getAction().equals("com.ainawireless.intent.action.EMERG_DOWN")) {
+        // Aina 15-Jan-2019, Emergency alert on broadcast
+        else if (intent.getAction().equals(broadcast)) {
             Log.i(TAG, "EmergencyAlarmButton triggered!");
             Intent intentOut = new Intent(Intent.ACTION_DEFAULT, null, this.context, ShortcutActivity.class);
             intentOut.putExtra(ShortcutActivity.EXTRA_ACTION, ShortcutActivity.ACTION_SOS);
