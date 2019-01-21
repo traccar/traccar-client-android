@@ -13,4 +13,10 @@
         android:title="@string/menu_about"
         app:showAsAction="never" />
 
+    // Aina 21-Jan-2019, Emergency alert on broadcast
+    <item
+        android:id="@+id/sosBroadcast"
+        android:title="@string/settings_sos_broadcast_title"
+        app:showAsAction="never" />
+
 </menu>

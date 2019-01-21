@@ -53,15 +53,14 @@ public class NetworkManager extends BroadcastReceiver {
     public void start() {
         // Aina 15-Jan-2019, Emergency alert on broadcast
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        broadcast = preferences.getString(MainFragment.KEY_BROADCAST, context.getString(R.string.settings_broadcast));
+        broadcast = preferences.getString(MainFragment.KEY_BROADCAST, " ");
         IntentFilter filter = new IntentFilter();
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        filter.addAction(broadcast);
+        if(broadcast.trim().length() > 0) {
+            filter.addAction(broadcast);
+        }
         context.registerReceiver(this, filter);
     }
-
-    //preferences = PreferenceManager.getDefaultSharedPreferences(context);
-    //url = preferences.getString(MainFragment.KEY_URL, context.getString(R.string.settings_url_default_value));
 
     public void stop() {
         context.unregisterReceiver(this);

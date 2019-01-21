@@ -20,6 +20,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -36,10 +37,13 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.URLUtil;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -168,8 +172,6 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         findPreference(KEY_DISTANCE).setEnabled(enabled);
         findPreference(KEY_ANGLE).setEnabled(enabled);
         findPreference(KEY_ACCURACY).setEnabled(enabled);
-        // Aina 15-Jan-2019, Emergency alert on broadcast
-        findPreference(KEY_BROADCAST).setEnabled(enabled);
     }
 
     @Override
@@ -191,6 +193,18 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    // Aina 21-Jan-2019, Emergency alert on broadcast
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem sosItem = menu.findItem(R.id.sosBroadcast);
+        if(sharedPreferences.getBoolean(KEY_STATUS, false)){
+            sosItem.setEnabled(false);
+        } else {
+            sosItem.setEnabled(true);
+        }
+        super.onPrepareOptionsMenu(menu);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.status) {
@@ -199,6 +213,36 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         } else if (item.getItemId() == R.id.about) {
             startActivity(new Intent(getActivity(), AboutActivity.class));
             return true;
+        }
+        // Aina 21-Jan-2019, Emergency alert on broadcast
+        else if (item.getItemId() == R.id.sosBroadcast) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.sos_setting_field, null);
+            final EditText sosEditText = (EditText) dialogView.findViewById(R.id.sosEditText);
+            String broadcast = sharedPreferences.getString(MainFragment.KEY_BROADCAST, "");
+            if(broadcast.trim().length() > 0) {
+                sosEditText.setText(broadcast);
+            }
+            builder.setMessage(R.string.settings_sos_broadcast_summary)
+                    .setTitle(R.string.settings_sos_broadcast_title)
+                    .setView(dialogView);
+            builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(KEY_BROADCAST, sosEditText.getText().toString());
+                    editor.commit();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
         return super.onOptionsItemSelected(item);
     }
