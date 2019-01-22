@@ -13,4 +13,9 @@
         android:title="@string/menu_about"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/sosBroadcast"
+        android:title="@string/settings_sos_broadcast_title"
+        app:showAsAction="never" />
+
 </menu>

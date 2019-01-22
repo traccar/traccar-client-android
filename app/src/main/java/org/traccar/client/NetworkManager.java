@@ -19,13 +19,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class NetworkManager extends BroadcastReceiver {
 
     private static final String TAG = NetworkManager.class.getSimpleName();
+    private String broadcast;
+    private SharedPreferences preferences;
 
     private Context context;
     private NetworkHandler handler;
@@ -47,8 +51,13 @@ public class NetworkManager extends BroadcastReceiver {
     }
 
     public void start() {
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        broadcast = preferences.getString(MainFragment.KEY_BROADCAST, " ");
         IntentFilter filter = new IntentFilter();
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        if(broadcast.trim().length() > 0) {
+            filter.addAction(broadcast);
+        }
         context.registerReceiver(this, filter);
     }
 
@@ -62,6 +71,11 @@ public class NetworkManager extends BroadcastReceiver {
             boolean isOnline = isOnline();
             Log.i(TAG, "network " + (isOnline ? "on" : "off"));
             handler.onNetworkUpdate(isOnline);
+        } else if (intent.getAction().equals(broadcast)) {
+            Log.i(TAG, "EmergencyAlarmButton triggered!");
+            Intent intentOut = new Intent(Intent.ACTION_DEFAULT, null, this.context, ShortcutActivity.class);
+            intentOut.putExtra(ShortcutActivity.EXTRA_ACTION, ShortcutActivity.ACTION_SOS);
+            this.context.startActivity(intentOut);
         }
     }
 

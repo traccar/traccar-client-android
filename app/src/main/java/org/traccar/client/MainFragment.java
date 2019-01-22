@@ -20,6 +20,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -36,10 +37,13 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.URLUtil;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -57,6 +61,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     public static final String KEY_ANGLE = "angle";
     public static final String KEY_ACCURACY = "accuracy";
     public static final String KEY_STATUS = "status";
+    public static final String KEY_BROADCAST = "broadcast";
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
 
@@ -188,6 +193,13 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     }
 
     @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem sosItem = menu.findItem(R.id.sosBroadcast);
+        sosItem.setEnabled(!sharedPreferences.getBoolean(KEY_STATUS, false));
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.status) {
             startActivity(new Intent(getActivity(), StatusActivity.class));
@@ -195,6 +207,33 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         } else if (item.getItemId() == R.id.about) {
             startActivity(new Intent(getActivity(), AboutActivity.class));
             return true;
+        } else if (item.getItemId() == R.id.sosBroadcast) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.sos_setting_field, null);
+            final EditText sosEditText = (EditText) dialogView.findViewById(R.id.sosEditText);
+            String broadcast = sharedPreferences.getString(MainFragment.KEY_BROADCAST, "");
+            if(broadcast.trim().length() > 0) {
+                sosEditText.setText(broadcast);
+            }
+            builder.setMessage(R.string.settings_sos_broadcast_summary)
+                    .setTitle(R.string.settings_sos_broadcast_title)
+                    .setView(dialogView);
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(KEY_BROADCAST, sosEditText.getText().toString());
+                    editor.commit();
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            builder.create().show();
         }
         return super.onOptionsItemSelected(item);
     }
