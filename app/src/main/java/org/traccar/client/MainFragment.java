@@ -61,7 +61,6 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     public static final String KEY_ANGLE = "angle";
     public static final String KEY_ACCURACY = "accuracy";
     public static final String KEY_STATUS = "status";
-    // Aina 15-Jan-2019, Emergency alert on broadcast
     public static final String KEY_BROADCAST = "broadcast";
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
@@ -193,15 +192,10 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    // Aina 21-Jan-2019, Emergency alert on broadcast
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         MenuItem sosItem = menu.findItem(R.id.sosBroadcast);
-        if(sharedPreferences.getBoolean(KEY_STATUS, false)){
-            sosItem.setEnabled(false);
-        } else {
-            sosItem.setEnabled(true);
-        }
+        sosItem.setEnabled(!sharedPreferences.getBoolean(KEY_STATUS, false));
         super.onPrepareOptionsMenu(menu);
     }
 
@@ -213,9 +207,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         } else if (item.getItemId() == R.id.about) {
             startActivity(new Intent(getActivity(), AboutActivity.class));
             return true;
-        }
-        // Aina 21-Jan-2019, Emergency alert on broadcast
-        else if (item.getItemId() == R.id.sosBroadcast) {
+        } else if (item.getItemId() == R.id.sosBroadcast) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             LayoutInflater inflater = getActivity().getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.sos_setting_field, null);
@@ -227,7 +219,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
             builder.setMessage(R.string.settings_sos_broadcast_summary)
                     .setTitle(R.string.settings_sos_broadcast_title)
                     .setView(dialogView);
-            builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -235,14 +227,13 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
                     editor.commit();
                 }
             });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
             });
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            builder.create().show();
         }
         return super.onOptionsItemSelected(item);
     }

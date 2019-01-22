@@ -51,7 +51,6 @@ public class NetworkManager extends BroadcastReceiver {
     }
 
     public void start() {
-        // Aina 15-Jan-2019, Emergency alert on broadcast
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         broadcast = preferences.getString(MainFragment.KEY_BROADCAST, " ");
         IntentFilter filter = new IntentFilter();
@@ -72,9 +71,7 @@ public class NetworkManager extends BroadcastReceiver {
             boolean isOnline = isOnline();
             Log.i(TAG, "network " + (isOnline ? "on" : "off"));
             handler.onNetworkUpdate(isOnline);
-        }
-        // Aina 15-Jan-2019, Emergency alert on broadcast
-        else if (intent.getAction().equals(broadcast)) {
+        } else if (intent.getAction().equals(broadcast)) {
             Log.i(TAG, "EmergencyAlarmButton triggered!");
             Intent intentOut = new Intent(Intent.ACTION_DEFAULT, null, this.context, ShortcutActivity.class);
             intentOut.putExtra(ShortcutActivity.EXTRA_ACTION, ShortcutActivity.ACTION_SOS);
