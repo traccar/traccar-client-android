@@ -2,6 +2,10 @@
 <resources>
   <string name="app_name">Traccar klient</string>
   <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Spustit službu</string>
+  <string name="shortcut_stop">Zastavit službu</string>
+  <string name="shortcut_sos">Odeslat SOS</string>
+  <string name="channel_default">Primární kanál</string>
   <string name="settings_id_title">Identifikátor zařízení</string>
   <string name="settings_url_title">URL serveru</string>
   <string name="settings_url_summary">URL sledovacího serveru</string>
@@ -16,11 +20,11 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Zastaveno</string>
   <string name="settings_status_on_summary">Spuštěno</string>
-  <string name="settings_provider_title">Poskytovatel zaměření</string>
-  <string name="settings_provider_summary">Zdroj zaměřovacích dat</string>
-  <string name="settings_provider_gps">GPS</string>
-  <string name="settings_provider_network">Mobilní síť</string>
-  <string name="settings_provider_mixed">Obojí</string>
+  <string name="settings_accuracy_title">Přesnost umístění</string>
+  <string name="settings_accuracy_summary">Požadovaná přesnost umístění</string>
+  <string name="settings_accuracy_high">Vysoká</string>
+  <string name="settings_accuracy_medium">Střední</string>
+  <string name="settings_accuracy_low">Nízká</string>
   <string name="settings_foreground_title">Popředí služba</string>
   <string name="settings_foreground_summary">Zvýšit prioritu služba</string>
   <string name="menu_status">Stav</string>
@@ -30,10 +34,13 @@
   <string name="about_description">GPS sledovací aplikace pracující v reálném čase pro zařízení s operačním systémem Android. Kompatibilní s Traccar serverem a dalšími sledovacími systémy.</string>
   <string name="about_license">Tato aplikace je zdarma a open source, zdrojový kód je licencován pod Apache License Version 2.0 a je přístupný na GitHub.</string>
   <string name="about_web">Pro více informací navštivte\nwww.traccar.org/client</string>
+  <string name="status_service_create">Služba spuštěna</string>
+  <string name="status_service_destroy">Služba zastavena</string>
   <string name="status_send_success">Úspěšně odesláno</string>
   <string name="status_send_fail">Odesílání selhalo</string>
   <string name="status_location_update">Aktualizace pozice</string>
-  <string name="status_connectivity_change">Změna připojení</string>
+  <string name="status_network_online">Síť online</string>
+  <string name="status_network_offline">Síť offile</string>
   <string name="hidden_app_name">Nastavení zařízení</string>
   <string name="hidden_alert">Aplikace byla skryta. Pro znovuotevření vytočte 8722227 (TRACCAR)</string>
   <string name="error_msg_invalid_url">Prosím vložte platnou http:// nebo https:// URL</string>

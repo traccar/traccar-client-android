@@ -9,11 +9,6 @@
   <string name="settings_status_on">중지</string>
   <string name="settings_status_off_summary">서비스중지</string>
   <string name="settings_status_on_summary">서비스실행</string>
-  <string name="settings_provider_title">위치공급자</string>
-  <string name="settings_provider_summary">위치데이타 출처</string>
-  <string name="settings_provider_gps">GPS공급자</string>
-  <string name="settings_provider_network">네트워크공급자</string>
-  <string name="settings_provider_mixed">혼합공급자</string>
   <string name="settings_foreground_title">선처리 서비스</string>
   <string name="settings_foreground_summary">서비스우선순위증가</string>
   <string name="menu_status">상태</string>
@@ -26,7 +21,6 @@
   <string name="status_send_success">보내기 성공</string>
   <string name="status_send_fail">보내기 실패</string>
   <string name="status_location_update">위치 수정</string>
-  <string name="status_connectivity_change">연결 변경</string>
   <string name="hidden_app_name">장치설정</string>
   <string name="hidden_alert">앱이 숨겨져 있습니다. 다시 열려면 8722227 (TRACCAR)로 전화하십시오.</string>
 </resources>

@@ -16,11 +16,6 @@
   <string name="settings_status_on">Kết thúc</string>
   <string name="settings_status_off_summary">Dịch vụ kết thúc</string>
   <string name="settings_status_on_summary">Dịch vụ đang hoạt động</string>
-  <string name="settings_provider_title">Định vị</string>
-  <string name="settings_provider_summary">Nguồn dữ liệu vị trí</string>
-  <string name="settings_provider_gps">Thiết bị GPS</string>
-  <string name="settings_provider_network">Nhà cung cấp mạng</string>
-  <string name="settings_provider_mixed">Nhà cung cấp tổng hợp</string>
   <string name="settings_foreground_title">Dịch vụ chạy nổi</string>
   <string name="settings_foreground_summary">Tăng thứ tự ưu tiên dịch vụ</string>
   <string name="menu_status">Trạng thái</string>
@@ -33,7 +28,6 @@
   <string name="status_send_success">Gửi thành công</string>
   <string name="status_send_fail">Gửi lỗi</string>
   <string name="status_location_update">Vị trí đã được cập nhật</string>
-  <string name="status_connectivity_change">Kết nối thay đổi</string>
   <string name="hidden_app_name">Cài đặt thiết bị</string>
   <string name="hidden_alert">Ứng dụng đã được ẩn. Để mở lại xin vui lòng gọi 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Vui lòng nhập đường dẫn hợp lệ http:// hoặc https://</string>

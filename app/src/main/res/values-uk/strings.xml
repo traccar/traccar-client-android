@@ -9,11 +9,6 @@
   <string name="settings_status_on">Стоп</string>
   <string name="settings_status_off_summary">Сервіс зупинений</string>
   <string name="settings_status_on_summary">Сервіс працює</string>
-  <string name="settings_provider_title">Місцезнаходження провайдера</string>
-  <string name="settings_provider_summary">Джерело місцезнаходження</string>
-  <string name="settings_provider_gps">Дані GPS</string>
-  <string name="settings_provider_network">Дані мережі провайдера</string>
-  <string name="settings_provider_mixed">Змішані дані</string>
   <string name="settings_foreground_title">Служба переднього плану</string>
   <string name="settings_foreground_summary">Збільшення пріоритету обслуговування</string>
   <string name="menu_status">Статус</string>
@@ -26,7 +21,6 @@
   <string name="status_send_success">Успішно відправлено</string>
   <string name="status_send_fail">Відправлення  невдале</string>
   <string name="status_location_update">Оновлення розташування</string>
-  <string name="status_connectivity_change">Зміна підключення</string>
   <string name="hidden_app_name">Налаштування пристрою</string>
   <string name="hidden_alert">Додаток було приховано. Щоб відкрити його знову наберіть 8722227 (TRACCAR).</string>
 </resources>

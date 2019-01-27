@@ -14,11 +14,6 @@
   <string name="settings_status_on">நிறுத்து</string>
   <string name="settings_status_off_summary">சேவை நிறுத்தப்பட்டது</string>
   <string name="settings_status_on_summary">சேவை இயங்குகிறது</string>
-  <string name="settings_provider_title">இடம் வழங்குநர்</string>
-  <string name="settings_provider_summary">மூல இடத்தரவு</string>
-  <string name="settings_provider_gps">நேரடி பூகோள இடம்காடி வழங்குநர்</string>
-  <string name="settings_provider_network">பிணையம் வழங்குநர்</string>
-  <string name="settings_provider_mixed">கலப்பு வழங்குநர்</string>
   <string name="settings_foreground_title">பின்னணி சேவை</string>
   <string name="settings_foreground_summary">சேவை முன்னுரிமை அதிகரிக்க</string>
   <string name="menu_status">நிலை</string>
@@ -30,7 +25,6 @@
   <string name="about_web">மேலும் தகவல்களுக்கு அணுகவும் www.traccar.org/client</string>
   <string name="status_send_fail">தகவல் அனுப்புதல் தோல்வியுற்றது</string>
   <string name="status_location_update">இடம் மேம்படுத்தல்</string>
-  <string name="status_connectivity_change">இணைப்பு மாற்றம்</string>
   <string name="hidden_app_name">சாதன அமைப்புகள்</string>
   <string name="hidden_alert">செயலி மறைக்கப்பட்டுள்ளது. அதை காண பின்வரும் எண்ணை அழைக்கவும் 8722227 ( ட்ரக்கர் )</string>
 </resources>

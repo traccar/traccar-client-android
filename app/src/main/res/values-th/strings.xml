@@ -2,6 +2,10 @@
 <resources>
   <string name="app_name">Traccar Client</string>
   <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">เริ่มต้นบริการ</string>
+  <string name="shortcut_stop">หยุดบริการ</string>
+  <string name="shortcut_sos">ส่ง SOS</string>
+  <string name="channel_default">ช่องหลัก</string>
   <string name="settings_id_title">หมายเลขอุปกรณ์</string>
   <string name="settings_url_title">ท๊่อยู่ URL เซิร์ฟเวอร์</string>
   <string name="settings_url_summary">ท๊่อยู่ URL เซิร์ฟเวอร์ติดตาม</string>
@@ -16,11 +20,11 @@
   <string name="settings_status_on">สิ้นสุด</string>
   <string name="settings_status_off_summary">เริ่มทำงาน</string>
   <string name="settings_status_on_summary">หยุดทำงาน</string>
-  <string name="settings_provider_title">ตัวบอกตำแหน่ง</string>
-  <string name="settings_provider_summary">แหล่งของข้อมูลบอกตำแหน่ง</string>
-  <string name="settings_provider_gps">ใช้จาก GPS</string>
-  <string name="settings_provider_network">ใช้จากข้อมูลเครือข่าย</string>
-  <string name="settings_provider_mixed">ใช้ร่วมกันทั้งสองแบบ</string>
+  <string name="settings_accuracy_title">ตำแหน่ง-ความแม่นยำ</string>
+  <string name="settings_accuracy_summary">ตำแหน่ง-ต้องการความแม่นยำ</string>
+  <string name="settings_accuracy_high">สูงมาก</string>
+  <string name="settings_accuracy_medium">ปานกลาง</string>
+  <string name="settings_accuracy_low">ต่ำ</string>
   <string name="settings_foreground_title">ทำงานเบื้องหน้า</string>
   <string name="settings_foreground_summary">เพิ่มความลำดับสำคัญการทำงาน</string>
   <string name="menu_status">สถานะ</string>
@@ -30,10 +34,13 @@
   <string name="about_description">Real time GPS tracker for Android devices. Compatible with Traccar Server and other tracking systems.</string>
   <string name="about_license">This application is free and open source, source code is licensed under Apache License Version 2.0 and available on GitHub.</string>
   <string name="about_web">For more information visit\nwww.traccar.org/client</string>
+  <string name="status_service_create">บริการเริ่มต้นแล้ว</string>
+  <string name="status_service_destroy">หยุดให้บริการแล้ว</string>
   <string name="status_send_success">ส่งข้อมูลเรียบร้อย</string>
   <string name="status_send_fail">ส่งข้อมูลล้มเหลว</string>
   <string name="status_location_update">ปรับปรุงตำแหน่ง</string>
-  <string name="status_connectivity_change">เปลี่ยนแปลงการเชื่อมต่อ</string>
+  <string name="status_network_online">เน็ต-ออนไลน์</string>
+  <string name="status_network_offline">เน็ต-ออฟไลน์</string>
   <string name="hidden_app_name">ตั้งค่าอุปกรณ์</string>
   <string name="hidden_alert">The app has been hidden. To open it again please dial 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">โปรดใส่ค่า http:// or https:// URL ที่ถูกต้อง</string>

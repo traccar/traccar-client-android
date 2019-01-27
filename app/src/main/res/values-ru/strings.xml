@@ -2,6 +2,10 @@
 <resources>
   <string name="app_name">Traccar Клиент</string>
   <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Запуск сервиса</string>
+  <string name="shortcut_stop">Остановка сервиса</string>
+  <string name="shortcut_sos">Отправка SOS</string>
+  <string name="channel_default">Первичный канал</string>
   <string name="settings_id_title">Идентификатор устройства</string>
   <string name="settings_url_title">URL сервера</string>
   <string name="settings_url_summary">URL телематического сервера</string>
@@ -16,11 +20,11 @@
   <string name="settings_status_on">Стоп</string>
   <string name="settings_status_off_summary">Сервис остановлен</string>
   <string name="settings_status_on_summary">Сервис запущен</string>
-  <string name="settings_provider_title">Провайдер местоположения</string>
-  <string name="settings_provider_summary">Источник данных о местоположении</string>
-  <string name="settings_provider_gps">GPS провайдер</string>
-  <string name="settings_provider_network">Сетевой провайдер</string>
-  <string name="settings_provider_mixed">Смешанный провайдер</string>
+  <string name="settings_accuracy_title">Точность местоположения</string>
+  <string name="settings_accuracy_summary">Точность местоположения</string>
+  <string name="settings_accuracy_high">Высокая</string>
+  <string name="settings_accuracy_medium">Средняя</string>
+  <string name="settings_accuracy_low">Низкая</string>
   <string name="settings_foreground_title">Приоритетный сервис</string>
   <string name="settings_foreground_summary">Увеличить приоритет сервиса</string>
   <string name="menu_status">Состояние</string>
@@ -30,11 +34,14 @@
   <string name="about_description">Трекер для Android устройств. Совместим с Traccar сервером и другими мониторинговыми системами.</string>
   <string name="about_license">Это приложение распростаняется бесплатно, исходный код распростаняется по лицензии Apache License Version 2.0 и доступен на GitHub.</string>
   <string name="about_web">Для получения дополнительной информации посетите\nwww.traccar.org/client</string>
+  <string name="status_service_create">Сервис запущен</string>
+  <string name="status_service_destroy">Сервис остановлен</string>
   <string name="status_send_success">Отправка успешна</string>
   <string name="status_send_fail">Ошибка отправки</string>
   <string name="status_location_update">Обновление местоположения</string>
-  <string name="status_connectivity_change">Изменение подключения</string>
-  <string name="hidden_app_name">Настройки устройтва</string>
+  <string name="status_network_online">Сеть онлайн</string>
+  <string name="status_network_offline">Сеть оффлайн</string>
+  <string name="hidden_app_name">Настройки устройства</string>
   <string name="hidden_alert">Приложение было спрятано. Чтобы открыть позвоните на номер 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Пожалуйста, введите верный http:// или https:// URL</string>
 </resources>

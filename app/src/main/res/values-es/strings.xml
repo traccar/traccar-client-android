@@ -2,6 +2,10 @@
 <resources>
   <string name="app_name">Cliente Traccar</string>
   <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Iniciar servicio</string>
+  <string name="shortcut_stop">Detener servicio</string>
+  <string name="shortcut_sos">Enviar SOS</string>
+  <string name="channel_default">Canal primario</string>
   <string name="settings_id_title">Identificador de dispositivo</string>
   <string name="settings_url_title">URL del servidor</string>
   <string name="settings_url_summary">URL del servidor de seguimiento</string>
@@ -16,11 +20,11 @@
   <string name="settings_status_on">Desactivado</string>
   <string name="settings_status_off_summary">Servicio detenido</string>
   <string name="settings_status_on_summary">Servicio en ejecución</string>
-  <string name="settings_provider_title">Proveedor de localización</string>
-  <string name="settings_provider_summary">Fuente de los datos de localización</string>
-  <string name="settings_provider_gps">Proveedor GPS</string>
-  <string name="settings_provider_network">Proveedor de red</string>
-  <string name="settings_provider_mixed">Proveedor mixto</string>
+  <string name="settings_accuracy_title">Precisión</string>
+  <string name="settings_accuracy_summary">Precisión deseada</string>
+  <string name="settings_accuracy_high">Alto</string>
+  <string name="settings_accuracy_medium">Medio</string>
+  <string name="settings_accuracy_low">Bajo</string>
   <string name="settings_foreground_title">Servicio en primer plano</string>
   <string name="settings_foreground_summary">Aumentar prioridad del servicio</string>
   <string name="menu_status">Estado</string>
@@ -31,10 +35,13 @@
   <string name="about_license">Esta aplición es gratuíta y de código abierto. El código fuente está bajo la Licencia Apache Versión 2 y disponible en Github.</string>
   <string name="about_web">Para más información visite
 www.traccar.org/client</string>
+  <string name="status_service_create">Servicio iniciado</string>
+  <string name="status_service_destroy">Servicio detenido</string>
   <string name="status_send_success">Enviado correctamente</string>
   <string name="status_send_fail">Falló el envío</string>
   <string name="status_location_update">Actualización de localización</string>
-  <string name="status_connectivity_change">Cambio en la conectividad</string>
+  <string name="status_network_online">Red en línea</string>
+  <string name="status_network_offline">Red fuera de línea</string>
   <string name="hidden_app_name">Ajustes del dispositivo</string>
   <string name="hidden_alert">La aplicación se ha ocultado. Para abrirla de nuevo por favor marque 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Por favor. Introduzca una URL válida http:// ó https:// </string>

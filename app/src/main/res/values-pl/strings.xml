@@ -1,7 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Klient Traccar</string>
+  <string name="app_name">Traccar Klient</string>
   <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Start usługi</string>
+  <string name="shortcut_stop">Zatrzymanie usługi</string>
+  <string name="shortcut_sos">Wyślij SOS</string>
+  <string name="channel_default">Podstawowy kanał</string>
   <string name="settings_id_title">Identyfikator urządzenia</string>
   <string name="settings_url_title">URL Serwera</string>
   <string name="settings_url_summary">URL serwera śledzącego</string>
@@ -16,11 +20,11 @@
   <string name="settings_status_on">Zatrzymaj</string>
   <string name="settings_status_off_summary">Usługa zatrzymana</string>
   <string name="settings_status_on_summary">Usługa uruchomiona</string>
-  <string name="settings_provider_title">Dostawca lokalizacji</string>
-  <string name="settings_provider_summary">Źródło danych o lokalizacji</string>
-  <string name="settings_provider_gps">GPS</string>
-  <string name="settings_provider_network">Sieć</string>
-  <string name="settings_provider_mixed">Mieszane</string>
+  <string name="settings_accuracy_title">Dokładność lokalizacji</string>
+  <string name="settings_accuracy_summary">Żądana dokładność lokalizacji</string>
+  <string name="settings_accuracy_high">Wysoka</string>
+  <string name="settings_accuracy_medium">Średnia</string>
+  <string name="settings_accuracy_low">Niska</string>
   <string name="settings_foreground_title">Usługa pierwszoplanowa</string>
   <string name="settings_foreground_summary">Zwiększ priorytet usługi</string>
   <string name="menu_status">Status</string>
@@ -30,10 +34,13 @@
   <string name="about_description">Monitor GPS dla urządzeń Android. Kompatybilny z serwerem Traccar oraz innymi platformami śledzącymi.</string>
   <string name="about_license">Ta aplikacja jest darmowa i otwartoźródłowa. Kod źródłowy jest licencjonowany Apache License Version 2.0 i jest dostępny na GitHub.</string>
   <string name="about_web">Więcej informacji - odwiedź\nwww.traccar.org/client</string>
+  <string name="status_service_create">Usługa wystartowana</string>
+  <string name="status_service_destroy">Usługa zatrzymana</string>
   <string name="status_send_success">Wysłane poprawnie</string>
   <string name="status_send_fail">Wysłanie nieudane</string>
   <string name="status_location_update">Aktualizacja lokalizacji</string>
-  <string name="status_connectivity_change">Zmiana połączenia</string>
+  <string name="status_network_online">Połączony z siecią</string>
+  <string name="status_network_offline">Rozłączony z siecią</string>
   <string name="hidden_app_name">Ustawienia urządzenia</string>
   <string name="hidden_alert">Aplikacja została ukryta. By ją otworzyć, zadzwoń pod 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Wprowadź poprawny adres http:// lub https:// URL</string>

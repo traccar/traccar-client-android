@@ -2,6 +2,8 @@
 <resources>
   <string name="app_name">Traccar klijent</string>
   <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Pokreni servis</string>
+  <string name="shortcut_stop">Zaustavi servis</string>
   <string name="settings_id_title">Identifikator uređaja</string>
   <string name="settings_url_title">Adresa poslužitelja</string>
   <string name="settings_url_summary">Adresa poslužitelja za praćenje</string>
@@ -16,11 +18,10 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Servis zaustavljen</string>
   <string name="settings_status_on_summary">Servis pokrenut</string>
-  <string name="settings_provider_title">Pružatelj usluge lokacija</string>
-  <string name="settings_provider_summary">Izvor podataka o lokaciji</string>
-  <string name="settings_provider_gps">GPS pružatelj usluge</string>
-  <string name="settings_provider_network">Mrežni pružatelj usluge</string>
-  <string name="settings_provider_mixed">Mješani pružatelj usluge</string>
+  <string name="settings_accuracy_title">Točnost lokacije</string>
+  <string name="settings_accuracy_high">Visoki</string>
+  <string name="settings_accuracy_medium">Srednji</string>
+  <string name="settings_accuracy_low">Niski</string>
   <string name="settings_foreground_title">Predhodna usluga</string>
   <string name="settings_foreground_summary">Povećanje prioriteta usluge</string>
   <string name="menu_status">Status</string>
@@ -30,10 +31,11 @@
   <string name="about_description">GPS praćenje u stvarnom vremenu za Android uređaje. Kompatibilno sa Traccar Server i drugim sustavima za praćenje.</string>
   <string name="about_license">Ova aplikacija je besplatna i iz otvorenog izvora, izvorni kod je zaštićen Apache Licencom verzija 2.0 i dostupna na GitHub.</string>
   <string name="about_web">Za više informacija posjetite www.traccar.org/client</string>
+  <string name="status_service_create">Servis pokrenut</string>
+  <string name="status_service_destroy">Servis zaustavljen</string>
   <string name="status_send_success">Slanje uspješno</string>
   <string name="status_send_fail">Greška pri slanju</string>
   <string name="status_location_update">Osvežavanje lokacije</string>
-  <string name="status_connectivity_change">Promjena konekcije</string>
   <string name="hidden_app_name">Podešavanje uređaja</string>
   <string name="hidden_alert">Aplikacija je skrivena. Za ponovno otvaranje molim nazovite  8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Molimo unesite ispravnu http:// ili https:// adresu</string>

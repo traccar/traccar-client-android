@@ -16,11 +16,6 @@
   <string name="settings_status_on">বন্ধ</string>
   <string name="settings_status_off_summary">সার্ভিস বন্ধ হয়েছে</string>
   <string name="settings_status_on_summary">সার্ভিস চলমান</string>
-  <string name="settings_provider_title">লোকেশন প্রদানকারী</string>
-  <string name="settings_provider_summary">লোকেশন ডেটা উৎস</string>
-  <string name="settings_provider_gps">জিপিএস প্রদানকারী</string>
-  <string name="settings_provider_network">নেটওয়ার্ক প্রদানকারী</string>
-  <string name="settings_provider_mixed">মিশ্র প্রদানকারী</string>
   <string name="settings_foreground_title">ফোরগ্রাউন্ড সার্ভিস</string>
   <string name="settings_foreground_summary">সার্ভিসের পূর্ববর্তিতা বৃদ্ধি</string>
   <string name="menu_status">অবস্থা</string>
@@ -33,7 +28,6 @@
   <string name="status_send_success">সফলভাবে পাঠান হয়েছে</string>
   <string name="status_send_fail">পাঠান ব্যর্থ হয়েছে</string>
   <string name="status_location_update">অবস্থান আপডেট</string>
-  <string name="status_connectivity_change">সংযোগ পরিবর্তন হয়েছে</string>
   <string name="hidden_app_name">ডিভাইস সেটিংস</string>
   <string name="hidden_alert">অ্যাপ্লিকেশনটি লুকানো আছে। আবার খুলতে ডায়াল করুন 8722227 (TRACCAR)।</string>
   <string name="error_msg_invalid_url">দয়া করে একটি ভ্যালিড http:// বা https:// URL লিখুন</string>

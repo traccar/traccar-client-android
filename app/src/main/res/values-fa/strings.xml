@@ -2,6 +2,10 @@
 <resources>
   <string name="app_name">ردیاب Traccar</string>
   <string name="app_logo">ردیاب Traccar</string>
+  <string name="shortcut_start">شروع کار</string>
+  <string name="shortcut_stop">توقف کار</string>
+  <string name="shortcut_sos">ارسال پیام اضطراری</string>
+  <string name="channel_default">شبکه اولیه</string>
   <string name="settings_id_title">کد هویت دستگاه</string>
   <string name="settings_url_title">مسیر آدرس سرور</string>
   <string name="settings_url_summary">مسیر آدرس سرور مسیریاب</string>
@@ -16,11 +20,11 @@
   <string name="settings_status_on">توقف</string>
   <string name="settings_status_off_summary">سرویس متوقف است</string>
   <string name="settings_status_on_summary">سرویس در حال کار است</string>
-  <string name="settings_provider_title">ارائه مکان</string>
-  <string name="settings_provider_summary">سورس اطلاعات مکان</string>
-  <string name="settings_provider_gps">ارائه GPS</string>
-  <string name="settings_provider_network">ارائه شبکه اپراتور</string>
-  <string name="settings_provider_mixed">ارائه ترکیبی</string>
+  <string name="settings_accuracy_title">دقت مکان</string>
+  <string name="settings_accuracy_summary">دقت مکان دلخواه</string>
+  <string name="settings_accuracy_high">زیاد</string>
+  <string name="settings_accuracy_medium">متوسط</string>
+  <string name="settings_accuracy_low">کم</string>
   <string name="settings_foreground_title">سرویس پیش زمینه</string>
   <string name="settings_foreground_summary">افزایش اولویت سرویس</string>
   <string name="menu_status">وضعیت</string>
@@ -31,10 +35,13 @@
   <string name="about_license">این نرم افزار مجانی و سورس باز تحت لیسانس Apache  نگارش 2.0 و فعال در GitHub.</string>
   <string name="about_web">برای کسب اطلاعات بیشتر به سایت زیر مراجعه نمایید.
 www.traccar.org/client</string>
+  <string name="status_service_create">کار شروع شد</string>
+  <string name="status_service_destroy">کار متوقف شد</string>
   <string name="status_send_success">ارسال موفق</string>
   <string name="status_send_fail">ارسال ناموفق</string>
   <string name="status_location_update">به روز رسانی مکان</string>
-  <string name="status_connectivity_change">تغییرات در ارتباطات</string>
+  <string name="status_network_online">شبکه آنلاین</string>
+  <string name="status_network_offline">شبکه آفلاین</string>
   <string name="hidden_app_name">تنظیمات دستگاه</string>
   <string name="hidden_alert">نرم افزار مخفی است . جهت نمایش آن با این شماره تماس بگیرید.
 8722227 (Traccar)</string>

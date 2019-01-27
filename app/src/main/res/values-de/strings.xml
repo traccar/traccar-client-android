@@ -20,11 +20,11 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Dienst inaktiv</string>
   <string name="settings_status_on_summary">Dienst aktiv</string>
-  <string name="settings_provider_title">Datenherkunft</string>
-  <string name="settings_provider_summary">Quelle der Positionsdaten</string>
-  <string name="settings_provider_gps">GPS-Provider</string>
-  <string name="settings_provider_network">Netzwerk-Provider</string>
-  <string name="settings_provider_mixed">Gemischt</string>
+  <string name="settings_accuracy_title">Positionsgenauigkeit</string>
+  <string name="settings_accuracy_summary">Erwünschte Positionsgenauigkeit</string>
+  <string name="settings_accuracy_high">Hoch</string>
+  <string name="settings_accuracy_medium">Mittel</string>
+  <string name="settings_accuracy_low">Niedrig</string>
   <string name="settings_foreground_title">Vordergrund Service</string>
   <string name="settings_foreground_summary">Servicepriorität erhöhen</string>
   <string name="menu_status">Status</string>
@@ -39,7 +39,8 @@
   <string name="status_send_success">Erfolgreich gesendet</string>
   <string name="status_send_fail">Übertragung fehlerhaft</string>
   <string name="status_location_update">Positionsupdate</string>
-  <string name="status_connectivity_change">Anschlusswechsel</string>
+  <string name="status_network_online">Netzwerk online</string>
+  <string name="status_network_offline">Netzwerk offline</string>
   <string name="hidden_app_name">Geräteeinstellungen</string>
   <string name="hidden_alert">Die App wurde versteckt. Um sie wieder zu öffnen, wähle 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Bitte eine gültige http:// oder https:// URL eingeben</string>

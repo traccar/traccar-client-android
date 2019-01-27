@@ -9,11 +9,6 @@
   <string name="settings_status_on">නැවතීම</string>
   <string name="settings_status_off_summary">සේවාව අක්‍රීයයි</string>
   <string name="settings_status_on_summary">සේවාව ක්‍රියාත්මකයි</string>
-  <string name="settings_provider_title">Location provider</string>
-  <string name="settings_provider_summary">Source of location data</string>
-  <string name="settings_provider_gps">GPS provider</string>
-  <string name="settings_provider_network">Network provider</string>
-  <string name="settings_provider_mixed">Mixed provider</string>
   <string name="settings_foreground_title">Foreground service</string>
   <string name="settings_foreground_summary">Increase service priority</string>
   <string name="menu_status">තත්වය</string>
@@ -25,6 +20,5 @@
   <string name="about_web">For more information visit\nwww.traccar.org/client</string>
   <string name="status_send_fail">යැවිය නොහැකිය</string>
   <string name="status_location_update">Location update</string>
-  <string name="status_connectivity_change">Connectivity change</string>
   <string name="hidden_app_name">උපකරණ සැකසුම්</string>
 </resources>

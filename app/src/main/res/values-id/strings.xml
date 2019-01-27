@@ -2,6 +2,10 @@
 <resources>
   <string name="app_name">Traccar Client</string>
   <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Mulai Layanan</string>
+  <string name="shortcut_stop">Tutup Layanan</string>
+  <string name="shortcut_sos">Kirim SOS</string>
+  <string name="channel_default">Jalur Utama</string>
   <string name="settings_id_title">Pengindentifikasi Perangkat</string>
   <string name="settings_url_title">URL Server</string>
   <string name="settings_url_summary">URL Server Pelacak</string>
@@ -16,11 +20,11 @@
   <string name="settings_status_on">Berhenti</string>
   <string name="settings_status_off_summary">Service Berhenti</string>
   <string name="settings_status_on_summary">Service Aktif</string>
-  <string name="settings_provider_title">Lokasi Penyedia Layanan</string>
-  <string name="settings_provider_summary">Sumber Lokasi Data</string>
-  <string name="settings_provider_gps">Penyedia Layanan GPS</string>
-  <string name="settings_provider_network">Penyedia Layanan Jaringan</string>
-  <string name="settings_provider_mixed">Campuran Penyedia Layanan</string>
+  <string name="settings_accuracy_title">Ketepatan Lokasi</string>
+  <string name="settings_accuracy_summary">Ketepatan Lokasi Yg Dinginkan</string>
+  <string name="settings_accuracy_high">Tinggi</string>
+  <string name="settings_accuracy_medium">Tengah</string>
+  <string name="settings_accuracy_low">Rendah</string>
   <string name="settings_foreground_title">Service Depan</string>
   <string name="settings_foreground_summary">TIngkatkan Prioritas Service</string>
   <string name="menu_status">Status</string>
@@ -30,10 +34,13 @@
   <string name="about_description">Aplikasi GPS Untuk Perangkat Android. Kompatibel Dengan Traccar Server Dan Sistem GPS Lainnya.</string>
   <string name="about_license">Aplikasi Ini Gratis Dan Terbuka, Sumber Kode Berlisensi Dibawah Apache License 2.0 Dan Tersedia di GitHub.</string>
   <string name="about_web">Untuk Informasi Lebih Lanjut Kunjungi www.traccar.org/client</string>
+  <string name="status_service_create">Layanan Dimulai</string>
+  <string name="status_service_destroy">Layanan Berhenti</string>
   <string name="status_send_success">Sukses Terkirim</string>
   <string name="status_send_fail">Gagal Terkirim</string>
   <string name="status_location_update">Lokasi Terbaru</string>
-  <string name="status_connectivity_change">Koneksi Berubah</string>
+  <string name="status_network_online">Jaringan Hidup</string>
+  <string name="status_network_offline">Jaringan Mati</string>
   <string name="hidden_app_name">Pengaturan Perangkat</string>
   <string name="hidden_alert">Aplikasi Telah Tersembunyi. Untuk Membuka Lagi Silahkan Tekan 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Tolong Masukan http:// atau https:// URL Yang Benar</string>

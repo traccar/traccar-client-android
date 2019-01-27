@@ -9,11 +9,6 @@
   <string name="settings_status_on">បញ្ឈប់</string>
   <string name="settings_status_off_summary">សេវាឈប់</string>
   <string name="settings_status_on_summary">កំពុងរត់សេវា</string>
-  <string name="settings_provider_title">ក្រុមហ៊ុនផ្ដល់ទីតាំង</string>
-  <string name="settings_provider_summary">ប្រភពនៃទិន្នន័យទីតាំង</string>
-  <string name="settings_provider_gps">អ្នកផ្តល់សេវាប្រព័ន្ធ GPS</string>
-  <string name="settings_provider_network">អ្នកផ្តល់សេវាបណ្តាញ</string>
-  <string name="settings_provider_mixed">ក្រុមហ៊ុនផ្ដល់សេវាជាមួយគ្នា</string>
   <string name="settings_foreground_title">សេវាផ្ទៃខាងមុខ</string>
   <string name="settings_foreground_summary">បង្កើនអាទិភាពសេវា</string>
   <string name="menu_status">ស្ថានភាព</string>
@@ -26,7 +21,6 @@
   <string name="status_send_success">ផ្ញើដោយជោគជ័យ</string>
   <string name="status_send_fail">ការផ្ញើបានបរាជ័យ</string>
   <string name="status_location_update">ធ្វើឱ្យទាន់សម័យទីតាំង</string>
-  <string name="status_connectivity_change">ការផ្លាស់ប្តូរការតភ្ជាប់</string>
   <string name="hidden_app_name">ការកំណត់ឧបករណ៍</string>
   <string name="hidden_alert">កម្មវិធីនេះត្រូវបានលាក់។ ដើម្បីបើកវាម្តងទៀតសូមចុច 8722227 (TRACCAR) ។</string>
 </resources>

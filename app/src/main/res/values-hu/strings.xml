@@ -2,6 +2,10 @@
 <resources>
   <string name="app_name">Traccar Kliens</string>
   <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Szolgáltatás indítása</string>
+  <string name="shortcut_stop">Szolgáltatás leállítása</string>
+  <string name="shortcut_sos">SOS küldése</string>
+  <string name="channel_default">Elsődleges csatorna</string>
   <string name="settings_id_title">Eszközazonosító</string>
   <string name="settings_url_title">Szerver URL</string>
   <string name="settings_url_summary">Nyomkövető szerver URL</string>
@@ -16,11 +20,11 @@
   <string name="settings_status_on">Megállítás</string>
   <string name="settings_status_off_summary">Szolgáltatás megállítva</string>
   <string name="settings_status_on_summary">Szolgáltatás elindítva</string>
-  <string name="settings_provider_title">Pozíciós szolgáltató</string>
-  <string name="settings_provider_summary">Pozíciós adatok forrása</string>
-  <string name="settings_provider_gps">GPS szolgáltató</string>
-  <string name="settings_provider_network">Hálózati szolgáltató</string>
-  <string name="settings_provider_mixed">Kevert szolgáltató</string>
+  <string name="settings_accuracy_title">Pozíció pontossága</string>
+  <string name="settings_accuracy_summary">Kívánt pozíció pontosság</string>
+  <string name="settings_accuracy_high">Magas</string>
+  <string name="settings_accuracy_medium">Közepes</string>
+  <string name="settings_accuracy_low">Alacsony</string>
   <string name="settings_foreground_title">Előtér szolgáltatás</string>
   <string name="settings_foreground_summary">Szolgáltatás prioritásának emelése</string>
   <string name="menu_status">Státusz</string>
@@ -30,10 +34,13 @@
   <string name="about_description">Valós idejű GPS követő Android eszközökre. Kompatibilis többek közt a Traccar Szerverrel és egyéb követő rendszerekkel is.</string>
   <string name="about_license">Ez az applikáció ingyenes és nyílt forrású, forráskódja az Apache License 2.0 licenccel rendelkezik és elérhető a GitHub-on.</string>
   <string name="about_web">További információkért látogass el az alábbi weboldalra\nwww.traccar.org/client</string>
+  <string name="status_service_create">Szolgáltatás elindítva</string>
+  <string name="status_service_destroy">Szolgáltatás leállítva</string>
   <string name="status_send_success">Küldés sikeres</string>
   <string name="status_send_fail">Küldés sikertelen</string>
   <string name="status_location_update">Pozíció frissítés</string>
-  <string name="status_connectivity_change">Kapcsolódás módosítása</string>
+  <string name="status_network_online">Hálózat aktív</string>
+  <string name="status_network_offline">Hálózat nem aktív</string>
   <string name="hidden_app_name">Eszköz beállítások</string>
   <string name="hidden_alert">Ez az applikáció el lett rejtve. Megnyitásához  kérjük hívja a 8722227 (TRACCAR) telefonszámot.</string>
   <string name="error_msg_invalid_url">Adjon meg egy érvényes URL-t (http:// vagy https://)</string>
