@@ -213,7 +213,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
             View dialogView = inflater.inflate(R.layout.sos_setting_field, null);
             final EditText sosEditText = (EditText) dialogView.findViewById(R.id.sosEditText);
             String broadcast = sharedPreferences.getString(MainFragment.KEY_BROADCAST, "");
-            if(broadcast.trim().length() > 0) {
+            if (broadcast.trim().length() > 0) {
                 sosEditText.setText(broadcast);
             }
             builder.setMessage(R.string.settings_sos_broadcast_summary)

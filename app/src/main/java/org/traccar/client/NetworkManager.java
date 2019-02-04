@@ -55,7 +55,7 @@ public class NetworkManager extends BroadcastReceiver {
         broadcast = preferences.getString(MainFragment.KEY_BROADCAST, " ");
         IntentFilter filter = new IntentFilter();
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        if(broadcast.trim().length() > 0) {
+        if (broadcast.trim().length() > 0) {
             filter.addAction(broadcast);
         }
         context.registerReceiver(this, filter);
