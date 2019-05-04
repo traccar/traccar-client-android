@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+ * Copyright 2012 - 2019 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package org.traccar.client;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -26,6 +27,8 @@ import android.os.Build;
 import android.os.IBinder;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+
+import android.os.PowerManager;
 import android.util.Log;
 
 public class TrackingService extends Service {
@@ -33,6 +36,7 @@ public class TrackingService extends Service {
     private static final String TAG = TrackingService.class.getSimpleName();
     private static final int NOTIFICATION_ID = 1;
 
+    private PowerManager.WakeLock wakeLock;
     private TrackingController trackingController;
 
     private static Notification createNotification(Context context) {
@@ -73,6 +77,7 @@ public class TrackingService extends Service {
         }
     }
 
+    @SuppressLint("WakelockTimeout")
     @Override
     public void onCreate() {
         Log.i(TAG, "service create");
@@ -81,6 +86,11 @@ public class TrackingService extends Service {
         startForeground(NOTIFICATION_ID, createNotification(this));
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
+            wakeLock.acquire();
+
             trackingController = new TrackingController(this);
             trackingController.start();
         }
@@ -111,6 +121,9 @@ public class TrackingService extends Service {
 
         stopForeground(true);
 
+        if (wakeLock != null && wakeLock.isHeld()) {
+            wakeLock.release();
+        }
         if (trackingController != null) {
             trackingController.stop();
         }
