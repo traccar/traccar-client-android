@@ -43,7 +43,7 @@ public class TrackingService extends Service {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, MainApplication.PRIMARY_CHANNEL)
                 .setSmallIcon(R.drawable.ic_stat_notify)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
-                .setCategory(Notification.CATEGORY_SERVICE);
+                .setCategory(NotificationCompat.CATEGORY_SERVICE);
         Intent intent;
         if (!BuildConfig.HIDDEN_APP) {
             intent = new Intent(context, MainActivity.class);
