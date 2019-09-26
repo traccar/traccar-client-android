@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "org.traccar.client"
         buildConfigField "boolean", "HIDDEN_APP", "false"
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 56
-        versionName '5.19'
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 57
+        versionName '5.20'
     }
 
     lintOptions {
@@ -34,12 +34,13 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.1.0-alpha06'
+    implementation 'com.google.android.material:material:1.1.0-alpha10'
+    implementation 'androidx.preference:preference:1.1.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:4.1'
-    googleImplementation 'com.google.firebase:firebase-core:16.0.8'
-    googleImplementation 'com.crashlytics.sdk.android:crashlytics:2.10.0'
-    googleImplementation "com.google.android.gms:play-services-location:16.0.0"
+    googleImplementation 'com.google.firebase:firebase-core:17.2.0'
+    googleImplementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    googleImplementation "com.google.android.gms:play-services-location:17.0.0"
 }
 
 if (getGradle().getStartParameter().getTaskRequests().toString().contains("Google")) {

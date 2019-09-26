@@ -5,7 +5,8 @@
 
     <application
         android:name="org.traccar.client.GoogleMainApplication"
-        tools:replace="android:name">
+        tools:replace="android:name"
+        tools:ignore="GoogleAppIndexingWarning">
 
     </application>
 

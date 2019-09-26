@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+ * Copyright 2012 - 2019 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,14 +27,15 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.preference.TwoStatePreference;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.EditTextPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+import androidx.preference.TwoStatePreference;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,9 +43,11 @@ import android.view.MenuItem;
 import android.webkit.URLUtil;
 import android.widget.Toast;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
-public class MainFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+public class MainFragment extends PreferenceFragmentCompat implements OnSharedPreferenceChangeListener {
 
     private static final String TAG = MainFragment.class.getSimpleName();
 
@@ -66,15 +69,14 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     private PendingIntent alarmIntent;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (BuildConfig.HIDDEN_APP) {
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        if (BuildConfig.HIDDEN_APP && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             removeLauncherIcon();
         }
 
         setHasOptionsMenu(true);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         addPreferencesFromResource(R.xml.preferences);
         initPreferences();
 
@@ -129,6 +131,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
             startTrackingService(true, false);
         }
+
     }
 
     private void removeLauncherIcon() {
@@ -212,11 +215,18 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
 
     private void startTrackingService(boolean checkPermission, boolean permission) {
         if (checkPermission) {
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                permission = true;
-            } else {
+            Set<String> requiredPermissions = new HashSet<>();
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requiredPermissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+                    && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requiredPermissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+            }
+            permission = requiredPermissions.isEmpty();
+            if (!permission) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_LOCATION);
+                    requestPermissions(requiredPermissions.toArray(new String[requiredPermissions.size()]), PERMISSIONS_REQUEST_LOCATION);
                 }
                 return;
             }
@@ -224,12 +234,12 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
 
         if (permission) {
             setPreferencesEnabled(false);
-            ContextCompat.startForegroundService(getActivity(), new Intent(getActivity(), TrackingService.class));
+            ContextCompat.startForegroundService(getContext(), new Intent(getActivity(), TrackingService.class));
             alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                     ALARM_MANAGER_INTERVAL, ALARM_MANAGER_INTERVAL, alarmIntent);
         } else {
             sharedPreferences.edit().putBoolean(KEY_STATUS, false).apply();
-            TwoStatePreference preference = (TwoStatePreference) findPreference(KEY_STATUS);
+            TwoStatePreference preference = findPreference(KEY_STATUS);
             preference.setChecked(false);
         }
     }

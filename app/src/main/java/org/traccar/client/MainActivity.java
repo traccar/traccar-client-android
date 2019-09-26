@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction().replace(android.R.id.content, new MainFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new MainFragment()).commit();
         }
     }
 
