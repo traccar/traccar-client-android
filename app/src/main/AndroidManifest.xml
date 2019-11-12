@@ -48,8 +48,6 @@
 
         <activity android:name=".StatusActivity"/>
 
-        <activity android:name=".AboutActivity"/>
-
         <activity
             android:name=".ShortcutActivity"
             android:label="@string/menu_shortcuts">

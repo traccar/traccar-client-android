@@ -195,9 +195,6 @@ public class MainFragment extends PreferenceFragmentCompat implements OnSharedPr
         if (item.getItemId() == R.id.status) {
             startActivity(new Intent(getActivity(), StatusActivity.class));
             return true;
-        } else if (item.getItemId() == R.id.about) {
-            startActivity(new Intent(getActivity(), AboutActivity.class));
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
