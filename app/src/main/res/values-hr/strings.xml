@@ -25,12 +25,8 @@
   <string name="settings_foreground_title">Predhodna usluga</string>
   <string name="settings_foreground_summary">Povećanje prioriteta usluge</string>
   <string name="menu_status">Status</string>
-  <string name="menu_about">O nama</string>
   <string name="menu_shortcuts">Dodaj prečace</string>
   <string name="menu_clear">Očisti</string>
-  <string name="about_description">GPS praćenje u stvarnom vremenu za Android uređaje. Kompatibilno sa Traccar Server i drugim sustavima za praćenje.</string>
-  <string name="about_license">Ova aplikacija je besplatna i iz otvorenog izvora, izvorni kod je zaštićen Apache Licencom verzija 2.0 i dostupna na GitHub.</string>
-  <string name="about_web">Za više informacija posjetite www.traccar.org/client</string>
   <string name="status_service_create">Servis pokrenut</string>
   <string name="status_service_destroy">Servis zaustavljen</string>
   <string name="status_send_success">Slanje uspješno</string>

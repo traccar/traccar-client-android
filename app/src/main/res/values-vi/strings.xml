@@ -19,12 +19,8 @@
   <string name="settings_foreground_title">Dịch vụ chạy nổi</string>
   <string name="settings_foreground_summary">Tăng thứ tự ưu tiên dịch vụ</string>
   <string name="menu_status">Trạng thái</string>
-  <string name="menu_about">About</string>
   <string name="menu_shortcuts">Thêm phím tắt</string>
   <string name="menu_clear">Xóa</string>
-  <string name="about_description">Định vị GPS thời gian thực cho thiết bị Android. Tương thích với máy chủ Traccar và các hệ thống theo dõi khác.</string>
-  <string name="about_license">Ứng dụng miễn phí và mã nguồn mở, mã nguồn được phát hành theo giấy phép Apache License phiên bản 2.0 trên GitHub.</string>
-  <string name="about_web">Thông tin chi tiết\nwww.traccar.org/client</string>
   <string name="status_send_success">Gửi thành công</string>
   <string name="status_send_fail">Gửi lỗi</string>
   <string name="status_location_update">Vị trí đã được cập nhật</string>

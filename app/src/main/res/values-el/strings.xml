@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Υπηρεσία προσκηνίου</string>
   <string name="settings_foreground_summary">Αύξηση προτεραιότητας της υπηρεσίας</string>
   <string name="menu_status">Κατάσταση</string>
-  <string name="menu_about">Περί</string>
   <string name="menu_shortcuts">Προσθήκη συντόμευσης</string>
   <string name="menu_clear">Καθαρισμός</string>
-  <string name="about_description">GPS ιχνηλάτης πραγματικού χρόνου για συσκευές Android. Συμβατός με Traccar και άλλα συστήματα ιχνηλάτησης.</string>
-  <string name="about_license">Εφαρμογή Ελεύθερου και Ανοικτού κώδικα. Ο πηγαίος κώδικας παρέχεται με άδεια Apache 2.0 και διατίθεται στο GitHub.</string>
-  <string name="about_web">Για περισσότερες πληροφορίες επισκεφτείτε\nwww.traccar.org/client</string>
   <string name="status_service_create">Η Υπηρεσία εκκινήθηκε</string>
   <string name="status_service_destroy">Η Υπηρεσία διακόπηκε</string>
   <string name="status_send_success">Απεστάλη επιτυχώς</string>

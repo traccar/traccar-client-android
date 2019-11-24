@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Foreground service</string>
   <string name="settings_foreground_summary">Увеличаване на приоритета на услугата</string>
   <string name="menu_status">Състояние</string>
-  <string name="menu_about">Относно</string>
   <string name="menu_shortcuts">Добави пряк път</string>
   <string name="menu_clear">Изтрий</string>
-  <string name="about_description">Real time GPS tracker for Android devices. Compatible with Traccar Server and other tracking systems.</string>
-  <string name="about_license">This application is free and open source, source code is licensed under Apache License Version 2.0 and available on GitHub.</string>
-  <string name="about_web">For more information visit\nwww.traccar.org/client</string>
   <string name="status_service_create">Услугата стартира</string>
   <string name="status_service_destroy">Услугата спряна</string>
   <string name="status_send_success">Успешно изпращане</string>

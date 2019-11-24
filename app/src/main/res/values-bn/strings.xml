@@ -19,12 +19,8 @@
   <string name="settings_foreground_title">ফোরগ্রাউন্ড সার্ভিস</string>
   <string name="settings_foreground_summary">সার্ভিসের পূর্ববর্তিতা বৃদ্ধি</string>
   <string name="menu_status">অবস্থা</string>
-  <string name="menu_about">সম্পর্কে / সম্বন্ধে</string>
   <string name="menu_shortcuts">শর্টকাট যুক্ত করা</string>
   <string name="menu_clear">পরিষ্কার</string>
-  <string name="about_description">অ্যান্ড্রয়েড ডিভাইসের জন্য রিয়েল টাইম GPS ট্র্যাকার। Traccar সার্ভার এবং অন্যান্য ট্র্যাকিং সিস্টেমগুলির সাথে সামঞ্জস্যপূর্ণ।</string>
-  <string name="about_license">এই অ্যাপ্লিকেশনটি বিনামূল্যে প্রদানকৃত এবং ওপেন সোর্স, সোর্স কোডটি Apache License Version 2.0 এর অধীনে লাইসেন্স করা এবং GitHub এ রক্ষিত।</string>
-  <string name="about_web">আরও তথ্যের জন্য www.traccar.org/client দেখুন</string>
   <string name="status_send_success">সফলভাবে পাঠান হয়েছে</string>
   <string name="status_send_fail">পাঠান ব্যর্থ হয়েছে</string>
   <string name="status_location_update">অবস্থান আপডেট</string>

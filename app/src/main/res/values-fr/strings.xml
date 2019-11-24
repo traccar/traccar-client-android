@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Un service de premier plan</string>
   <string name="settings_foreground_summary">Augmenter la priorité de service</string>
   <string name="menu_status">Etat</string>
-  <string name="menu_about">A propos</string>
   <string name="menu_shortcuts">Ajouter des raccourcis</string>
   <string name="menu_clear">Effacer</string>
-  <string name="about_description">Suivi GPS en temps réels pour appareils Android. Compatible avec le serveur Traccar ainsi que d\'autres plateformes de suivi.</string>
-  <string name="about_license">Cette application open source est gratuite. Le code source est disponible sur GitHub est sous licence Apache Version 2.0.</string>
-  <string name="about_web">Pour plus d’information, visitez le site: \nwww.traccar.org/client</string>
   <string name="status_service_create">Service démarré</string>
   <string name="status_service_destroy">Service arrêté</string>
   <string name="status_send_success">Envoyé avec succès</string>

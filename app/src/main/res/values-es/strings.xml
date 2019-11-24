@@ -28,13 +28,8 @@
   <string name="settings_foreground_title">Servicio en primer plano</string>
   <string name="settings_foreground_summary">Aumentar prioridad del servicio</string>
   <string name="menu_status">Estado</string>
-  <string name="menu_about">Acerca de…</string>
   <string name="menu_shortcuts">Añadir acceso directo</string>
   <string name="menu_clear">Limpiar</string>
-  <string name="about_description">Rastreador GPS en tiempo real para dispositivos Android. Compatible con Servidor Traccar y otros sistemas de rastreo.</string>
-  <string name="about_license">Esta aplición es gratuíta y de código abierto. El código fuente está bajo la Licencia Apache Versión 2 y disponible en Github.</string>
-  <string name="about_web">Para más información visite
-www.traccar.org/client</string>
   <string name="status_service_create">Servicio iniciado</string>
   <string name="status_service_destroy">Servicio detenido</string>
   <string name="status_send_success">Enviado correctamente</string>

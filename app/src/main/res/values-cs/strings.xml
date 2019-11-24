@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Popředí služba</string>
   <string name="settings_foreground_summary">Zvýšit prioritu služba</string>
   <string name="menu_status">Stav</string>
-  <string name="menu_about">O aplikaci</string>
   <string name="menu_shortcuts">Přidat zástupce</string>
   <string name="menu_clear">Vyčistit</string>
-  <string name="about_description">GPS sledovací aplikace pracující v reálném čase pro zařízení s operačním systémem Android. Kompatibilní s Traccar serverem a dalšími sledovacími systémy.</string>
-  <string name="about_license">Tato aplikace je zdarma a open source, zdrojový kód je licencován pod Apache License Version 2.0 a je přístupný na GitHub.</string>
-  <string name="about_web">Pro více informací navštivte\nwww.traccar.org/client</string>
   <string name="status_service_create">Služba spuštěna</string>
   <string name="status_service_destroy">Služba zastavena</string>
   <string name="status_send_success">Úspěšně odesláno</string>

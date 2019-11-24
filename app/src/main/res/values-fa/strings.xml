@@ -28,13 +28,8 @@
   <string name="settings_foreground_title">سرویس پیش زمینه</string>
   <string name="settings_foreground_summary">افزایش اولویت سرویس</string>
   <string name="menu_status">وضعیت</string>
-  <string name="menu_about">درباره</string>
   <string name="menu_shortcuts">ایجاد میانبر</string>
   <string name="menu_clear">پاک کردن</string>
-  <string name="about_description">ردیاب زنده GPS برای اندروید . سازگار با سرورهای Traccar و سایر سرورهای ردیاب</string>
-  <string name="about_license">این نرم افزار مجانی و سورس باز تحت لیسانس Apache  نگارش 2.0 و فعال در GitHub.</string>
-  <string name="about_web">برای کسب اطلاعات بیشتر به سایت زیر مراجعه نمایید.
-www.traccar.org/client</string>
   <string name="status_service_create">کار شروع شد</string>
   <string name="status_service_destroy">کار متوقف شد</string>
   <string name="status_send_success">ارسال موفق</string>

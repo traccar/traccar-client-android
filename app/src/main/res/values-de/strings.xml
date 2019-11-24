@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Vordergrund Service</string>
   <string name="settings_foreground_summary">Servicepriorität erhöhen</string>
   <string name="menu_status">Status</string>
-  <string name="menu_about">Über</string>
   <string name="menu_shortcuts">Verknüpfung hinzufügen</string>
   <string name="menu_clear">Leeren</string>
-  <string name="about_description">Echtzeit GPS Ortung für Android Geräte. Kompatibel mit Traccar Server und anderen Ortungsservern.</string>
-  <string name="about_license">Dieses Programm ist frei und Open Source. Es ist unter Apache Lizenz Version 2.0 lizenziert und ist auf GitHub verfügbar.</string>
-  <string name="about_web">Für weitere Informationen besuchen Sie www.traccar.org/client</string>
   <string name="status_service_create">Dienst gestartet</string>
   <string name="status_service_destroy">Dienst gestoppt</string>
   <string name="status_send_success">Erfolgreich gesendet</string>

@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Voorgrond service</string>
   <string name="settings_foreground_summary">Verhoog voorrang voor service</string>
   <string name="menu_status">Status</string>
-  <string name="menu_about">Over ons</string>
   <string name="menu_shortcuts">Voeg snelkoppelingen toe</string>
   <string name="menu_clear">Wis</string>
-  <string name="about_description">Real time GPS tracker voor Android apparaten. Compatibel met de Traccar server en andere tracking systemen.</string>
-  <string name="about_license">Deze toepassing is gratis en open source, de broncode is beschikbaar onder de Apache Licentie versie 2.0 op GitHub.</string>
-  <string name="about_web">Voor meer informatie bezoek\nwww.traccar.org/client</string>
   <string name="status_service_create">Service gestart</string>
   <string name="status_service_destroy">Service gestopt</string>
   <string name="status_send_success">Succesvol verstuurd</string>

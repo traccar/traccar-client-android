@@ -12,12 +12,8 @@
   <string name="settings_foreground_title">ເຊີວິດໂຟກຣາວດ໌</string>
   <string name="settings_foreground_summary">ເພີ່ມເຊີວິດໄພອໍຣິດຕີ້</string>
   <string name="menu_status">ສະຖານະ</string>
-  <string name="menu_about">ກ່ຽວກັບ</string>
   <string name="menu_shortcuts">ເພີ່ມຊອດຄັດ</string>
   <string name="menu_clear">ລົບລ້າງ</string>
-  <string name="about_description">ລາວຈີພີເອສຄາຣ໌ສຳລັບແອນດຣອຍ. ສາມາດໃຊ້ໄດ້ກັບລາວຈີພີເອສຄາຣ໌ເຊີເວີ້.</string>
-  <string name="about_license">ແອັບໂຕນີ້ສາມາດດາວໂຫລດໃຊ້ໄດ້ຟຣີໂດຍບໍ່ມີຄ່າໃຊ້ຈ່າຍຫຍັງ.</string>
-  <string name="about_web">ຂໍ້ມູນເພີ່ມເຕີມໄດ້ທີ່\nwww.traccar.org/client</string>
   <string name="status_send_fail">ມີຂໍ້ຜິດພາດໃນການສົ່ງຂໍ້ມູນ</string>
   <string name="status_location_update">ສະຖານທີ່ພິກັດໄດ້ອັບເດດ</string>
   <string name="hidden_app_name">ການຕັ້ງຄ່າອຸປະກອນ</string>

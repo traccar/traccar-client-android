@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Žeminti tarnybos prioritetą</string>
   <string name="settings_foreground_summary">Padidinti tarnybos prioritetą</string>
   <string name="menu_status">Būklė</string>
-  <string name="menu_about">Apie</string>
   <string name="menu_shortcuts">Pridėti nuorodas</string>
   <string name="menu_clear">Valyti</string>
-  <string name="about_description">GPS sekimo programėlė Android įrenginiams. Suderinta su Traccar Serveriu ir kitomis vietos nustatymo tarnybomis.</string>
-  <string name="about_license">Ši programėlė yra nemokama ir atviro kodo. Autorinės teisės yra saugomos pagal Apache Licence Version 2.0 reglamentą (pasiekiama GitHub)</string>
-  <string name="about_web">Daugiau informacijos rasite adresu \nwww.traccar.org/client</string>
   <string name="status_service_create">Servisas pradėtas</string>
   <string name="status_service_destroy">Servisas sustabdytas</string>
   <string name="status_send_success">Išsiųsta sėkmingai</string>

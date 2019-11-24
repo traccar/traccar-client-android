@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Storitev v ospredju</string>
   <string name="settings_foreground_summary">Povečaj prioriteto storitve</string>
   <string name="menu_status">Stanje</string>
-  <string name="menu_about">O programu</string>
   <string name="menu_shortcuts">Dodaj bližnjice</string>
   <string name="menu_clear">Počisti</string>
-  <string name="about_description">GPS sledilnik v realnem času za naprave Android. Kompatibilno s strežnikom Traccar in drugimi sledilnimi sistemi.</string>
-  <string name="about_license">Ta aplikacija je zastonj in odprtokodna. Izvorna koda je objavljena na GitHub-u z dovoljenjem Apache License verzije 2.0</string>
-  <string name="about_web">Za več informacij obiščite\nwww.traccar.org/client</string>
   <string name="status_service_create">Storitev zagnana</string>
   <string name="status_service_destroy">Storitev ustavljena</string>
   <string name="status_send_success">Pošiljanje uspelo</string>

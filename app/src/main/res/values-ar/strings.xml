@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">الخدمة الأمامية</string>
   <string name="settings_foreground_summary">زيادة أولوية الخدمة</string>
   <string name="menu_status">الحالة</string>
-  <string name="menu_about">حول</string>
   <string name="menu_shortcuts">إضافة اختصارات</string>
   <string name="menu_clear">مسح</string>
-  <string name="about_description">محدد الموقع في الوقت الفعلي لأجهزة Android. متوافق مع خادم Traccar ونظم تعقب أخرى </string>
-  <string name="about_license">هذا التطبيق مجاني ومفتوح المصدر، الكود المصدري مرخص تحت رخصة Apache الإصدار 2.0 و متاح على GitHub.</string>
-  <string name="about_web">لمزيد من المعلومات زر \nwww.traccar.org/client</string>
   <string name="status_service_create">بدأت الخدمة</string>
   <string name="status_service_destroy">توقفت الخدمة</string>
   <string name="status_send_success">تم الإرسال بنجاح</string>

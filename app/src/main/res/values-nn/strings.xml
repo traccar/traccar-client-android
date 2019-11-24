@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Forgrunnsteneste</string>
   <string name="settings_foreground_summary">Auk teneste-prioritet</string>
   <string name="menu_status">Status</string>
-  <string name="menu_about">Om</string>
   <string name="menu_shortcuts">Legg til snarveg</string>
   <string name="menu_clear">Nullstill</string>
-  <string name="about_description">Sanntids GPS-sporing for Android-einingar. Kompatibel med Traccar Server og andre sporingssystem</string>
-  <string name="about_license">Dette programmet har fri og åpen kildekode; kildekoden er lisensiert under Apache License Version 2.0 og er tilgjengeleg på GitHub.</string>
-  <string name="about_web">For meir informasjon besøk\nwww.traccar.org/client</string>
   <string name="status_service_create">Teneste starta</string>
   <string name="status_service_destroy">Teneste stoppa</string>
   <string name="status_send_success">Send vellukka</string>

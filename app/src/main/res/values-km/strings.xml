@@ -12,12 +12,8 @@
   <string name="settings_foreground_title">សេវាផ្ទៃខាងមុខ</string>
   <string name="settings_foreground_summary">បង្កើនអាទិភាពសេវា</string>
   <string name="menu_status">ស្ថានភាព</string>
-  <string name="menu_about">អំពី</string>
   <string name="menu_shortcuts">បន្ថែមផ្លូវកាត់</string>
   <string name="menu_clear">ដើម្បីជម្រះ</string>
-  <string name="about_description">កម្មវិធីតាមដាន GPS ពេលវេលាពិតប្រាកដសម្រាប់ឧបករណ៍ប្រព័ន្ធប្រតិបត្តិការ Android ។ ឆបគ្នាជាមួយនឹងម៉ាស៊ីនបម្រើនិងប្រព័ន្ធតាមដានតាមដានផ្សេងទៀត</string>
-  <string name="about_license">កម្មវិធីនេះត្រូវបានបើកចំហនិងឥតគិតថ្លៃ, កូដប្រភពត្រូវបានទទួលបានអាជ្ញាប័ណ្ណក្រោមអាជ្ញាប័ណ្ណ Apache កំណែ 2.0 និងអាចប្រើបាននៅលើ GitHub ។</string>
-  <string name="about_web">ចំពោះ​​​​​​​​​ព័ត៌មានបន្ថែម\nwww.traccar.org/client</string>
   <string name="status_send_success">ផ្ញើដោយជោគជ័យ</string>
   <string name="status_send_fail">ការផ្ញើបានបរាជ័យ</string>
   <string name="status_location_update">ធ្វើឱ្យទាន់សម័យទីតាំង</string>

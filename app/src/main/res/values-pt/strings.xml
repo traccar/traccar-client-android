@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Serviço primeiro plano</string>
   <string name="settings_foreground_summary">Aumentar a prioridade de serviço</string>
   <string name="menu_status">Estado</string>
-  <string name="menu_about">Sobre</string>
   <string name="menu_shortcuts">Adicionar Atalhos</string>
   <string name="menu_clear">Limpar</string>
-  <string name="about_description">Localizador GPS em tempo real para dispositivos Android. Compatível com servidor Traccar e outros sistemas de localização.</string>
-  <string name="about_license">Esta aplicação é livre e de código aberto, o código fonte é licenciado sob a licença Apache Versão 2.0 e disponível no GitHub.</string>
-  <string name="about_web">Para mais informações visite \nwww.traccar.org/client</string>
   <string name="status_service_create">Serviço Iniciado</string>
   <string name="status_service_destroy">Serviço Parado</string>
   <string name="status_send_success">Enviado com Sucesso</string>

@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Prvi plan servis</string>
   <string name="settings_foreground_summary">Povecanje usluga prioritet</string>
   <string name="menu_status">Status</string>
-  <string name="menu_about">O klijentu</string>
   <string name="menu_shortcuts">Dodaj prečice</string>
   <string name="menu_clear">Očisti</string>
-  <string name="about_description">GPS tracker za Android telefone. GPS satelit kompatibilno.</string>
-  <string name="about_license">Ova aplikacija je besplatna i open source,izvorni kod je licenciran pod Apache License Version 2.0 i dostupan na GitHub</string>
-  <string name="about_web">Za više informacija www.traccar.org/client </string>
   <string name="status_service_create">Servis pokrenut</string>
   <string name="status_service_destroy">Servis zaustavljen</string>
   <string name="status_send_success">Slanje uspešno</string>

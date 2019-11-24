@@ -23,12 +23,8 @@
   <string name="settings_foreground_title">Forgrunds tjeneste</string>
   <string name="settings_foreground_summary">Øg tjeneste prioritet</string>
   <string name="menu_status">Status</string>
-  <string name="menu_about">Om</string>
   <string name="menu_shortcuts">Tilføj genveje</string>
   <string name="menu_clear">Slet</string>
-  <string name="about_description">Real tid`s GPS tracker for Android enheder. Kompatibel med Traccar Server og andre tracking systemer.</string>
-  <string name="about_license">Denne application er gratis og open source. Kildekoden er licenseret under Apache License Version 2.0 og tilgængelig på GitHub.</string>
-  <string name="about_web">For mere information besøg\nwww.traccar.org/client</string>
   <string name="status_service_create">Tjenesten kører</string>
   <string name="status_service_destroy">Tjenesten er stoppet</string>
   <string name="status_send_success">Send succesfuld</string>

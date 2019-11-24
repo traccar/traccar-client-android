@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">前台服务</string>
   <string name="settings_foreground_summary">提高服务优先级</string>
   <string name="menu_status">定位状态</string>
-  <string name="menu_about">关于</string>
   <string name="menu_shortcuts">添加图标</string>
   <string name="menu_clear">清除</string>
-  <string name="about_description">Android设备的实时GPS跟踪器。兼容Traccar服务器和其他跟踪系统。</string>
-  <string name="about_license">此应用免费且开源。源码许可为Apache V2.0，在GitHub上发布。</string>
-  <string name="about_web">更多信息请访问www.traccar.org/client</string>
   <string name="status_service_create">服务已开始</string>
   <string name="status_service_destroy">服务已停止</string>
   <string name="status_send_success">发送成功</string>

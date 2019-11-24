@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Ön xidməti</string>
   <string name="settings_foreground_summary">Xidmət prioritetini artırın</string>
   <string name="menu_status">vəziyyət</string>
-  <string name="menu_about">Haqqında</string>
   <string name="menu_shortcuts">Qısa yollar əlavə edin</string>
   <string name="menu_clear">Aydındır</string>
-  <string name="about_description">Real time GPS tracker for Android devices. Compatible with Traccar Server and other tracking systems.</string>
-  <string name="about_license">This application is free and open source, source code is licensed under Apache License Version 2.0 and available on GitHub.</string>
-  <string name="about_web">For more information visit\nwww.traccar.org/client</string>
   <string name="status_service_create">Xidmət başladı</string>
   <string name="status_service_destroy">Xidmət dayandı</string>
   <string name="status_send_success">Uğurla göndərin</string>

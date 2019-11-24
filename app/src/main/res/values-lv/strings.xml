@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Zināšanu servis</string>
   <string name="settings_foreground_summary">Paaugstināt servisa prioritāti</string>
   <string name="menu_status">Statuss</string>
-  <string name="menu_about">Par</string>
   <string name="menu_shortcuts">Pievienot saīsnes</string>
   <string name="menu_clear">Notīrīt</string>
-  <string name="about_description">Reāllaika GPS sekošanas ierīce Android ierīcēm. Savietojams ar Traccar Server un citām izsekošanas sistēmām.</string>
-  <string name="about_license">Šī lietotne ir bezmaksas un atvērtā koda, avota kods ir licencēts Apache Licence 2.0 versijā un ir pieejams GitHub.</string>
-  <string name="about_web">Lai iegūtu papildinformāciju, apmeklējiet vietni\nwww.traccar.org/client</string>
   <string name="status_service_create">Serviss uzsākts</string>
   <string name="status_service_destroy">Serviss apstādināts</string>
   <string name="status_send_success">Sūtīšana veiksmīga</string>

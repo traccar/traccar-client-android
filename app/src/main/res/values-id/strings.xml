@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Service Depan</string>
   <string name="settings_foreground_summary">TIngkatkan Prioritas Service</string>
   <string name="menu_status">Status</string>
-  <string name="menu_about">Tentang</string>
   <string name="menu_shortcuts">Tambah Jalan Pintas</string>
   <string name="menu_clear">Bersihkan</string>
-  <string name="about_description">Aplikasi GPS Untuk Perangkat Android. Kompatibel Dengan Traccar Server Dan Sistem GPS Lainnya.</string>
-  <string name="about_license">Aplikasi Ini Gratis Dan Terbuka, Sumber Kode Berlisensi Dibawah Apache License 2.0 Dan Tersedia di GitHub.</string>
-  <string name="about_web">Untuk Informasi Lebih Lanjut Kunjungi www.traccar.org/client</string>
   <string name="status_service_create">Layanan Dimulai</string>
   <string name="status_service_destroy">Layanan Berhenti</string>
   <string name="status_send_success">Sukses Terkirim</string>

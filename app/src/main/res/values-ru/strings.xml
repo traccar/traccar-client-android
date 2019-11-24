@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Приоритетный сервис</string>
   <string name="settings_foreground_summary">Увеличить приоритет сервиса</string>
   <string name="menu_status">Состояние</string>
-  <string name="menu_about">О программе</string>
   <string name="menu_shortcuts">Добавить ярлыки</string>
   <string name="menu_clear">Очистить</string>
-  <string name="about_description">Трекер для Android устройств. Совместим с Traccar сервером и другими мониторинговыми системами.</string>
-  <string name="about_license">Это приложение распростаняется бесплатно, исходный код распростаняется по лицензии Apache License Version 2.0 и доступен на GitHub.</string>
-  <string name="about_web">Для получения дополнительной информации посетите\nwww.traccar.org/client</string>
   <string name="status_service_create">Сервис запущен</string>
   <string name="status_service_destroy">Сервис остановлен</string>
   <string name="status_send_success">Отправка успешна</string>

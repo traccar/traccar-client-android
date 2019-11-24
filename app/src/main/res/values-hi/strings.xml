@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">अग्रभूमि शीर्षका</string>
   <string name="settings_foreground_summary">अग्रभूमि सारांश</string>
   <string name="menu_status">स्थिति</string>
-  <string name="menu_about">बारे में</string>
   <string name="menu_shortcuts">शॉर्टकट्स जोड़ें</string>
   <string name="menu_clear">स्पष्ट /  साफ़</string>
-  <string name="about_description">एंड्रॉयड उपकरणों के लिए वास्तविक समय जीपीएस ट्रैकर। ट्रैक्कार सर्वर और अन्य  ट्रैकिंग प्रणालियों के साथ अनुकूल।</string>
-  <string name="about_license">इस एप्लिकेशन के पास स्वतंत्र और खुला स्रोत है  , स्रोत कोड अपाचे लाइसेंस संस्करण 2.0 और GitHub के अंतर्गत उपलब्ध लाइसेंस प्राप्त है ।</string>
-  <string name="about_web">अधिक जानकारी के लिए www.traccar.org/client वेबसाइट देखें </string>
   <string name="status_service_create">सेवा बनाएँ</string>
   <string name="status_service_destroy">सेवा नष्ट</string>
   <string name="status_send_success">सफलता भेजें</string>

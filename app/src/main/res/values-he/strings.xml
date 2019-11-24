@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">אפשר הפעלה ברקע</string>
   <string name="settings_foreground_summary">הגדל את עדיפות התוכנה</string>
   <string name="menu_status">סטטוס</string>
-  <string name="menu_about">אודות</string>
   <string name="menu_shortcuts">הוסף קיצור דרך</string>
   <string name="menu_clear">נקה</string>
-  <string name="about_description">מכשיר איתור  בזמן אמת עבור מכשירי אנדרואיד</string>
-  <string name="about_license">יישום זה הוא קוד פתוח, קוד המקור מורשה תחת רישיון Apache גירסה 2.0 וזמין על GitHub.</string>
-  <string name="about_web">לפרטים נוספים    www.traccar.org/client</string>
   <string name="status_service_create">אפליקציה הופעלה</string>
   <string name="status_service_destroy">אפליקציה הופסקה</string>
   <string name="status_send_success">נשלח בהצלחה</string>

@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Előtér szolgáltatás</string>
   <string name="settings_foreground_summary">Szolgáltatás prioritásának emelése</string>
   <string name="menu_status">Státusz</string>
-  <string name="menu_about">Névjegy</string>
   <string name="menu_shortcuts">Parancsikon hozzáadása</string>
   <string name="menu_clear">Töröl</string>
-  <string name="about_description">Valós idejű GPS követő Android eszközökre. Kompatibilis többek közt a Traccar Szerverrel és egyéb követő rendszerekkel is.</string>
-  <string name="about_license">Ez az applikáció ingyenes és nyílt forrású, forráskódja az Apache License 2.0 licenccel rendelkezik és elérhető a GitHub-on.</string>
-  <string name="about_web">További információkért látogass el az alábbi weboldalra\nwww.traccar.org/client</string>
   <string name="status_service_create">Szolgáltatás elindítva</string>
   <string name="status_service_destroy">Szolgáltatás leállítva</string>
   <string name="status_send_success">Küldés sikeres</string>

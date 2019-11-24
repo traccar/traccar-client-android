@@ -12,12 +12,8 @@
   <string name="settings_foreground_title">Foreground service</string>
   <string name="settings_foreground_summary">Increase service priority</string>
   <string name="menu_status">තත්වය</string>
-  <string name="menu_about">පිළිබඳ</string>
   <string name="menu_shortcuts">කෙටි මං එකතු කරන්න</string>
   <string name="menu_clear">හිස් කරන්න</string>
-  <string name="about_description">Real time GPS tracker for Android devices. Compatible with Traccar Server and other tracking systems.</string>
-  <string name="about_license">This application is free and open source, source code is licensed under Apache License Version 2.0 and available on GitHub.</string>
-  <string name="about_web">For more information visit\nwww.traccar.org/client</string>
   <string name="status_send_fail">යැවිය නොහැකිය</string>
   <string name="status_location_update">Location update</string>
   <string name="hidden_app_name">උපකරණ සැකසුම්</string>

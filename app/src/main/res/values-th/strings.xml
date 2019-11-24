@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">ทำงานเบื้องหน้า</string>
   <string name="settings_foreground_summary">เพิ่มความลำดับสำคัญการทำงาน</string>
   <string name="menu_status">สถานะ</string>
-  <string name="menu_about">เกี่ยวกับ</string>
   <string name="menu_shortcuts">เพิ่มชอร์ตคัท</string>
   <string name="menu_clear">ล้างข้อมูล</string>
-  <string name="about_description">Real time GPS tracker for Android devices. Compatible with Traccar Server and other tracking systems.</string>
-  <string name="about_license">This application is free and open source, source code is licensed under Apache License Version 2.0 and available on GitHub.</string>
-  <string name="about_web">For more information visit\nwww.traccar.org/client</string>
   <string name="status_service_create">บริการเริ่มต้นแล้ว</string>
   <string name="status_service_destroy">หยุดให้บริการแล้ว</string>
   <string name="status_send_success">ส่งข้อมูลเรียบร้อย</string>

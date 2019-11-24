@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">フォアグラウンドサービス</string>
   <string name="settings_foreground_summary">サービス優先度を上げる</string>
   <string name="menu_status">ステータス</string>
-  <string name="menu_about">アプリについて</string>
   <string name="menu_shortcuts">ショートカットを追加</string>
   <string name="menu_clear">クリア</string>
-  <string name="about_description">Android デバイス用のリアルタイム GPS トラッカーです。 Traccar サーバーや他のトラッキングシステムと互換性があります。</string>
-  <string name="about_license">このアプリケーションは無料のオープンソースで、ソースコードは Apache ライセンス バージョン 2.0 でライセンスされます。 GitHub で利用可能です。</string>
-  <string name="about_web">詳細は visit\nwww.traccar.org/client</string>
   <string name="status_service_create">サービスを開始しました</string>
   <string name="status_service_destroy">サービスを停止しました</string>
   <string name="status_send_success">送信に成功しました</string>

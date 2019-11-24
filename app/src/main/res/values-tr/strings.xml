@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Önplan servisi</string>
   <string name="settings_foreground_summary">Servis önceliği arttır</string>
   <string name="menu_status">Durum</string>
-  <string name="menu_about">Hakkında</string>
   <string name="menu_shortcuts">Kısayol ekle</string>
   <string name="menu_clear">Temizle</string>
-  <string name="about_description">Android cihazlar için gerçek zamanlı takip uygulaması. Traccar sunucuları ve diğer takip sistemleriyle uyumlu.</string>
-  <string name="about_license">Bu uygulama ücretsiz ve acık kaynaklıdır , kaynak kodu lisansı Apache License Version 2.0 altında lisanslı ve GitHub üzerinden ulaşılabilir.</string>
-  <string name="about_web">Daha fazla bilgi için http:\\www.traccar.org/client adresini ziyaret edin.</string>
   <string name="status_service_create">Servis Başlatıldı</string>
   <string name="status_service_destroy">Servis Durduruldu</string>
   <string name="status_send_success">Gönderme başarılı</string>

@@ -28,12 +28,8 @@
   <string name="settings_foreground_title">Edustapalvelu</string>
   <string name="settings_foreground_summary">Lisää palvelun prioriteettia</string>
   <string name="menu_status">Tila</string>
-  <string name="menu_about">Tietoja</string>
   <string name="menu_shortcuts">Lisää pikakuvakkeet</string>
   <string name="menu_clear">Tyhjennä</string>
-  <string name="about_description">Reaaliaikainen GPS-paikannin Android-laitteille. Yhteensopiva Traccar-palvelimen ja muiden paikannusjärjestelmien kanssa.</string>
-  <string name="about_license">Tämä sovellus on vapaata ja avointa lähdekoodia. Lähdekoodi on lisensoitu Apache License Version 2.0 -lisenssillä ja on saatavilla GitHubissa.</string>
-  <string name="about_web">Lisätietoa saat osoitteessa: \nwww.traccar.org/client</string>
   <string name="status_service_create">Palvelu käynnistynyt</string>
   <string name="status_service_destroy">Palvelu pysähtyi</string>
   <string name="status_send_success">Lähetys onnistui</string>

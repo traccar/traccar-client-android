@@ -12,12 +12,8 @@
   <string name="settings_foreground_title">Служба переднього плану</string>
   <string name="settings_foreground_summary">Збільшення пріоритету обслуговування</string>
   <string name="menu_status">Статус</string>
-  <string name="menu_about">Про</string>
   <string name="menu_shortcuts">Додати ярлики</string>
   <string name="menu_clear">Очистити</string>
-  <string name="about_description">GPS трекер реального часу для Android пристроїв. Сумісність з Traccar сервером і іншими системами стеження.</string>
-  <string name="about_license">Цей додаток є безкоштовним з відкритим кодом, код розміщений під ліцензією Apache License версії 2.0 і доступний на GitHub.</string>
-  <string name="about_web">Більше інформації на сайті \nwww.traccar.org/client</string>
   <string name="status_send_success">Успішно відправлено</string>
   <string name="status_send_fail">Відправлення  невдале</string>
   <string name="status_location_update">Оновлення розташування</string>
