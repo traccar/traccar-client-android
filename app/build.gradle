@@ -4,8 +4,8 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "org.traccar.client"
-        buildConfigField "boolean", "HIDDEN_APP", "false"
+        applicationId 'org.traccar.client'
+        buildConfigField 'boolean', 'HIDDEN_APP', 'false'
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 62
@@ -16,13 +16,15 @@ android {
         checkReleaseBuilds false
     }
 
-    flavorDimensions "default"
+    flavorDimensions 'default'
     productFlavors {
-        regular
+        regular {
+            isDefault.set(true)
+        }
         google
         hidden {
-            applicationId "org.traccar.client.hidden"
-            buildConfigField "boolean", "HIDDEN_APP", "true"
+            applicationId 'org.traccar.client.hidden'
+            buildConfigField 'boolean', 'HIDDEN_APP', 'true'
         }
     }
 
@@ -40,10 +42,10 @@ dependencies {
     testImplementation 'org.robolectric:robolectric:4.1'
     googleImplementation 'com.google.firebase:firebase-core:17.2.0'
     googleImplementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    googleImplementation "com.google.android.gms:play-services-location:17.0.0"
+    googleImplementation 'com.google.android.gms:play-services-location:17.0.0'
 }
 
-if (getGradle().getStartParameter().getTaskRequests().toString().contains("Google")) {
+if (getGradle().getStartParameter().getTaskRequests().toString().contains('Google')) {
     apply plugin: 'com.google.gms.google-services'
     apply plugin: 'io.fabric'
 
