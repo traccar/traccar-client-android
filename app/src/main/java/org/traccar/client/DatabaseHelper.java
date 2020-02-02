@@ -18,6 +18,7 @@ package org.traccar.client;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -27,8 +28,10 @@ import java.util.Date;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 3;
-    public static final String DATABASE_NAME = "traccar.db";
+    private static final int DATABASE_VERSION = 3;
+    private static final String DATABASE_NAME = "traccar.db";
+    private static final String TABLE_NAME = "position";
+    private static final String DROP_QUERY = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
     public interface DatabaseHandler<T> {
         void onComplete(boolean success, T result);
@@ -39,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         private DatabaseHandler<T> handler;
         private RuntimeException error;
 
-        public DatabaseAsyncTask(DatabaseHandler<T> handler) {
+        DatabaseAsyncTask(DatabaseHandler<T> handler) {
             this.handler = handler;
         }
 
@@ -70,7 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE position (" +
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "deviceId TEXT," +
                 "time INTEGER," +
@@ -86,12 +89,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS position;");
+        db.execSQL(DROP_QUERY);
         onCreate(db);
     }
 
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS position;");
+        db.execSQL(DROP_QUERY);
         onCreate(db);
     }
 
@@ -108,7 +111,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("battery", position.getBattery());
         values.put("mock", position.getMock() ? 1 : 0);
 
-        db.insertOrThrow("position", null, values);
+        db.insertOrThrow(TABLE_NAME, null, values);
     }
 
     public void insertPositionAsync(final Position position, DatabaseHandler<Void> handler) {
@@ -124,7 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Position selectPosition() {
         Position position = new Position();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM position ORDER BY id LIMIT 1", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY id LIMIT 1", null);
         try {
             if (cursor.getCount() > 0) {
 
@@ -162,7 +165,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void deletePosition(long id) {
-        if (db.delete("position", "id = ?", new String[] { String.valueOf(id) }) != 1) {
+        if (db.delete(TABLE_NAME, "id = ?", new String[] { String.valueOf(id) }) != 1) {
             throw new SQLException();
         }
     }
@@ -175,6 +178,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 return null;
             }
         }.execute();
+    }
+
+    public long getLocationsCount() {
+        return DatabaseUtils.queryNumEntries(db, TABLE_NAME);
     }
 
 }

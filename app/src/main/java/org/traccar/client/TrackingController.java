@@ -76,9 +76,14 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     @Override
     public void onPositionUpdate(Position position) {
-        StatusActivity.addMessage(context.getString(R.string.status_location_update));
         if (position != null) {
             write(position);
+            long count = databaseHelper.getLocationsCount();
+            if (count > 0) {
+                StatusActivity.addMessage(context.getString(R.string.status_location_update) + " (" + count + ")");
+            } else {
+                StatusActivity.addMessage(context.getString(R.string.status_location_update));
+            }
         }
     }
 
