@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2019 Anton Tananaev (anton@traccar.org)
+ * Copyright 2012 - 2020 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,6 +60,7 @@ public class MainFragment extends PreferenceFragmentCompat implements OnSharedPr
     public static final String KEY_ANGLE = "angle";
     public static final String KEY_ACCURACY = "accuracy";
     public static final String KEY_STATUS = "status";
+    public static final String KEY_BUFFER = "buffer";
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
 
@@ -169,6 +170,7 @@ public class MainFragment extends PreferenceFragmentCompat implements OnSharedPr
         findPreference(KEY_DISTANCE).setEnabled(enabled);
         findPreference(KEY_ANGLE).setEnabled(enabled);
         findPreference(KEY_ACCURACY).setEnabled(enabled);
+        findPreference(KEY_BUFFER).setEnabled(enabled);
     }
 
     @Override

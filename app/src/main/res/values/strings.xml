@@ -20,6 +20,9 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Service stopped</string>
   <string name="settings_status_on_summary">Service running</string>
+  <string name="settings_buffer">Offline buffering</string>
+  <string name="settings_buffer_off_summary">Buffering off</string>
+  <string name="settings_buffer_on_summary">Buffering on</string>
   <string name="settings_accuracy_title">Location accuracy</string>
   <string name="settings_accuracy_summary">Desired location accuracy</string>
   <string name="settings_accuracy_high">High</string>

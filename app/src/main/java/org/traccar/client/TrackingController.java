@@ -35,6 +35,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     private SharedPreferences preferences;
 
     private String url;
+    private boolean buffer;
 
     private PositionProvider positionProvider;
     private DatabaseHelper databaseHelper;
@@ -50,6 +51,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         isOnline = networkManager.isOnline();
 
         url = preferences.getString(MainFragment.KEY_URL, context.getString(R.string.settings_url_default_value));
+        buffer = preferences.getBoolean(MainFragment.KEY_BUFFER, true);
     }
 
     public void start() {
@@ -78,7 +80,11 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     public void onPositionUpdate(Position position) {
         StatusActivity.addMessage(context.getString(R.string.status_location_update));
         if (position != null) {
-            write(position);
+            if (buffer) {
+                write(position);
+            } else {
+                send(position);
+            }
         }
     }
 
@@ -173,10 +179,14 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
             @Override
             public void onComplete(boolean success) {
                 if (success) {
-                    delete(position);
+                    if (buffer) {
+                        delete(position);
+                    }
                 } else {
                     StatusActivity.addMessage(context.getString(R.string.status_send_fail));
-                    retry();
+                    if (buffer) {
+                        retry();
+                    }
                 }
             }
         });
