@@ -27,22 +27,27 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.webkit.URLUtil;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.preference.EditTextPreference;
+import androidx.preference.EditTextPreferenceDialogFragmentCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.TwoStatePreference;
 
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.webkit.URLUtil;
-import android.widget.Toast;
-
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -133,6 +138,36 @@ public class MainFragment extends PreferenceFragmentCompat implements OnSharedPr
             startTrackingService(true, false);
         }
 
+    }
+
+    public static class NumericEditTextPreferenceDialogFragment extends EditTextPreferenceDialogFragmentCompat {
+
+        public static NumericEditTextPreferenceDialogFragment newInstance(String key) {
+            final NumericEditTextPreferenceDialogFragment fragment = new NumericEditTextPreferenceDialogFragment();
+            final Bundle bundle = new Bundle();
+            bundle.putString(ARG_KEY, key);
+            fragment.setArguments(bundle);
+            return fragment;
+        }
+
+        @Override
+        protected void onBindDialogView(View view) {
+            EditText editText = view.findViewById(android.R.id.edit);
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+            super.onBindDialogView(view);
+        }
+
+    }
+
+    @Override
+    public void onDisplayPreferenceDialog(Preference preference) {
+        if (Arrays.asList(KEY_INTERVAL, KEY_DISTANCE, KEY_ANGLE).contains(preference.getKey())) {
+            final EditTextPreferenceDialogFragmentCompat f = NumericEditTextPreferenceDialogFragment.newInstance(preference.getKey());
+            f.setTargetFragment(this, 0);
+            f.show(getFragmentManager(), "androidx.preference.PreferenceFragment.DIALOG");
+        } else {
+            super.onDisplayPreferenceDialog(preference);
+        }
     }
 
     private void removeLauncherIcon() {
