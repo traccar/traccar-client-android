@@ -20,6 +20,9 @@
   <string name="settings_status_on">Zatrzymaj</string>
   <string name="settings_status_off_summary">Usługa zatrzymana</string>
   <string name="settings_status_on_summary">Usługa uruchomiona</string>
+  <string name="settings_buffer">Buforowanie offline</string>
+  <string name="settings_buffer_off_summary">Buforowanie wył.</string>
+  <string name="settings_buffer_on_summary"> Buforowanie wł.</string>
   <string name="settings_accuracy_title">Dokładność lokalizacji</string>
   <string name="settings_accuracy_summary">Żądana dokładność lokalizacji</string>
   <string name="settings_accuracy_high">Wysoka</string>

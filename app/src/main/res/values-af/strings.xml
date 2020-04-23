@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Traccar-kliënt</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">Begin diens</string>
+  <string name="shortcut_stop">Stop diens</string>
+  <string name="shortcut_sos">Stuur SOS</string>
+  <string name="channel_default">Primêre Kanaal</string>
+  <string name="settings_id_title">Toestel-identifiseerder</string>
+  <string name="settings_url_title">Bediener-URL</string>
+  <string name="settings_url_summary">Volg bediener-URL</string>
+  <string name="settings_interval_title">Frekwensie</string>
+  <string name="settings_interval_summary">Rapporteer interval in sekondes</string>
+  <string name="settings_distance_title">Afstand</string>
+  <string name="settings_distance_summary">Rapporteer afstand in meter</string>
+  <string name="settings_angle_title">Hoek</string>
+  <string name="settings_angle_summary">Rapporteringshoek in grade</string>
+  <string name="settings_status_title">Diensstatus</string>
+  <string name="settings_status_off">Begin</string>
+  <string name="settings_status_on">Stop</string>
+  <string name="settings_status_off_summary">Diens gestop</string>
+  <string name="settings_status_on_summary">Diens loop</string>
+  <string name="settings_buffer">Vanlyn buffer</string>
+  <string name="settings_buffer_off_summary">Buffer af</string>
+  <string name="settings_buffer_on_summary">Buffer aan</string>
+  <string name="settings_accuracy_title">Ligging akkuraatheid</string>
+  <string name="settings_accuracy_summary">Verlangde ligging akkuraatheid</string>
+  <string name="settings_accuracy_high">Hoog</string>
+  <string name="settings_accuracy_medium">Medium</string>
+  <string name="settings_accuracy_low">Laag</string>
+  <string name="settings_foreground_title">Voorgrond diens</string>
+  <string name="settings_foreground_summary">Verhoog diensprioriteit</string>
+  <string name="menu_status">Status</string>
+  <string name="menu_shortcuts">Voeg kortpaaie by</string>
+  <string name="menu_clear">Skoonmaak</string>
+  <string name="status_service_create">Diens het begin</string>
+  <string name="status_service_destroy">Diens het gestop</string>
+  <string name="status_send_success">Stuur suksesvol</string>
+  <string name="status_send_fail">Stuur misluk</string>
+  <string name="status_location_update">Ligging opdateer</string>
+  <string name="status_network_online">Netwerk aanlyn</string>
+  <string name="status_network_offline">Netwerk vanlyn</string>
+  <string name="hidden_app_name">Toestelinstellings</string>
+  <string name="hidden_alert">Die toep is versteek. Skakel 8722227 (TRACCAR) om dit weer oop te maak.</string>
+  <string name="error_msg_invalid_url">Voer \'n geldige http: // of https: // URL in</string>
+</resources>

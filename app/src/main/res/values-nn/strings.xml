@@ -20,6 +20,9 @@
   <string name="settings_status_on">Stopp</string>
   <string name="settings_status_off_summary">Teneste stoppa</string>
   <string name="settings_status_on_summary">Tenar køyrer</string>
+  <string name="settings_buffer">Fråkopla mellomlagring</string>
+  <string name="settings_buffer_off_summary">Mellomlagring deaktivert</string>
+  <string name="settings_buffer_on_summary">Mellomlagring på</string>
   <string name="settings_accuracy_title">Lokasjonsnøyaktighet</string>
   <string name="settings_accuracy_summary">Ønska lokasjonsnøyaktighet</string>
   <string name="settings_accuracy_high">Høg</string>

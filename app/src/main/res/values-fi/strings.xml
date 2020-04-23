@@ -20,6 +20,9 @@
   <string name="settings_status_on">Pysäytä</string>
   <string name="settings_status_off_summary">Palvelu pysäytetty</string>
   <string name="settings_status_on_summary">Palvelu käynnissä</string>
+  <string name="settings_buffer">Offline-puskurointi</string>
+  <string name="settings_buffer_off_summary">Puskurointi pois päältä</string>
+  <string name="settings_buffer_on_summary">Puskurointi päälle</string>
   <string name="settings_accuracy_title">Sijainnin tarkkuus</string>
   <string name="settings_accuracy_summary">Haluttu sijainnin tarkkuus</string>
   <string name="settings_accuracy_high">Korkea</string>

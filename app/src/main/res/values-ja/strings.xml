@@ -20,6 +20,9 @@
   <string name="settings_status_on">停止</string>
   <string name="settings_status_off_summary">サービス停止中</string>
   <string name="settings_status_on_summary">サービス実行中</string>
+  <string name="settings_buffer">オフラインバッファリング</string>
+  <string name="settings_buffer_off_summary">バッファリング オフ</string>
+  <string name="settings_buffer_on_summary">バッファリング オン</string>
   <string name="settings_accuracy_title">位置情報の精度</string>
   <string name="settings_accuracy_summary">要求される位置情報の精度</string>
   <string name="settings_accuracy_high">高</string>

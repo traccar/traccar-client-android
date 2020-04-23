@@ -20,6 +20,9 @@
   <string name="settings_status_on">Stopp</string>
   <string name="settings_status_off_summary">Tjenesten stoppet</string>
   <string name="settings_status_on_summary">Tjenesten kjører</string>
+  <string name="settings_buffer">Frakoblet mellomlagring</string>
+  <string name="settings_buffer_off_summary">Mellomlagring deaktivert</string>
+  <string name="settings_buffer_on_summary">Mellomlagring på</string>
   <string name="settings_accuracy_title">Posisjonsnøyaktighet</string>
   <string name="settings_accuracy_summary">Ønsket plasseringsnøyaktighet</string>
   <string name="settings_accuracy_high">Høy</string>

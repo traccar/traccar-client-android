@@ -5,6 +5,7 @@ import optparse
 import urllib2
 import json
 import base64
+import shutil
 
 parser = optparse.OptionParser()
 parser.add_option("-u", "--user", dest="username", help="transifex user login")
@@ -39,3 +40,8 @@ for language in resource["available_languages"]:
     file = open(filename, "wb")
     file.write(data.read())
     file.close()
+
+filename = path + "values-iw/strings.xml"
+if not os.path.exists(os.path.dirname(filename)):
+    os.makedirs(os.path.dirname(filename))
+shutil.copyfile(path + "values-he/strings.xml", filename)

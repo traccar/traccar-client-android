@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name"> Traccar לאנדרויד</string>
+  <string name="app_logo">Traccar</string>
+  <string name="shortcut_start">הפעל שירות </string>
+  <string name="shortcut_stop">עצור תהליך</string>
+  <string name="shortcut_sos">שלח הודעת חירום</string>
+  <string name="channel_default">ערוץ ראשי</string>
+  <string name="settings_id_title">מזהה מכשיר</string>
+  <string name="settings_url_title">כתובת שרת</string>
+  <string name="settings_url_summary">כתובת שרת איתור</string>
+  <string name="settings_interval_title">תדירות</string>
+  <string name="settings_interval_summary">זמן דיווח בשניות </string>
+  <string name="settings_distance_title">מרחק</string>
+  <string name="settings_distance_summary">דיווח מרחק במטרים</string>
+  <string name="settings_angle_title">זווית</string>
+  <string name="settings_angle_summary">דיווח פניות בזווית </string>
+  <string name="settings_status_title">מצב שירות</string>
+  <string name="settings_status_off">הפעל</string>
+  <string name="settings_status_on">עצור</string>
+  <string name="settings_status_off_summary">השירות הופסק</string>
+  <string name="settings_status_on_summary">השירות פועל</string>
+  <string name="settings_accuracy_title">דיוק מיקום</string>
+  <string name="settings_accuracy_summary">דיוק מיקום מבוקש</string>
+  <string name="settings_accuracy_high">מדוייק </string>
+  <string name="settings_accuracy_medium">בינוני</string>
+  <string name="settings_accuracy_low">נמוך - משתמש רק בGPS של המכשיר </string>
+  <string name="settings_foreground_title">אפשר הפעלה ברקע</string>
+  <string name="settings_foreground_summary">הגדל את עדיפות התוכנה</string>
+  <string name="menu_status">סטטוס</string>
+  <string name="menu_shortcuts">הוסף קיצור דרך</string>
+  <string name="menu_clear">נקה</string>
+  <string name="status_service_create">אפליקציה הופעלה</string>
+  <string name="status_service_destroy">אפליקציה הופסקה</string>
+  <string name="status_send_success">נשלח בהצלחה</string>
+  <string name="status_send_fail">שליחה נכשלה</string>
+  <string name="status_location_update">עדכון מיקום</string>
+  <string name="status_network_online">רשת באונליין </string>
+  <string name="status_network_offline">רשת מנותקת</string>
+  <string name="hidden_app_name">הגדרות המכשיר</string>
+  <string name="hidden_alert">האפליקציה הוסתרה. כדי לפתוח אותה שוב חייג בטלפון 8722227 (TRACCAR).</string>
+  <string name="error_msg_invalid_url">הזן כתובת חוקית  http:// או  https:// URL</string>
+</resources>

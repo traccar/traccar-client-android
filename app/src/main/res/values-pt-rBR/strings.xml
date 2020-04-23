@@ -20,6 +20,9 @@
   <string name="settings_status_on">Parar</string>
   <string name="settings_status_off_summary">Serviço Parado</string>
   <string name="settings_status_on_summary">Serviço em execução</string>
+  <string name="settings_buffer">Offline buffering</string>
+  <string name="settings_buffer_off_summary">Buffering off</string>
+  <string name="settings_buffer_on_summary">Buffering on</string>
   <string name="settings_accuracy_title">Precisão de localização</string>
   <string name="settings_accuracy_summary">Precisão de localização desejada</string>
   <string name="settings_accuracy_high">Alto</string>
