@@ -18,6 +18,7 @@ package org.traccar.client;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -31,7 +32,7 @@ public class RequestManager {
         void onComplete(boolean success);
     }
 
-    private static class RequestAsyncTask extends AsyncTask<String, Void, Boolean> {
+    private static class RequestAsyncTask extends AsyncTask<Request, Void, Boolean> {
 
         private RequestHandler handler;
 
@@ -40,7 +41,7 @@ public class RequestManager {
         }
 
         @Override
-        protected Boolean doInBackground(String... request) {
+        protected Boolean doInBackground(Request... request) {
             return sendRequest(request[0]);
         }
 
@@ -50,15 +51,25 @@ public class RequestManager {
         }
     }
 
-    public static boolean sendRequest(String request) {
+    public static boolean sendRequest(Request request) {
         InputStream inputStream = null;
         try {
-            URL url = new URL(request);
+            URL url = new URL(request.getUrl());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(TIMEOUT);
             connection.setConnectTimeout(TIMEOUT);
             connection.setRequestMethod("POST");
-            connection.connect();
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept","application/json");
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+
+            DataOutputStream os = new DataOutputStream(connection.getOutputStream());
+            os.writeBytes(request.getData());
+
+            os.flush();
+            os.close();
+
             inputStream = connection.getInputStream();
             while (inputStream.read() != -1);
             return true;
@@ -75,7 +86,7 @@ public class RequestManager {
         }
     }
 
-    public static void sendRequestAsync(String request, RequestHandler handler) {
+    public static void sendRequestAsync(Request request, RequestHandler handler) {
         RequestAsyncTask task = new RequestAsyncTask(handler);
         task.execute(request);
     }
