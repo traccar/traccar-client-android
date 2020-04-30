@@ -104,8 +104,7 @@ public class ShortcutActivity extends AppCompatActivity {
             @Override
             public void onPositionUpdate(Position position) {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ShortcutActivity.this);
-                String request = ProtocolFormatter.formatRequest(
-                        preferences.getString(MainFragment.KEY_URL, null), position, ALARM_SOS);
+                Request request = new Request(preferences.getString(MainFragment.KEY_URL, null), RequestData.get(position, ALARM_SOS));
 
                 RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
                     @Override
