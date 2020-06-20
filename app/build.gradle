@@ -19,7 +19,7 @@ android {
     flavorDimensions 'default'
     productFlavors {
         regular {
-            isDefault.set(true)
+            isDefault = true
         }
         google
         hidden {
