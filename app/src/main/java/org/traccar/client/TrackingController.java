@@ -25,7 +25,6 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     private static final String TAG = TrackingController.class.getSimpleName();
     private static final int RETRY_DELAY = 30 * 1000;
-    private static final int WAKE_LOCK_TIMEOUT = 120 * 1000;
 
     private boolean isOnline;
     private boolean isWaiting;
