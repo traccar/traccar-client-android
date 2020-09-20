@@ -46,7 +46,7 @@ public class MainApplication extends Application {
     @TargetApi(Build.VERSION_CODES.O)
     private void registerChannel() {
         NotificationChannel channel = new NotificationChannel(
-                PRIMARY_CHANNEL, getString(R.string.channel_default), NotificationManager.IMPORTANCE_MIN);
+                PRIMARY_CHANNEL, getString(R.string.channel_default), NotificationManager.IMPORTANCE_LOW);
         channel.setLightColor(Color.GREEN);
         channel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
         ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
