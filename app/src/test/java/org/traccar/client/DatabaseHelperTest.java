@@ -1,5 +1,5 @@
 
-package org.traccar.client;
+package app.jc2.client;
 
 import android.location.Location;
 import android.os.Build;

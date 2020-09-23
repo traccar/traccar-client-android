@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
+package app.jc2.client;
 
 import android.Manifest;
 import android.app.AlarmManager;
@@ -130,7 +130,9 @@ public class MainFragment extends PreferenceFragmentCompat implements OnSharedPr
             }
         };
         findPreference(KEY_DISTANCE).setOnPreferenceChangeListener(numberValidationListener);
+        findPreference(KEY_DISTANCE).setVisible(false);
         findPreference(KEY_ANGLE).setOnPreferenceChangeListener(numberValidationListener);
+        findPreference(KEY_ANGLE).setVisible(false);
 
         alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
         alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, new Intent(getActivity(), AutostartReceiver.class), 0);

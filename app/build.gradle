@@ -4,12 +4,12 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId 'org.traccar.client'
+        applicationId 'app.jc2.client'
         buildConfigField 'boolean', 'HIDDEN_APP', 'false'
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 64
-        versionName '6.3'
+        versionCode 10
+        versionName '1.0'
     }
 
     lintOptions {
@@ -23,7 +23,7 @@ android {
         }
         google
         hidden {
-            applicationId 'org.traccar.client.hidden'
+            applicationId 'app.jc2.client.hidden'
             buildConfigField 'boolean', 'HIDDEN_APP', 'true'
         }
     }

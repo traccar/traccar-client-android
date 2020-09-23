@@ -11,8 +11,8 @@
         android:shortcutShortLabel="@string/shortcut_start">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="org.traccar.client"
-            android:targetClass="org.traccar.client.ShortcutActivity">
+            android:targetPackage="app.jc2.client"
+            android:targetClass="app.jc2.client.ShortcutActivity">
             <extra
                 android:name="action"
                 android:value="start" />
@@ -26,27 +26,14 @@
         android:shortcutShortLabel="@string/shortcut_stop">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="org.traccar.client"
-            android:targetClass="org.traccar.client.ShortcutActivity">
+            android:targetPackage="app.jc2.client"
+            android:targetClass="app.jc2.client.ShortcutActivity">
             <extra
                 android:name="action"
                 android:value="stop" />
         </intent>
     </shortcut>
 
-    <shortcut
-        android:shortcutId="sos"
-        android:enabled="true"
-        android:icon="@mipmap/ic_sos"
-        android:shortcutShortLabel="@string/shortcut_sos">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetPackage="org.traccar.client"
-            android:targetClass="org.traccar.client.ShortcutActivity">
-            <extra
-                android:name="action"
-                android:value="sos" />
-        </intent>
-    </shortcut>
+   
 
 </shortcuts>

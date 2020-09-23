@@ -1,0 +1,1 @@
+sudo cp ./app/build/outputs/apk/regular/debug/app-regular-debug.apk /var/www/html/apk/

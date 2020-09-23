@@ -21,7 +21,7 @@
         android:title="@string/settings_url_title" />
 
     <ListPreference
-        android:defaultValue="medium"
+        android:defaultValue="high"
         android:entries="@array/settings_accuracy_names"
         android:entryValues="@array/settings_accuracy_values"
         android:key="accuracy"
@@ -29,7 +29,7 @@
         android:title="@string/settings_accuracy_title" />
 
     <EditTextPreference
-        android:defaultValue="300"
+        android:defaultValue="30"
         android:key="interval"
         android:inputType="number"
         android:summary="@string/settings_interval_summary"

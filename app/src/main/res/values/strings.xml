@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar Client</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_name">Posduif</string>
+  <string name="app_logo">Posduif</string>
   <string name="shortcut_start">Start service</string>
   <string name="shortcut_stop">Stop service</string>
   <string name="shortcut_sos">Send SOS</string>
