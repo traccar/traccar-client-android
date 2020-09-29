@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 - 2017 Anton Tananaev (anton@traccar.org)
+ * Copyright 2016 - 2020 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 package org.traccar.client;
 
 import android.annotation.TargetApi;
-import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -27,7 +26,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
-public class MainApplication extends Application {
+import androidx.multidex.MultiDexApplication;
+
+public class MainApplication extends MultiDexApplication {
 
     public static final String PRIMARY_CHANNEL = "default";
 
