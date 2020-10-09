@@ -16,6 +16,7 @@
 package org.traccar.client;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -26,6 +27,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
+import androidx.annotation.NonNull;
 import androidx.multidex.MultiDexApplication;
 
 public class MainApplication extends MultiDexApplication {
@@ -69,6 +71,9 @@ public class MainApplication extends MultiDexApplication {
             editor.remove("secure");
             editor.apply();
         }
+    }
+
+    public void handleRatingFlow(@NonNull Activity activity) {
     }
 
 }

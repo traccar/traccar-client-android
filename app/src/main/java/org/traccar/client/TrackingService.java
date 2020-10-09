@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2019 Anton Tananaev (anton@traccar.org)
+ * Copyright 2012 - 2020 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class TrackingService extends Service {
+
+    public static final String ACTION_STARTED = "org.traccar.action.SERVICE_STARTED";
+    public static final String ACTION_STOPPED = "org.traccar.action.SERVICE_STOPPED";
 
     private static final String TAG = TrackingService.class.getSimpleName();
     private static final int NOTIFICATION_ID = 1;
@@ -82,6 +85,7 @@ public class TrackingService extends Service {
     @Override
     public void onCreate() {
         Log.i(TAG, "service create");
+        sendBroadcast(new Intent(ACTION_STARTED));
         StatusActivity.addMessage(getString(R.string.status_service_create));
 
         startForeground(NOTIFICATION_ID, createNotification(this));
@@ -120,6 +124,7 @@ public class TrackingService extends Service {
     @Override
     public void onDestroy() {
         Log.i(TAG, "service destroy");
+        sendBroadcast(new Intent(ACTION_STOPPED));
         StatusActivity.addMessage(getString(R.string.status_service_destroy));
 
         stopForeground(true);

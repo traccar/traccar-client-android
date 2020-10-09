@@ -218,6 +218,7 @@ public class MainFragment extends PreferenceFragmentCompat implements OnSharedPr
             } else {
                 stopTrackingService();
             }
+            ((MainApplication) getActivity().getApplication()).handleRatingFlow(getActivity());
         } else if (key.equals(KEY_DEVICE)) {
             findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
         }
