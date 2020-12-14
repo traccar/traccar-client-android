@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
+    compileSdkVersion 30
+
     defaultConfig {
         applicationId 'org.traccar.client'
         buildConfigField 'boolean', 'HIDDEN_APP', 'false'
         minSdkVersion 16
-        targetSdkVersion 30
         versionCode 66
         versionName '6.5'
         multiDexEnabled true

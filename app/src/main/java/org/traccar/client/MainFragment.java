@@ -47,6 +47,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.TwoStatePreference;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
@@ -69,6 +71,7 @@ public class MainFragment extends PreferenceFragmentCompat implements OnSharedPr
     public static final String KEY_WAKELOCK = "wakelock";
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 2;
+    private static final String KEY_DISCLOSURE_SHOWN = "disclosureShown";
 
     private SharedPreferences sharedPreferences;
 
@@ -77,6 +80,7 @@ public class MainFragment extends PreferenceFragmentCompat implements OnSharedPr
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+
         if (BuildConfig.HIDDEN_APP && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             removeLauncherIcon();
         }
@@ -191,6 +195,17 @@ public class MainFragment extends PreferenceFragmentCompat implements OnSharedPr
     public void onResume() {
         super.onResume();
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+
+        if (!sharedPreferences.getBoolean(KEY_DISCLOSURE_SHOWN, false)) {
+            Snackbar.make(getView(), R.string.disclosure_location, Snackbar.LENGTH_INDEFINITE)
+                    .addCallback(new Snackbar.Callback() {
+                        @Override
+                        public void onDismissed(Snackbar transientBottomBar, int event) {
+                            sharedPreferences.edit().putBoolean(KEY_DISCLOSURE_SHOWN, true).apply();
+                        }
+                    })
+                    .show();
+        }
     }
 
     @Override
