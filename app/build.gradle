@@ -7,6 +7,7 @@ android {
         applicationId 'org.traccar.client'
         buildConfigField 'boolean', 'HIDDEN_APP', 'false'
         minSdkVersion 16
+        targetSdkVersion 30
         versionCode 67
         versionName '6.6'
         multiDexEnabled true
