@@ -46,5 +46,4 @@
   <string name="hidden_app_name">Device Settings</string>
   <string name="hidden_alert">The app has been hidden. To open it again please dial 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Please enter a valid http:// or https:// URL</string>
-  <string name="disclosure_location">This app collects location data to enable live tracking even when the app is closed or not in use.</string>
 </resources>
