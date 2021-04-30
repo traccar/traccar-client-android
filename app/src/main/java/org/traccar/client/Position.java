@@ -16,7 +16,6 @@
 package org.traccar.client;
 
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 
 import java.util.Date;
@@ -31,10 +30,16 @@ public class Position {
         time = new Date(location.getTime());
         latitude = location.getLatitude();
         longitude = location.getLongitude();
-        altitude = location.getAltitude();
-        speed = location.getSpeed() * 1.943844; // speed in knots
-        course = location.getBearing();
-        if (location.getProvider() != null && !location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
+        if (location.hasAltitude()) {
+            altitude = location.getAltitude();
+        }
+        if (location.hasSpeed()) {
+            speed = location.getSpeed() * 1.943844F; // speed in knots
+        }
+        if (location.hasBearing()) {
+            course = location.getBearing();
+        }
+        if (location.hasAccuracy()) {
             accuracy = location.getAccuracy();
         }
         this.battery = battery;
@@ -93,9 +98,9 @@ public class Position {
         this.longitude = longitude;
     }
 
-    private double altitude;
+    private Double altitude;
 
-    public double getAltitude() {
+    public Double getAltitude() {
         return altitude;
     }
 
@@ -103,33 +108,33 @@ public class Position {
         this.altitude = altitude;
     }
 
-    private double speed;
+    private Float speed;
 
-    public double getSpeed() {
+    public Float getSpeed() {
         return speed;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(float speed) {
         this.speed = speed;
     }
 
-    private double course;
+    private Float course;
 
-    public double getCourse() {
+    public Float getCourse() {
         return course;
     }
 
-    public void setCourse(double course) {
+    public void setCourse(float course) {
         this.course = course;
     }
 
-    private double accuracy;
+    private Float accuracy;
 
-    public double getAccuracy() {
+    public Float getAccuracy() {
         return accuracy;
     }
 
-    public void setAccuracy(double accuracy) {
+    public void setAccuracy(float accuracy) {
         this.accuracy = accuracy;
     }
 

@@ -30,11 +30,23 @@ public class ProtocolFormatter {
                 .appendQueryParameter("timestamp", String.valueOf(position.getTime().getTime() / 1000))
                 .appendQueryParameter("lat", String.valueOf(position.getLatitude()))
                 .appendQueryParameter("lon", String.valueOf(position.getLongitude()))
-                .appendQueryParameter("speed", String.valueOf(position.getSpeed()))
-                .appendQueryParameter("bearing", String.valueOf(position.getCourse()))
-                .appendQueryParameter("altitude", String.valueOf(position.getAltitude()))
-                .appendQueryParameter("accuracy", String.valueOf(position.getAccuracy()))
                 .appendQueryParameter("batt", String.valueOf(position.getBattery()));
+
+        if (position.getSpeed() != null) {
+            builder.appendQueryParameter("speed", String.valueOf(position.getSpeed()));
+        }
+
+        if (position.getCourse() != null) {
+            builder.appendQueryParameter("bearing", String.valueOf(position.getCourse()));
+        }
+
+        if (position.getAltitude() != null) {
+            builder.appendQueryParameter("altitude", String.valueOf(position.getAltitude()));
+        }
+
+        if (position.getAccuracy() != null) {
+            builder.appendQueryParameter("accuracy", String.valueOf(position.getAccuracy()));
+        }
 
         if (position.getMock()) {
             builder.appendQueryParameter("mock", String.valueOf(position.getMock()));

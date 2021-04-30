@@ -101,10 +101,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("time", position.getTime().getTime());
         values.put("latitude", position.getLatitude());
         values.put("longitude", position.getLongitude());
-        values.put("altitude", position.getAltitude());
-        values.put("speed", position.getSpeed());
-        values.put("course", position.getCourse());
-        values.put("accuracy", position.getAccuracy());
+        if (position.getAltitude() != null) {
+            values.put("altitude", position.getAltitude());
+        }
+        if (position.getSpeed() != null) {
+            values.put("speed", position.getSpeed());
+        }
+        if (position.getCourse() != null) {
+            values.put("course", position.getCourse());
+        }
+        if (position.getAccuracy() != null) {
+            values.put("accuracy", position.getAccuracy());
+        }
         values.put("battery", position.getBattery());
         values.put("mock", position.getMock() ? 1 : 0);
 
@@ -135,10 +143,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 position.setTime(new Date(cursor.getLong(cursor.getColumnIndex("time"))));
                 position.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
                 position.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
-                position.setAltitude(cursor.getDouble(cursor.getColumnIndex("altitude")));
-                position.setSpeed(cursor.getDouble(cursor.getColumnIndex("speed")));
-                position.setCourse(cursor.getDouble(cursor.getColumnIndex("course")));
-                position.setAccuracy(cursor.getDouble(cursor.getColumnIndex("accuracy")));
+                if (!cursor.isNull(cursor.getColumnIndex("altitude"))) {
+                    position.setAltitude(cursor.getDouble(cursor.getColumnIndex("altitude")));
+                }
+                if (!cursor.isNull(cursor.getColumnIndex("speed"))) {
+                    position.setSpeed(cursor.getFloat(cursor.getColumnIndex("speed")));
+                }
+                if (!cursor.isNull(cursor.getColumnIndex("course"))) {
+                    position.setCourse(cursor.getFloat(cursor.getColumnIndex("course")));
+                }
+                if (!cursor.isNull(cursor.getColumnIndex("accuracy"))) {
+                    position.setAccuracy(cursor.getFloat(cursor.getColumnIndex("accuracy")));
+                }
                 position.setBattery(cursor.getDouble(cursor.getColumnIndex("battery")));
                 position.setMock(cursor.getInt(cursor.getColumnIndex("mock")) > 0);
 
