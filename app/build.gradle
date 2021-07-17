@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 30
@@ -46,16 +47,18 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.3.0-alpha03'
+    implementation 'com.google.android.material:material:1.5.0-alpha01'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.preference:preference:1.1.1'
-    testImplementation 'junit:junit:4.13'
+    implementation 'androidx.preference:preference-ktx:1.1.1'
+    testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.1'
-    googleImplementation 'com.google.firebase:firebase-core:17.5.0'
-    googleImplementation 'com.google.firebase:firebase-crashlytics-gradle:2.3.0'
-    googleImplementation 'com.google.firebase:firebase-analytics:17.5.0'
-    googleImplementation 'com.google.android.gms:play-services-location:17.1.0'
-    googleImplementation 'com.google.android.play:core:1.8.2'
+    googleImplementation 'com.google.firebase:firebase-core:19.0.0'
+    googleImplementation 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
+    googleImplementation 'com.google.firebase:firebase-analytics:19.0.0'
+    googleImplementation 'com.google.android.gms:play-services-location:18.0.0'
+    googleImplementation 'com.google.android.play:core:1.10.0'
+    implementation "androidx.core:core-ktx:1.6.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 if (getGradle().getStartParameter().getTaskRequests().toString().contains('Google')) {
