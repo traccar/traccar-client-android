@@ -20,6 +20,12 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Servis zaustavljen</string>
   <string name="settings_status_on_summary">Servis pokrenut</string>
+  <string name="settings_buffer">Offline buffering</string>
+  <string name="settings_buffer_off_summary">Buffering uključen</string>
+  <string name="settings_buffer_on_summary">Buffering isključen</string>
+  <string name="settings_wakelock">Zaključavanje budnosti</string>
+  <string name="settings_wakelock_off_summary">Budnost isključena</string>
+  <string name="settings_wakelock_on_summary">Budnost uključena</string>
   <string name="settings_accuracy_title">Tačnost lokacije</string>
   <string name="settings_accuracy_summary">Željena tačnost lokacije</string>
   <string name="settings_accuracy_high">Visoka</string>

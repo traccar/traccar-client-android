@@ -20,6 +20,12 @@
   <string name="settings_status_on">Parar</string>
   <string name="settings_status_off_summary">Serviço Parado</string>
   <string name="settings_status_on_summary">Serviço em execução</string>
+  <string name="settings_buffer">Buffering Offline</string>
+  <string name="settings_buffer_off_summary">Buffering desligado</string>
+  <string name="settings_buffer_on_summary">Buffering ligado</string>
+  <string name="settings_wakelock">Bloqueio de Ativação</string>
+  <string name="settings_wakelock_off_summary">Bloqueio de Ativação Desligado</string>
+  <string name="settings_wakelock_on_summary">Bloqueio de Ativação Ligado</string>
   <string name="settings_accuracy_title">Precisão de localização</string>
   <string name="settings_accuracy_summary">Precisão de localização desejada</string>
   <string name="settings_accuracy_high">Alto</string>

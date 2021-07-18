@@ -4,6 +4,8 @@
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Pokreni servis</string>
   <string name="shortcut_stop">Zaustavi servis</string>
+  <string name="shortcut_sos">Pošalji SOS</string>
+  <string name="channel_default">Primarni kanal</string>
   <string name="settings_id_title">Identifikator uređaja</string>
   <string name="settings_url_title">Adresa poslužitelja</string>
   <string name="settings_url_summary">Adresa poslužitelja za praćenje</string>
@@ -18,7 +20,14 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Servis zaustavljen</string>
   <string name="settings_status_on_summary">Servis pokrenut</string>
+  <string name="settings_buffer">Offline memoriranje</string>
+  <string name="settings_buffer_off_summary">Predmemoriranje isključeno</string>
+  <string name="settings_buffer_on_summary">Predmemoriranje uključeno</string>
+  <string name="settings_wakelock">Gašenje ekrana pri neaktivnosti</string>
+  <string name="settings_wakelock_off_summary">Gasi ekran pri neaktivnosti</string>
+  <string name="settings_wakelock_on_summary">Ne gasi ekran pri neaktivnosti</string>
   <string name="settings_accuracy_title">Točnost lokacije</string>
+  <string name="settings_accuracy_summary">Željena preciznost lokacije</string>
   <string name="settings_accuracy_high">Visoki</string>
   <string name="settings_accuracy_medium">Srednji</string>
   <string name="settings_accuracy_low">Niski</string>
@@ -32,6 +41,8 @@
   <string name="status_send_success">Slanje uspješno</string>
   <string name="status_send_fail">Greška pri slanju</string>
   <string name="status_location_update">Osvežavanje lokacije</string>
+  <string name="status_network_online">Mrežna dostupnost</string>
+  <string name="status_network_offline">Mrežna nedostupnost</string>
   <string name="hidden_app_name">Podešavanje uređaja</string>
   <string name="hidden_alert">Aplikacija je skrivena. Za ponovno otvaranje molim nazovite  8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Molimo unesite ispravnu http:// ili https:// adresu</string>

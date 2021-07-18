@@ -20,6 +20,12 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Serviss apturēts</string>
   <string name="settings_status_on_summary">Serviss darbojas</string>
+  <string name="settings_buffer">Bezsaistes buferizācija</string>
+  <string name="settings_buffer_off_summary">Buferizācija izslēgta</string>
+  <string name="settings_buffer_on_summary">Buferizācija ieslēgta</string>
+  <string name="settings_wakelock">Pretaizmigšanas funkcija</string>
+  <string name="settings_wakelock_off_summary">Pretaizmigšanas funkcija izslēgta</string>
+  <string name="settings_wakelock_on_summary">Pretaizmigšanas funkcija ieslēgta</string>
   <string name="settings_accuracy_title">Vietas precizitāte</string>
   <string name="settings_accuracy_summary">Vēlamās vietas precizitāte</string>
   <string name="settings_accuracy_high">Augsta</string>

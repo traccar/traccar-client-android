@@ -20,6 +20,12 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Zastaveno</string>
   <string name="settings_status_on_summary">Spuštěno</string>
+  <string name="settings_buffer">Ukládání do vyrovnávací paměti</string>
+  <string name="settings_buffer_off_summary">Vyrovnávací pamět vypnuta</string>
+  <string name="settings_buffer_on_summary">Vyrovnávací pamět zapnuta</string>
+  <string name="settings_wakelock">Zámek probuzení</string>
+  <string name="settings_wakelock_off_summary">Zámek probuzení vypnut</string>
+  <string name="settings_wakelock_on_summary">Zámek probuzení zapnut</string>
   <string name="settings_accuracy_title">Přesnost umístění</string>
   <string name="settings_accuracy_summary">Požadovaná přesnost umístění</string>
   <string name="settings_accuracy_high">Vysoká</string>

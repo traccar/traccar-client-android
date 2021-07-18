@@ -20,9 +20,15 @@
   <string name="settings_status_on">إيقاف</string>
   <string name="settings_status_off_summary">الخدمة توقفت</string>
   <string name="settings_status_on_summary">الخدمة تعمل</string>
+  <string name="settings_buffer">التخزين المؤقت دون اتصال</string>
+  <string name="settings_buffer_off_summary">التخزين المؤقت غير مفعل</string>
+  <string name="settings_buffer_on_summary">التخزين المؤقت مفعل</string>
+  <string name="settings_wakelock">قفل الإيقاظ</string>
+  <string name="settings_wakelock_off_summary">قفل الإيقاظ غير مفعل</string>
+  <string name="settings_wakelock_on_summary">قفل الإيقاظ مفعل</string>
   <string name="settings_accuracy_title">دقة الموقع</string>
   <string name="settings_accuracy_summary">دقة الموقع المطلوبة</string>
-  <string name="settings_accuracy_high">عالي</string>
+  <string name="settings_accuracy_high">مرتفع</string>
   <string name="settings_accuracy_medium">متوسط</string>
   <string name="settings_accuracy_low">منخفض</string>
   <string name="settings_foreground_title">الخدمة الأمامية</string>
@@ -39,5 +45,5 @@
   <string name="status_network_offline">غير متصل بالشبكة</string>
   <string name="hidden_app_name">إعدادات الجهاز</string>
   <string name="hidden_alert">تم إخفاء التطبيق. لفتحه مجددا رجاءا اتصل بـ8722227 (TRACCAR).</string>
-  <string name="error_msg_invalid_url">أرجو إدخال رابط صحيح http:// أو https://</string>
+  <string name="error_msg_invalid_url">الرجاء إدخال رابط صحيح http:// أو https://</string>
 </resources>

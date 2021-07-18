@@ -20,6 +20,17 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Tjenesten stoppet</string>
   <string name="settings_status_on_summary">Tjenesten er aktiv</string>
+  <string name="settings_buffer">Offline buffering</string>
+  <string name="settings_buffer_off_summary">buffering off</string>
+  <string name="settings_buffer_on_summary">buffering on</string>
+  <string name="settings_wakelock">Vågelås</string>
+  <string name="settings_wakelock_off_summary">Vågelås off</string>
+  <string name="settings_wakelock_on_summary">Vågelås on</string>
+  <string name="settings_accuracy_title">Placeringsnøjagtighed</string>
+  <string name="settings_accuracy_summary">Ønsket placeringsnøjagtighed</string>
+  <string name="settings_accuracy_high">Høj</string>
+  <string name="settings_accuracy_medium">Mellem</string>
+  <string name="settings_accuracy_low">Lav</string>
   <string name="settings_foreground_title">Forgrunds tjeneste</string>
   <string name="settings_foreground_summary">Øg tjeneste prioritet</string>
   <string name="menu_status">Status</string>
@@ -30,6 +41,8 @@
   <string name="status_send_success">Send succesfuld</string>
   <string name="status_send_fail">Send fejlede</string>
   <string name="status_location_update">Placering opdateret</string>
+  <string name="status_network_online">Netværk online</string>
+  <string name="status_network_offline">Netværk offline</string>
   <string name="hidden_app_name">Enheds indstillinger</string>
   <string name="hidden_alert">Appen er skjult. For at åbne appen igen skal du ringe til 8722227 (TRACCAR)</string>
   <string name="error_msg_invalid_url">Indtast gyldig http:// eller https:// adresse</string>

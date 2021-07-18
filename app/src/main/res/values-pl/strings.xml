@@ -21,8 +21,11 @@
   <string name="settings_status_off_summary">Usługa zatrzymana</string>
   <string name="settings_status_on_summary">Usługa uruchomiona</string>
   <string name="settings_buffer">Buforowanie offline</string>
-  <string name="settings_buffer_off_summary">Buforowanie wył.</string>
-  <string name="settings_buffer_on_summary"> Buforowanie wł.</string>
+  <string name="settings_buffer_off_summary">Buforowanie wyłączone</string>
+  <string name="settings_buffer_on_summary">Buforowanie włączone</string>
+  <string name="settings_wakelock">Wybudź blokadę</string>
+  <string name="settings_wakelock_off_summary">Wybudzenie blokady wyłączone</string>
+  <string name="settings_wakelock_on_summary">Wybudzenie blokady włączone</string>
   <string name="settings_accuracy_title">Dokładność lokalizacji</string>
   <string name="settings_accuracy_summary">Żądana dokładność lokalizacji</string>
   <string name="settings_accuracy_high">Wysoka</string>

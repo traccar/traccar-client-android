@@ -20,6 +20,9 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Dienst inaktiv</string>
   <string name="settings_status_on_summary">Dienst aktiv</string>
+  <string name="settings_buffer">Offline puffern</string>
+  <string name="settings_buffer_off_summary">Puffern aus</string>
+  <string name="settings_buffer_on_summary">Puffern ein</string>
   <string name="settings_accuracy_title">Positionsgenauigkeit</string>
   <string name="settings_accuracy_summary">Erwünschte Positionsgenauigkeit</string>
   <string name="settings_accuracy_high">Hoch</string>

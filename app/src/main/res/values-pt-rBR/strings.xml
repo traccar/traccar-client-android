@@ -21,16 +21,19 @@
   <string name="settings_status_off_summary">Serviço Parado</string>
   <string name="settings_status_on_summary">Serviço em execução</string>
   <string name="settings_buffer">Offline buffering</string>
-  <string name="settings_buffer_off_summary">Buffering off</string>
-  <string name="settings_buffer_on_summary">Buffering on</string>
+  <string name="settings_buffer_off_summary">Buffering Desligado</string>
+  <string name="settings_buffer_on_summary">Buffering Ligado</string>
+  <string name="settings_wakelock">Bloqueio de Ativação</string>
+  <string name="settings_wakelock_off_summary">Bloqueio de Ativação Desligado</string>
+  <string name="settings_wakelock_on_summary">Bloqueio de Ativação Ligado</string>
   <string name="settings_accuracy_title">Precisão de localização</string>
   <string name="settings_accuracy_summary">Precisão de localização desejada</string>
   <string name="settings_accuracy_high">Alto</string>
   <string name="settings_accuracy_medium">Médio</string>
   <string name="settings_accuracy_low">Baixo</string>
   <string name="settings_foreground_title">Serviço em primeiro plano</string>
-  <string name="settings_foreground_summary">Aumentar a prioridade de serviço</string>
-  <string name="menu_status">Status</string>
+  <string name="settings_foreground_summary">Aumentar a prioridade do serviço</string>
+  <string name="menu_status">Estado</string>
   <string name="menu_shortcuts">Adicionar atalhos</string>
   <string name="menu_clear">Limpar</string>
   <string name="status_service_create">Serviço iniciado</string>
@@ -42,5 +45,5 @@
   <string name="status_network_offline">Rede offline</string>
   <string name="hidden_app_name">Configurações do Dispositivo</string>
   <string name="hidden_alert">O aplicativo foi escondido. Para abrir novamente por favor digite 8722227 (TRACCAR).</string>
-  <string name="error_msg_invalid_url">Digite um URL http: // ou https: // válido</string>
+  <string name="error_msg_invalid_url">Digite uma URL http: // ou https: // válida</string>
 </resources>

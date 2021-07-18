@@ -20,6 +20,12 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Service gestopt</string>
   <string name="settings_status_on_summary">Service draait</string>
+  <string name="settings_buffer">Offline bufferen</string>
+  <string name="settings_buffer_off_summary">Bufferen uit</string>
+  <string name="settings_buffer_on_summary">Bufferen aan</string>
+  <string name="settings_wakelock">Slaapstand blokkade</string>
+  <string name="settings_wakelock_off_summary">Slaapstand blokkade uit</string>
+  <string name="settings_wakelock_on_summary">Slaapstand blokkade aan</string>
   <string name="settings_accuracy_title">Locatienauwkeurigheid</string>
   <string name="settings_accuracy_summary">Gewenste lokatienauwkeurigheid</string>
   <string name="settings_accuracy_high">Hoog</string>
