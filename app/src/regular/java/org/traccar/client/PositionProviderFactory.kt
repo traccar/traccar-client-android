@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Anton Tananaev (anton@traccar.org)
+ * Copyright 2019 - 2021 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
+package org.traccar.client
 
-import android.content.Context;
+import android.content.Context
+import org.traccar.client.PositionProvider.PositionListener
 
-public class PositionProviderFactory {
+object PositionProviderFactory {
 
-    public static PositionProvider create(Context context, PositionProvider.PositionListener listener) {
-        return new AndroidPositionProvider(context, listener);
+    fun create(context: Context, listener: PositionListener): PositionProvider {
+        return AndroidPositionProvider(context, listener)
     }
-
 }

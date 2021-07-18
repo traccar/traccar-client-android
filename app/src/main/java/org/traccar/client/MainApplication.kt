@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 - 2020 Anton Tananaev (anton@traccar.org)
+ * Copyright 2016 - 2021 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,67 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
+package org.traccar.client
 
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
-import android.preference.PreferenceManager;
+import androidx.multidex.MultiDexApplication
+import android.annotation.TargetApi
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.Notification
+import android.graphics.Color
+import android.os.Build
+import android.app.Activity
 
-import androidx.annotation.NonNull;
-import androidx.multidex.MultiDexApplication;
+import androidx.annotation.NonNull
 
-public class MainApplication extends MultiDexApplication {
 
-    public static final String PRIMARY_CHANNEL = "default";
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        System.setProperty("http.keepAliveDuration", String.valueOf(30 * 60 * 1000));
 
-        migrateLegacyPreferences(PreferenceManager.getDefaultSharedPreferences(this));
+open class MainApplication : MultiDexApplication() {
 
+    override fun onCreate() {
+        super.onCreate()
+        System.setProperty("http.keepAliveDuration", (30 * 60 * 1000).toString())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            registerChannel();
+            registerChannel()
         }
     }
 
     @TargetApi(Build.VERSION_CODES.O)
-    private void registerChannel() {
-        NotificationChannel channel = new NotificationChannel(
-                PRIMARY_CHANNEL, getString(R.string.channel_default), NotificationManager.IMPORTANCE_LOW);
-        channel.setLightColor(Color.GREEN);
-        channel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
-        ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
+    private fun registerChannel() {
+        val channel = NotificationChannel(
+            PRIMARY_CHANNEL, getString(R.string.channel_default), NotificationManager.IMPORTANCE_LOW
+        )
+        channel.lightColor = Color.GREEN
+        channel.lockscreenVisibility = Notification.VISIBILITY_SECRET
+        (getSystemService(NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(channel)
     }
 
-    private void migrateLegacyPreferences(SharedPreferences preferences) {
-        String port = preferences.getString("port", null);
-        if (port != null) {
-            String host = preferences.getString("address", getString(R.string.settings_url_default_value));
-            String scheme = preferences.getBoolean("secure", false) ? "https" : "http";
+    open fun handleRatingFlow(activity: Activity) {}
 
-            Uri.Builder builder = new Uri.Builder();
-            builder.scheme(scheme).encodedAuthority(host + ":" + port).build();
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(MainFragment.KEY_URL, builder.toString());
-
-            editor.remove("port");
-            editor.remove("address");
-            editor.remove("secure");
-            editor.apply();
-        }
-    }
-
-    public void handleRatingFlow(@NonNull Activity activity) {
+    companion object {
+        const val PRIMARY_CHANNEL = "default"
     }
 
 }

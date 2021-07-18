@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Anton Tananaev (anton@traccar.org)
+ * Copyright 2015 - 2021 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,168 +13,142 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
+@file:Suppress("DEPRECATION", "StaticFieldLeak")
+package org.traccar.client
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.os.AsyncTask;
+import android.content.ContentValues
+import android.content.Context
+import android.database.SQLException
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
+import android.os.AsyncTask
+import java.sql.Date
 
-import java.util.Date;
+class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-public class DatabaseHelper extends SQLiteOpenHelper {
-
-    public static final int DATABASE_VERSION = 3;
-    public static final String DATABASE_NAME = "traccar.db";
-
-    public interface DatabaseHandler<T> {
-        void onComplete(boolean success, T result);
+    interface DatabaseHandler<T> {
+        fun onComplete(success: Boolean, result: T)
     }
 
-    private static abstract class DatabaseAsyncTask<T> extends AsyncTask<Void, Void, T> {
+    private abstract class DatabaseAsyncTask<T>(val handler: DatabaseHandler<T>) : AsyncTask<Unit, Unit, T?>() {
 
-        private DatabaseHandler<T> handler;
-        private RuntimeException error;
+        private var error: RuntimeException? = null
 
-        public DatabaseAsyncTask(DatabaseHandler<T> handler) {
-            this.handler = handler;
-        }
-
-        @Override
-        protected T doInBackground(Void... params) {
-            try {
-                return executeMethod();
-            } catch (RuntimeException error) {
-                this.error = error;
-                return null;
+        override fun doInBackground(vararg params: Unit): T? {
+            return try {
+                executeMethod()
+            } catch (error: RuntimeException) {
+                this.error = error
+                null
             }
         }
 
-        protected abstract T executeMethod();
+        protected abstract fun executeMethod(): T
 
-        @Override
-        protected void onPostExecute(T result) {
-            handler.onComplete(error == null, result);
+        override fun onPostExecute(result: T?) {
+            result?.let { handler.onComplete(error == null, result) }
         }
     }
 
-    private SQLiteDatabase db;
+    private val db: SQLiteDatabase = writableDatabase
 
-    public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        db = getWritableDatabase();
+    override fun onCreate(db: SQLiteDatabase) {
+        db.execSQL(
+            "CREATE TABLE position (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "deviceId TEXT," +
+                    "time INTEGER," +
+                    "latitude REAL," +
+                    "longitude REAL," +
+                    "altitude REAL," +
+                    "speed REAL," +
+                    "course REAL," +
+                    "accuracy REAL," +
+                    "battery REAL," +
+                    "mock INTEGER)"
+        )
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE position (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "deviceId TEXT," +
-                "time INTEGER," +
-                "latitude REAL," +
-                "longitude REAL," +
-                "altitude REAL," +
-                "speed REAL," +
-                "course REAL," +
-                "accuracy REAL," +
-                "battery REAL," +
-                "mock INTEGER)");
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.execSQL("DROP TABLE IF EXISTS position;")
+        onCreate(db)
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS position;");
-        onCreate(db);
+    override fun onDowngrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.execSQL("DROP TABLE IF EXISTS position;")
+        onCreate(db)
     }
 
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS position;");
-        onCreate(db);
+    fun insertPosition(position: Position) {
+        val values = ContentValues()
+        values.put("deviceId", position.deviceId)
+        values.put("time", position.time.time)
+        values.put("latitude", position.latitude)
+        values.put("longitude", position.longitude)
+        values.put("altitude", position.altitude)
+        values.put("speed", position.speed)
+        values.put("course", position.course)
+        values.put("accuracy", position.accuracy)
+        values.put("battery", position.battery)
+        values.put("mock", if (position.mock) 1 else 0)
+        db.insertOrThrow("position", null, values)
     }
 
-    public void insertPosition(Position position) {
-        ContentValues values = new ContentValues();
-        values.put("deviceId", position.getDeviceId());
-        values.put("time", position.getTime().getTime());
-        values.put("latitude", position.getLatitude());
-        values.put("longitude", position.getLongitude());
-        values.put("altitude", position.getAltitude());
-        values.put("speed", position.getSpeed());
-        values.put("course", position.getCourse());
-        values.put("accuracy", position.getAccuracy());
-        values.put("battery", position.getBattery());
-        values.put("mock", position.getMock() ? 1 : 0);
-
-        db.insertOrThrow("position", null, values);
-    }
-
-    public void insertPositionAsync(final Position position, DatabaseHandler<Void> handler) {
-        new DatabaseAsyncTask<Void>(handler) {
-            @Override
-            protected Void executeMethod() {
-                insertPosition(position);
-                return null;
+    fun insertPositionAsync(position: Position, handler: DatabaseHandler<Unit>) {
+        object : DatabaseAsyncTask<Unit>(handler) {
+            override fun executeMethod() {
+                insertPosition(position)
             }
-        }.execute();
+        }.execute()
     }
 
-    public Position selectPosition() {
-        Position position = new Position();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM position ORDER BY id LIMIT 1", null);
-        try {
-            if (cursor.getCount() > 0) {
-
-                cursor.moveToFirst();
-
-                position.setId(cursor.getLong(cursor.getColumnIndex("id")));
-                position.setDeviceId(cursor.getString(cursor.getColumnIndex("deviceId")));
-                position.setTime(new Date(cursor.getLong(cursor.getColumnIndex("time"))));
-                position.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
-                position.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
-                position.setAltitude(cursor.getDouble(cursor.getColumnIndex("altitude")));
-                position.setSpeed(cursor.getDouble(cursor.getColumnIndex("speed")));
-                position.setCourse(cursor.getDouble(cursor.getColumnIndex("course")));
-                position.setAccuracy(cursor.getDouble(cursor.getColumnIndex("accuracy")));
-                position.setBattery(cursor.getDouble(cursor.getColumnIndex("battery")));
-                position.setMock(cursor.getInt(cursor.getColumnIndex("mock")) > 0);
-
-            } else {
-                return null;
+    fun selectPosition(): Position? {
+        db.rawQuery("SELECT * FROM position ORDER BY id LIMIT 1", null).use { cursor ->
+            if (cursor.count > 0) {
+                cursor.moveToFirst()
+                return Position(
+                    id = cursor.getLong(cursor.getColumnIndex("id")),
+                    deviceId = cursor.getString(cursor.getColumnIndex("deviceId")),
+                    time = Date(cursor.getLong(cursor.getColumnIndex("time"))),
+                    latitude = cursor.getDouble(cursor.getColumnIndex("latitude")),
+                    longitude = cursor.getDouble(cursor.getColumnIndex("longitude")),
+                    altitude = cursor.getDouble(cursor.getColumnIndex("altitude")),
+                    speed = cursor.getDouble(cursor.getColumnIndex("speed")),
+                    course = cursor.getDouble(cursor.getColumnIndex("course")),
+                    accuracy = cursor.getDouble(cursor.getColumnIndex("accuracy")),
+                    battery = cursor.getDouble(cursor.getColumnIndex("battery")),
+                    mock = cursor.getInt(cursor.getColumnIndex("mock")) > 0,
+                )
             }
-        } finally {
-            cursor.close();
         }
-
-        return position;
+        return null
     }
 
-    public void selectPositionAsync(DatabaseHandler<Position> handler) {
-        new DatabaseAsyncTask<Position>(handler) {
-            @Override
-            protected Position executeMethod() {
-                return selectPosition();
+    fun selectPositionAsync(handler: DatabaseHandler<Position?>) {
+        object : DatabaseAsyncTask<Position?>(handler) {
+            override fun executeMethod(): Position? {
+                return selectPosition()
             }
-        }.execute();
+        }.execute()
     }
 
-    public void deletePosition(long id) {
-        if (db.delete("position", "id = ?", new String[] { String.valueOf(id) }) != 1) {
-            throw new SQLException();
+    fun deletePosition(id: Long) {
+        if (db.delete("position", "id = ?", arrayOf(id.toString())) != 1) {
+            throw SQLException()
         }
     }
 
-    public void deletePositionAsync(final long id, DatabaseHandler<Void> handler) {
-        new DatabaseAsyncTask<Void>(handler) {
-            @Override
-            protected Void executeMethod() {
-                deletePosition(id);
-                return null;
+    fun deletePositionAsync(id: Long, handler: DatabaseHandler<Unit>) {
+        object : DatabaseAsyncTask<Unit>(handler) {
+            override fun executeMethod() {
+                deletePosition(id)
             }
-        }.execute();
+        }.execute()
+    }
+
+    companion object {
+        const val DATABASE_VERSION = 3
+        const val DATABASE_NAME = "traccar.db"
     }
 
 }

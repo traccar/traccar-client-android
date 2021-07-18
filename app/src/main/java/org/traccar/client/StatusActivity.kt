@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+ * Copyright 2012 - 2021 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,82 +13,74 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
+package org.traccar.client
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.ArrayAdapter
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.ListView
+import java.text.DateFormat
+import java.util.*
 
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+class StatusActivity : AppCompatActivity() {
 
-public class StatusActivity extends AppCompatActivity {
+    private var adapter: ArrayAdapter<String>? = null
 
-    private static final int LIMIT = 20;
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.list)
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1, messages)
+        val listView = findViewById<ListView>(android.R.id.list)
+        listView.adapter = adapter
+        adapter?.let { adapters.add(it) }
+    }
 
-    private static final LinkedList<String> messages = new LinkedList<>();
-    private static final Set<ArrayAdapter<String>> adapters = new HashSet<>();
+    override fun onDestroy() {
+        adapters.remove(adapter)
+        super.onDestroy()
+    }
 
-    private static void notifyAdapters() {
-        for (ArrayAdapter<String> adapter : adapters) {
-            adapter.notifyDataSetChanged();
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.status, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.clear) {
+            clearMessages()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    companion object {
+        private const val LIMIT = 20
+        private val messages = LinkedList<String>()
+        private val adapters: MutableSet<ArrayAdapter<String>> = HashSet()
+
+        private fun notifyAdapters() {
+            for (adapter in adapters) {
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        fun addMessage(originalMessage: String) {
+            var message = originalMessage
+            val format = DateFormat.getTimeInstance(DateFormat.MEDIUM)
+            message = format.format(Date()) + " - " + message
+            messages.add(message)
+            while (messages.size > LIMIT) {
+                messages.removeFirst()
+            }
+            notifyAdapters()
+        }
+
+        fun clearMessages() {
+            messages.clear()
+            notifyAdapters()
         }
     }
-
-    public static void addMessage(String message) {
-        DateFormat format = DateFormat.getTimeInstance(DateFormat.MEDIUM);
-        message = format.format(new Date()) + " - " + message;
-        messages.add(message);
-        while (messages.size() > LIMIT) {
-            messages.removeFirst();
-        }
-        notifyAdapters();
-    }
-
-    public static void clearMessages() {
-        messages.clear();
-        notifyAdapters();
-    }
-
-    private ArrayAdapter<String> adapter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.list);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, messages);
-        ListView listView = findViewById(android.R.id.list);
-        listView.setAdapter(adapter);
-        adapters.add(adapter);
-    }
-
-    @Override
-    protected void onDestroy() {
-        adapters.remove(adapter);
-        super.onDestroy();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.status, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.clear) {
-            clearMessages();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 }

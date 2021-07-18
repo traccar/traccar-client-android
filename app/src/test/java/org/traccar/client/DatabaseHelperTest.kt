@@ -1,43 +1,35 @@
+package org.traccar.client
 
-package org.traccar.client;
+import android.location.Location
+import android.os.Build
+import androidx.test.core.app.ApplicationProvider
+import org.junit.Assert
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
-import android.location.Location;
-import android.os.Build;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import java.util.Date;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-@Config(sdk = Build.VERSION_CODES.P)
-@RunWith(RobolectricTestRunner.class)
-public class DatabaseHelperTest {
-
+@Config(sdk = [Build.VERSION_CODES.P])
+@RunWith(RobolectricTestRunner::class)
+class DatabaseHelperTest {
     @Test
-    public void test() throws Exception {
+    fun test() {
 
-        DatabaseHelper databaseHelper = new DatabaseHelper(RuntimeEnvironment.application);
+        val databaseHelper = DatabaseHelper(ApplicationProvider.getApplicationContext())
 
-        Position position = new Position("123456789012345", new Location("gps"), 0);
-        position.setTime(new Date(0));
+        var position: Position? = Position("123456789012345", Location("gps"), 0.0)
 
-        assertNull(databaseHelper.selectPosition());
+        Assert.assertNull(databaseHelper.selectPosition())
 
-        databaseHelper.insertPosition(position);
+        databaseHelper.insertPosition(position!!)
 
-        position = databaseHelper.selectPosition();
+        position = databaseHelper.selectPosition()
 
-        assertNotNull(position);
+        Assert.assertNotNull(position)
 
-        databaseHelper.deletePosition(position.getId());
+        databaseHelper.deletePosition(position!!.id)
 
-        assertNull(databaseHelper.selectPosition());
+        Assert.assertNull(databaseHelper.selectPosition())
 
     }
 

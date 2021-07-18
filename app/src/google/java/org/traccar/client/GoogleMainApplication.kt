@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Anton Tananaev (anton@traccar.org)
+ * Copyright 2017 - 2021 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,57 +13,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
+package org.traccar.client
 
-import android.app.Activity;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.os.Build;
+import android.app.Activity
+import android.content.IntentFilter
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.preference.PreferenceManager
+import com.google.android.play.core.review.ReviewInfo
+import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.android.play.core.tasks.Task
+import com.google.firebase.analytics.FirebaseAnalytics
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.preference.PreferenceManager;
+class GoogleMainApplication : MainApplication() {
 
-import com.google.android.play.core.review.ReviewManager;
-import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.play.core.tasks.Task;
-import com.google.firebase.analytics.FirebaseAnalytics;
+    private var firebaseAnalytics: FirebaseAnalytics? = null
 
-public class GoogleMainApplication extends MainApplication {
-
-    private static final String KEY_RATING_SHOWN = "ratingShown";
-    private static final long RATING_THRESHOLD = -24 * 60 * 60 * 1000L;
-
-    private FirebaseAnalytics firebaseAnalytics;
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(TrackingService.ACTION_STARTED);
-        filter.addAction(TrackingService.ACTION_STOPPED);
-        registerReceiver(new ServiceReceiver(), filter);
+    override fun onCreate() {
+        super.onCreate()
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        val filter = IntentFilter()
+        filter.addAction(TrackingService.ACTION_STARTED)
+        filter.addAction(TrackingService.ACTION_STOPPED)
+        registerReceiver(ServiceReceiver(), filter)
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
-    @Override
-    public void handleRatingFlow(@NonNull Activity activity) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean ratingShown = preferences.getBoolean(KEY_RATING_SHOWN, false);
-        long totalDuration = preferences.getLong(ServiceReceiver.KEY_DURATION, 0);
+    override fun handleRatingFlow(activity: Activity) {
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val ratingShown = preferences.getBoolean(KEY_RATING_SHOWN, false)
+        val totalDuration = preferences.getLong(ServiceReceiver.KEY_DURATION, 0)
         if (!ratingShown && totalDuration > RATING_THRESHOLD) {
-            ReviewManager reviewManager = ReviewManagerFactory.create(activity);
-            reviewManager.requestReviewFlow().addOnCompleteListener(infoTask -> {
-                if (infoTask.isSuccessful()) {
-                    Task<Void> flow = reviewManager.launchReviewFlow(activity, infoTask.getResult());
-                    flow.addOnCompleteListener(flowTask -> {
-                        preferences.edit().putBoolean(KEY_RATING_SHOWN, true).apply();
-                    });
+            val reviewManager = ReviewManagerFactory.create(activity)
+            reviewManager.requestReviewFlow().addOnCompleteListener { infoTask: Task<ReviewInfo?> ->
+                if (infoTask.isSuccessful) {
+                    val flow = reviewManager.launchReviewFlow(activity, infoTask.result)
+                    flow.addOnCompleteListener { preferences.edit().putBoolean(KEY_RATING_SHOWN, true).apply() }
                 }
-            });
+            }
         }
     }
 
+    companion object {
+        private const val KEY_RATING_SHOWN = "ratingShown"
+        private const val RATING_THRESHOLD = -24 * 60 * 60 * 1000L
+    }
 }

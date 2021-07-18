@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2016 Anton Tananaev (anton@traccar.org)
+ * Copyright 2012 - 2021 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,37 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
+package org.traccar.client
 
-import android.net.Uri;
+import android.net.Uri
 
-public class ProtocolFormatter {
+object ProtocolFormatter {
 
-    public static String formatRequest(String url, Position position) {
-        return formatRequest(url, position, null);
-    }
-
-    public static String formatRequest(String url, Position position, String alarm) {
-        Uri serverUrl = Uri.parse(url);
-        Uri.Builder builder = serverUrl.buildUpon()
-                .appendQueryParameter("id", position.getDeviceId())
-                .appendQueryParameter("timestamp", String.valueOf(position.getTime().getTime() / 1000))
-                .appendQueryParameter("lat", String.valueOf(position.getLatitude()))
-                .appendQueryParameter("lon", String.valueOf(position.getLongitude()))
-                .appendQueryParameter("speed", String.valueOf(position.getSpeed()))
-                .appendQueryParameter("bearing", String.valueOf(position.getCourse()))
-                .appendQueryParameter("altitude", String.valueOf(position.getAltitude()))
-                .appendQueryParameter("accuracy", String.valueOf(position.getAccuracy()))
-                .appendQueryParameter("batt", String.valueOf(position.getBattery()));
-
-        if (position.getMock()) {
-            builder.appendQueryParameter("mock", String.valueOf(position.getMock()));
+    fun formatRequest(url: String, position: Position, alarm: String? = null): String {
+        val serverUrl = Uri.parse(url)
+        val builder = serverUrl.buildUpon()
+            .appendQueryParameter("id", position.deviceId)
+            .appendQueryParameter("timestamp", (position.time.time / 1000).toString())
+            .appendQueryParameter("lat", position.latitude.toString())
+            .appendQueryParameter("lon", position.longitude.toString())
+            .appendQueryParameter("speed", position.speed.toString())
+            .appendQueryParameter("bearing", position.course.toString())
+            .appendQueryParameter("altitude", position.altitude.toString())
+            .appendQueryParameter("accuracy", position.accuracy.toString())
+            .appendQueryParameter("batt", position.battery.toString())
+        if (position.mock) {
+            builder.appendQueryParameter("mock", position.mock.toString())
         }
-
         if (alarm != null) {
-            builder.appendQueryParameter("alarm", alarm);
+            builder.appendQueryParameter("alarm", alarm)
         }
-
-        return builder.build().toString();
+        return builder.build().toString()
     }
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2013 The Android Open Source Project
+ * Copyright 2021 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,50 +13,58 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.os.PowerManager;
-import androidx.core.content.ContextCompat;
-import android.util.SparseArray;
+package org.traccar.client
 
-public abstract class WakefulBroadcastReceiver extends BroadcastReceiver {
-    private static final String EXTRA_WAKE_LOCK_ID = "android.support.content.wakelockid";
-    private static final SparseArray<PowerManager.WakeLock> mActiveWakeLocks = new SparseArray<>();
-    private static int mNextId = 1;
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.util.SparseArray
+import android.os.PowerManager.WakeLock
+import android.content.Intent
+import androidx.core.content.ContextCompat
+import android.os.PowerManager
 
-    public static void startWakefulForegroundService(Context context, Intent intent) {
-        synchronized (mActiveWakeLocks) {
-            int id = mNextId;
-            mNextId++;
-            if (mNextId <= 0) {
-                mNextId = 1;
+abstract class WakefulBroadcastReceiver : BroadcastReceiver() {
+
+    companion object {
+
+        private const val EXTRA_WAKE_LOCK_ID = "android.support.content.wakelockid"
+        private val activeWakeLocks = SparseArray<WakeLock>()
+        private var nextId = 1
+
+        fun startWakefulForegroundService(context: Context, intent: Intent) {
+            synchronized(activeWakeLocks) {
+                val id = nextId
+                nextId += 1
+                if (nextId <= 0) {
+                    nextId = 1
+                }
+                intent.putExtra(EXTRA_WAKE_LOCK_ID, id)
+                ContextCompat.startForegroundService(context, intent)
+                val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+                val wakeLock = powerManager.newWakeLock(
+                    PowerManager.PARTIAL_WAKE_LOCK,
+                    WakefulBroadcastReceiver::class.java.simpleName
+                )
+                wakeLock.setReferenceCounted(false)
+                wakeLock.acquire((60 * 1000).toLong())
+                activeWakeLocks.put(id, wakeLock)
             }
-            intent.putExtra(EXTRA_WAKE_LOCK_ID, id);
-            ContextCompat.startForegroundService(context, intent);
-            PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
-            PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                    WakefulBroadcastReceiver.class.getSimpleName());
-            wl.setReferenceCounted(false);
-            wl.acquire(60*1000);
-            mActiveWakeLocks.put(id, wl);
         }
-    }
 
-    public static boolean completeWakefulIntent(Intent intent) {
-        final int id = intent.getIntExtra(EXTRA_WAKE_LOCK_ID, 0);
-        if (id == 0) {
-            return false;
-        }
-        synchronized (mActiveWakeLocks) {
-            PowerManager.WakeLock wl = mActiveWakeLocks.get(id);
-            if (wl != null) {
-                wl.release();
-                mActiveWakeLocks.remove(id);
-                return true;
+        fun completeWakefulIntent(intent: Intent): Boolean {
+            val id = intent.getIntExtra(EXTRA_WAKE_LOCK_ID, 0)
+            if (id == 0) {
+                return false
             }
-            return true;
+            synchronized(activeWakeLocks) {
+                val wakeLock = activeWakeLocks[id]
+                if (wakeLock != null) {
+                    wakeLock.release()
+                    activeWakeLocks.remove(id)
+                    return true
+                }
+                return true
+            }
         }
     }
 }

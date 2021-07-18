@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 - 2019 Anton Tananaev (anton@traccar.org)
+ * Copyright 2015 - 2021 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,92 +13,73 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
+package org.traccar.client
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Handler;
-import android.preference.PreferenceManager;
-import android.util.Log;
+import android.content.Context
+import org.traccar.client.ProtocolFormatter.formatRequest
+import org.traccar.client.RequestManager.sendRequestAsync
+import org.traccar.client.PositionProvider.PositionListener
+import org.traccar.client.NetworkManager.NetworkHandler
+import android.os.Handler
+import android.os.Looper
+import androidx.preference.PreferenceManager
+import android.util.Log
+import org.traccar.client.DatabaseHelper.DatabaseHandler
+import org.traccar.client.RequestManager.RequestHandler
 
-public class TrackingController implements PositionProvider.PositionListener, NetworkManager.NetworkHandler {
+class TrackingController(private val context: Context) : PositionListener, NetworkHandler {
 
-    private static final String TAG = TrackingController.class.getSimpleName();
-    private static final int RETRY_DELAY = 30 * 1000;
+    private val handler = Handler(Looper.getMainLooper())
+    private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+    private val positionProvider = PositionProviderFactory.create(context, this)
+    private val databaseHelper = DatabaseHelper(context)
+    private val networkManager = NetworkManager(context, this)
 
-    private boolean isOnline;
-    private boolean isWaiting;
+    private val url: String = preferences.getString(MainFragment.KEY_URL, context.getString(R.string.settings_url_default_value))!!
+    private val buffer: Boolean = preferences.getBoolean(MainFragment.KEY_BUFFER, true)
 
-    private Context context;
-    private Handler handler;
-    private SharedPreferences preferences;
+    private var isOnline = networkManager.isOnline
+    private var isWaiting = false
 
-    private String url;
-    private boolean buffer;
-
-    private PositionProvider positionProvider;
-    private DatabaseHelper databaseHelper;
-    private NetworkManager networkManager;
-
-    public TrackingController(Context context) {
-        this.context = context;
-        handler = new Handler();
-        preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        positionProvider = PositionProviderFactory.create(context, this);
-        databaseHelper = new DatabaseHelper(context);
-        networkManager = new NetworkManager(context, this);
-        isOnline = networkManager.isOnline();
-
-        url = preferences.getString(MainFragment.KEY_URL, context.getString(R.string.settings_url_default_value));
-        buffer = preferences.getBoolean(MainFragment.KEY_BUFFER, true);
-    }
-
-    public void start() {
+    fun start() {
         if (isOnline) {
-            read();
+            read()
         }
         try {
-            positionProvider.startUpdates();
-        } catch (SecurityException e) {
-            Log.w(TAG, e);
+            positionProvider.startUpdates()
+        } catch (e: SecurityException) {
+            Log.w(TAG, e)
         }
-        networkManager.start();
+        networkManager.start()
     }
 
-    public void stop() {
-        networkManager.stop();
+    fun stop() {
+        networkManager.stop()
         try {
-            positionProvider.stopUpdates();
-        } catch (SecurityException e) {
-            Log.w(TAG, e);
+            positionProvider.stopUpdates()
+        } catch (e: SecurityException) {
+            Log.w(TAG, e)
         }
-        handler.removeCallbacksAndMessages(null);
+        handler.removeCallbacksAndMessages(null)
     }
 
-    @Override
-    public void onPositionUpdate(Position position) {
-        StatusActivity.addMessage(context.getString(R.string.status_location_update));
-        if (position != null) {
-            if (buffer) {
-                write(position);
-            } else {
-                send(position);
-            }
+    override fun onPositionUpdate(position: Position) {
+        StatusActivity.addMessage(context.getString(R.string.status_location_update))
+        if (buffer) {
+            write(position)
+        } else {
+            send(position)
         }
     }
 
-    @Override
-    public void onPositionError(Throwable error) {
-    }
-
-    @Override
-    public void onNetworkUpdate(boolean isOnline) {
-        int message = isOnline ? R.string.status_network_online : R.string.status_network_offline;
-        StatusActivity.addMessage(context.getString(message));
+    override fun onPositionError(error: Throwable) {}
+    override fun onNetworkUpdate(isOnline: Boolean) {
+        val message = if (isOnline) R.string.status_network_online else R.string.status_network_offline
+        StatusActivity.addMessage(context.getString(message))
         if (!this.isOnline && isOnline) {
-            read();
+            read()
         }
-        this.isOnline = isOnline;
+        this.isOnline = isOnline
     }
 
     //
@@ -109,98 +90,97 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     // read -> send -> retry -> read -> send
     //
 
-    private void log(String action, Position position) {
+    private fun log(action: String, position: Position?) {
+        var formattedAction: String = action
         if (position != null) {
-            action += " (" +
-                    "id:" + position.getId() +
-                    " time:" + position.getTime().getTime() / 1000 +
-                    " lat:" + position.getLatitude() +
-                    " lon:" + position.getLongitude() + ")";
+            formattedAction +=
+                    " (id:" + position.id +
+                    " time:" + position.time.time / 1000 +
+                    " lat:" + position.latitude +
+                    " lon:" + position.longitude + ")"
         }
-        Log.d(TAG, action);
+        Log.d(TAG, formattedAction)
     }
 
-    private void write(Position position) {
-        log("write", position);
-        databaseHelper.insertPositionAsync(position, new DatabaseHelper.DatabaseHandler<Void>() {
-            @Override
-            public void onComplete(boolean success, Void result) {
+    private fun write(position: Position) {
+        log("write", position)
+        databaseHelper.insertPositionAsync(position, object : DatabaseHandler<Unit> {
+            override fun onComplete(success: Boolean, result: Unit) {
                 if (success) {
                     if (isOnline && isWaiting) {
-                        read();
-                        isWaiting = false;
+                        read()
+                        isWaiting = false
                     }
                 }
             }
-        });
+        })
     }
 
-    private void read() {
-        log("read", null);
-        databaseHelper.selectPositionAsync(new DatabaseHelper.DatabaseHandler<Position>() {
-            @Override
-            public void onComplete(boolean success, Position result) {
+    private fun read() {
+        log("read", null)
+        databaseHelper.selectPositionAsync(object : DatabaseHandler<Position?> {
+            override fun onComplete(success: Boolean, result: Position?) {
                 if (success) {
                     if (result != null) {
-                        if (result.getDeviceId().equals(preferences.getString(MainFragment.KEY_DEVICE, null))) {
-                            send(result);
+                        if (result.deviceId == preferences.getString(MainFragment.KEY_DEVICE, null)) {
+                            send(result)
                         } else {
-                            delete(result);
+                            delete(result)
                         }
                     } else {
-                        isWaiting = true;
+                        isWaiting = true
                     }
                 } else {
-                    retry();
+                    retry()
                 }
             }
-        });
+        })
     }
 
-    private void delete(Position position) {
-        log("delete", position);
-        databaseHelper.deletePositionAsync(position.getId(), new DatabaseHelper.DatabaseHandler<Void>() {
-            @Override
-            public void onComplete(boolean success, Void result) {
+    private fun delete(position: Position) {
+        log("delete", position)
+        databaseHelper.deletePositionAsync(position.id, object : DatabaseHandler<Unit> {
+            override fun onComplete(success: Boolean, result: Unit) {
                 if (success) {
-                    read();
+                    read()
                 } else {
-                    retry();
+                    retry()
                 }
             }
-        });
+        })
     }
 
-    private void send(final Position position) {
-        log("send", position);
-        String request = ProtocolFormatter.formatRequest(url, position);
-        RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
-            @Override
-            public void onComplete(boolean success) {
+    private fun send(position: Position) {
+        log("send", position)
+        val request = formatRequest(url, position)
+        sendRequestAsync(request, object : RequestHandler {
+            override fun onComplete(success: Boolean) {
                 if (success) {
                     if (buffer) {
-                        delete(position);
+                        delete(position)
                     }
                 } else {
-                    StatusActivity.addMessage(context.getString(R.string.status_send_fail));
+                    StatusActivity.addMessage(context.getString(R.string.status_send_fail))
                     if (buffer) {
-                        retry();
+                        retry()
                     }
                 }
             }
-        });
+        })
     }
 
-    private void retry() {
-        log("retry", null);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (isOnline) {
-                    read();
-                }
+    private fun retry() {
+        log("retry", null)
+        handler.postDelayed({
+            if (isOnline) {
+                read()
             }
-        }, RETRY_DELAY);
+        }, RETRY_DELAY.toLong())
+    }
+
+    companion object {
+        private val TAG = TrackingController::class.java.simpleName
+        private const val RETRY_DELAY = 30 * 1000
     }
 
 }

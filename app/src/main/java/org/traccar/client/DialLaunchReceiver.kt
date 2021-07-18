@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Anton Tananaev (anton@traccar.org)
+ * Copyright 2015 - 2021 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
+package org.traccar.client
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 
-public class DialLaunchReceiver extends BroadcastReceiver {
+class DialLaunchReceiver : BroadcastReceiver() {
 
-    private static final String LAUNCHER_NUMBER = "8722227"; // TRACCAR
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        String phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
-        if (phoneNumber.equals(LAUNCHER_NUMBER)) {
-            setResultData(null);
-            Intent appIntent = new Intent(context, MainActivity.class);
-            appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(appIntent);
+    override fun onReceive(context: Context, intent: Intent) {
+        val phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER)
+        if (phoneNumber == LAUNCHER_NUMBER) {
+            resultData = null
+            val appIntent = Intent(context, MainActivity::class.java)
+            appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(appIntent)
         }
+    }
+
+    companion object {
+        private const val LAUNCHER_NUMBER = "8722227" // TRACCAR
     }
 
 }

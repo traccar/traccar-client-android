@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Anton Tananaev (anton@traccar.org)
+ * Copyright 2015 - 2021 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,56 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client;
+@file:Suppress("DEPRECATION")
+package org.traccar.client
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.util.Log;
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
+import android.util.Log
 
-public class NetworkManager extends BroadcastReceiver {
+class NetworkManager(private val context: Context, private val handler: NetworkHandler?) : BroadcastReceiver() {
 
-    private static final String TAG = NetworkManager.class.getSimpleName();
+    private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-    private Context context;
-    private NetworkHandler handler;
-    private ConnectivityManager connectivityManager;
-
-    public NetworkManager(Context context, NetworkHandler handler) {
-        this.context = context;
-        this.handler = handler;
-        connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    interface NetworkHandler {
+        fun onNetworkUpdate(isOnline: Boolean)
     }
 
-    public interface NetworkHandler {
-        void onNetworkUpdate(boolean isOnline);
-    }
-
-    public boolean isOnline() {
-        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-    }
-
-    public void start() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        context.registerReceiver(this, filter);
-    }
-
-    public void stop() {
-        context.unregisterReceiver(this);
-    }
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION) && handler != null) {
-            boolean isOnline = isOnline();
-            Log.i(TAG, "network " + (isOnline ? "on" : "off"));
-            handler.onNetworkUpdate(isOnline);
+    val isOnline: Boolean
+        get() {
+            val activeNetwork = connectivityManager.activeNetworkInfo
+            return activeNetwork != null && activeNetwork.isConnectedOrConnecting
         }
+
+    fun start() {
+        val filter = IntentFilter()
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
+        context.registerReceiver(this, filter)
+    }
+
+    fun stop() {
+        context.unregisterReceiver(this)
+    }
+
+    override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action == ConnectivityManager.CONNECTIVITY_ACTION && handler != null) {
+            val isOnline = isOnline
+            Log.i(TAG, "network " + if (isOnline) "on" else "off")
+            handler.onNetworkUpdate(isOnline)
+        }
+    }
+
+    companion object {
+        private val TAG = NetworkManager::class.java.simpleName
     }
 
 }
