@@ -24,11 +24,6 @@ import android.graphics.Color
 import android.os.Build
 import android.app.Activity
 
-import androidx.annotation.NonNull
-
-
-
-
 open class MainApplication : MultiDexApplication() {
 
     override fun onCreate() {
