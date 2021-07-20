@@ -59,7 +59,7 @@ dependencies {
     googleImplementation 'com.google.firebase:firebase-core'
     googleImplementation 'com.google.firebase:firebase-analytics'
     googleImplementation 'com.google.firebase:firebase-crashlytics'
-    googleImplementation 'com.google.android.gms:play-services-location'
+    googleImplementation 'com.google.android.gms:play-services-location:18.0.0'
     googleImplementation 'com.google.android.play:core:1.10.0'
 }
 
