@@ -9,8 +9,8 @@ android {
         buildConfigField 'boolean', 'HIDDEN_APP', 'false'
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 69
-        versionName '6.8'
+        versionCode 70
+        versionName '6.9'
         multiDexEnabled true
     }
 
@@ -53,13 +53,14 @@ dependencies {
     implementation 'androidx.test:core-ktx:1.4.0'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.1'
-    googleImplementation 'com.google.firebase:firebase-core:19.0.0'
-    googleImplementation 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
-    googleImplementation 'com.google.firebase:firebase-analytics:19.0.0'
-    googleImplementation 'com.google.android.gms:play-services-location:18.0.0'
-    googleImplementation 'com.google.android.play:core:1.10.0'
     implementation "androidx.core:core-ktx:1.6.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    googleImplementation platform('com.google.firebase:firebase-bom:28.2.1')
+    googleImplementation 'com.google.firebase:firebase-core'
+    googleImplementation 'com.google.firebase:firebase-analytics'
+    googleImplementation 'com.google.firebase:firebase-crashlytics'
+    googleImplementation 'com.google.android.gms:play-services-location'
+    googleImplementation 'com.google.android.play:core:1.10.0'
 }
 
 if (getGradle().getStartParameter().getTaskRequests().toString().contains('Google')) {
