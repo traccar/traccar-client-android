@@ -49,7 +49,7 @@ class TrackingService : Service() {
             stopForeground(true)
         }
 
-        override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
             stopSelfResult(startId)
             return START_NOT_STICKY
         }
@@ -83,7 +83,7 @@ class TrackingService : Service() {
     }
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         WakefulBroadcastReceiver.completeWakefulIntent(intent)
         return START_STICKY
     }

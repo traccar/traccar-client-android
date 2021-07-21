@@ -51,8 +51,8 @@ abstract class WakefulBroadcastReceiver : BroadcastReceiver() {
             }
         }
 
-        fun completeWakefulIntent(intent: Intent): Boolean {
-            val id = intent.getIntExtra(EXTRA_WAKE_LOCK_ID, 0)
+        fun completeWakefulIntent(intent: Intent?): Boolean {
+            val id = intent?.getIntExtra(EXTRA_WAKE_LOCK_ID, 0) ?: 0
             if (id == 0) {
                 return false
             }
