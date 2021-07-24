@@ -104,8 +104,8 @@ class TrackingController(private val context: Context) : PositionListener, Netwo
 
     private fun write(position: Position) {
         log("write", position)
-        databaseHelper.insertPositionAsync(position, object : DatabaseHandler<Unit> {
-            override fun onComplete(success: Boolean, result: Unit) {
+        databaseHelper.insertPositionAsync(position, object : DatabaseHandler<Unit?> {
+            override fun onComplete(success: Boolean, result: Unit?) {
                 if (success) {
                     if (isOnline && isWaiting) {
                         read()
@@ -139,8 +139,8 @@ class TrackingController(private val context: Context) : PositionListener, Netwo
 
     private fun delete(position: Position) {
         log("delete", position)
-        databaseHelper.deletePositionAsync(position.id, object : DatabaseHandler<Unit> {
-            override fun onComplete(success: Boolean, result: Unit) {
+        databaseHelper.deletePositionAsync(position.id, object : DatabaseHandler<Unit?> {
+            override fun onComplete(success: Boolean, result: Unit?) {
                 if (success) {
                     read()
                 } else {

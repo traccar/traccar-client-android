@@ -30,7 +30,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         fun onComplete(success: Boolean, result: T)
     }
 
-    private abstract class DatabaseAsyncTask<T>(val handler: DatabaseHandler<T>) : AsyncTask<Unit, Unit, T?>() {
+    private abstract class DatabaseAsyncTask<T>(val handler: DatabaseHandler<T?>) : AsyncTask<Unit, Unit, T?>() {
 
         private var error: RuntimeException? = null
 
@@ -46,7 +46,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         protected abstract fun executeMethod(): T
 
         override fun onPostExecute(result: T?) {
-            result?.let { handler.onComplete(error == null, result) }
+            handler.onComplete(error == null, result)
         }
     }
 
@@ -94,7 +94,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         db.insertOrThrow("position", null, values)
     }
 
-    fun insertPositionAsync(position: Position, handler: DatabaseHandler<Unit>) {
+    fun insertPositionAsync(position: Position, handler: DatabaseHandler<Unit?>) {
         object : DatabaseAsyncTask<Unit>(handler) {
             override fun executeMethod() {
                 insertPosition(position)
@@ -138,7 +138,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         }
     }
 
-    fun deletePositionAsync(id: Long, handler: DatabaseHandler<Unit>) {
+    fun deletePositionAsync(id: Long, handler: DatabaseHandler<Unit?>) {
         object : DatabaseAsyncTask<Unit>(handler) {
             override fun executeMethod() {
                 deletePosition(id)
