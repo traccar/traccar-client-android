@@ -90,7 +90,10 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         findPreference<Preference>(KEY_ANGLE)?.onPreferenceChangeListener = numberValidationListener
 
         alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmIntent = PendingIntent.getBroadcast(activity, 0, Intent(activity, AutostartReceiver::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
+        val originalIntent = Intent(activity, AutostartReceiver::class.java)
+        originalIntent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
+        alarmIntent = PendingIntent.getBroadcast(activity, 0, originalIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
         if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
             startTrackingService(checkPermission = true, initialPermission = false)
         }
