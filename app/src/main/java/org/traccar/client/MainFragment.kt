@@ -229,6 +229,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 ALARM_MANAGER_INTERVAL.toLong(), ALARM_MANAGER_INTERVAL.toLong(), alarmIntent
             )
+            BatteryOptimizationHelper().requestException(requireContext())
         } else {
             sharedPreferences.edit().putBoolean(KEY_STATUS, false).apply()
             val preference = findPreference<TwoStatePreference>(KEY_STATUS)
