@@ -34,6 +34,7 @@
   <string name="settings_foreground_title">Foreground service</string>
   <string name="settings_foreground_summary">Increase service priority</string>
   <string name="menu_status">Status</string>
+  <string name="menu_info">Info</string>
   <string name="menu_shortcuts">Add shortcuts</string>
   <string name="menu_clear">Clear</string>
   <string name="status_service_create">Service started</string>

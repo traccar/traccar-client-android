@@ -122,7 +122,12 @@ class TrackingService : Service() {
             } else {
                 intent = Intent(Settings.ACTION_SETTINGS)
             }
-            builder.setContentIntent(PendingIntent.getActivity(context, 0, intent, 0))
+            val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.FLAG_IMMUTABLE
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
+            builder.setContentIntent(PendingIntent.getActivity(context, 0, intent, flags))
             return builder.build()
         }
     }

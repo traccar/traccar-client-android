@@ -45,6 +45,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import androidx.preference.TwoStatePreference
+import dev.doubledot.doki.ui.DokiActivity
 import java.util.*
 import kotlin.collections.HashSet
 
@@ -92,7 +93,13 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val originalIntent = Intent(activity, AutostartReceiver::class.java)
         originalIntent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
-        alarmIntent = PendingIntent.getBroadcast(activity, 0, originalIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.FLAG_MUTABLE
+        } else {
+            0
+        }
+        alarmIntent = PendingIntent.getBroadcast(activity, 0, originalIntent, flags)
 
         if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
             startTrackingService(checkPermission = true, initialPermission = false)
@@ -189,6 +196,9 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.status) {
             startActivity(Intent(activity, StatusActivity::class.java))
+            return true
+        } else if (item.itemId == R.id.info) {
+            DokiActivity.start(requireContext())
             return true
         }
         return super.onOptionsItemSelected(item)
