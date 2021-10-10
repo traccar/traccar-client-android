@@ -9,7 +9,8 @@
         tools:replace="android:label">
 
         <activity
-            android:name="org.traccar.client.MainActivity">
+            android:name="org.traccar.client.MainActivity"
+            android:exported="true">
             <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -18,7 +19,9 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="org.traccar.client.DialLaunchReceiver" >
+        <receiver
+            android:name="org.traccar.client.DialLaunchReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>

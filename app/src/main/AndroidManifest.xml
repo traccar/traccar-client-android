@@ -34,12 +34,13 @@
 
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:launchMode="singleTask" />
 
         <activity-alias
             android:name=".Launcher"
-            android:targetActivity=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:targetActivity=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -49,12 +50,14 @@
                 android:resource="@xml/shortcuts" />
         </activity-alias>
 
-        <activity android:name=".StatusActivity"/>
+        <activity
+            android:name=".StatusActivity"
+            android:exported="false" />
 
         <activity
             android:name=".ShortcutActivity"
-            android:label="@string/menu_shortcuts"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/menu_shortcuts">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
@@ -63,10 +66,12 @@
 
         <service
             android:name=".TrackingService"
+            android:exported="false"
             android:foregroundServiceType="location" />
 
         <service
-            android:name=".TrackingService$HideNotificationService" />
+            android:name=".TrackingService$HideNotificationService"
+            android:exported="false" />
 
         <receiver
             android:name=".AutostartReceiver"
