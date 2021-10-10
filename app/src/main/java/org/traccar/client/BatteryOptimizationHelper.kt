@@ -25,6 +25,7 @@ import android.os.PowerManager
 import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.PreferenceManager
+import com.judemanutd.autostarter.AutoStartPermissionHelper
 
 class BatteryOptimizationHelper {
 
@@ -80,11 +81,15 @@ class BatteryOptimizationHelper {
                         }
                     }
                 }
+            } else if (!sharedPreferences.getBoolean(KEY_AUTOSTART_REQUESTED, false)) {
+                sharedPreferences.edit().putBoolean(KEY_AUTOSTART_REQUESTED, true).apply()
+                AutoStartPermissionHelper.getInstance().getAutoStartPermission(context)
             }
         }
     }
 
     companion object {
         private const val KEY_EXCEPTION_REQUESTED = "exceptionRequested"
+        private const val KEY_AUTOSTART_REQUESTED = "autostartRequested"
     }
 }

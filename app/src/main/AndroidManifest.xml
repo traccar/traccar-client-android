@@ -38,7 +38,8 @@
 
         <activity-alias
             android:name=".Launcher"
-            android:targetActivity=".MainActivity">
+            android:targetActivity=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -52,7 +53,8 @@
 
         <activity
             android:name=".ShortcutActivity"
-            android:label="@string/menu_shortcuts">
+            android:label="@string/menu_shortcuts"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
@@ -66,7 +68,9 @@
         <service
             android:name=".TrackingService$HideNotificationService" />
 
-        <receiver android:name=".AutostartReceiver">
+        <receiver
+            android:name=".AutostartReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
