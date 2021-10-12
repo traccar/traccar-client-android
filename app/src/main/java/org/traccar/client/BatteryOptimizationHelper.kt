@@ -83,7 +83,10 @@ class BatteryOptimizationHelper {
                 }
             } else if (!sharedPreferences.getBoolean(KEY_AUTOSTART_REQUESTED, false)) {
                 sharedPreferences.edit().putBoolean(KEY_AUTOSTART_REQUESTED, true).apply()
-                AutoStartPermissionHelper.getInstance().getAutoStartPermission(context)
+                try {
+                    AutoStartPermissionHelper.getInstance().getAutoStartPermission(context)
+                } catch (e: SecurityException) {
+                }
             }
         }
     }
