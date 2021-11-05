@@ -47,11 +47,11 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.5.0-alpha04'
+    implementation 'com.google.android.material:material:1.5.0-alpha05'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'androidx.test:core-ktx:1.4.0'
-    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.core:core-ktx:1.7.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.github.judemanutd:autostarter:1.1.0'
     implementation('dev.doubledot.doki:library:0.0.1@aar') {
