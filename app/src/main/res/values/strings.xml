@@ -48,4 +48,6 @@
   <string name="hidden_alert">The app has been hidden. To open it again please dial 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Please enter a valid http:// or https:// URL</string>
   <string name="request_exception">To continuously collect location data please turn off battery optimization for the app.</string>
+  <string name="request_background">To continuously collect location data please enable \"%s\" permission.</string>
+  <string name="request_background_option">Allow all the time</string>
 </resources>

@@ -54,6 +54,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var alarmManager: AlarmManager
     private lateinit var alarmIntent: PendingIntent
+    private var requestingPermissions: Boolean = false
 
     @SuppressLint("UnspecifiedImmutableFlag")
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -154,6 +155,13 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (requestingPermissions) {
+            requestingPermissions = BatteryOptimizationHelper().requestException(requireContext())
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         sharedPreferences.registerOnSharedPreferenceChangeListener(this)
@@ -214,6 +222,19 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         findPreference<Preference>(KEY_DEVICE)?.summary = sharedPreferences.getString(KEY_DEVICE, null)
     }
 
+    private fun showBackgroundLocationDialog(context: Context, onSuccess: () -> Unit) {
+        val builder = AlertDialog.Builder(context)
+        val option = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            context.packageManager.backgroundPermissionOptionLabel
+        } else {
+            context.getString(R.string.request_background_option)
+        }
+        builder.setMessage(context.getString(R.string.request_background, option))
+        builder.setPositiveButton(android.R.string.ok) { _, _ -> onSuccess() }
+        builder.setNegativeButton(android.R.string.cancel, null)
+        builder.show()
+    }
+
     private fun startTrackingService(checkPermission: Boolean, initialPermission: Boolean) {
         var permission = initialPermission
         if (checkPermission) {
@@ -224,10 +245,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
             permission = requiredPermissions.isEmpty()
             if (!permission) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestPermissions(
-                        requiredPermissions.toTypedArray(),
-                        PERMISSIONS_REQUEST_LOCATION
-                    )
+                    requestPermissions(requiredPermissions.toTypedArray(), PERMISSIONS_REQUEST_LOCATION)
                 }
                 return
             }
@@ -239,7 +257,16 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 ALARM_MANAGER_INTERVAL.toLong(), ALARM_MANAGER_INTERVAL.toLong(), alarmIntent
             )
-            BatteryOptimizationHelper().requestException(requireContext())
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+                && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestingPermissions = true
+                showBackgroundLocationDialog(requireContext()) {
+                    requestPermissions(arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), PERMISSIONS_REQUEST_BACKGROUND_LOCATION)
+                }
+            } else {
+                requestingPermissions = BatteryOptimizationHelper().requestException(requireContext())
+            }
         } else {
             sharedPreferences.edit().putBoolean(KEY_STATUS, false).apply()
             val preference = findPreference<TwoStatePreference>(KEY_STATUS)
@@ -292,6 +319,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         const val KEY_BUFFER = "buffer"
         const val KEY_WAKELOCK = "wakelock"
         private const val PERMISSIONS_REQUEST_LOCATION = 2
+        private const val PERMISSIONS_REQUEST_BACKGROUND_LOCATION = 3
     }
 
 }

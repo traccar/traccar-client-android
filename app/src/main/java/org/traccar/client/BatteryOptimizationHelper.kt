@@ -66,7 +66,7 @@ class BatteryOptimizationHelper {
         }
     }
 
-    fun requestException(context: Context) {
+    fun requestException(context: Context): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             if (!sharedPreferences.getBoolean(KEY_EXCEPTION_REQUESTED, false)) {
@@ -80,15 +80,19 @@ class BatteryOptimizationHelper {
                             requestVendorException(context)
                         }
                     }
+                    return true
                 }
             } else if (!sharedPreferences.getBoolean(KEY_AUTOSTART_REQUESTED, false)) {
                 sharedPreferences.edit().putBoolean(KEY_AUTOSTART_REQUESTED, true).apply()
                 try {
-                    AutoStartPermissionHelper.getInstance().getAutoStartPermission(context)
+                    if (AutoStartPermissionHelper.getInstance().getAutoStartPermission(context)) {
+                        return true
+                    }
                 } catch (e: SecurityException) {
                 }
             }
         }
+        return false
     }
 
     companion object {
