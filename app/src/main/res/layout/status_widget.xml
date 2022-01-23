@@ -1,0 +1,16 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.Traccarclientandroid.AppWidget.Container"
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme.AppWidgetContainer">
+
+    <ImageView
+        android:id="@+id/ivEnabled"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/settings_status_title"
+        android:src="@android:drawable/ic_menu_help"
+        app:srcCompat="@mipmap/ic_launcher" />
+</RelativeLayout>

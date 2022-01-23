@@ -85,6 +85,18 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".StatusWidget"
+            android:label="@string/status_widget_label"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/status_widget_info" />
+        </receiver>
+
     </application>
 
 </manifest>
