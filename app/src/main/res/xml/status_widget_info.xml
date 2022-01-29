@@ -5,9 +5,9 @@
     android:initialLayout="@layout/status_widget"
     android:minWidth="40dp"
     android:minHeight="40dp"
-    android:previewImage="@drawable/status_widget_preview"
+    android:previewImage="@mipmap/ic_launcher"
     android:previewLayout="@layout/status_widget"
     android:resizeMode="none"
     android:targetCellWidth="1"
     android:targetCellHeight="1"
-    android:updatePeriodMillis="0" />
+    android:updatePeriodMillis="1800000" />
