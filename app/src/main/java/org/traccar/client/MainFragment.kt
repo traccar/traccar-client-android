@@ -96,9 +96,9 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         originalIntent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
 
         val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.FLAG_MUTABLE
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
         } else {
-            0
+            PendingIntent.FLAG_UPDATE_CURRENT
         }
         alarmIntent = PendingIntent.getBroadcast(activity, 0, originalIntent, flags)
 
@@ -253,10 +253,12 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         if (permission) {
             setPreferencesEnabled(false)
             ContextCompat.startForegroundService(requireContext(), Intent(activity, TrackingService::class.java))
-            alarmManager.setInexactRepeating(
-                AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                ALARM_MANAGER_INTERVAL.toLong(), ALARM_MANAGER_INTERVAL.toLong(), alarmIntent
-            )
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+                alarmManager.setInexactRepeating(
+                    AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    ALARM_MANAGER_INTERVAL.toLong(), ALARM_MANAGER_INTERVAL.toLong(), alarmIntent
+                )
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
                 && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -275,7 +277,9 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
     }
 
     private fun stopTrackingService() {
-        alarmManager.cancel(alarmIntent)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+            alarmManager.cancel(alarmIntent)
+        }
         requireActivity().stopService(Intent(activity, TrackingService::class.java))
         setPreferencesEnabled(true)
     }
