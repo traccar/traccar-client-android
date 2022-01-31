@@ -87,7 +87,7 @@
 
         <receiver
             android:name=".StatusWidget"
-            android:label="@string/status_widget_label"
+            android:label="@string/widget_label"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

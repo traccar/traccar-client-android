@@ -33,7 +33,8 @@ class StatusWidget : AppWidgetProvider() {
     }
 
     override fun onEnabled(context: Context) {
-        // Enter relevant functionality for when the first widget is created
+        // When the first widget is created, we want to start receiving service status broadcasts,
+        // so we can react and change the look
         val filter = IntentFilter()
         filter.addAction(TrackingService.ACTION_STARTED)
         filter.addAction(TrackingService.ACTION_STOPPED)
@@ -43,7 +44,7 @@ class StatusWidget : AppWidgetProvider() {
     }
 
     override fun onDisabled(context: Context) {
-        // Enter relevant functionality for when the last widget is disabled
+        // When the last widget is disabled (removed), we stop receiving service status broadcasts
         context.applicationContext.unregisterReceiver(Companion)
     }
 
@@ -69,11 +70,8 @@ class StatusWidget : AppWidgetProvider() {
             val enabled = prefs.getBoolean(MainFragment.KEY_STATUS, false)
             // There may be multiple widgets active, so update all of them
             for (appWidgetId in appWidgetIds) {
-                // Construct the RemoteViews object
                 val views = RemoteViews(context.packageName, R.layout.status_widget)
                 views.setImageViewResource(R.id.ivEnabled, if (enabled) R.mipmap.ic_start else R.mipmap.ic_stop)
-
-                // Instruct the widget manager to update the widget
                 appWidgetManager.updateAppWidget(appWidgetId, views)
             }
         }
