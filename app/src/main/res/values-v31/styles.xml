@@ -1,7 +1,0 @@
-<resources>
-
-    <style name="Widget.Traccarclientandroid.AppWidget.Container" parent="android:Widget">
-        <item name="android:clipToOutline">true</item>
-    </style>
-
-</resources>
