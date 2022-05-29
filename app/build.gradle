@@ -2,29 +2,23 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     defaultConfig {
         applicationId 'org.traccar.client'
         buildConfigField 'boolean', 'HIDDEN_APP', 'false'
         minSdkVersion 16
-        targetSdkVersion 31
-        versionCode 77
-        versionName '6.16'
+        targetSdkVersion 32
+        versionCode 78
+        versionName '6.17'
         multiDexEnabled true
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+    namespace 'org.traccar.client'
 
     packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
-    }
-
-    lintOptions {
-        checkReleaseBuilds false
+        resources {
+            excludes += ['META-INF/DEPENDENCIES']
+        }
     }
 
     flavorDimensions 'default'
@@ -44,12 +38,15 @@ android {
             includeAndroidResources = true
         }
     }
+    lint {
+        checkReleaseBuilds false
+    }
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.5.0-alpha05'
+    implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.preference:preference-ktx:1.1.1'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.test:core-ktx:1.4.0'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -63,8 +60,8 @@ dependencies {
     googleImplementation 'com.google.firebase:firebase-core'
     googleImplementation 'com.google.firebase:firebase-analytics'
     googleImplementation 'com.google.firebase:firebase-crashlytics'
-    googleImplementation 'com.google.android.gms:play-services-location:18.0.0'
-    googleImplementation 'com.google.android.play:core:1.10.2'
+    googleImplementation 'com.google.android.gms:play-services-location:19.0.1'
+    googleImplementation 'com.google.android.play:core:1.10.3'
 }
 
 if (getGradle().getStartParameter().getTaskRequests().toString().contains('Google')) {

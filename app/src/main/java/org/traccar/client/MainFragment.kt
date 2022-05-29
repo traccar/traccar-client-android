@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2021 Anton Tananaev (anton@traccar.org)
+ * Copyright 2012 - 2022 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
             removeLauncherIcon()
         }
         setHasOptionsMenu(true)
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         setPreferencesFromResource(R.xml.preferences, rootKey)
         initPreferences()
 
@@ -126,6 +126,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         }
     }
 
+    @Suppress("DEPRECATION")
     override fun onDisplayPreferenceDialog(preference: Preference) {
         if (listOf(KEY_INTERVAL, KEY_DISTANCE, KEY_ANGLE).contains(preference.key)) {
             val f: EditTextPreferenceDialogFragmentCompat =
@@ -213,7 +214,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
     }
 
     private fun initPreferences() {
-        PreferenceManager.setDefaultValues(activity, R.xml.preferences, false)
+        PreferenceManager.setDefaultValues(requireActivity(), R.xml.preferences, false)
         if (!sharedPreferences.contains(KEY_DEVICE)) {
             val id = (Random().nextInt(900000) + 100000).toString()
             sharedPreferences.edit().putString(KEY_DEVICE, id).apply()
