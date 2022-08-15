@@ -49,7 +49,7 @@ data class Position(
             0.0
         },
         battery = battery.level,
-        charging = battery.changing,
+        charging = battery.charging,
         mock = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             location.isMock
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
