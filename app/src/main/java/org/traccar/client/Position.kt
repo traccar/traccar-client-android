@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 - 2021 Anton Tananaev (anton@traccar.org)
+ * Copyright 2015 - 2022 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +42,19 @@ data class Position(
         altitude = location.altitude,
         speed = location.speed * 1.943844, // speed in knots
         course = location.bearing.toDouble(),
-        accuracy = if (location.provider != null && location.provider != LocationManager.GPS_PROVIDER) location.accuracy.toDouble() else 0.0,
+        accuracy = if (location.provider != null && location.provider != LocationManager.GPS_PROVIDER) {
+            location.accuracy.toDouble()
+        } else {
+            0.0
+        },
         battery = battery,
-        mock = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) location.isFromMockProvider else false,
+        mock = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            location.isMock
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            @Suppress("DEPRECATION")
+            location.isFromMockProvider
+        } else {
+            false
+        },
     )
 }
