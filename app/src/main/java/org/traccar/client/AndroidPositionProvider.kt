@@ -47,11 +47,11 @@ class AndroidPositionProvider(context: Context, listener: PositionListener) : Po
         try {
             val location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
             if (location != null) {
-                listener.onPositionUpdate(Position(deviceId, location, getBatteryLevel(context)))
+                listener.onPositionUpdate(Position(deviceId, location, getBatteryStatus(context)))
             } else {
                 locationManager.requestSingleUpdate(provider, object : LocationListener {
                     override fun onLocationChanged(location: Location) {
-                        listener.onPositionUpdate(Position(deviceId, location, getBatteryLevel(context)))
+                        listener.onPositionUpdate(Position(deviceId, location, getBatteryStatus(context)))
                     }
 
                     override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}

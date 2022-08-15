@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 - 2021 Anton Tananaev (anton@traccar.org)
+ * Copyright 2015 - 2022 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 @file:Suppress("DEPRECATION", "StaticFieldLeak")
 package org.traccar.client
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.SQLException
@@ -65,6 +66,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
                     "course REAL," +
                     "accuracy REAL," +
                     "battery REAL," +
+                    "charging INTEGER," +
                     "mock INTEGER)"
         )
     }
@@ -90,6 +92,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         values.put("course", position.course)
         values.put("accuracy", position.accuracy)
         values.put("battery", position.battery)
+        values.put("charging", if (position.charging) 1 else 0)
         values.put("mock", if (position.mock) 1 else 0)
         db.insertOrThrow("position", null, values)
     }
@@ -102,6 +105,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         }.execute()
     }
 
+    @SuppressLint("Range")
     fun selectPosition(): Position? {
         db.rawQuery("SELECT * FROM position ORDER BY id LIMIT 1", null).use { cursor ->
             if (cursor.count > 0) {
@@ -117,6 +121,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
                     course = cursor.getDouble(cursor.getColumnIndex("course")),
                     accuracy = cursor.getDouble(cursor.getColumnIndex("accuracy")),
                     battery = cursor.getDouble(cursor.getColumnIndex("battery")),
+                    charging = cursor.getInt(cursor.getColumnIndex("charging")) > 0,
                     mock = cursor.getInt(cursor.getColumnIndex("mock")) > 0,
                 )
             }
@@ -147,7 +152,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
     }
 
     companion object {
-        const val DATABASE_VERSION = 3
+        const val DATABASE_VERSION = 4
         const val DATABASE_NAME = "traccar.db"
     }
 

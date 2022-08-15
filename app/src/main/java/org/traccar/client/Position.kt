@@ -31,10 +31,11 @@ data class Position(
     val course: Double = 0.0,
     val accuracy: Double = 0.0,
     val battery: Double = 0.0,
+    val charging: Boolean = false,
     val mock: Boolean = false,
 ) {
 
-    constructor(deviceId: String, location: Location, battery: Double) : this(
+    constructor(deviceId: String, location: Location, battery: BatteryStatus) : this(
         deviceId = deviceId,
         time = Date(location.time),
         latitude = location.latitude,
@@ -47,7 +48,8 @@ data class Position(
         } else {
             0.0
         },
-        battery = battery,
+        battery = battery.level,
+        charging = battery.changing,
         mock = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             location.isMock
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
