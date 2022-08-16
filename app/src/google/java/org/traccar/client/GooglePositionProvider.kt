@@ -43,7 +43,7 @@ class GooglePositionProvider(context: Context, listener: PositionListener) : Pos
     override fun requestSingleLocation() {
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
-                listener.onPositionUpdate(Position(deviceId, location, getBatteryLevel(context)))
+                listener.onPositionUpdate(Position(deviceId, location, getBatteryStatus(context)))
             }
         }
     }
