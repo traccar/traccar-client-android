@@ -10,7 +10,7 @@
   <string name="settings_url_title">URL Servidor</string>
   <string name="settings_url_summary">URL del servidor de seguiment</string>
   <string name="settings_interval_title">Interval</string>
-  <string name="settings_interval_summary">Interval d\\'enviament en segons</string>
+  <string name="settings_interval_summary">Interval d\'enviament en segons</string>
   <string name="settings_distance_title">Distància</string>
   <string name="settings_distance_summary">Distància en metres per informar</string>
   <string name="settings_angle_title">Angle</string>
@@ -40,7 +40,7 @@
   <string name="status_service_create">Servei iniciat</string>
   <string name="status_service_destroy">Servei aturat</string>
   <string name="status_send_success">Enviat correctament</string>
-  <string name="status_send_fail">Error a l\\'enviar</string>
+  <string name="status_send_fail">Error a l\'enviar</string>
   <string name="status_location_update">Actualització de localització</string>
   <string name="status_network_online">Xarxa en línia</string>
   <string name="status_network_offline">Xarxa fora de línia</string>
