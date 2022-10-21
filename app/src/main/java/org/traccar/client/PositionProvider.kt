@@ -47,13 +47,14 @@ abstract class PositionProvider(
     abstract fun requestSingleLocation()
 
     protected fun processLocation(location: Location?) {
+        val lastLocation = this.lastLocation
         if (location != null &&
             (lastLocation == null || location.time - lastLocation!!.time >= interval || distance > 0
                     && location.distanceTo(lastLocation) >= distance || angle > 0
                     && abs(location.bearing - lastLocation!!.bearing) >= angle)
         ) {
             Log.i(TAG, "location new")
-            lastLocation = location
+            this.lastLocation = location
             listener.onPositionUpdate(Position(deviceId, location, getBatteryStatus(context)))
         } else {
             Log.i(TAG, if (location != null) "location ignored" else "location nil")

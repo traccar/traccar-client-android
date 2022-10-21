@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId 'org.traccar.client'
         buildConfigField 'boolean', 'HIDDEN_APP', 'false'
         minSdkVersion 16
-        targetSdkVersion 32
-        versionCode 78
-        versionName '6.17'
+        targetSdkVersion 33
+        versionCode 79
+        versionName '6.18'
         multiDexEnabled true
     }
     namespace 'org.traccar.client'
@@ -48,7 +48,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.test:core-ktx:1.4.0'
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.github.judemanutd:autostarter:1.1.0'
     implementation('dev.doubledot.doki:library:0.0.1@aar') {
@@ -60,7 +60,7 @@ dependencies {
     googleImplementation 'com.google.firebase:firebase-core'
     googleImplementation 'com.google.firebase:firebase-analytics'
     googleImplementation 'com.google.firebase:firebase-crashlytics'
-    googleImplementation 'com.google.android.gms:play-services-location:20.0.0'
+    googleImplementation 'com.google.android.gms:play-services-location:21.0.0'
     googleImplementation 'com.google.android.play:core:1.10.3'
 }
 
