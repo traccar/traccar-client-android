@@ -37,7 +37,7 @@ data class Position(
 
     constructor(deviceId: String, location: Location, battery: BatteryStatus) : this(
         deviceId = deviceId,
-        time = Date(location.time),
+        time = Date(location.time.correctRollover()),
         latitude = location.latitude,
         longitude = location.longitude,
         altitude = location.altitude,
@@ -59,4 +59,11 @@ data class Position(
             false
         },
     )
+}
+
+private const val rolloverDate = 1554508800000L // April 6, 2019
+private const val rolloverOffset = 619315200000L // 1024 weeks
+
+private fun Long.correctRollover(): Long {
+    return if (this < rolloverDate) this + rolloverOffset else this
 }
