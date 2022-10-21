@@ -34,6 +34,7 @@
   <string name="settings_foreground_title">Prvi plan servis</string>
   <string name="settings_foreground_summary">Povecanje usluga prioritet</string>
   <string name="menu_status">Status</string>
+  <string name="menu_info">Info</string>
   <string name="menu_shortcuts">Dodaj prečice</string>
   <string name="menu_clear">Očisti</string>
   <string name="status_service_create">Servis pokrenut</string>
@@ -46,4 +47,7 @@
   <string name="hidden_app_name">Podešavanja uređaja</string>
   <string name="hidden_alert">Aplikacija je skrivena. Da je otvorite kucajte 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Molimo unesite pravilnu http:// ili https:// adresu</string>
+  <string name="request_exception">Da biste kontinuirano prikupljali podatke o lokaciji, isključite optimizaciju baterije za aplikaciju.</string>
+  <string name="request_background">Da biste kontinuirano prikupljali podatke o lokaciji, omogućite %s dozvolu.</string>
+  <string name="request_background_option">Dozvoljeno svo vreme</string>
 </resources>

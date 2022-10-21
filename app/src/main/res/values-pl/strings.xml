@@ -34,6 +34,7 @@
   <string name="settings_foreground_title">Usługa pierwszoplanowa</string>
   <string name="settings_foreground_summary">Zwiększ priorytet usługi</string>
   <string name="menu_status">Status</string>
+  <string name="menu_info">Info</string>
   <string name="menu_shortcuts">Dodaj skróty</string>
   <string name="menu_clear">Wyczyść</string>
   <string name="status_service_create">Usługa uruchomiona</string>
@@ -46,4 +47,7 @@
   <string name="hidden_app_name">Ustawienia urządzenia</string>
   <string name="hidden_alert">Aplikacja została ukryta. By ją otworzyć, zadzwoń pod 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Wprowadź poprawny adres http:// lub https:// URL</string>
+  <string name="request_exception">Do stałego zbierania danych o lokalizacji, należy wyłączyć optymalizację baterii w aplikacji.</string>
+  <string name="request_background">Włącz zezwolenie \"%s\", aby ciągle zbierać dane o lokalizacji.</string>
+  <string name="request_background_option">Pozwól cały czas</string>
 </resources>

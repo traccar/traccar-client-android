@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Cliente Traccar</string>
+  <string name="app_name">Traccar Client</string>
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Iniciar servicio</string>
   <string name="shortcut_stop">Detener servicio</string>
@@ -34,16 +34,20 @@
   <string name="settings_foreground_title">Servicio en primer plano</string>
   <string name="settings_foreground_summary">Aumentar prioridad del servicio</string>
   <string name="menu_status">Estado</string>
+  <string name="menu_info">Info</string>
   <string name="menu_shortcuts">Añadir acceso directo</string>
   <string name="menu_clear">Limpiar</string>
   <string name="status_service_create">Servicio iniciado</string>
   <string name="status_service_destroy">Servicio detenido</string>
   <string name="status_send_success">Enviado correctamente</string>
-  <string name="status_send_fail">Falló el envío</string>
+  <string name="status_send_fail">Fallo en el envío</string>
   <string name="status_location_update">Actualización de localización</string>
   <string name="status_network_online">Red en línea</string>
   <string name="status_network_offline">Red fuera de línea</string>
   <string name="hidden_app_name">Ajustes del dispositivo</string>
   <string name="hidden_alert">La aplicación se ha ocultado. Para abrirla de nuevo por favor marque 8722227 (TRACCAR).</string>
-  <string name="error_msg_invalid_url">Por favor. Introduzca una URL válida http:// ó https:// </string>
+  <string name="error_msg_invalid_url">Por favor, introduzca una URL válida http:// ó https:// </string>
+  <string name="request_exception">Para recoger continuamente los datos de localización, desactiva la optimización de la batería de la aplicación.</string>
+  <string name="request_background">Para recoger continuamente los datos de localización, por favor, activa el permiso \"%s\".</string>
+  <string name="request_background_option">Permitir todo el tiempo</string>
 </resources>

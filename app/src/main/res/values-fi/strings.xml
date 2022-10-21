@@ -23,6 +23,9 @@
   <string name="settings_buffer">Offline-puskurointi</string>
   <string name="settings_buffer_off_summary">Puskurointi pois päältä</string>
   <string name="settings_buffer_on_summary">Puskurointi päälle</string>
+  <string name="settings_wakelock">Lepotilalukko</string>
+  <string name="settings_wakelock_off_summary">Lepotilalukko pois päältä</string>
+  <string name="settings_wakelock_on_summary">Lepotilalukko päällä</string>
   <string name="settings_accuracy_title">Sijainnin tarkkuus</string>
   <string name="settings_accuracy_summary">Haluttu sijainnin tarkkuus</string>
   <string name="settings_accuracy_high">Korkea</string>
@@ -31,6 +34,7 @@
   <string name="settings_foreground_title">Edustapalvelu</string>
   <string name="settings_foreground_summary">Lisää palvelun prioriteettia</string>
   <string name="menu_status">Tila</string>
+  <string name="menu_info">Tiedot</string>
   <string name="menu_shortcuts">Lisää pikakuvakkeet</string>
   <string name="menu_clear">Tyhjennä</string>
   <string name="status_service_create">Palvelu käynnistynyt</string>
@@ -43,4 +47,7 @@
   <string name="hidden_app_name">Laitteen asetukset</string>
   <string name="hidden_alert">Sovellus on piilotettu. Näppäile 8722227 (TRACCAR) avataksesi sovelluksen uudelleen.</string>
   <string name="error_msg_invalid_url">Syötä kelvollinen http:// tai https:// URL-osoite</string>
+  <string name="request_exception">Kerätäksesi jatkuvasti sijaintitietoa, poista akun optimointi käytöstä tältä sovellukselta.</string>
+  <string name="request_background">Kerätäksesi jatkuvasti sijaintitietoa, salli \"%s\" käyttöoikeus.</string>
+  <string name="request_background_option">Salli kokoajan</string>
 </resources>

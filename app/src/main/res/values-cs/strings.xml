@@ -34,6 +34,7 @@
   <string name="settings_foreground_title">Popředí služba</string>
   <string name="settings_foreground_summary">Zvýšit prioritu služba</string>
   <string name="menu_status">Stav</string>
+  <string name="menu_info">Informace</string>
   <string name="menu_shortcuts">Přidat zástupce</string>
   <string name="menu_clear">Vyčistit</string>
   <string name="status_service_create">Služba spuštěna</string>
@@ -46,4 +47,7 @@
   <string name="hidden_app_name">Nastavení zařízení</string>
   <string name="hidden_alert">Aplikace byla skryta. Pro znovuotevření vytočte 8722227 (TRACCAR)</string>
   <string name="error_msg_invalid_url">Prosím vložte platnou http:// nebo https:// URL</string>
+  <string name="request_exception">Chcete-li průběžně shromažďovat údaje o poloze, vypněte optimalizaci baterie pro aplikaci.</string>
+  <string name="request_background">Chcete-li průběžně shromažďovat údaje o poloze, zapněte  \"%s\"  oprávnění.</string>
+  <string name="request_background_option">Povolit po celou dobu</string>
 </resources>
