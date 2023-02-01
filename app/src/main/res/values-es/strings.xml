@@ -21,11 +21,11 @@
   <string name="settings_status_off_summary">Servicio detenido</string>
   <string name="settings_status_on_summary">Servicio en ejecución</string>
   <string name="settings_buffer">Búfer fuera de línea</string>
-  <string name="settings_buffer_off_summary">Búfer activado</string>
-  <string name="settings_buffer_on_summary">Búfer desactivado</string>
+  <string name="settings_buffer_off_summary">Búfer desactivado</string>
+  <string name="settings_buffer_on_summary">Búfer activado</string>
   <string name="settings_wakelock">Estado despierto forzado</string>
-  <string name="settings_wakelock_off_summary">Estado despierto forzado activado</string>
-  <string name="settings_wakelock_on_summary">Estado despierto forzado desactivado</string>
+  <string name="settings_wakelock_off_summary">Estado despierto forzado desactivado</string>
+  <string name="settings_wakelock_on_summary">Estado despierto forzado activado</string>
   <string name="settings_accuracy_title">Precisión de posición</string>
   <string name="settings_accuracy_summary">Precisión de posición deseada</string>
   <string name="settings_accuracy_high">Alta</string>
