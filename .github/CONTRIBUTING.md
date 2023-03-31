@@ -15,8 +15,8 @@ There are multiple Traccar projects. If you create a new issue you MUST do it in
 
 - [Traccar Server](https://github.com/tananaev/traccar/issues)
 - [Traccar Web Interface](https://github.com/tananaev/traccar-web/issues)
-- [Seta Client for Android](https://github.com/tananaev/traccar-client-android/issues)
-- [Seta Client for iOS](https://github.com/tananaev/traccar-client-ios/issues)
+- [SETA Client for Android](https://github.com/tananaev/traccar-client-android/issues)
+- [SETA Client for iOS](https://github.com/tananaev/traccar-client-ios/issues)
 - [Traccar Manager for Android](https://github.com/tananaev/traccar-manager-android/issues)
 - [Traccar Manager for iOS](https://github.com/tananaev/traccar-manager-ios/issues)
 
