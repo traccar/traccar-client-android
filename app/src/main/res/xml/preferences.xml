@@ -29,21 +29,21 @@
         android:title="@string/settings_accuracy_title" />
 
     <EditTextPreference
-        android:defaultValue="300"
+        android:defaultValue="60"
         android:key="interval"
         android:inputType="number"
         android:summary="@string/settings_interval_summary"
         android:title="@string/settings_interval_title" />
 
     <EditTextPreference
-        android:defaultValue="0"
+        android:defaultValue="250"
         android:key="distance"
         android:inputType="number"
         android:summary="@string/settings_distance_summary"
         android:title="@string/settings_distance_title" />
 
     <EditTextPreference
-        android:defaultValue="0"
+        android:defaultValue="50"
         android:key="angle"
         android:inputType="number"
         android:summary="@string/settings_angle_summary"
