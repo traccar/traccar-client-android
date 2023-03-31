@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar Client</string>
+  <string name="app_name">Seta Client</string>
   <string name="app_logo">Traccar</string>
   <string name="shortcut_start">Mulai Layanan</string>
   <string name="shortcut_stop">Tutup Layanan</string>
