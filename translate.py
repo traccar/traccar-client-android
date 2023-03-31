@@ -20,8 +20,8 @@ path = "./app/src/main/res/"
 
 transifex_api.setup(auth=options.token)
 
-organization = transifex_api.Organization.get(slug='traccar')
-project = organization.fetch('projects').get(slug='traccar')
+organization = transifex_api.Organization.get(slug='seta')
+project = organization.fetch('projects').get(slug='seta')
 resource = project.fetch('resources').get(slug='client')
 languages = project.fetch('languages')
 
