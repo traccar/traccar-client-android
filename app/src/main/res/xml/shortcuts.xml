@@ -11,8 +11,8 @@
         android:shortcutShortLabel="@string/shortcut_start">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="org.traccar.client"
-            android:targetClass="org.traccar.client.ShortcutActivity">
+            android:targetPackage="org.seta.client"
+            android:targetClass="org.seta.client.ShortcutActivity">
             <extra
                 android:name="action"
                 android:value="start" />
@@ -26,8 +26,8 @@
         android:shortcutShortLabel="@string/shortcut_stop">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="org.traccar.client"
-            android:targetClass="org.traccar.client.ShortcutActivity">
+            android:targetPackage="org.seta.client"
+            android:targetClass="org.seta.client.ShortcutActivity">
             <extra
                 android:name="action"
                 android:value="stop" />
@@ -41,8 +41,8 @@
         android:shortcutShortLabel="@string/shortcut_sos">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="org.traccar.client"
-            android:targetClass="org.traccar.client.ShortcutActivity">
+            android:targetPackage="org.seta.client"
+            android:targetClass="org.seta.client.ShortcutActivity">
             <extra
                 android:name="action"
                 android:value="sos" />

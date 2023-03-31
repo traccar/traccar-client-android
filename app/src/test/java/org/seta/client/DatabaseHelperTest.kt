@@ -1,4 +1,4 @@
-package org.traccar.client
+package org.seta.client
 
 import android.location.Location
 import android.os.Build

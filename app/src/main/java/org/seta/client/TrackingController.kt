@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.seta.client
 
 import android.content.Context
-import org.traccar.client.ProtocolFormatter.formatRequest
-import org.traccar.client.RequestManager.sendRequestAsync
-import org.traccar.client.PositionProvider.PositionListener
-import org.traccar.client.NetworkManager.NetworkHandler
+import org.seta.client.ProtocolFormatter.formatRequest
+import org.seta.client.RequestManager.sendRequestAsync
+import org.seta.client.PositionProvider.PositionListener
+import org.seta.client.NetworkManager.NetworkHandler
 import android.os.Handler
 import android.os.Looper
 import androidx.preference.PreferenceManager
 import android.util.Log
-import org.traccar.client.DatabaseHelper.DatabaseHandler
-import org.traccar.client.RequestManager.RequestHandler
+import org.seta.client.DatabaseHelper.DatabaseHandler
+import org.seta.client.RequestManager.RequestHandler
 
 class TrackingController(private val context: Context) : PositionListener, NetworkHandler {
 

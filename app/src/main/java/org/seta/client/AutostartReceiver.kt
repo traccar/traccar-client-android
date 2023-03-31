@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 - 2021 Anton Tananaev (anton@traccar.org)
+ * Copyright 2013 - 2021 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.seta.client
 
 import android.content.Context
-import org.traccar.client.PositionProvider.PositionListener
+import android.content.Intent
+import androidx.preference.PreferenceManager
 
-object PositionProviderFactory {
+class AutostartReceiver : WakefulBroadcastReceiver() {
 
-    fun create(context: Context, listener: PositionListener): PositionProvider {
-        return AndroidPositionProvider(context, listener)
+    @Suppress("UnsafeProtectedBroadcastReceiver")
+    override fun onReceive(context: Context, intent: Intent) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        if (sharedPreferences.getBoolean(MainFragment.KEY_STATUS, false)) {
+            startWakefulForegroundService(context, Intent(context, TrackingService::class.java))
+        }
     }
+
 }

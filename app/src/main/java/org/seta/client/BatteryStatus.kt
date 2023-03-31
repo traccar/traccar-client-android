@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.seta.client
 
 data class BatteryStatus(
     val level: Double = 0.0,

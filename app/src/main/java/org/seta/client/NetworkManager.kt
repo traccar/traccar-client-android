@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 @file:Suppress("DEPRECATION")
-package org.traccar.client
+package org.seta.client
 
 import android.content.BroadcastReceiver
 import android.content.Context

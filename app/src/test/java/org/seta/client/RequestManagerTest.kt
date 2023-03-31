@@ -1,4 +1,4 @@
-package org.traccar.client
+package org.seta.client
 
 import android.os.Build
 import org.junit.Assert
@@ -7,7 +7,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import org.traccar.client.RequestManager.sendRequest
+import org.seta.client.RequestManager.sendRequest
 
 @Config(sdk = [Build.VERSION_CODES.P])
 @RunWith(RobolectricTestRunner::class)

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 @file:Suppress("DEPRECATION", "StaticFieldLeak")
-package org.traccar.client
+package org.seta.client
 
 import android.annotation.SuppressLint
 import android.content.ContentValues

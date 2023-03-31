@@ -1,4 +1,4 @@
-# Contributing to Traccar
+# Contributing to SETA
 
 Please make sure you read this guide before commenting on any issue or creating a new issue or pull request.
 
