@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name="org.seta.client.GoogleMainApplication"
+        android:name="org.seta.tracker.GoogleMainApplication"
         tools:replace="android:name"
         tools:ignore="GoogleAppIndexingWarning">
 

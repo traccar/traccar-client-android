@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar Yönetim</string>
+  <string name="app_name">SETA Yönetim</string>
   <string name="app_logo">SETA</string>
   <string name="shortcut_start">Servisi Başlat</string>
   <string name="shortcut_stop">Servisi Durdur</string>

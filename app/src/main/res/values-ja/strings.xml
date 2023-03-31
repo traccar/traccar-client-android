@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar クライアント</string>
+  <string name="app_name">SETA クライアント</string>
   <string name="app_logo">SETA</string>
   <string name="shortcut_start">サービスを開始</string>
   <string name="shortcut_stop">サービスを停止</string>

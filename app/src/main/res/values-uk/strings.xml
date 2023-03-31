@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar Клієнт</string>
+  <string name="app_name">SETA Клієнт</string>
   <string name="app_logo">SETA</string>
   <string name="settings_id_title">Ідентифікатор пристрою</string>
   <string name="settings_interval_title">Частота</string>

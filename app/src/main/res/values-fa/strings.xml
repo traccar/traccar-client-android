@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">ردیاب Traccar</string>
-  <string name="app_logo">ردیاب Traccar</string>
+  <string name="app_name">ردیاب SETA</string>
+  <string name="app_logo">ردیاب SETA</string>
   <string name="shortcut_start">شروع کار</string>
   <string name="shortcut_stop">توقف کار</string>
   <string name="shortcut_sos">ارسال پیام اضطراری</string>

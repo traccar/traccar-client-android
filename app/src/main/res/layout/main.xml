@@ -8,6 +8,6 @@
         android:id="@+id/fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="org.seta.client.MainFragment" />
+        android:name="org.seta.tracker.MainFragment" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

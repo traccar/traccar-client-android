@@ -13,7 +13,7 @@ android {
         versionName '7.0'
         multiDexEnabled true
     }
-    namespace 'org.traccar.client'
+    namespace 'org.seta.tracker'
 
     packagingOptions {
         resources {
@@ -28,7 +28,7 @@ android {
         }
         google
         hidden {
-            applicationId 'org.traccar.client.hidden'
+            applicationId 'org.seta.tracker.hidden'
             buildConfigField 'boolean', 'HIDDEN_APP', 'true'
         }
     }
@@ -53,6 +53,7 @@ dependencies {
     implementation('dev.doubledot.doki:library:0.0.1@aar') {
         transitive = true
     }
+    implementation 'androidx.test:core-ktx:1.4.0'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.7.3'
     googleImplementation platform('com.google.firebase:firebase-bom:28.2.1')
@@ -70,8 +71,8 @@ if (getGradle().getStartParameter().getTaskRequests().toString().contains('Googl
     task copyJson(type: Copy) {
         from '../../environment/google-services'
         into '.'
-        include 'traccar-client-android.json'
-        rename('traccar-client-android.json', 'google-services.json')
+        include 'seta-tracker-android.json'
+        rename('seta-tracker-android.json', 'google-services.json')
     }
 
     afterEvaluate {

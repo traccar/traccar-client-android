@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar Kliens</string>
+  <string name="app_name">SETA Kliens</string>
   <string name="app_logo">SETA</string>
   <string name="shortcut_start">Szolgáltatás indítása</string>
   <string name="shortcut_stop">Szolgáltatás leállítása</string>

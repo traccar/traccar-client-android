@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Εφαρμογή Traccar</string>
+  <string name="app_name">SETA Tracker</string>
   <string name="app_logo">SETA</string>
   <string name="shortcut_start">Εκκίνηση υπηρεσίας</string>
   <string name="shortcut_stop">Διακοπή υπηρεσίας</string>

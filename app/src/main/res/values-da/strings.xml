@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar klient</string>
+  <string name="app_name">SETA klient</string>
   <string name="app_logo">SETA</string>
   <string name="shortcut_start">Start tjenesten</string>
   <string name="shortcut_stop">Stop tjenesten</string>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Client Traccar</string>
+  <string name="app_name">Client SETA</string>
   <string name="app_logo">SETA</string>
   <string name="shortcut_start">Porneste Serviciu</string>
   <string name="shortcut_stop">Opreste serviciu</string>

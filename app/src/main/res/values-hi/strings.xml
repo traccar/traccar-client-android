@@ -38,6 +38,6 @@
   <string name="status_network_online">नेटवर्क ऑनलाइन</string>
   <string name="status_network_offline">नेटवर्क ऑफ़लाइन</string>
   <string name="hidden_app_name">उपकरण की सेटिंग्स</string>
-  <string name="hidden_alert">एप्लिकेशन को छुपा दिया गया है l इसे फिर से खोलने के लिए डायल करें 8722227 ( TRACCAR ) l</string>
+  <string name="hidden_alert">एप्लिकेशन को छुपा दिया गया है l इसे फिर से खोलने के लिए डायल करें 8722227 ( SETA ) l</string>
   <string name="error_msg_invalid_url">अवैध यूआरएल त्रुटि संदेश</string>
 </resources>

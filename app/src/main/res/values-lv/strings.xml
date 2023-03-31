@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar klients</string>
+  <string name="app_name">SETA klients</string>
   <string name="app_logo">SETA</string>
   <string name="shortcut_start">Sākt servisu</string>
   <string name="shortcut_stop">Apstādināt servisu</string>
@@ -8,7 +8,7 @@
   <string name="channel_default">Primārais kanāls</string>
   <string name="settings_id_title">Ierīces identifikators</string>
   <string name="settings_url_title">Servera URL</string>
-  <string name="settings_url_summary">Traccar servera URL</string>
+  <string name="settings_url_summary">SETA servera URL</string>
   <string name="settings_interval_title">Biežums</string>
   <string name="settings_interval_summary">Atskaites biežums sekundēs</string>
   <string name="settings_distance_title">Distance</string>

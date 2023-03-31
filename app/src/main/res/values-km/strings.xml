@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">ម៉ាស៊ីនភ្ញៀវ Traccar</string>
+  <string name="app_name">ម៉ាស៊ីនភ្ញៀវ SETA</string>
   <string name="app_logo">SETA</string>
   <string name="settings_id_title">ឧបករណ៍សម្គាល់ឧបករណ៍</string>
   <string name="settings_interval_title">ជាញឹកញាប់</string>

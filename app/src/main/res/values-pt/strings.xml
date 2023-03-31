@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Cliente Traccar</string>
+  <string name="app_name">Cliente SETA</string>
   <string name="app_logo">SETA</string>
   <string name="shortcut_start">Iniciar serviço</string>
   <string name="shortcut_stop">Parar serviço</string>

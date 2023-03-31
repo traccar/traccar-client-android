@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar ক্লায়েন্ট</string>
+  <string name="app_name">SETA ক্লায়েন্ট</string>
   <string name="app_logo">SETA</string>
   <string name="settings_id_title">ডিভাইস সনাক্তকারী</string>
   <string name="settings_url_title">সার্ভার URL</string>

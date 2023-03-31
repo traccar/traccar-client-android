@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar定位端</string>
+  <string name="app_name">SETA定位端</string>
   <string name="app_logo">SETA</string>
   <string name="shortcut_start">开始服务</string>
   <string name="shortcut_stop">停止服务</string>
