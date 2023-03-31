@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">SETA Client</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Käynnistä palvelu</string>
   <string name="shortcut_stop">Pysäytä palvelu</string>
   <string name="shortcut_sos">Lähetä SOS-viesti</string>
@@ -45,7 +45,7 @@
   <string name="status_network_online">Yhdistetty verkkoon</string>
   <string name="status_network_offline">Verkkoyhteys katkennut</string>
   <string name="hidden_app_name">Laitteen asetukset</string>
-  <string name="hidden_alert">Sovellus on piilotettu. Näppäile 8722227 (TRACCAR) avataksesi sovelluksen uudelleen.</string>
+  <string name="hidden_alert">Sovellus on piilotettu. Näppäile 8722227 (SETA) avataksesi sovelluksen uudelleen.</string>
   <string name="error_msg_invalid_url">Syötä kelvollinen http:// tai https:// URL-osoite</string>
   <string name="request_exception">Kerätäksesi jatkuvasti sijaintitietoa, poista akun optimointi käytöstä tältä sovellukselta.</string>
   <string name="request_background">Kerätäksesi jatkuvasti sijaintitietoa, salli \"%s\" käyttöoikeus.</string>

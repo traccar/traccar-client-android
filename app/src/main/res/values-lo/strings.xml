@@ -17,5 +17,5 @@
   <string name="status_send_fail">ມີຂໍ້ຜິດພາດໃນການສົ່ງຂໍ້ມູນ</string>
   <string name="status_location_update">ສະຖານທີ່ພິກັດໄດ້ອັບເດດ</string>
   <string name="hidden_app_name">ການຕັ້ງຄ່າອຸປະກອນ</string>
-  <string name="hidden_alert">ແອັບໂຕນີ້ໄດ້ຖືກເຊື່ອງໄວ້. ຖ້າຢາກເປີດຂຶ້ນມາອີກຄັ້ງກະລຸນາກົດໝາຍເລກ 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">ແອັບໂຕນີ້ໄດ້ຖືກເຊື່ອງໄວ້. ຖ້າຢາກເປີດຂຶ້ນມາອີກຄັ້ງກະລຸນາກົດໝາຍເລກ 8722227 (SETA).</string>
 </resources>

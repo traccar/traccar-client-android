@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">SETA Client</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">เริ่มต้นบริการ</string>
   <string name="shortcut_stop">หยุดบริการ</string>
   <string name="shortcut_sos">ส่ง SOS</string>
@@ -45,7 +45,7 @@
   <string name="status_network_online">เครือข่ายออนไลน์</string>
   <string name="status_network_offline">เครือข่ายออฟไลน์</string>
   <string name="hidden_app_name">ตั้งค่าอุปกรณ์</string>
-  <string name="hidden_alert">แอพถูกซ่อน หากต้องการเปิดอีกครั้ง โปรดโทร 8722227 (TRACCAR)</string>
+  <string name="hidden_alert">แอพถูกซ่อน หากต้องการเปิดอีกครั้ง โปรดโทร 8722227 (SETA)</string>
   <string name="error_msg_invalid_url">โปรดใส่ค่า http:// หรือ https:// URL ที่ถูกต้อง</string>
   <string name="request_exception">หากต้องการรวบรวมข้อมูลตำแหน่งอย่างต่อเนื่อง โปรดปิดการเพิ่มประสิทธิภาพแบตเตอรี่สำหรับแอป</string>
   <string name="request_background">หากต้องการรวบรวมข้อมูลตำแหน่งอย่างต่อเนื่อง โปรดเปิดใช้การอนุญาต \"%s\"</string>

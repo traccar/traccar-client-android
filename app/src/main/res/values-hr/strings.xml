@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar klijent</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Pokreni servis</string>
   <string name="shortcut_stop">Zaustavi servis</string>
   <string name="shortcut_sos">Pošalji SOS</string>
@@ -44,6 +44,6 @@
   <string name="status_network_online">Mrežna dostupnost</string>
   <string name="status_network_offline">Mrežna nedostupnost</string>
   <string name="hidden_app_name">Podešavanje uređaja</string>
-  <string name="hidden_alert">Aplikacija je skrivena. Za ponovno otvaranje molim nazovite  8722227 (TRACCAR).</string>
+  <string name="hidden_alert">Aplikacija je skrivena. Za ponovno otvaranje molim nazovite  8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Molimo unesite ispravnu http:// ili https:// adresu</string>
 </resources>

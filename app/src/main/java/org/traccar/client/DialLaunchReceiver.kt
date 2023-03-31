@@ -32,7 +32,7 @@ class DialLaunchReceiver : BroadcastReceiver() {
     }
 
     companion object {
-        private const val LAUNCHER_NUMBER = "8722227" // TRACCAR
+        private const val LAUNCHER_NUMBER = "8722227" // SETA
     }
 
 }

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">SETA Client</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Start service</string>
   <string name="shortcut_stop">Stop service</string>
   <string name="shortcut_sos">Stuur SOS</string>
@@ -45,7 +45,7 @@
   <string name="status_network_online">Netwerk online</string>
   <string name="status_network_offline">Netwerk offline</string>
   <string name="hidden_app_name">Toestel instellingen</string>
-  <string name="hidden_alert">De app is verborgen. Om hem opnieuw te openen bel je naar 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">De app is verborgen. Om hem opnieuw te openen bel je naar 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Voer alstublieft een geldige http:// of https:// URL in</string>
   <string name="request_exception">Om continu locatiegegevens te kunnen verzamelen is het noodzakelijk dat accuoptimalisatie voor deze app is uitgeschakeld.</string>
   <string name="request_background">Geef de \"1%s\" permissie om continu locatieinformatie bij te houden.</string>

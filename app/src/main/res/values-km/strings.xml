@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">ម៉ាស៊ីនភ្ញៀវ Traccar</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="settings_id_title">ឧបករណ៍សម្គាល់ឧបករណ៍</string>
   <string name="settings_interval_title">ជាញឹកញាប់</string>
   <string name="settings_status_title">ស្ថានភាពសេវា</string>
@@ -18,5 +18,5 @@
   <string name="status_send_fail">ការផ្ញើបានបរាជ័យ</string>
   <string name="status_location_update">ធ្វើឱ្យទាន់សម័យទីតាំង</string>
   <string name="hidden_app_name">ការកំណត់ឧបករណ៍</string>
-  <string name="hidden_alert">កម្មវិធីនេះត្រូវបានលាក់។ ដើម្បីបើកវាម្តងទៀតសូមចុច 8722227 (TRACCAR) ។</string>
+  <string name="hidden_alert">កម្មវិធីនេះត្រូវបានលាក់។ ដើម្បីបើកវាម្តងទៀតសូមចុច 8722227 (SETA) ។</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar klients</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Sākt servisu</string>
   <string name="shortcut_stop">Apstādināt servisu</string>
   <string name="shortcut_sos">Sūtīt SOS</string>
@@ -45,7 +45,7 @@
   <string name="status_network_online">Tīkls tiešsaitē</string>
   <string name="status_network_offline">Tīkls bezsaitē</string>
   <string name="hidden_app_name">Ierīces iestatījumi</string>
-  <string name="hidden_alert">Lietotne ir paslēpta. Zvaniet 8722227 (TRACCAR), lai to atkal parādītu.</string>
+  <string name="hidden_alert">Lietotne ir paslēpta. Zvaniet 8722227 (SETA), lai to atkal parādītu.</string>
   <string name="error_msg_invalid_url">Lūdzu ievadiet derīgu http:// vai https:// URL</string>
   <string name="request_background_option">Visu laiku atļauts</string>
 </resources>

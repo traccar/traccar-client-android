@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Client Traccar</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Démarrer le service</string>
   <string name="shortcut_stop">Arrêter le service</string>
   <string name="shortcut_sos">Envoyer un SOS</string>
@@ -44,6 +44,6 @@
   <string name="status_network_online">Réseau connecté</string>
   <string name="status_network_offline">Réseau déconnecté</string>
   <string name="hidden_app_name">Paramètres de l\'appareil</string>
-  <string name="hidden_alert">Cette application a été cachée. Pour l\'ouvrir à nouveau, composez le 8722227 (TRACCAR)</string>
+  <string name="hidden_alert">Cette application a été cachée. Pour l\'ouvrir à nouveau, composez le 8722227 (SETA)</string>
   <string name="error_msg_invalid_url">S\'il vous plait, entrer un URL http:// ou https:// valide</string>
 </resources>

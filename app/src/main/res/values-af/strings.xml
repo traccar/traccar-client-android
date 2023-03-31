@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar-kliënt</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Begin diens</string>
   <string name="shortcut_stop">Stop diens</string>
   <string name="shortcut_sos">Stuur SOS</string>
@@ -41,6 +41,6 @@
   <string name="status_network_online">Netwerk aanlyn</string>
   <string name="status_network_offline">Netwerk vanlyn</string>
   <string name="hidden_app_name">Toestelinstellings</string>
-  <string name="hidden_alert">Die toep is versteek. Skakel 8722227 (TRACCAR) om dit weer oop te maak.</string>
+  <string name="hidden_alert">Die toep is versteek. Skakel 8722227 (SETA) om dit weer oop te maak.</string>
   <string name="error_msg_invalid_url">Voer \'n geldige http: // of https: // URL in</string>
 </resources>

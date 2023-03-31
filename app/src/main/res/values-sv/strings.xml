@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccarklient</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Starta tjänsten</string>
   <string name="shortcut_stop">Stoppa tjänsten</string>
   <string name="shortcut_sos">Skicka SOS</string>
@@ -45,7 +45,7 @@
   <string name="status_network_online">Nätverk online</string>
   <string name="status_network_offline">Nätverk offline</string>
   <string name="hidden_app_name">Inställningar</string>
-  <string name="hidden_alert">App:en är gömd. För att öppna den igen, vänligen ring 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">App:en är gömd. För att öppna den igen, vänligen ring 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Vänligen fyll i en giltig http://- eller https://-URL</string>
   <string name="request_exception">För att kontinuerligt samla in platsdata, stäng av batterioptimeringen för appen.</string>
   <string name="request_background">För att kontinuerligt samla in platsdata vänligen aktivera \"%s\" behörighet.</string>

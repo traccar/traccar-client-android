@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">SETA Client</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Inicia servei</string>
   <string name="shortcut_stop">Atura servei</string>
   <string name="shortcut_sos">Envia SOS</string>
@@ -45,7 +45,7 @@
   <string name="status_network_online">Xarxa en línia</string>
   <string name="status_network_offline">Xarxa fora de línia</string>
   <string name="hidden_app_name">Configuració del dispositiu</string>
-  <string name="hidden_alert">Aplicació ocultada. Per obrir-la de nou escriviu 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">Aplicació ocultada. Per obrir-la de nou escriviu 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Adreça URL incorrecte</string>
   <string name="request_exception">Per obtenir contínuament les dades de localització, desactivi la optimització de la bateria per aquesta aplicació</string>
   <string name="request_background">Per obtenir contínuament les dades de localització, activi el permís \"%s\".</string>

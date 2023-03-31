@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">SETA Client</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Mulai Layanan</string>
   <string name="shortcut_stop">Tutup Layanan</string>
   <string name="shortcut_sos">Kirim SOS</string>
@@ -38,6 +38,6 @@
   <string name="status_network_online">Jaringan Hidup</string>
   <string name="status_network_offline">Jaringan Mati</string>
   <string name="hidden_app_name">Pengaturan Perangkat</string>
-  <string name="hidden_alert">Aplikasi Telah Tersembunyi. Untuk Membuka Lagi Silahkan Tekan 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">Aplikasi Telah Tersembunyi. Untuk Membuka Lagi Silahkan Tekan 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Tolong Masukan http:// atau https:// URL Yang Benar</string>
 </resources>

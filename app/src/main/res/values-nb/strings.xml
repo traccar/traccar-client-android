@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar Klient</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Start tjeneste</string>
   <string name="shortcut_stop">Stopp tjeneste</string>
   <string name="shortcut_sos">Send SOS</string>
@@ -41,6 +41,6 @@
   <string name="status_network_online">Nettverk Online</string>
   <string name="status_network_offline">Nettverk Offline</string>
   <string name="hidden_app_name">Enhetsinnstillinger</string>
-  <string name="hidden_alert">App\'en har blitt gjemt. For å åpne igjen, vennligst tast (ring) 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">App\'en har blitt gjemt. For å åpne igjen, vennligst tast (ring) 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Vennligst skriv korrekt nettadresse som http:// eller https://</string>
 </resources>

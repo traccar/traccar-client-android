@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar კლიენტი</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">სერვისის სტარტი</string>
   <string name="shortcut_stop">სერვისის დასტოპება</string>
   <string name="shortcut_sos">SOS სიგნალის გაგზავნა</string>
@@ -44,6 +44,6 @@
   <string name="status_network_online">ქსელი კავშირშია</string>
   <string name="status_network_offline">ქსელი გამორთულია</string>
   <string name="hidden_app_name">მოწყობილობის პარამეტრები</string>
-  <string name="hidden_alert">პროგრამა დამალულია. მის გასახსნელად გთხოვთ აკრიფოთ 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">პროგრამა დამალულია. მის გასახსნელად გთხოვთ აკრიფოთ 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">გთხოვთ, შეიყვანოთ სწორი http: // ან https: // URL</string>
 </resources>

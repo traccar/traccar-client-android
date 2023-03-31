@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar клиент</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Стартирай услугата</string>
   <string name="shortcut_stop">Спри услугата</string>
   <string name="shortcut_sos">Изпрати SOS</string>
@@ -38,6 +38,6 @@
   <string name="status_network_online">Има връзка с мрежата</string>
   <string name="status_network_offline">Няма връзка с мрежа</string>
   <string name="hidden_app_name">Настройки</string>
-  <string name="hidden_alert">Приложението е скрито. За да го отворите отново, моля наберете 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">Приложението е скрито. За да го отворите отново, моля наберете 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Моля въведете валиден адрес</string>
 </resources>

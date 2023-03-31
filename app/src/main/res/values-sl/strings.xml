@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar klient</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Zaženi storitev</string>
   <string name="shortcut_stop">Ustavi storitev</string>
   <string name="shortcut_sos">Pošlji SOS</string>
@@ -38,6 +38,6 @@
   <string name="status_network_online">Mrežna povezava vzpostavljena</string>
   <string name="status_network_offline">Ni mrežne povezave</string>
   <string name="hidden_app_name">Nastavitve naprave</string>
-  <string name="hidden_alert">Aplikacija je bila skrita. Za njen ponoven prikaz pokličite telefonsko številko 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">Aplikacija je bila skrita. Za njen ponoven prikaz pokličite telefonsko številko 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Prosim vpišite veljaven http:// ali https:// naslov</string>
 </resources>

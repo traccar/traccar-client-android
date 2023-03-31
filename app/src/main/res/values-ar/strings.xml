@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">عميل Traccar</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">بدء الخدمة</string>
   <string name="shortcut_stop">توقف الخدمة</string>
   <string name="shortcut_sos">ارسال استغاثة</string>
@@ -44,6 +44,6 @@
   <string name="status_network_online">متصل بالشبكة</string>
   <string name="status_network_offline">غير متصل بالشبكة</string>
   <string name="hidden_app_name">إعدادات الجهاز</string>
-  <string name="hidden_alert">تم إخفاء التطبيق. لفتحه مجددا رجاءا اتصل بـ8722227 (TRACCAR).</string>
+  <string name="hidden_alert">تم إخفاء التطبيق. لفتحه مجددا رجاءا اتصل بـ8722227 (SETA).</string>
   <string name="error_msg_invalid_url">الرجاء إدخال رابط صحيح http:// أو https://</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">SETA Client</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Avvia servizio</string>
   <string name="shortcut_stop">Ferma servizio</string>
   <string name="shortcut_sos">Invia SOS</string>
@@ -45,7 +45,7 @@
   <string name="status_network_online">Network online</string>
   <string name="status_network_offline">Network offline</string>
   <string name="hidden_app_name">Impostazioni dispositivo</string>
-  <string name="hidden_alert">La app è stata nascosta. Per aprirla nuovamente digita 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">La app è stata nascosta. Per aprirla nuovamente digita 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Per favore inserisci un URL valido http:// o https://</string>
   <string name="request_exception">Per abilitare la raccolta continua delle posizioni, disabilita le ottimizzazioni batteria per questa applicazione</string>
   <string name="request_background">Per abilitare la raccolta delle posizione, abilita il permesso \"%s\"</string>

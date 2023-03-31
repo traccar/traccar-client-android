@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar クライアント</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">サービスを開始</string>
   <string name="shortcut_stop">サービスを停止</string>
   <string name="shortcut_sos">SOSを送信</string>
@@ -41,6 +41,6 @@
   <string name="status_network_online">ネットワーク　オンライン</string>
   <string name="status_network_offline">ネットワーク　オフライン</string>
   <string name="hidden_app_name">デバイス設定</string>
-  <string name="hidden_alert">アプリは非表示になりました。 もう一度開くには 8722227 (TRACCAR) にダイヤルしてください。</string>
+  <string name="hidden_alert">アプリは非表示になりました。 もう一度開くには 8722227 (SETA) にダイヤルしてください。</string>
   <string name="error_msg_invalid_url">http:// または https:// から始まるURL を正しく入力してください。</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar Yönetim</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Servisi Başlat</string>
   <string name="shortcut_stop">Servisi Durdur</string>
   <string name="shortcut_sos">Yardım Çağrısı Gönder</string>
@@ -38,6 +38,6 @@
   <string name="status_network_online">Ağa Bağlandı</string>
   <string name="status_network_offline">Ağ Bağlantısı Kesildi</string>
   <string name="hidden_app_name">Cihaz Ayarları</string>
-  <string name="hidden_alert">Bu uygulama arkaplanda gizli olarak çalışmaktadır. Tekrar görmek için lütfen 8722227 tuşlayın. Arayın. (TRACCAR)</string>
+  <string name="hidden_alert">Bu uygulama arkaplanda gizli olarak çalışmaktadır. Tekrar görmek için lütfen 8722227 tuşlayın. Arayın. (SETA)</string>
   <string name="error_msg_invalid_url">Lütfen geçerli bir adres girin http:// veya https://</string>
 </resources>

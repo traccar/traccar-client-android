@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar Клієнт</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="settings_id_title">Ідентифікатор пристрою</string>
   <string name="settings_interval_title">Частота</string>
   <string name="settings_status_title">Стан сервісу</string>
@@ -18,5 +18,5 @@
   <string name="status_send_fail">Відправлення  невдале</string>
   <string name="status_location_update">Оновлення розташування</string>
   <string name="hidden_app_name">Налаштування пристрою</string>
-  <string name="hidden_alert">Додаток було приховано. Щоб відкрити його знову наберіть 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">Додаток було приховано. Щоб відкрити його знову наберіть 8722227 (SETA).</string>
 </resources>

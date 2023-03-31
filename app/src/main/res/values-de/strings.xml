@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">SETA Client</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Dienst starten</string>
   <string name="shortcut_stop">Dienst stoppen</string>
   <string name="shortcut_sos">SOS senden</string>
@@ -41,6 +41,6 @@
   <string name="status_network_online">Netzwerk online</string>
   <string name="status_network_offline">Netzwerk offline</string>
   <string name="hidden_app_name">Geräteeinstellungen</string>
-  <string name="hidden_alert">Die App wurde versteckt. Um sie wieder zu öffnen, wähle 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">Die App wurde versteckt. Um sie wieder zu öffnen, wähle 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Bitte eine gültige http:// oder https:// URL eingeben</string>
 </resources>

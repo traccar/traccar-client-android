@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar klient</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Spustit službu</string>
   <string name="shortcut_stop">Zastavit službu</string>
   <string name="shortcut_sos">Odeslat SOS</string>
@@ -45,7 +45,7 @@
   <string name="status_network_online">Síť online</string>
   <string name="status_network_offline">Síť offile</string>
   <string name="hidden_app_name">Nastavení zařízení</string>
-  <string name="hidden_alert">Aplikace byla skryta. Pro znovuotevření vytočte 8722227 (TRACCAR)</string>
+  <string name="hidden_alert">Aplikace byla skryta. Pro znovuotevření vytočte 8722227 (SETA)</string>
   <string name="error_msg_invalid_url">Prosím vložte platnou http:// nebo https:// URL</string>
   <string name="request_exception">Chcete-li průběžně shromažďovat údaje o poloze, vypněte optimalizaci baterie pro aplikaci.</string>
   <string name="request_background">Chcete-li průběžně shromažďovat údaje o poloze, zapněte  \"%s\"  oprávnění.</string>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar Manager</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Spustiť službu</string>
   <string name="shortcut_stop">Zastaviť službu</string>
   <string name="shortcut_sos">Poslať SOS</string>
@@ -38,6 +38,6 @@
   <string name="status_network_online">Sieť online</string>
   <string name="status_network_offline">Sieť offline</string>
   <string name="hidden_app_name">Nastavenie zariadenia</string>
-  <string name="hidden_alert">Aplikácia bola skrytá. Pre opätovné otvorenie znova vytočte 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">Aplikácia bola skrytá. Pre opätovné otvorenie znova vytočte 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Prosím zadajte validné http:// alebo https:// URL</string>
 </resources>

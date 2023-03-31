@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar Klient</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Uruchomienie usługi</string>
   <string name="shortcut_stop">Zatrzymanie usługi</string>
   <string name="shortcut_sos">Wyślij SOS</string>
@@ -45,7 +45,7 @@
   <string name="status_network_online">Połączony z siecią</string>
   <string name="status_network_offline">Rozłączony z siecią</string>
   <string name="hidden_app_name">Ustawienia urządzenia</string>
-  <string name="hidden_alert">Aplikacja została ukryta. By ją otworzyć, zadzwoń pod 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">Aplikacja została ukryta. By ją otworzyć, zadzwoń pod 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Wprowadź poprawny adres http:// lub https:// URL</string>
   <string name="request_exception">Do stałego zbierania danych o lokalizacji, należy wyłączyć optymalizację baterii w aplikacji.</string>
   <string name="request_background">Włącz zezwolenie \"%s\", aby ciągle zbierać dane o lokalizacji.</string>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar klient</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Start tjenesten</string>
   <string name="shortcut_stop">Stop tjenesten</string>
   <string name="shortcut_sos">Send SOS</string>
@@ -44,6 +44,6 @@
   <string name="status_network_online">Netværk online</string>
   <string name="status_network_offline">Netværk offline</string>
   <string name="hidden_app_name">Enheds indstillinger</string>
-  <string name="hidden_alert">Appen er skjult. For at åbne appen igen skal du ringe til 8722227 (TRACCAR)</string>
+  <string name="hidden_alert">Appen er skjult. For at åbne appen igen skal du ringe til 8722227 (SETA)</string>
   <string name="error_msg_invalid_url">Indtast gyldig http:// eller https:// adresse</string>
 </resources>

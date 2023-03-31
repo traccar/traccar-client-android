@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">SETA Client</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Start teneste</string>
   <string name="shortcut_stop">Stopp teneste</string>
   <string name="shortcut_sos">Send SOS</string>
@@ -41,6 +41,6 @@
   <string name="status_network_online">Nettverk tilkopla</string>
   <string name="status_network_offline">Nettverk fråkopla</string>
   <string name="hidden_app_name">Einingsinnstillingar</string>
-  <string name="hidden_alert">App\'en har blitt gøymt. For å åpne han igjen, ver venleg å tast (ring) 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">App\'en har blitt gøymt. For å åpne han igjen, ver venleg å tast (ring) 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Ver venleg å taste gyldig http:// eller https:// URL</string>
 </resources>

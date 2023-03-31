@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Cliente Traccar</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Iniciar serviço</string>
   <string name="shortcut_stop">Parar serviço</string>
   <string name="shortcut_sos">Enviar SOS</string>
@@ -44,6 +44,6 @@
   <string name="status_network_online">Rede online</string>
   <string name="status_network_offline">Rede offline</string>
   <string name="hidden_app_name">Definições do Dispositivo</string>
-  <string name="hidden_alert">A aplicação foi ocultada com sucesso. Para abrir novamente, por favor contacte 8722227 (TRACCAR).</string>
+  <string name="hidden_alert">A aplicação foi ocultada com sucesso. Para abrir novamente, por favor contacte 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Digite um URL http: // ou https: // válido</string>
 </resources>

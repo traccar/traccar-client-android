@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar Kliens</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">Szolgáltatás indítása</string>
   <string name="shortcut_stop">Szolgáltatás leállítása</string>
   <string name="shortcut_sos">SOS küldése</string>
@@ -45,7 +45,7 @@
   <string name="status_network_online">Hálózat aktív</string>
   <string name="status_network_offline">Hálózat nem aktív</string>
   <string name="hidden_app_name">Eszköz beállítások</string>
-  <string name="hidden_alert">Ez az applikáció el lett rejtve. Megnyitásához  kérjük hívja a 8722227 (TRACCAR) telefonszámot.</string>
+  <string name="hidden_alert">Ez az applikáció el lett rejtve. Megnyitásához  kérjük hívja a 8722227 (SETA) telefonszámot.</string>
   <string name="error_msg_invalid_url">Adjon meg egy érvényes URL-t (http:// vagy https://)</string>
   <string name="request_exception">A folyamatos helyadatok
 gyűjtéséhez kapcsolja ki

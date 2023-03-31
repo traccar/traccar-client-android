@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Traccar 클라이언트</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_logo">SETA</string>
   <string name="shortcut_start">서비스 시작</string>
   <string name="shortcut_stop">서비스 중지</string>
   <string name="shortcut_sos">SOS 신호 보내기</string>
@@ -38,6 +38,6 @@
   <string name="status_network_online">네트워크 연결됨</string>
   <string name="status_network_offline">네트워크 연결 불가</string>
   <string name="hidden_app_name">장치설정</string>
-  <string name="hidden_alert">앱이 숨겨져 있습니다. 다시 열려면 8722227 (TRACCAR)로 전화하십시오.</string>
+  <string name="hidden_alert">앱이 숨겨져 있습니다. 다시 열려면 8722227 (SETA)로 전화하십시오.</string>
   <string name="error_msg_invalid_url">올바른 http:// 또는 https:// 형태의 URL 주소를 넣어주세요</string>
 </resources>
