@@ -4,7 +4,7 @@
 
 ## Overview
 
-SETA Client is an Android GPS tracking application.
+SETA Tracker is an Android GPS tracking application.
 
 ## License
 
