@@ -1,4 +1,4 @@
-# [SETA Client for Android](#)
+# [SETA Tracker for Android](#)
 
 [![Get it on Google Play](http://www.tananaev.com/badges/google-play.svg)](#) [![Get it on F-Droid](http://www.tananaev.com/badges/f-droid.svg)](#)
 
