@@ -5,7 +5,7 @@ android {
     compileSdkVersion 33
 
     defaultConfig {
-        applicationId 'org.SETA.client'
+        applicationId 'org.seta.tracker'
         buildConfigField 'boolean', 'HIDDEN_APP', 'false'
         minSdkVersion 16
         targetSdkVersion 33
@@ -53,7 +53,6 @@ dependencies {
     implementation('dev.doubledot.doki:library:0.0.1@aar') {
         transitive = true
     }
-    implementation 'androidx.test:core-ktx:1.4.0'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.7.3'
     googleImplementation platform('com.google.firebase:firebase-bom:28.2.1')

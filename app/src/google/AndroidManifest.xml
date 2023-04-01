@@ -7,7 +7,6 @@
         android:name="org.seta.tracker.GoogleMainApplication"
         tools:replace="android:name"
         tools:ignore="GoogleAppIndexingWarning">
-
     </application>
 
 </manifest>
