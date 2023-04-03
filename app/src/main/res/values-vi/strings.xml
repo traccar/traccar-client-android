@@ -27,4 +27,5 @@
   <string name="hidden_app_name">Cài đặt thiết bị</string>
   <string name="hidden_alert">Ứng dụng đã được ẩn. Để mở lại xin vui lòng gọi 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Vui lòng nhập đường dẫn hợp lệ http:// hoặc https://</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

@@ -50,4 +50,5 @@
   <string name="request_exception">Da biste kontinuirano prikupljali podatke o lokaciji, isključite optimizaciju baterije za aplikaciju.</string>
   <string name="request_background">Da biste kontinuirano prikupljali podatke o lokaciji, omogućite %s dozvolu.</string>
   <string name="request_background_option">Dozvoljeno svo vreme</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

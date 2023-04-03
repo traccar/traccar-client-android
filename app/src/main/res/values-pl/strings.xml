@@ -50,4 +50,5 @@
   <string name="request_exception">Do stałego zbierania danych o lokalizacji, należy wyłączyć optymalizację baterii w aplikacji.</string>
   <string name="request_background">Włącz zezwolenie \"%s\", aby ciągle zbierać dane o lokalizacji.</string>
   <string name="request_background_option">Pozwól cały czas</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

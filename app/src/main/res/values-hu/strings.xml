@@ -53,4 +53,5 @@ az alkalmazás akkumulátor
 optimazilását.</string>
   <string name="request_background">A folyamatos helyadat gyűjtéshez engedélyezze a \"%s\" jogosultságot.</string>
   <string name="request_background_option">Mindig engedélyezve</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

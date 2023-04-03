@@ -43,4 +43,5 @@
   <string name="hidden_app_name">デバイス設定</string>
   <string name="hidden_alert">アプリは非表示になりました。 もう一度開くには 8722227 (SETA) にダイヤルしてください。</string>
   <string name="error_msg_invalid_url">http:// または https:// から始まるURL を正しく入力してください。</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

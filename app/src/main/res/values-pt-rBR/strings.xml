@@ -50,4 +50,5 @@
   <string name="request_exception">Para coletar dados de localização continuamente por favor desabilite a economia de bateria para o aplicativo.</string>
   <string name="request_background">Para coletar dados de localização continuamente por favor habilite a permissão \"%s\".</string>
   <string name="request_background_option">Permitir sempre</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

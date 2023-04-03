@@ -46,4 +46,5 @@
   <string name="hidden_app_name">Definições do Dispositivo</string>
   <string name="hidden_alert">A aplicação foi ocultada com sucesso. Para abrir novamente, por favor contacte 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Digite um URL http: // ou https: // válido</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

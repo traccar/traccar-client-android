@@ -41,4 +41,5 @@
   <string name="hidden_alert">نرم افزار مخفی است . جهت نمایش آن با این شماره تماس بگیرید.
 8722227 (SETA)</string>
   <string name="error_msg_invalid_url">لطفا آدرس معتبر که با http:// یا https:// شروع میشود را وارد نمایید</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

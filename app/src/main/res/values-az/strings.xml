@@ -40,4 +40,5 @@
   <string name="hidden_app_name">Qurğu Ayarları</string>
   <string name="hidden_alert">The app has been hidden. To open it again please dial 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Please enter a valid http:// or https:// URL</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

@@ -46,4 +46,5 @@
   <string name="hidden_app_name">Настройки устройства</string>
   <string name="hidden_alert">Приложение было спрятано. Чтобы открыть позвоните на номер 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Пожалуйста, введите верный http:// или https:// URL</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

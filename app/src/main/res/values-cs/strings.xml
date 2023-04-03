@@ -50,4 +50,5 @@
   <string name="request_exception">Chcete-li průběžně shromažďovat údaje o poloze, vypněte optimalizaci baterie pro aplikaci.</string>
   <string name="request_background">Chcete-li průběžně shromažďovat údaje o poloze, zapněte  \"%s\"  oprávnění.</string>
   <string name="request_background_option">Povolit po celou dobu</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

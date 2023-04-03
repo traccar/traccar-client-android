@@ -50,4 +50,5 @@
   <string name="request_exception">หากต้องการรวบรวมข้อมูลตำแหน่งอย่างต่อเนื่อง โปรดปิดการเพิ่มประสิทธิภาพแบตเตอรี่สำหรับแอป</string>
   <string name="request_background">หากต้องการรวบรวมข้อมูลตำแหน่งอย่างต่อเนื่อง โปรดเปิดใช้การอนุญาต \"%s\"</string>
   <string name="request_background_option">อนุญาตตลอดเวลา</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

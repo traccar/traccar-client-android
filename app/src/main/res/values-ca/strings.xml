@@ -50,4 +50,5 @@
   <string name="request_exception">Per obtenir contínuament les dades de localització, desactivi la optimització de la bateria per aquesta aplicació</string>
   <string name="request_background">Per obtenir contínuament les dades de localització, activi el permís \"%s\".</string>
   <string name="request_background_option">Permetre tot el temps</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

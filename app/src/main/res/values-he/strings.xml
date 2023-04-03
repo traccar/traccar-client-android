@@ -40,4 +40,5 @@
   <string name="hidden_app_name">הגדרות המכשיר</string>
   <string name="hidden_alert">האפליקציה הוסתרה. כדי לפתוח אותה שוב חייג בטלפון 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">הזן כתובת חוקית  http:// או  https:// URL</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

@@ -50,4 +50,5 @@
   <string name="request_exception">Om continu locatiegegevens te kunnen verzamelen is het noodzakelijk dat accuoptimalisatie voor deze app is uitgeschakeld.</string>
   <string name="request_background">Geef de \"1%s\" permissie om continu locatieinformatie bij te houden.</string>
   <string name="request_background_option">Altijd toestaan</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

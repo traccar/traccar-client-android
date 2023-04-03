@@ -40,4 +40,5 @@
   <string name="hidden_app_name">Įrenginio nustatymai</string>
   <string name="hidden_alert">Ši programėlė veikia paslėptu režimu. Norint ją atidaryti, prašau skambinti numeriu 8722227 (SETA)</string>
   <string name="error_msg_invalid_url">Įveskite tinkamą http:// ar https:// URL</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

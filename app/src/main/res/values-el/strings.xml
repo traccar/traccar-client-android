@@ -50,4 +50,5 @@
   <string name="request_exception">Για να συλλέγετε συνεχώς δεδομένα τοποθεσίας απενεργοποιήστε την βελτιστοποίηση μπαταρίας για την εφαρμογή.</string>
   <string name="request_background">Για να συλλέγετε συνεχώς δεδομένα τοποθεσίας ενεργοποιήστε την επιλογή \"%s\".</string>
   <string name="request_background_option">Να επιτρέπεται όλη την ώρα</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

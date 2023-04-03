@@ -40,4 +40,5 @@
   <string name="hidden_app_name">장치설정</string>
   <string name="hidden_alert">앱이 숨겨져 있습니다. 다시 열려면 8722227 (SETA)로 전화하십시오.</string>
   <string name="error_msg_invalid_url">올바른 http:// 또는 https:// 형태의 URL 주소를 넣어주세요</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

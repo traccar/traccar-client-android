@@ -25,4 +25,5 @@
   <string name="status_send_fail">යැවීමට අසමත් විය</string>
   <string name="status_location_update">ස්ථානය යාවත්කාලය</string>
   <string name="hidden_app_name">උපකරණ සැකසුම්</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

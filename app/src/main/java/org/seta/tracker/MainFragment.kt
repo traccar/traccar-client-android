@@ -39,15 +39,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.preference.EditTextPreference
-import androidx.preference.EditTextPreferenceDialogFragmentCompat
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
-import androidx.preference.TwoStatePreference
+import androidx.preference.*
 import dev.doubledot.doki.ui.DokiActivity
 import java.util.*
-import kotlin.collections.HashSet
+
 
 class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListener {
 
@@ -73,12 +68,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
             newValue != null && validateServerURL(newValue.toString())
         }
         findPreference<Preference>(KEY_INTERVAL)?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
-            try {
-                newValue != null && (newValue as String).toInt() > 0
-            } catch (e: NumberFormatException) {
-                Log.w(TAG, e)
-                false
-            }
+            validateNewPreference(newValue, MIN_INTERVAL)
         }
         val numberValidationListener = Preference.OnPreferenceChangeListener { _, newValue ->
             try {
@@ -88,8 +78,12 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
                 false
             }
         }
-        findPreference<Preference>(KEY_DISTANCE)?.onPreferenceChangeListener = numberValidationListener
-        findPreference<Preference>(KEY_ANGLE)?.onPreferenceChangeListener = numberValidationListener
+        findPreference<Preference>(KEY_DISTANCE)?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
+            validateNewPreference(newValue, MIN_DISTANCE)
+        }
+        findPreference<Preference>(KEY_ANGLE)?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
+            validateNewPreference(newValue, MIN_ANGLE)
+        }
 
         alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val originalIntent = Intent(activity, AutostartReceiver::class.java)
@@ -107,6 +101,24 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         }
     }
 
+    private fun validateNewPreference(newValue: Any?, minValue: Int): Boolean {
+        try {
+            if (newValue == null) {
+                return false
+            }
+            if((newValue as String).toInt() < minValue){
+                val minimumValueText = getString(R.string.minimum_value_not_accepted, minValue)
+
+                Toast.makeText(activity, minimumValueText, Toast.LENGTH_LONG).show()
+                Log.w(TAG, String.format("Minimum Value not accepted", minValue))
+                return false;
+            }
+        } catch (e: NumberFormatException) {
+            Log.w(TAG, e)
+            return false
+        }
+        return true
+    }
     class NumericEditTextPreferenceDialogFragment : EditTextPreferenceDialogFragmentCompat() {
 
         override fun onBindDialogView(view: View) {
@@ -323,6 +335,9 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         const val KEY_STATUS = "status"
         const val KEY_BUFFER = "buffer"
         const val KEY_WAKELOCK = "wakelock"
+        const val MIN_INTERVAL = 30
+        const val MIN_ANGLE = 45
+        const val MIN_DISTANCE = 250
         private const val PERMISSIONS_REQUEST_LOCATION = 2
         private const val PERMISSIONS_REQUEST_BACKGROUND_LOCATION = 3
     }

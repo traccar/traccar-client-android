@@ -19,4 +19,5 @@
   <string name="status_location_update">ធ្វើឱ្យទាន់សម័យទីតាំង</string>
   <string name="hidden_app_name">ការកំណត់ឧបករណ៍</string>
   <string name="hidden_alert">កម្មវិធីនេះត្រូវបានលាក់។ ដើម្បីបើកវាម្តងទៀតសូមចុច 8722227 (SETA) ។</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

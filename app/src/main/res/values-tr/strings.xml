@@ -40,4 +40,5 @@
   <string name="hidden_app_name">Cihaz Ayarları</string>
   <string name="hidden_alert">Bu uygulama arkaplanda gizli olarak çalışmaktadır. Tekrar görmek için lütfen 8722227 tuşlayın. Arayın. (SETA)</string>
   <string name="error_msg_invalid_url">Lütfen geçerli bir adres girin http:// veya https://</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

@@ -50,4 +50,5 @@
   <string name="request_exception">Para recoger continuamente los datos de localización, desactiva la optimización de la batería de la aplicación.</string>
   <string name="request_background">Para recoger continuamente los datos de localización, por favor, activa el permiso \"%s\".</string>
   <string name="request_background_option">Permitir todo el tiempo</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

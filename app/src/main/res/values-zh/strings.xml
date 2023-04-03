@@ -40,4 +40,5 @@
   <string name="hidden_app_name">设备设置</string>
   <string name="hidden_alert">APP已隐藏，请拨号8722227重新打开</string>
   <string name="error_msg_invalid_url">请输入有效的地址，如http://或https://</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

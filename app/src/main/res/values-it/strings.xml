@@ -50,4 +50,5 @@
   <string name="request_exception">Per abilitare la raccolta continua delle posizioni, disabilita le ottimizzazioni batteria per questa applicazione</string>
   <string name="request_background">Per abilitare la raccolta delle posizione, abilita il permesso \"%s\"</string>
   <string name="request_background_option">Contenti per tutto il tempo</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

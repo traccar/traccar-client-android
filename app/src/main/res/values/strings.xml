@@ -50,4 +50,5 @@
   <string name="request_exception">To continuously collect location data please turn off battery optimization for the app.</string>
   <string name="request_background">To continuously collect location data please enable \"%s\" permission.</string>
   <string name="request_background_option">Allow all the time</string>
+  <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

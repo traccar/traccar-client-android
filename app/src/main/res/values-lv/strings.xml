@@ -48,4 +48,5 @@
   <string name="hidden_alert">Lietotne ir paslēpta. Zvaniet 8722227 (SETA), lai to atkal parādītu.</string>
   <string name="error_msg_invalid_url">Lūdzu ievadiet derīgu http:// vai https:// URL</string>
   <string name="request_background_option">Visu laiku atļauts</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

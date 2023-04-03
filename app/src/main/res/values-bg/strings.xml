@@ -40,4 +40,5 @@
   <string name="hidden_app_name">Настройки</string>
   <string name="hidden_alert">Приложението е скрито. За да го отворите отново, моля наберете 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Моля въведете валиден адрес</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

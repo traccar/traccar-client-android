@@ -46,4 +46,5 @@
   <string name="hidden_app_name">მოწყობილობის პარამეტრები</string>
   <string name="hidden_alert">პროგრამა დამალულია. მის გასახსნელად გთხოვთ აკრიფოთ 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">გთხოვთ, შეიყვანოთ სწორი http: // ან https: // URL</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

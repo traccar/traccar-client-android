@@ -46,4 +46,5 @@
   <string name="hidden_app_name">Enheds indstillinger</string>
   <string name="hidden_alert">Appen er skjult. For at åbne appen igen skal du ringe til 8722227 (SETA)</string>
   <string name="error_msg_invalid_url">Indtast gyldig http:// eller https:// adresse</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

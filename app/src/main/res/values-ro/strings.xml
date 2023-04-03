@@ -40,4 +40,5 @@
   <string name="hidden_app_name">Setări Dispozitiv</string>
   <string name="hidden_alert">Aplicaţia este ascunsă. Pentru deschidere vă rugam apelaţi numărul de telefon 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Introduceti o adresa valida http:// sau https://</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

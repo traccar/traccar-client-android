@@ -40,4 +40,5 @@
   <string name="hidden_app_name">Nastavenie zariadenia</string>
   <string name="hidden_alert">Aplikácia bola skrytá. Pre opätovné otvorenie znova vytočte 8722227 (SETA).</string>
   <string name="error_msg_invalid_url">Prosím zadajte validné http:// alebo https:// URL</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

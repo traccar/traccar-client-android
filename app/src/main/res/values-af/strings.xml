@@ -43,4 +43,5 @@
   <string name="hidden_app_name">Toestelinstellings</string>
   <string name="hidden_alert">Die toep is versteek. Skakel 8722227 (SETA) om dit weer oop te maak.</string>
   <string name="error_msg_invalid_url">Voer \'n geldige http: // of https: // URL in</string>
+  <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

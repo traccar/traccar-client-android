@@ -40,4 +40,5 @@
   <string name="hidden_app_name">சாதன அமைப்புகள்</string>
   <string name="hidden_alert">செயலி மறைக்கப்பட்டுள்ளது. அதை காண பின்வரும் எண்ணை அழைக்கவும் 8722227 ( ட்ரக்கர் )</string>
   <string name="error_msg_invalid_url">சரியான http: // அல்லது https: // URL ஐ உள்ளிடுக</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>

@@ -27,4 +27,5 @@
   <string name="hidden_app_name">ডিভাইস সেটিংস</string>
   <string name="hidden_alert">অ্যাপ্লিকেশনটি লুকানো আছে। আবার খুলতে ডায়াল করুন 8722227 (SETA)।</string>
   <string name="error_msg_invalid_url">দয়া করে একটি ভ্যালিড http:// বা https:// URL লিখুন</string>
+    <string name="minimum_value_not_accepted">Inserted value is lower than the minimum of %1$d</string>
 </resources>
