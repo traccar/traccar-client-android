@@ -49,9 +49,9 @@ abstract class PositionProvider(
     protected fun processLocation(location: Location?) {
         val lastLocation = this.lastLocation
         if (location != null &&
-            (lastLocation == null || location.time - lastLocation!!.time >= interval || distance > 0
+            (lastLocation == null || location.time - lastLocation.time >= interval || distance > 0
                     && location.distanceTo(lastLocation) >= distance || angle > 0
-                    && abs(location.bearing - lastLocation!!.bearing) >= angle)
+                    && abs(location.bearing - lastLocation.bearing) >= angle)
         ) {
             Log.i(TAG, "location new")
             this.lastLocation = location
