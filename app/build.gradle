@@ -53,6 +53,7 @@ dependencies {
     implementation('dev.doubledot.doki:library:0.0.1@aar') {
         transitive = true
     }
+    testImplementation 'androidx.test:core:1.5.0'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.7.3'
     googleImplementation platform('com.google.firebase:firebase-bom:28.2.1')
