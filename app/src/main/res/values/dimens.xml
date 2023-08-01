@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="spacing_normal">16dp</dimen>
+    <!-- 40dp is the cell width/height in a "standard launcher" -->
+    <!-- Refer to samples at https://developer.android.com/develop/ui/views/appwidgets -->
     <dimen name="widget_min_size">40dp</dimen>
 </resources>

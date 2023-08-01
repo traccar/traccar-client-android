@@ -28,52 +28,32 @@ import androidx.preference.PreferenceManager
  */
 class StatusWidget : AppWidgetProvider() {
 
+    override fun onReceive(context: Context, intent: Intent) {
+        if (TrackingService.ACTION_STARTED == intent.action
+                || TrackingService.ACTION_STOPPED == intent.action) {
+            updateWidgets(context)
+        }
+        else
+            super.onReceive(context, intent)
+    }
+
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         update(context, appWidgetManager, appWidgetIds)
     }
 
-    override fun onEnabled(context: Context) {
-        // When the first widget is created, we want to start receiving service status broadcasts,
-        // so we can react and change the look
-        val filter = IntentFilter()
-        filter.addAction(TrackingService.ACTION_STARTED)
-        filter.addAction(TrackingService.ACTION_STOPPED)
-        // Note: we must register through the app context as a workaround
-        // for 'BroadcastReceiver components are not allowed to register to receive intents'
-        context.applicationContext.registerReceiver(Companion, filter)
+    fun updateWidgets(context: Context) {
+        val manager = AppWidgetManager.getInstance(context)
+        val appWidgetIds = manager.getAppWidgetIds(ComponentName(context, StatusWidget::class.java.name))
+        update(context, manager, appWidgetIds)
     }
 
-    override fun onDisabled(context: Context) {
-        // When the last widget is disabled (removed), we stop receiving service status broadcasts
-        context.applicationContext.unregisterReceiver(Companion)
-    }
-
-    companion object: BroadcastReceiver() {
-
-        override fun onReceive(context: Context, intent: Intent) {
-            if (TrackingService.ACTION_STARTED == intent.action
-                    || TrackingService.ACTION_STOPPED == intent.action) {
-                updateWidgets(context)
-            }
-        }
-
-        // Performs update for all widgets of this class.
-        fun updateWidgets(context: Context) {
-            val manager = AppWidgetManager.getInstance(context)
-            val appWidgetIds = manager.getAppWidgetIds(ComponentName(context, StatusWidget::class.java.name))
-            update(context, manager, appWidgetIds)
-        }
-
-        // Performs update for the widgets with given identifiers.
-        internal fun update(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-            val enabled = prefs.getBoolean(MainFragment.KEY_STATUS, false)
-            // There may be multiple widgets active, so update all of them
-            for (appWidgetId in appWidgetIds) {
-                val views = RemoteViews(context.packageName, R.layout.status_widget)
-                views.setImageViewResource(R.id.ivEnabled, if (enabled) R.mipmap.ic_start else R.mipmap.ic_stop)
-                appWidgetManager.updateAppWidget(appWidgetId, views)
-            }
+    internal fun update(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val enabled = prefs.getBoolean(MainFragment.KEY_STATUS, false)
+        for (appWidgetId in appWidgetIds) {
+            val views = RemoteViews(context.packageName, R.layout.status_widget)
+            views.setImageViewResource(R.id.image_enabled, if (enabled) R.mipmap.ic_start else R.mipmap.ic_stop)
+            appWidgetManager.updateAppWidget(appWidgetId, views)
         }
     }
 

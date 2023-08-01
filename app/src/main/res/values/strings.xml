@@ -50,6 +50,6 @@
   <string name="request_exception">To continuously collect location data please turn off battery optimization for the app.</string>
   <string name="request_background">To continuously collect location data please enable \"%s\" permission.</string>
   <string name="request_background_option">Allow all the time</string>
-  <string name="widget_description">The widget shows the service status</string>
+  <string name="widget_description">Shows the service status</string>
   <string name="widget_label">Status widget</string>
 </resources>
