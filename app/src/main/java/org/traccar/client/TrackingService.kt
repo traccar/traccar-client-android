@@ -59,7 +59,9 @@ class TrackingService : Service() {
     override fun onCreate() {
         Log.i(TAG, "service create")
 
-        sendBroadcast(Intent(ACTION_STARTED))
+        // Explicit package name is required here for manifest-declared receiver of the status widget
+        // Refer to https://developer.android.com/guide/components/broadcasts#manifest-declared-receivers
+        sendBroadcast(Intent(ACTION_STARTED).setPackage(packageName))
         StatusActivity.addMessage(getString(R.string.status_service_create))
         startForeground(NOTIFICATION_ID, createNotification(this))
 
@@ -90,7 +92,10 @@ class TrackingService : Service() {
 
     override fun onDestroy() {
         Log.i(TAG, "service destroy")
-        sendBroadcast(Intent(ACTION_STOPPED))
+
+        // Explicit package name is required here for manifest-declared receiver of the status widget
+        // Refer to https://developer.android.com/guide/components/broadcasts#manifest-declared-receivers
+        sendBroadcast(Intent(ACTION_STOPPED).setPackage(packageName))
         StatusActivity.addMessage(getString(R.string.status_service_destroy))
         stopForeground(true)
         if (wakeLock?.isHeld == true) {

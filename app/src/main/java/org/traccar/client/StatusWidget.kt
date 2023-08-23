@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 - 2022 Anton Tananaev (anton@traccar.org)
+ * Copyright 2016 - 2023 Anton Tananaev (anton@traccar.org), Anton-V-K
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,39 +17,38 @@ package org.traccar.client
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.*
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.widget.RemoteViews
 
 import androidx.preference.PreferenceManager
 
-/**
- * Implementation of Status Widget functionality, which can display the status of the service -
- * whether it is enabled or not.
- */
 class StatusWidget : AppWidgetProvider() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        if (TrackingService.ACTION_STARTED == intent.action
-                || TrackingService.ACTION_STOPPED == intent.action) {
-            updateWidgets(context)
-        }
+        if (TrackingService.ACTION_STARTED == intent.action)
+            updateWidgets(context, true)
+        else if (TrackingService.ACTION_STOPPED == intent.action)
+            updateWidgets(context, false)
         else
             super.onReceive(context, intent)
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        update(context, appWidgetManager, appWidgetIds)
-    }
-
-    fun updateWidgets(context: Context) {
-        val manager = AppWidgetManager.getInstance(context)
-        val appWidgetIds = manager.getAppWidgetIds(ComponentName(context, StatusWidget::class.java.name))
-        update(context, manager, appWidgetIds)
-    }
-
-    internal fun update(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         val enabled = prefs.getBoolean(MainFragment.KEY_STATUS, false)
+        update(context, appWidgetManager, appWidgetIds, enabled)
+    }
+
+    fun updateWidgets(context: Context, enabled: Boolean) {
+        val manager = AppWidgetManager.getInstance(context)
+        val appWidgetIds = manager.getAppWidgetIds(ComponentName(context, StatusWidget::class.java.name))
+        update(context, manager, appWidgetIds, enabled)
+    }
+
+    private fun update(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray, enabled: Boolean) {
         for (appWidgetId in appWidgetIds) {
             val views = RemoteViews(context.packageName, R.layout.status_widget)
             views.setImageViewResource(R.id.image_enabled, if (enabled) R.mipmap.ic_start else R.mipmap.ic_stop)
