@@ -15,6 +15,7 @@
  */
 package org.traccar.client
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
@@ -52,6 +53,10 @@ class StatusWidget : AppWidgetProvider() {
         for (appWidgetId in appWidgetIds) {
             val views = RemoteViews(context.packageName, R.layout.status_widget)
             views.setImageViewResource(R.id.image_enabled, if (enabled) R.mipmap.ic_start else R.mipmap.ic_stop)
+
+            val clickIntent = PendingIntent.getActivity(context,0, Intent(context, MainActivity::class.java),0)
+            views.setOnClickPendingIntent(R.id.image_enabled, clickIntent)
+
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
     }
