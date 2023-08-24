@@ -34,6 +34,7 @@
   <string name="settings_foreground_title">Voorgrond service</string>
   <string name="settings_foreground_summary">Verhoog voorrang voor service</string>
   <string name="menu_status">Status</string>
+  <string name="menu_info">Info</string>
   <string name="menu_shortcuts">Voeg snelkoppelingen toe</string>
   <string name="menu_clear">Wis</string>
   <string name="status_service_create">Service gestart</string>
@@ -46,4 +47,7 @@
   <string name="hidden_app_name">Toestel instellingen</string>
   <string name="hidden_alert">De app is verborgen. Om hem opnieuw te openen bel je naar 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Voer alstublieft een geldige http:// of https:// URL in</string>
+  <string name="request_exception">Om continu locatiegegevens te kunnen verzamelen is het noodzakelijk dat accuoptimalisatie voor deze app is uitgeschakeld.</string>
+  <string name="request_background">Geef de \"1%s\" permissie om continu locatieinformatie bij te houden.</string>
+  <string name="request_background_option">Altijd toestaan</string>
 </resources>

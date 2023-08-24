@@ -31,6 +31,9 @@ object ProtocolFormatter {
             .appendQueryParameter("altitude", position.altitude.toString())
             .appendQueryParameter("accuracy", position.accuracy.toString())
             .appendQueryParameter("batt", position.battery.toString())
+        if (position.charging) {
+            builder.appendQueryParameter("charge", position.charging.toString())
+        }
         if (position.mock) {
             builder.appendQueryParameter("mock", position.mock.toString())
         }

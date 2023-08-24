@@ -34,6 +34,7 @@
   <string name="settings_foreground_title">Zināšanu servis</string>
   <string name="settings_foreground_summary">Paaugstināt servisa prioritāti</string>
   <string name="menu_status">Statuss</string>
+  <string name="menu_info">Informācija</string>
   <string name="menu_shortcuts">Pievienot saīsnes</string>
   <string name="menu_clear">Notīrīt</string>
   <string name="status_service_create">Serviss uzsākts</string>
@@ -46,4 +47,5 @@
   <string name="hidden_app_name">Ierīces iestatījumi</string>
   <string name="hidden_alert">Lietotne ir paslēpta. Zvaniet 8722227 (TRACCAR), lai to atkal parādītu.</string>
   <string name="error_msg_invalid_url">Lūdzu ievadiet derīgu http:// vai https:// URL</string>
+  <string name="request_background_option">Visu laiku atļauts</string>
 </resources>

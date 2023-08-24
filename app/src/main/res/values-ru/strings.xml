@@ -20,6 +20,12 @@
   <string name="settings_status_on">Стоп</string>
   <string name="settings_status_off_summary">Сервис остановлен</string>
   <string name="settings_status_on_summary">Сервис запущен</string>
+  <string name="settings_buffer">Оффлайн буферизация</string>
+  <string name="settings_buffer_off_summary">Буферизация выключена</string>
+  <string name="settings_buffer_on_summary">Буферизация включена</string>
+  <string name="settings_wakelock">Блокировка пробуждения</string>
+  <string name="settings_wakelock_off_summary">Блокировка выключена</string>
+  <string name="settings_wakelock_on_summary">Блокировка включена</string>
   <string name="settings_accuracy_title">Точность местоположения</string>
   <string name="settings_accuracy_summary">Точность местоположения</string>
   <string name="settings_accuracy_high">Высокая</string>

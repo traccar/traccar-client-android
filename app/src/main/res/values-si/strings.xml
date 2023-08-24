@@ -1,20 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar Client</string>
-  <string name="app_logo">Traccar</string>
-  <string name="settings_id_title">උපකරණ හඳුන්වනය</string>
+  <string name="app_name">ට්‍රැකකාර් අනුග්‍රාහකය</string>
+  <string name="app_logo">ට්‍රැකකාර්</string>
+  <string name="shortcut_start">සේවාව නවතන්න</string>
+  <string name="shortcut_stop">සේවාව නවතන්න</string>
+  <string name="settings_id_title">උපාංගයේ හඳුන්වනය</string>
+  <string name="settings_url_title">සේවාදායකයේ ඒ.ස.නි.</string>
+  <string name="settings_url_summary">ලුහුබැඳීමේ සේවාදායකයේ ඒ.ස.නි.</string>
   <string name="settings_interval_title">සංඛ්‍යාතය</string>
-  <string name="settings_status_title">සේවා තත්වය</string>
-  <string name="settings_status_off">ඇරැඹීම</string>
-  <string name="settings_status_on">නැවතීම</string>
-  <string name="settings_status_off_summary">සේවාව අක්‍රීයයි</string>
-  <string name="settings_status_on_summary">සේවාව ක්‍රියාත්මකයි</string>
-  <string name="settings_foreground_title">Foreground service</string>
-  <string name="settings_foreground_summary">Increase service priority</string>
+  <string name="settings_status_title">සේවාවේ තත්වය</string>
+  <string name="settings_status_off">අරඹන්න</string>
+  <string name="settings_status_on">නවත්වන්න</string>
+  <string name="settings_status_off_summary">සේවාව නවතා ඇත</string>
+  <string name="settings_status_on_summary">සේවාව ධාවනය වෙමින්</string>
+  <string name="settings_foreground_title">පෙරබිම් සේවාව</string>
+  <string name="settings_foreground_summary">සේවාවේ ප්‍රමුඛත්වය වැඩිකරන්න</string>
   <string name="menu_status">තත්වය</string>
-  <string name="menu_shortcuts">කෙටි මං එකතු කරන්න</string>
+  <string name="menu_info">තොරතුරු</string>
+  <string name="menu_shortcuts">කෙටිමං එකතු කරන්න</string>
   <string name="menu_clear">හිස් කරන්න</string>
-  <string name="status_send_fail">යැවිය නොහැකිය</string>
-  <string name="status_location_update">Location update</string>
+  <string name="status_service_create">සේවාව ඇරඹිණි</string>
+  <string name="status_service_destroy">සේවාව නැවතිණි</string>
+  <string name="status_send_success">සාර්ථකව යැවිණි</string>
+  <string name="status_send_fail">යැවීමට අසමත් විය</string>
+  <string name="status_location_update">ස්ථානය යාවත්කාලය</string>
   <string name="hidden_app_name">උපකරණ සැකසුම්</string>
 </resources>

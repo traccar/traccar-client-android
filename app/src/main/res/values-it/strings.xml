@@ -20,6 +20,12 @@
   <string name="settings_status_on">Stop</string>
   <string name="settings_status_off_summary">Servizio arrestato</string>
   <string name="settings_status_on_summary">Servizio avviato</string>
+  <string name="settings_buffer">Buffering offline</string>
+  <string name="settings_buffer_off_summary">Buffering spento</string>
+  <string name="settings_buffer_on_summary">Buffering acceso</string>
+  <string name="settings_wakelock">Wake lock</string>
+  <string name="settings_wakelock_off_summary">Wake lock spento</string>
+  <string name="settings_wakelock_on_summary">Wake lock acceso</string>
   <string name="settings_accuracy_title">Accuratezza posizione</string>
   <string name="settings_accuracy_summary">Precisione desiderata per la posizione</string>
   <string name="settings_accuracy_high">Alta</string>
@@ -28,6 +34,7 @@
   <string name="settings_foreground_title">Servizio in primo piano</string>
   <string name="settings_foreground_summary">Aumenta la priorità del servizio</string>
   <string name="menu_status">Stato</string>
+  <string name="menu_info">Informazioni</string>
   <string name="menu_shortcuts">Aggiungi combinazione rapida</string>
   <string name="menu_clear">Pulisci</string>
   <string name="status_service_create">Servizio avviato</string>
@@ -40,4 +47,7 @@
   <string name="hidden_app_name">Impostazioni dispositivo</string>
   <string name="hidden_alert">La app è stata nascosta. Per aprirla nuovamente digita 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Per favore inserisci un URL valido http:// o https://</string>
+  <string name="request_exception">Per abilitare la raccolta continua delle posizioni, disabilita le ottimizzazioni batteria per questa applicazione</string>
+  <string name="request_background">Per abilitare la raccolta delle posizione, abilita il permesso \"%s\"</string>
+  <string name="request_background_option">Contenti per tutto il tempo</string>
 </resources>

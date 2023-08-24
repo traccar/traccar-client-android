@@ -30,7 +30,7 @@ class GooglePositionProvider(context: Context, listener: PositionListener) : Pos
     @Suppress("DEPRECATION", "MissingPermission")
     override fun startUpdates() {
         val locationRequest = LocationRequest()
-        locationRequest.priority = getPriority(preferences.getString(MainFragment.KEY_ACCURACY,"medium"))
+        locationRequest.priority = getPriority(preferences.getString(MainFragment.KEY_ACCURACY, "medium"))
         locationRequest.interval = if (distance > 0 || angle > 0) MINIMUM_INTERVAL else interval
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
     }
@@ -43,7 +43,7 @@ class GooglePositionProvider(context: Context, listener: PositionListener) : Pos
     override fun requestSingleLocation() {
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
-                listener.onPositionUpdate(Position(deviceId, location, getBatteryLevel(context)))
+                listener.onPositionUpdate(Position(deviceId, location, getBatteryStatus(context)))
             }
         }
     }

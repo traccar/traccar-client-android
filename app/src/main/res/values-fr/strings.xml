@@ -20,6 +20,12 @@
   <string name="settings_status_on">Arrêter</string>
   <string name="settings_status_off_summary">Arrêté</string>
   <string name="settings_status_on_summary">En marche</string>
+  <string name="settings_buffer">Mise en tampon hors ligne</string>
+  <string name="settings_buffer_off_summary">Mise en tampon désactivée</string>
+  <string name="settings_buffer_on_summary">Mise en tampon activée</string>
+  <string name="settings_wakelock">Wake lock</string>
+  <string name="settings_wakelock_off_summary">Wake lock off</string>
+  <string name="settings_wakelock_on_summary">Wake lock on</string>
   <string name="settings_accuracy_title">Precision de la localisation</string>
   <string name="settings_accuracy_summary">Précision de localisation désirée</string>
   <string name="settings_accuracy_high">Haut</string>

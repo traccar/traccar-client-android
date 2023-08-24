@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 - 2021 Anton Tananaev (anton@traccar.org)
+ * Copyright 2013 - 2022 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,27 +47,32 @@ abstract class PositionProvider(
     abstract fun requestSingleLocation()
 
     protected fun processLocation(location: Location?) {
+        val lastLocation = this.lastLocation
         if (location != null &&
-            (lastLocation == null || location.time - lastLocation!!.time >= interval || distance > 0
+            (lastLocation == null || location.time - lastLocation.time >= interval || distance > 0
                     && location.distanceTo(lastLocation) >= distance || angle > 0
-                    && abs(location.bearing - lastLocation!!.bearing) >= angle)
+                    && abs(location.bearing - lastLocation.bearing) >= angle)
         ) {
             Log.i(TAG, "location new")
-            lastLocation = location
-            listener.onPositionUpdate(Position(deviceId, location, getBatteryLevel(context)))
+            this.lastLocation = location
+            listener.onPositionUpdate(Position(deviceId, location, getBatteryStatus(context)))
         } else {
             Log.i(TAG, if (location != null) "location ignored" else "location nil")
         }
     }
 
-    protected fun getBatteryLevel(context: Context): Double {
+    protected fun getBatteryStatus(context: Context): BatteryStatus {
         val batteryIntent = context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
         if (batteryIntent != null) {
             val level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)
             val scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1)
-            return level * 100.0 / scale
+            val status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
+            return BatteryStatus(
+                level = level * 100.0 / scale,
+                charging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL,
+            )
         }
-        return 0.0
+        return BatteryStatus()
     }
 
     companion object {

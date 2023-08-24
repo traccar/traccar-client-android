@@ -34,6 +34,7 @@
   <string name="settings_foreground_title">Serviço em primeiro plano</string>
   <string name="settings_foreground_summary">Aumentar a prioridade do serviço</string>
   <string name="menu_status">Estado</string>
+  <string name="menu_info">Informação</string>
   <string name="menu_shortcuts">Adicionar atalhos</string>
   <string name="menu_clear">Limpar</string>
   <string name="status_service_create">Serviço iniciado</string>
@@ -46,4 +47,7 @@
   <string name="hidden_app_name">Configurações do Dispositivo</string>
   <string name="hidden_alert">O aplicativo foi escondido. Para abrir novamente por favor digite 8722227 (TRACCAR).</string>
   <string name="error_msg_invalid_url">Digite uma URL http: // ou https: // válida</string>
+  <string name="request_exception">Para coletar dados de localização continuamente por favor desabilite a economia de bateria para o aplicativo.</string>
+  <string name="request_background">Para coletar dados de localização continuamente por favor habilite a permissão \"%s\".</string>
+  <string name="request_background_option">Permitir sempre</string>
 </resources>

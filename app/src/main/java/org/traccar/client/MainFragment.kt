@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2021 Anton Tananaev (anton@traccar.org)
+ * Copyright 2012 - 2022 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
             removeLauncherIcon()
         }
         setHasOptionsMenu(true)
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         setPreferencesFromResource(R.xml.preferences, rootKey)
         initPreferences()
 
@@ -96,9 +96,9 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         originalIntent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
 
         val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.FLAG_MUTABLE
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
         } else {
-            0
+            PendingIntent.FLAG_UPDATE_CURRENT
         }
         alarmIntent = PendingIntent.getBroadcast(activity, 0, originalIntent, flags)
 
@@ -126,6 +126,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         }
     }
 
+    @Suppress("DEPRECATION")
     override fun onDisplayPreferenceDialog(preference: Preference) {
         if (listOf(KEY_INTERVAL, KEY_DISTANCE, KEY_ANGLE).contains(preference.key)) {
             val f: EditTextPreferenceDialogFragmentCompat =
@@ -213,7 +214,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
     }
 
     private fun initPreferences() {
-        PreferenceManager.setDefaultValues(activity, R.xml.preferences, false)
+        PreferenceManager.setDefaultValues(requireActivity(), R.xml.preferences, false)
         if (!sharedPreferences.contains(KEY_DEVICE)) {
             val id = (Random().nextInt(900000) + 100000).toString()
             sharedPreferences.edit().putString(KEY_DEVICE, id).apply()
@@ -253,10 +254,12 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         if (permission) {
             setPreferencesEnabled(false)
             ContextCompat.startForegroundService(requireContext(), Intent(activity, TrackingService::class.java))
-            alarmManager.setInexactRepeating(
-                AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                ALARM_MANAGER_INTERVAL.toLong(), ALARM_MANAGER_INTERVAL.toLong(), alarmIntent
-            )
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+                alarmManager.setInexactRepeating(
+                    AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    ALARM_MANAGER_INTERVAL.toLong(), ALARM_MANAGER_INTERVAL.toLong(), alarmIntent
+                )
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
                 && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -275,7 +278,9 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
     }
 
     private fun stopTrackingService() {
-        alarmManager.cancel(alarmIntent)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+            alarmManager.cancel(alarmIntent)
+        }
         requireActivity().stopService(Intent(activity, TrackingService::class.java))
         setPreferencesEnabled(true)
     }

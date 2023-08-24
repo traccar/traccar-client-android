@@ -1,45 +1,42 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import os
 import optparse
-import urllib2
-import json
-import base64
+import requests
 import shutil
+from transifex.api import transifex_api
 
 parser = optparse.OptionParser()
-parser.add_option("-u", "--user", dest="username", help="transifex user login")
-parser.add_option("-p", "--password", dest="password", help="transifex user password")
+parser.add_option("-t", "--token", dest="token", help="transifex token")
 
 (options, args) = parser.parse_args()
 
-if not options.username or not options.password:
-    parser.error('User name and password are required')
+if not options.token:
+    parser.error('Token is required')
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 path = "./app/src/main/res/"
 
-def request(url):
-    req = urllib2.Request(url)
-    auth = base64.encodestring("%s:%s" % (options.username, options.password)).replace("\n", "")
-    req.add_header("Authorization", "Basic %s" % auth)
-    return urllib2.urlopen(req)
+transifex_api.setup(auth=options.token)
 
-resource = json.load(request("https://www.transifex.com/api/2/project/traccar/resource/client/?details"))
+organization = transifex_api.Organization.get(slug='traccar')
+project = organization.fetch('projects').get(slug='traccar')
+resource = project.fetch('resources').get(slug='client')
+languages = project.fetch('languages')
 
-for language in resource["available_languages"]:
-    code = language["code"]
-    data = request("https://www.transifex.com/api/2/project/traccar/resource/client/translation/" + code + "?file")
-    if code == "en":
+for language in languages:
+    print(language.code)
+    url = transifex_api.ResourceTranslationsAsyncDownload.download(resource=resource, language=language)
+    result = requests.get(url)
+    if language.code == "en":
         filename = path + "values/strings.xml"
     else:
-        filename = path + "values-" + code.replace("_", "-r") + "/strings.xml"
+        filename = path + "values-" + language.code.replace("_", "-r") + "/strings.xml"
     if not os.path.exists(os.path.dirname(filename)):
         os.makedirs(os.path.dirname(filename))
-    file = open(filename, "wb")
-    file.write(data.read())
-    file.close()
+    with open(filename, "w") as file:
+        file.write(result.text)
 
 filename = path + "values-iw/strings.xml"
 if not os.path.exists(os.path.dirname(filename)):

@@ -20,6 +20,12 @@
   <string name="settings_status_on">Megállítás</string>
   <string name="settings_status_off_summary">Szolgáltatás megállítva</string>
   <string name="settings_status_on_summary">Szolgáltatás elindítva</string>
+  <string name="settings_buffer">Offline pufferelés</string>
+  <string name="settings_buffer_off_summary">Pufferelés ki</string>
+  <string name="settings_buffer_on_summary">Pufferelés be</string>
+  <string name="settings_wakelock">Ébresztési zár</string>
+  <string name="settings_wakelock_off_summary">Ébresztési zár ki</string>
+  <string name="settings_wakelock_on_summary">Ébresztési zár be</string>
   <string name="settings_accuracy_title">Pozíció pontossága</string>
   <string name="settings_accuracy_summary">Kívánt pozíció pontosság</string>
   <string name="settings_accuracy_high">Magas</string>
@@ -28,6 +34,7 @@
   <string name="settings_foreground_title">Előtér szolgáltatás</string>
   <string name="settings_foreground_summary">Szolgáltatás prioritásának emelése</string>
   <string name="menu_status">Státusz</string>
+  <string name="menu_info">Infó</string>
   <string name="menu_shortcuts">Parancsikon hozzáadása</string>
   <string name="menu_clear">Töröl</string>
   <string name="status_service_create">Szolgáltatás elindítva</string>
@@ -40,4 +47,10 @@
   <string name="hidden_app_name">Eszköz beállítások</string>
   <string name="hidden_alert">Ez az applikáció el lett rejtve. Megnyitásához  kérjük hívja a 8722227 (TRACCAR) telefonszámot.</string>
   <string name="error_msg_invalid_url">Adjon meg egy érvényes URL-t (http:// vagy https://)</string>
+  <string name="request_exception">A folyamatos helyadatok
+gyűjtéséhez kapcsolja ki
+az alkalmazás akkumulátor 
+optimazilását.</string>
+  <string name="request_background">A folyamatos helyadat gyűjtéshez engedélyezze a \"%s\" jogosultságot.</string>
+  <string name="request_background_option">Mindig engedélyezve</string>
 </resources>
