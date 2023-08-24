@@ -59,7 +59,7 @@ class TrackingService : Service() {
     override fun onCreate() {
         startForeground(NOTIFICATION_ID, createNotification(this))
         Log.i(TAG, "service create")
-        sendBroadcast(Intent(ACTION_STARTED))
+        sendBroadcast(Intent(ACTION_STARTED).setPackage(packageName))
         StatusActivity.addMessage(getString(R.string.status_service_create))
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -90,7 +90,7 @@ class TrackingService : Service() {
     override fun onDestroy() {
         stopForeground(true)
         Log.i(TAG, "service destroy")
-        sendBroadcast(Intent(ACTION_STOPPED))
+        sendBroadcast(Intent(ACTION_STOPPED).setPackage(packageName))
         StatusActivity.addMessage(getString(R.string.status_service_destroy))
         if (wakeLock?.isHeld == true) {
             wakeLock?.release()
@@ -100,6 +100,9 @@ class TrackingService : Service() {
 
     companion object {
 
+        // Explicit package name should be specified when broadcasting START/STOP notifications -
+        // it is required for manifest-declared receiver of the status widget (when running on Android 8+).
+        // Refer to https://developer.android.com/guide/components/broadcasts#manifest-declared-receivers
         const val ACTION_STARTED = "org.traccar.action.SERVICE_STARTED"
         const val ACTION_STOPPED = "org.traccar.action.SERVICE_STOPPED"
         private val TAG = TrackingService::class.java.simpleName

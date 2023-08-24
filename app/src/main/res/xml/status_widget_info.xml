@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_description"
+    android:initialKeyguardLayout="@layout/status_widget"
+    android:initialLayout="@layout/status_widget"
+    android:previewImage="@mipmap/ic_launcher"
+    android:previewLayout="@layout/status_widget"
+    android:resizeMode="none"
+    android:updatePeriodMillis="0" />
