@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 - 2023 Anton Tananaev (anton@traccar.org), Anton-V-K
+ * Copyright 2023 Anton-V-K
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ class StatusWidget : AppWidgetProvider() {
             views.setImageViewResource(R.id.image_enabled, if (enabled) R.mipmap.ic_start else R.mipmap.ic_stop)
 
             val intent = Intent(context, MainActivity::class.java)
-            val clickIntent = PendingIntent.getActivity(context,0, intent,
+            val clickIntent = PendingIntent.getActivity(context, 0, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
             views.setOnClickPendingIntent(R.id.image_enabled, clickIntent)
 
