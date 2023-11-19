@@ -28,9 +28,9 @@ import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
 import android.os.PowerManager.WakeLock
-import android.provider.Settings
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 
@@ -38,22 +38,6 @@ class TrackingService : Service() {
 
     private var wakeLock: WakeLock? = null
     private var trackingController: TrackingController? = null
-
-    class HideNotificationService : Service() {
-        override fun onBind(intent: Intent): IBinder? {
-            return null
-        }
-
-        override fun onCreate() {
-            startForeground(NOTIFICATION_ID, createNotification(this))
-            stopForeground(true)
-        }
-
-        override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-            stopSelfResult(startId)
-            return START_NOT_STICKY
-        }
-    }
 
     @SuppressLint("WakelockTimeout")
     override fun onCreate() {
@@ -71,24 +55,19 @@ class TrackingService : Service() {
             trackingController = TrackingController(this)
             trackingController?.start()
         }
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            ContextCompat.startForegroundService(this, Intent(this, HideNotificationService::class.java))
-        }
     }
 
     override fun onBind(intent: Intent): IBinder? {
         return null
     }
 
-    @TargetApi(Build.VERSION_CODES.ECLAIR)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         WakefulBroadcastReceiver.completeWakefulIntent(intent)
         return START_STICKY
     }
 
     override fun onDestroy() {
-        stopForeground(true)
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         Log.i(TAG, "service destroy")
         sendBroadcast(Intent(ACTION_STOPPED).setPackage(packageName))
         StatusActivity.addMessage(getString(R.string.status_service_destroy))

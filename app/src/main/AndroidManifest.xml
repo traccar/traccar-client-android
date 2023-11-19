@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
     <uses-permission android:name="oppo.permission.OPPO_COMPONENT_SAFE" />
@@ -70,10 +71,6 @@
             android:name=".TrackingService"
             android:exported="false"
             android:foregroundServiceType="location" />
-
-        <service
-            android:name=".TrackingService$HideNotificationService"
-            android:exported="false" />
 
         <receiver
             android:name=".AutostartReceiver"

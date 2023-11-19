@@ -19,11 +19,10 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener
+import android.content.SharedPreferences.*
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -47,7 +46,6 @@ import androidx.preference.PreferenceManager
 import androidx.preference.TwoStatePreference
 import dev.doubledot.doki.ui.DokiActivity
 import java.util.*
-import kotlin.collections.HashSet
 
 class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListener {
 
