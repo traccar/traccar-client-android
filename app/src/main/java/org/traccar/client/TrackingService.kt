@@ -114,16 +114,11 @@ class TrackingService : Service() {
                 .setSmallIcon(R.drawable.ic_stat_notify)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
-            val intent: Intent
-            if (!BuildConfig.HIDDEN_APP) {
-                intent = Intent(context, MainActivity::class.java)
-                builder
-                    .setContentTitle(context.getString(R.string.settings_status_on_summary))
-                    .setTicker(context.getString(R.string.settings_status_on_summary))
-                    .color = ContextCompat.getColor(context, R.color.primary_dark)
-            } else {
-                intent = Intent(Settings.ACTION_SETTINGS)
-            }
+            val intent = Intent(context, MainActivity::class.java)
+            builder
+                .setContentTitle(context.getString(R.string.settings_status_on_summary))
+                .setTicker(context.getString(R.string.settings_status_on_summary))
+                .color = ContextCompat.getColor(context, R.color.primary_dark)
             val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 PendingIntent.FLAG_IMMUTABLE
             } else {

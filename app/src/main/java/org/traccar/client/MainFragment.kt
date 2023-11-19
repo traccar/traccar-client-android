@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2022 Anton Tananaev (anton@traccar.org)
+ * Copyright 2012 - 2023 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,9 +58,6 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
 
     @SuppressLint("UnspecifiedImmutableFlag")
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        if (BuildConfig.HIDDEN_APP && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            removeLauncherIcon()
-        }
         setHasOptionsMenu(true)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         setPreferencesFromResource(R.xml.preferences, rootKey)
@@ -138,24 +135,6 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         }
     }
 
-    private fun removeLauncherIcon() {
-        val className = MainActivity::class.java.canonicalName!!.replace(".MainActivity", ".Launcher")
-        val componentName = ComponentName(requireActivity().packageName, className)
-        val packageManager = requireActivity().packageManager
-        if (packageManager.getComponentEnabledSetting(componentName) != PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
-            packageManager.setComponentEnabledSetting(
-                componentName,
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP
-            )
-            val builder = AlertDialog.Builder(requireActivity())
-            builder.setIcon(android.R.drawable.ic_dialog_alert)
-            builder.setMessage(getString(R.string.hidden_alert))
-            builder.setPositiveButton(android.R.string.ok, null)
-            builder.show()
-        }
-    }
-
     override fun onStart() {
         super.onStart()
         if (requestingPermissions) {
@@ -184,16 +163,16 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         findPreference<Preference>(KEY_WAKELOCK)?.isEnabled = enabled
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key == KEY_STATUS) {
-            if (sharedPreferences.getBoolean(KEY_STATUS, false)) {
+            if (sharedPreferences?.getBoolean(KEY_STATUS, false) == true) {
                 startTrackingService(checkPermission = true, initialPermission = false)
             } else {
                 stopTrackingService()
             }
             (requireActivity().application as MainApplication).handleRatingFlow(requireActivity())
         } else if (key == KEY_DEVICE) {
-            findPreference<Preference>(KEY_DEVICE)?.summary = sharedPreferences.getString(KEY_DEVICE, null)
+            findPreference<Preference>(KEY_DEVICE)?.summary = sharedPreferences?.getString(KEY_DEVICE, null)
         }
     }
 

@@ -9,7 +9,6 @@ android {
     compileSdk 34
     defaultConfig {
         applicationId 'org.traccar.client'
-        buildConfigField 'boolean', 'HIDDEN_APP', 'false'
         minSdkVersion 16
         targetSdkVersion 34
         versionCode 81
@@ -33,10 +32,6 @@ android {
             ext.enableCrashlytics = false
         }
         google
-        hidden {
-            applicationId 'org.traccar.client.hidden'
-            buildConfigField 'boolean', 'HIDDEN_APP', 'true'
-        }
     }
 
     testOptions {
