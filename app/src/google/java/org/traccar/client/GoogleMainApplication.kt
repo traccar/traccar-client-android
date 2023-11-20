@@ -19,6 +19,7 @@ import android.app.Activity
 import android.content.IntentFilter
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManagerFactory
@@ -35,7 +36,7 @@ class GoogleMainApplication : MainApplication() {
         val filter = IntentFilter()
         filter.addAction(TrackingService.ACTION_STARTED)
         filter.addAction(TrackingService.ACTION_STOPPED)
-        registerReceiver(ServiceReceiver(), filter)
+        ContextCompat.registerReceiver(this, ServiceReceiver(), filter, ContextCompat.RECEIVER_EXPORTED)
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
