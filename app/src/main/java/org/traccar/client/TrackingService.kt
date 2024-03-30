@@ -17,7 +17,6 @@ package org.traccar.client
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.annotation.TargetApi
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
@@ -41,19 +40,26 @@ class TrackingService : Service() {
 
     @SuppressLint("WakelockTimeout")
     override fun onCreate() {
-        startForeground(NOTIFICATION_ID, createNotification(this))
-        Log.i(TAG, "service create")
-        sendBroadcast(Intent(ACTION_STARTED).setPackage(packageName))
-        StatusActivity.addMessage(getString(R.string.status_service_create))
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        try {
+            startForeground(NOTIFICATION_ID, createNotification(this))
+            Log.i(TAG, "service create")
+            sendBroadcast(Intent(ACTION_STARTED).setPackage(packageName))
+            StatusActivity.addMessage(getString(R.string.status_service_create))
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(MainFragment.KEY_WAKELOCK, true)) {
-                val powerManager = getSystemService(POWER_SERVICE) as PowerManager
-                wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, javaClass.name)
-                wakeLock?.acquire()
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                if (sharedPreferences.getBoolean(MainFragment.KEY_WAKELOCK, true)) {
+                    val powerManager = getSystemService(POWER_SERVICE) as PowerManager
+                    wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, javaClass.name)
+                    wakeLock?.acquire()
+                }
+                trackingController = TrackingController(this)
+                trackingController?.start()
             }
-            trackingController = TrackingController(this)
-            trackingController?.start()
+        } catch (e: SecurityException) {
+            Log.w(TAG, e)
+            sharedPreferences.edit().putBoolean(MainFragment.KEY_STATUS, false).apply()
+            stopSelf()
         }
     }
 
