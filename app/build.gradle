@@ -11,8 +11,8 @@ android {
         applicationId 'org.traccar.client'
         minSdkVersion 16
         targetSdkVersion 34
-        versionCode 83
-        versionName '7.2'
+        versionCode 84
+        versionName '7.3'
         multiDexEnabled true
     }
     namespace 'org.traccar.client'
@@ -54,7 +54,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'androidx.core:core-ktx:1.12.0'
@@ -70,7 +70,7 @@ dependencies {
     googleImplementation 'com.google.firebase:firebase-core'
     googleImplementation 'com.google.firebase:firebase-analytics'
     googleImplementation 'com.google.firebase:firebase-crashlytics'
-    googleImplementation 'com.google.android.gms:play-services-location:21.0.1'
+    googleImplementation 'com.google.android.gms:play-services-location:21.2.0'
     googleImplementation 'com.google.android.play:core:1.10.3'
 }
 
