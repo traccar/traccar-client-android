@@ -9,7 +9,7 @@ android {
     compileSdk 34
     defaultConfig {
         applicationId 'org.traccar.client'
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 34
         versionCode 84
         versionName '7.3'
