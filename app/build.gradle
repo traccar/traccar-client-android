@@ -8,14 +8,14 @@ plugins {
 android {
     compileSdk 34
     defaultConfig {
-        applicationId 'org.traccar.client'
+        applicationId 'de.ednt.atlasclient'
         minSdkVersion 21
         targetSdkVersion 34
         versionCode 86
         versionName '7.5'
         multiDexEnabled true
     }
-    namespace 'org.traccar.client'
+    namespace 'de.ednt.atlasclient'
 
     packagingOptions {
         resources {
