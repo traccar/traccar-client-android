@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 - 2021 Anton Tananaev (anton@traccar.org)
+ * Copyright 2017 - 2024 Anton Tananaev (anton@traccar.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,9 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
+import com.google.android.gms.tasks.Task
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManagerFactory
-import com.google.android.play.core.tasks.Task
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class GoogleMainApplication : MainApplication() {
@@ -47,8 +47,9 @@ class GoogleMainApplication : MainApplication() {
         if (!ratingShown && totalDuration > RATING_THRESHOLD) {
             val reviewManager = ReviewManagerFactory.create(activity)
             reviewManager.requestReviewFlow().addOnCompleteListener { infoTask: Task<ReviewInfo?> ->
-                if (infoTask.isSuccessful) {
-                    val flow = reviewManager.launchReviewFlow(activity, infoTask.result)
+                val reviewInfo = infoTask.result
+                if (infoTask.isSuccessful && reviewInfo != null) {
+                    val flow = reviewManager.launchReviewFlow(activity, reviewInfo)
                     flow.addOnCompleteListener { preferences.edit().putBoolean(KEY_RATING_SHOWN, true).apply() }
                 }
             }

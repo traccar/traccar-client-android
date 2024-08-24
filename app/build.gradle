@@ -63,14 +63,14 @@ dependencies {
     implementation('dev.doubledot.doki:library:0.0.1@aar') {
         transitive = true
     }
-    testImplementation 'androidx.test:core:1.5.0'
+    testImplementation 'androidx.test:core:1.6.1'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.7.3'
-    googleImplementation platform('com.google.firebase:firebase-bom:33.1.0')
+    googleImplementation platform('com.google.firebase:firebase-bom:33.2.0')
     googleImplementation 'com.google.firebase:firebase-analytics'
     googleImplementation 'com.google.firebase:firebase-crashlytics'
     googleImplementation 'com.google.android.gms:play-services-location:21.3.0'
-    googleImplementation 'com.google.android.play:core:1.10.3'
+    googleImplementation 'com.google.android.play:review:2.0.1'
 }
 
 tasks.register('copyFirebaseConfig', Copy) {
