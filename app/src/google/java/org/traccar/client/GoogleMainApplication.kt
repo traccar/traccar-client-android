@@ -47,10 +47,13 @@ class GoogleMainApplication : MainApplication() {
         if (!ratingShown && totalDuration > RATING_THRESHOLD) {
             val reviewManager = ReviewManagerFactory.create(activity)
             reviewManager.requestReviewFlow().addOnCompleteListener { infoTask: Task<ReviewInfo?> ->
-                val reviewInfo = infoTask.result
-                if (infoTask.isSuccessful && reviewInfo != null) {
-                    val flow = reviewManager.launchReviewFlow(activity, reviewInfo)
-                    flow.addOnCompleteListener { preferences.edit().putBoolean(KEY_RATING_SHOWN, true).apply() }
+                if (infoTask.isSuccessful) {
+                    val reviewInfo = infoTask.result
+                    if (reviewInfo != null) {
+                        reviewManager.launchReviewFlow(activity, reviewInfo).addOnCompleteListener {
+                            preferences.edit().putBoolean(KEY_RATING_SHOWN, true).apply()
+                        }
+                    }
                 }
             }
         }
