@@ -122,11 +122,11 @@ class TrackingController(private val context: Context) : PositionListener, Netwo
             override fun onComplete(success: Boolean, result: Position?) {
                 if (success) {
                     if (result != null) {
-                        if (result.deviceId == preferences.getString(MainFragment.KEY_DEVICE, null)) {
+//                        if (result.deviceId == preferences.getString(MainFragment.KEY_DEVICE, null)) {
                             send(result)
-                        } else {
-                            delete(result)
-                        }
+//                        } else {
+//                            delete(result)
+//                        }
                     } else {
                         isWaiting = true
                     }
@@ -151,8 +151,11 @@ class TrackingController(private val context: Context) : PositionListener, Netwo
     }
 
     private fun send(position: Position) {
+        position.deviceId = Trailblazer.Server_Details.device_id.replace("\\s".toRegex(), "").uppercase()
+        val serverUrl: String = Trailblazer.Server_Details.server_url
+        val request = formatRequest(serverUrl, position)
+        log("Server:$request", position)
         log("send", position)
-        val request = formatRequest(url, position)
         sendRequestAsync(request, object : RequestHandler {
             override fun onComplete(success: Boolean) {
                 if (success) {
@@ -180,7 +183,7 @@ class TrackingController(private val context: Context) : PositionListener, Netwo
 
     companion object {
         private val TAG = TrackingController::class.java.simpleName
-        private const val RETRY_DELAY = 30 * 1000
+        private const val RETRY_DELAY = 5 * 1000
     }
 
 }

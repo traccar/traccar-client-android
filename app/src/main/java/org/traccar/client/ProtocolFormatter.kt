@@ -15,6 +15,8 @@
  */
 package org.traccar.client
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.net.Uri
 
 object ProtocolFormatter {

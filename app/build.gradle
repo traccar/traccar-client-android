@@ -8,11 +8,11 @@ plugins {
 android {
     compileSdk 34
     defaultConfig {
-        applicationId 'org.traccar.client'
+        applicationId 'za.co.exonic'
         minSdkVersion 21
         targetSdkVersion 34
         versionCode 88
-        versionName '7.7'
+        versionName '1.0.4'
         multiDexEnabled true
     }
     namespace 'org.traccar.client'
@@ -51,6 +51,29 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        // add the code from below line.
+        applicationVariants.all{
+                // this method is use to rename your all apk weather
+                // it may be signed or unsigned(debug apk)
+            variant ->
+                variant.outputs.each{
+                        // on below line we are setting a
+                        // name to our apk as GFG.apk
+                    output->
+                        def name = "trailblazer-${variant.versionName}.apk"
+                        // on below line we are setting the
+                        // outputFile Name to our apk file.
+                        output.outputFileName = name
+                }
+        }
+    }
+
 }
 
 dependencies {
@@ -63,6 +86,10 @@ dependencies {
     implementation('dev.doubledot.doki:library:0.0.1@aar') {
         transitive = true
     }
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.activity:activity:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation("androidx.cardview:cardview:1.0.0")
     testImplementation 'androidx.test:core:1.6.1'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.7.3'

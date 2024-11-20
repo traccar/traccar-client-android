@@ -22,7 +22,7 @@ import java.util.*
 
 data class Position(
     val id: Long = 0,
-    val deviceId: String,
+    var deviceId: String,
     val time: Date,
     val latitude: Double = 0.0,
     val longitude: Double = 0.0,

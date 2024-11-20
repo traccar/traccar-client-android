@@ -17,7 +17,6 @@ package org.traccar.client
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.ForegroundServiceStartNotAllowedException
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
@@ -101,6 +100,7 @@ class TrackingService : Service() {
                 .setSmallIcon(R.drawable.ic_stat_notify)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
+//            val intent = Intent(context, Trailblazer::class.java)
             val intent = Intent(context, MainActivity::class.java)
             builder
                 .setContentTitle(context.getString(R.string.settings_status_on_summary))

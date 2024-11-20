@@ -25,7 +25,7 @@ import java.net.URL
 
 object RequestManager {
 
-    private const val TIMEOUT = 15 * 1000
+    private const val TIMEOUT = 5 * 1000
 
     fun sendRequest(request: String?): Boolean {
         var inputStream: InputStream? = null
