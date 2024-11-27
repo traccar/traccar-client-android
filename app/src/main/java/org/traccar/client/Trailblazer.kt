@@ -7,10 +7,12 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -27,16 +29,16 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import androidx.preference.Preference
-import com.google.android.material.internal.ViewUtils.hideKeyboard
-import org.traccar.client.MainFragment.Companion.KEY_STATUS
+import org.traccar.client.PositionProvider.PositionListener
+import org.traccar.client.ProtocolFormatter.formatRequest
+import org.traccar.client.RequestManager.RequestHandler
+import org.traccar.client.RequestManager.sendRequestAsync
 import org.traccar.client.Trailblazer.Server_Details.device_id
 import org.traccar.client.Trailblazer.Server_Details.location_accuracy
 import org.traccar.client.Trailblazer.Server_Details.server_url
-import java.util.Locale
 
 
-class Trailblazer : AppCompatActivity() {
+class Trailblazer : AppCompatActivity(), PositionListener {
 
     private lateinit var connectionStatus: TextView;
     private lateinit var sosButton: ImageButton
@@ -54,6 +56,8 @@ class Trailblazer : AppCompatActivity() {
     private lateinit var alarmManager: AlarmManager
     private lateinit var alarmIntent: PendingIntent
     private var requestingPermissions: Boolean = false
+    private lateinit var positionProvider: PositionProvider // = PositionProviderFactory.create(this, this)
+    private val handler = Handler(Looper.getMainLooper())
 
     private var onlineStatus = false
 
@@ -112,12 +116,14 @@ class Trailblazer : AppCompatActivity() {
     private fun connectUser() {
         onlineStatus = true
         updateConnectionOnline()
+        positionProvider.startUpdates()
         startTrackingService(checkPermission = true, initialPermission = false)
     }
 
     private fun disconnectUser() {
         onlineStatus = false
         updateConnectionOffline()
+        positionProvider.stopUpdates()
         stopTrackingService()
     }
 
@@ -191,6 +197,7 @@ class Trailblazer : AppCompatActivity() {
         device_id = deviceId.text.toString()
         server_url = getString(R.string.settings_server_url_value)
         location_accuracy = getString(R.string.settings_location_accuracy_value)
+        positionProvider = PositionProviderFactory.create(this, this)
     }
 
     private fun showBackgroundLocationDialog(context: Context, onSuccess: () -> Unit) {
@@ -274,7 +281,7 @@ class Trailblazer : AppCompatActivity() {
     companion object {
         private val TAG = Trailblazer::class.java.simpleName
         private const val ALARM_MANAGER_INTERVAL = 15000
-        private const val RETRY_DELAY = 30 * 1000
+        private const val RETRY_DELAY = 5 * 1000
         const val KEY_DEVICE = "id"
         const val KEY_URL = "url"
         const val KEY_INTERVAL = "interval"
@@ -286,5 +293,29 @@ class Trailblazer : AppCompatActivity() {
         const val KEY_WAKELOCK = "wakelock"
         private const val PERMISSIONS_REQUEST_LOCATION = 2
         private const val PERMISSIONS_REQUEST_BACKGROUND_LOCATION = 3
+    }
+
+    override fun onPositionUpdate(position: Position) {
+        handler.postDelayed({
+            if (onlineStatus) {
+                send(position)
+            }
+        }, Trailblazer.RETRY_DELAY.toLong())
+    }
+
+    override fun onPositionError(error: Throwable) {
+
+    }
+
+    private fun send(position: Position) {
+        position.deviceId = Trailblazer.Server_Details.device_id.replace("\\s".toRegex(), "").uppercase()
+        val serverUrl: String = Trailblazer.Server_Details.server_url
+        val request = formatRequest(serverUrl, position)
+        Log.d(Trailblazer.TAG, "Server:$position")
+        sendRequestAsync(request, object : RequestHandler {
+            override fun onComplete(success: Boolean) {
+                Log.d(Trailblazer.TAG, "Sent")
+            }
+        })
     }
 }

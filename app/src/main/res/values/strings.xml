@@ -3,7 +3,7 @@
     <string name="app_name">trailblazer</string>
     <string name="status_connected">● Connected</string>
     <string name="status_disconnected">Disconnected</string>
-    <string name="clock_in"> Clock in</string>
+    <string name="clock_in">Clock in</string>
     <string name="clock_out">Clock out</string>
     <string name="settings_title">Settings</string>
     <string name="settings_device_identifier">Device Identifier</string>
@@ -14,7 +14,6 @@
     <string name="settings_location_accuracy_value">High</string>
     <string name="settings_cancel_button">Cancel</string>
     <string name="settings_save_button">Save</string>
-
     <string name="app_logo">Traccar</string>
     <string name="shortcut_start">Start service</string>
     <string name="shortcut_stop">Stop service</string>

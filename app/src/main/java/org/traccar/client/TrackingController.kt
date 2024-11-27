@@ -24,6 +24,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.preference.PreferenceManager
 import android.util.Log
+import android.widget.Toast
 import org.traccar.client.DatabaseHelper.DatabaseHandler
 import org.traccar.client.RequestManager.RequestHandler
 
@@ -45,21 +46,21 @@ class TrackingController(private val context: Context) : PositionListener, Netwo
         if (isOnline) {
             read()
         }
-        try {
-            positionProvider.startUpdates()
-        } catch (e: SecurityException) {
-            Log.w(TAG, e)
-        }
+//        try {
+//            positionProvider.startUpdates()
+//        } catch (e: SecurityException) {
+//            Log.w(TAG, e)
+//        }
         networkManager.start()
     }
 
     fun stop() {
         networkManager.stop()
-        try {
-            positionProvider.stopUpdates()
-        } catch (e: SecurityException) {
-            Log.w(TAG, e)
-        }
+//        try {
+//            positionProvider.stopUpdates()
+//        } catch (e: SecurityException) {
+//            Log.w(TAG, e)
+//        }
         handler.removeCallbacksAndMessages(null)
     }
 
@@ -70,9 +71,11 @@ class TrackingController(private val context: Context) : PositionListener, Netwo
         } else {
             send(position)
         }
+        log("onPositionUpdate :$position", position)
     }
 
     override fun onPositionError(error: Throwable) {}
+
     override fun onNetworkUpdate(isOnline: Boolean) {
         val message = if (isOnline) R.string.status_network_online else R.string.status_network_offline
         StatusActivity.addMessage(context.getString(message))
@@ -120,9 +123,10 @@ class TrackingController(private val context: Context) : PositionListener, Netwo
         log("read", null)
         databaseHelper.selectPositionAsync(object : DatabaseHandler<Position?> {
             override fun onComplete(success: Boolean, result: Position?) {
+
                 if (success) {
                     if (result != null) {
-//                        if (result.deviceId == preferences.getString(MainFragment.KEY_DEVICE, null)) {
+//                        if (result.deviceId == Trailblazer.Server_Details.device_id) {
                             send(result)
 //                        } else {
 //                            delete(result)
@@ -158,16 +162,17 @@ class TrackingController(private val context: Context) : PositionListener, Netwo
         log("send", position)
         sendRequestAsync(request, object : RequestHandler {
             override fun onComplete(success: Boolean) {
-                if (success) {
-                    if (buffer) {
-                        delete(position)
-                    }
-                } else {
-                    StatusActivity.addMessage(context.getString(R.string.status_send_fail))
-                    if (buffer) {
+                log("Sent", position)
+//                if (success) {
+//                    if (buffer) {
+//                        delete(position)
+//                    }
+//                } else {
+//                    StatusActivity.addMessage(context.getString(R.string.status_send_fail))
+//                    if (buffer) {
                         retry()
-                    }
-                }
+//                    }
+//                }
             }
         })
     }

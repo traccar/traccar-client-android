@@ -100,8 +100,8 @@ class TrackingService : Service() {
                 .setSmallIcon(R.drawable.ic_stat_notify)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
-//            val intent = Intent(context, Trailblazer::class.java)
-            val intent = Intent(context, MainActivity::class.java)
+            val intent = Intent(context, Trailblazer::class.java)
+//            val intent = Intent(context, MainActivity::class.java)
             builder
                 .setContentTitle(context.getString(R.string.settings_status_on_summary))
                 .setTicker(context.getString(R.string.settings_status_on_summary))

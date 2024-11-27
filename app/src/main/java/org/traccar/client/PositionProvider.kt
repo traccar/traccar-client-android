@@ -35,11 +35,11 @@ abstract class PositionProvider(
         fun onPositionError(error: Throwable)
     }
 
-    protected var preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    protected var deviceId = preferences.getString(MainFragment.KEY_DEVICE, "undefined")!!
-    protected var interval = preferences.getString(MainFragment.KEY_INTERVAL, "600")!!.toLong() * 1000
-    protected var distance: Double = preferences.getString(MainFragment.KEY_DISTANCE, "0")!!.toInt().toDouble()
-    protected var angle: Double = preferences.getString(MainFragment.KEY_ANGLE, "0")!!.toInt().toDouble()
+//    protected var preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    protected var deviceId = "Undefined" // preferences.getString(MainFragment.KEY_DEVICE, "undefined")!!
+    protected var interval = 5000.toLong() // preferences.getString(MainFragment.KEY_INTERVAL, "600")!!.toLong() * 1000
+    protected var distance: Double = 0.0 // preferences.getString(MainFragment.KEY_DISTANCE, "0")!!.toInt().toDouble()
+    protected var angle: Double = 0.0 // preferences.getString(MainFragment.KEY_ANGLE, "0")!!.toInt().toDouble()
     private var lastLocation: Location? = null
 
     abstract fun startUpdates()
