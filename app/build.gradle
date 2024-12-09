@@ -8,11 +8,11 @@ plugins {
 android {
     compileSdk 34
     defaultConfig {
-        applicationId 'za.co.exonic'
+        applicationId 'za.co.exonic.trailblazer.pioneer.client'
         minSdkVersion 21
         targetSdkVersion 34
         versionCode 88
-        versionName '1.0.7'
+        versionName '1.0.8'
         multiDexEnabled true
     }
     namespace 'org.traccar.client'
@@ -66,7 +66,7 @@ android {
                         // on below line we are setting a
                         // name to our apk as GFG.apk
                     output->
-                        def name = "trailblazer-${variant.versionName}.apk"
+                        def name = "trailblazer-pioneer-client-${variant.versionName}.apk"
                         // on below line we are setting the
                         // outputFile Name to our apk file.
                         output.outputFileName = name
