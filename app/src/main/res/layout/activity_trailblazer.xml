@@ -6,20 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/eight_dp"
-    android:orientation="vertical"
     tools:context=".trailblazer.ui.Trailblazer">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <!-- Connection Status Section -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <TextView
                 android:id="@+id/connection_status"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="@dimen/twelve_dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/eight_dp"
                 android:textSize="16sp"
                 android:textColor="@color/primary"
                 android:layout_gravity="center_vertical"
@@ -28,8 +31,7 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1"/>
             <ImageButton
                 android:id="@+id/sos"
                 android:layout_width="60dp"
@@ -38,9 +40,10 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/sos"
                 android:scaleType="fitCenter"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"/>
         </LinearLayout>
 
+        <!-- Logo and Device ID Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,14 +56,14 @@
                 android:src="@drawable/logo"
                 android:scaleType="fitCenter"
                 android:background="@drawable/round_outline"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"/>
             <View
                 android:layout_width="@dimen/twelve_dp"
-                android:layout_height="0dp"
-                />
+                android:layout_height="0dp"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="112dp"
+                android:padding="@dimen/eight_dp"
                 android:background="@drawable/round_outline"
                 android:layout_weight="1">
                 <LinearLayout
@@ -73,22 +76,24 @@
                         android:layout_height="30dp"
                         android:src="@drawable/vehicle"
                         android:scaleType="fitCenter"
-                        tools:ignore="ContentDescription" />
+                        tools:ignore="ContentDescription"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        />
+                        android:layout_weight="1"/>
                     <TextView
                         android:id="@+id/device_id"
                         android:layout_width="match_parent"
                         android:layout_height="36dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:textSize="30sp"
                         android:textColor="@color/white"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
+        <!-- Spacer Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -97,15 +102,17 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                tools:ignore="NestedWeights" />
+                tools:ignore="NestedWeights"/>
         </LinearLayout>
 
+        <!-- Bottom Controls Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="24dp"
             android:orientation="horizontal"
             android:gravity="bottom">
+            <!-- Clock In/Out Section -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="60dp"
@@ -121,28 +128,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/clock_in"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription"/>
                 <TextView
                     android:id="@+id/clock_in_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"/>
-
             </LinearLayout>
+
+            <!-- Settings Button -->
             <ImageButton
                 android:id="@+id/settings_button"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:padding="@dimen/eight_dp"
+                android:padding="@dimen/twelve_dp"
                 android:onClick="settingsClicked"
                 android:src="@drawable/settings"
                 android:scaleType="fitCenter"
-                android:background="@color/trailblazer_dark_green"
+                android:background="@drawable/rounded_button"
                 android:layout_margin="@dimen/eight_dp"
-                tools:ignore="ContentDescription,UsingOnClickInXml" />
+                tools:ignore="ContentDescription,UsingOnClickInXml"/>
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Settings CardView -->
     <androidx.cardview.widget.CardView
         android:id="@+id/settings_view"
         android:layout_width="match_parent"
@@ -153,12 +162,13 @@
         app:cardBackgroundColor="@color/white"
         app:cardMaxElevation="@dimen/twelve_dp"
         app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true"
-        >
+        app:cardUseCompatPadding="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="8dp"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <TextView
@@ -169,6 +179,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
 
+            <!-- Device Identifier Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,6 +201,7 @@
                     android:hint="@string/settings_device_identifier_hint"/>
             </LinearLayout>
 
+            <!-- Server URL Section (Disabled) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -210,9 +222,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/black"
                     android:enabled="false"
-                    tools:ignore="TextFields" />
+                    tools:ignore="TextFields"/>
             </LinearLayout>
 
+            <!-- Location Accuracy Section (Disabled) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -234,6 +247,7 @@
                     android:enabled="false"/>
             </LinearLayout>
 
+            <!-- Cancel and Save Buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -248,7 +262,7 @@
                     android:onClick="cancelSettingsClicked"
                     android:text="@string/settings_cancel_button"
                     android:textColor="@color/black"
-                    tools:ignore="UsingOnClickInXml" />
+                    tools:ignore="UsingOnClickInXml"/>
                 <Button
                     android:id="@+id/settings_save"
                     android:layout_width="0dp"
@@ -259,8 +273,9 @@
                     android:onClick="saveSettingsClicked"
                     android:text="@string/settings_save_button"
                     android:textColor="@color/white"
-                    tools:ignore="UsingOnClickInXml" />
+                    tools:ignore="UsingOnClickInXml"/>
             </LinearLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
