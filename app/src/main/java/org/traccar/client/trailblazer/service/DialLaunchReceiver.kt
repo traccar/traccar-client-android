@@ -13,12 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.service
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import org.traccar.client.trailblazer.ui.MainActivity
 
+/**
+ * The DialLaunchReceiver class is a specialized broadcast receiver designed to launch the app's
+ * main activity when a specific phone number (in this case, "8722227") is dialed
+ */
 class DialLaunchReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.ArrayAdapter
@@ -21,9 +21,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ListView
+import org.traccar.client.R
 import java.text.DateFormat
 import java.util.*
 
+/**
+ * The StatusActivity class is designed to display a list of status messages in the form of a
+ * ListView with the ability to clear the messages through the options menu.
+ */
 class StatusActivity : AppCompatActivity() {
 
     private var adapter: ArrayAdapter<String>? = null

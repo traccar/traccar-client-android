@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.util
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -23,6 +23,10 @@ import android.content.Intent
 import androidx.core.content.ContextCompat
 import android.os.PowerManager
 
+/**
+ * The WakefulBroadcastReceiver class is a utility class that manages WakeLock to keep the device
+ * awake while the BroadcastReceiver is processing an intent.
+ */
 abstract class WakefulBroadcastReceiver : BroadcastReceiver() {
 
     companion object {

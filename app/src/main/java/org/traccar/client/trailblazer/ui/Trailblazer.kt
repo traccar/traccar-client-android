@@ -1,4 +1,4 @@
-package org.traccar.client
+package org.traccar.client.trailblazer.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -29,13 +29,20 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import org.traccar.client.PositionProvider.PositionListener
-import org.traccar.client.ProtocolFormatter.formatRequest
-import org.traccar.client.RequestManager.RequestHandler
-import org.traccar.client.RequestManager.sendRequestAsync
-import org.traccar.client.Trailblazer.Server_Details.device_id
-import org.traccar.client.Trailblazer.Server_Details.location_accuracy
-import org.traccar.client.Trailblazer.Server_Details.server_url
+import org.traccar.client.Position
+import org.traccar.client.PositionProviderFactory
+import org.traccar.client.R
+import org.traccar.client.trailblazer.service.PositionProvider.PositionListener
+import org.traccar.client.trailblazer.model.ProtocolFormatter.formatRequest
+import org.traccar.client.trailblazer.network.RequestManager.RequestHandler
+import org.traccar.client.trailblazer.network.RequestManager.sendRequestAsync
+import org.traccar.client.trailblazer.ui.Trailblazer.Server_Details.device_id
+import org.traccar.client.trailblazer.ui.Trailblazer.Server_Details.location_accuracy
+import org.traccar.client.trailblazer.ui.Trailblazer.Server_Details.server_url
+import org.traccar.client.trailblazer.service.AutostartReceiver
+import org.traccar.client.trailblazer.service.PositionProvider
+import org.traccar.client.trailblazer.service.TrackingService
+import org.traccar.client.trailblazer.util.BatteryOptimizationHelper
 
 
 class Trailblazer : AppCompatActivity(), PositionListener {
@@ -142,8 +149,8 @@ class Trailblazer : AppCompatActivity(), PositionListener {
     public final fun saveSettingsClicked(view: View) {
         hideKeyboard()
         if (deviceIdText.text.toString().trim().isNotEmpty() && deviceIdText.text.toString().trim().isNotBlank()) {
-            sharedPreferences.edit().putString(Trailblazer.KEY_DEVICE, deviceIdText.text.toString()).apply()
-            deviceId.text = sharedPreferences.getString(Trailblazer.KEY_DEVICE, "")
+            sharedPreferences.edit().putString(KEY_DEVICE, deviceIdText.text.toString()).apply()
+            deviceId.text = sharedPreferences.getString(KEY_DEVICE, "")
             device_id = deviceId.text.toString()
             cardView.isVisible = false
         } else {
@@ -158,21 +165,25 @@ class Trailblazer : AppCompatActivity(), PositionListener {
 
     fun updateConnectionOnline() {
         connectionStatus.text = getString(R.string.status_connected)
-        connectionStatus.setTextColor(ContextCompat.getColor(this,R.color.primary))
-        connectionStatus.background = ResourcesCompat.getDrawable(getResources(), R.drawable.status_connected, null)
+        connectionStatus.setTextColor(ContextCompat.getColor(this, R.color.primary))
+        connectionStatus.background = ResourcesCompat.getDrawable(getResources(),
+            R.drawable.status_connected, null)
 
         clockInText.text = getString(R.string.clock_out)
-        clockInImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.clock_out, null))
+        clockInImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+            R.drawable.clock_out, null))
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     fun updateConnectionOffline() {
         connectionStatus.text = getString(R.string.status_disconnected)
-        connectionStatus.setTextColor(ContextCompat.getColor(this,R.color.light_gray))
-        connectionStatus.background = ResourcesCompat.getDrawable(getResources(), R.drawable.status_disconnected, null)
+        connectionStatus.setTextColor(ContextCompat.getColor(this, R.color.light_gray))
+        connectionStatus.background = ResourcesCompat.getDrawable(getResources(),
+            R.drawable.status_disconnected, null)
 
         clockInText.text = getString(R.string.clock_in)
-        clockInImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.clock_in, null))
+        clockInImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+            R.drawable.clock_in, null))
     }
 
     private fun setupPreferences() {
@@ -187,10 +198,10 @@ class Trailblazer : AppCompatActivity(), PositionListener {
         }
         alarmIntent = PendingIntent.getBroadcast(this, 0, originalIntent, flags)
 
-        if (sharedPreferences.contains(Trailblazer.KEY_DEVICE)) {
-            deviceId.text = sharedPreferences.getString(Trailblazer.KEY_DEVICE, "")
+        if (sharedPreferences.contains(KEY_DEVICE)) {
+            deviceId.text = sharedPreferences.getString(KEY_DEVICE, "")
         } else {
-            sharedPreferences.edit().putString(Trailblazer.KEY_DEVICE, "").apply()
+            sharedPreferences.edit().putString(KEY_DEVICE, "").apply()
             deviceId.setText("")
         }
 
@@ -300,7 +311,7 @@ class Trailblazer : AppCompatActivity(), PositionListener {
             if (onlineStatus) {
                 send(position)
             }
-        }, Trailblazer.RETRY_DELAY.toLong())
+        }, RETRY_DELAY.toLong())
     }
 
     override fun onPositionError(error: Throwable) {
@@ -308,13 +319,13 @@ class Trailblazer : AppCompatActivity(), PositionListener {
     }
 
     private fun send(position: Position) {
-        position.deviceId = Trailblazer.Server_Details.device_id.replace("\\s".toRegex(), "").uppercase()
-        val serverUrl: String = Trailblazer.Server_Details.server_url
+        position.deviceId = Server_Details.device_id.replace("\\s".toRegex(), "").uppercase()
+        val serverUrl: String = Server_Details.server_url
         val request = formatRequest(serverUrl, position)
-        Log.d(Trailblazer.TAG, "Server:$position")
+        Log.d(TAG, "Server:$position")
         sendRequestAsync(request, object : RequestHandler {
             override fun onComplete(success: Boolean) {
-                Log.d(Trailblazer.TAG, "Sent")
+                Log.d(TAG, "Sent")
             }
         })
     }

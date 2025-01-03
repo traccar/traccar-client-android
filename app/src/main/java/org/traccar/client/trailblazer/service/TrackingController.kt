@@ -13,21 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.service
 
 import android.content.Context
-import org.traccar.client.ProtocolFormatter.formatRequest
-import org.traccar.client.RequestManager.sendRequestAsync
-import org.traccar.client.PositionProvider.PositionListener
-import org.traccar.client.NetworkManager.NetworkHandler
+import org.traccar.client.trailblazer.model.ProtocolFormatter.formatRequest
+import org.traccar.client.trailblazer.network.RequestManager.sendRequestAsync
+import org.traccar.client.trailblazer.service.PositionProvider.PositionListener
+import org.traccar.client.trailblazer.service.NetworkManager.NetworkHandler
 import android.os.Handler
 import android.os.Looper
 import androidx.preference.PreferenceManager
 import android.util.Log
-import android.widget.Toast
-import org.traccar.client.DatabaseHelper.DatabaseHandler
-import org.traccar.client.RequestManager.RequestHandler
+import org.traccar.client.Position
+import org.traccar.client.PositionProviderFactory
+import org.traccar.client.R
+import org.traccar.client.trailblazer.ui.Trailblazer
+import org.traccar.client.trailblazer.data.database.DatabaseHelper.DatabaseHandler
+import org.traccar.client.trailblazer.network.RequestManager.RequestHandler
+import org.traccar.client.trailblazer.data.database.DatabaseHelper
+import org.traccar.client.trailblazer.ui.MainFragment
+import org.traccar.client.trailblazer.ui.StatusActivity
 
+/**
+ * The TrackingController class is responsible for managing the lifecycle and operations of a
+ * tracking service. It handles receiving position updates, storing them in a local database,
+ * sending them to a remote server, and retrying if network connectivity or other conditions
+ * are unfavorable.
+ */
 class TrackingController(private val context: Context) : PositionListener, NetworkHandler {
 
     private val handler = Handler(Looper.getMainLooper())

@@ -13,12 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.service
 
 import android.content.Context
 import android.content.Intent
 import androidx.preference.PreferenceManager
+import org.traccar.client.trailblazer.ui.MainFragment
+import org.traccar.client.trailblazer.util.WakefulBroadcastReceiver
 
+/**
+ * The AutostartReceiver class is a BroadcastReceiver that listens for system events (e.g., device boot)
+ * and starts a foreground service (TrackingService) based on user preferences.
+ */
 class AutostartReceiver : WakefulBroadcastReceiver() {
 
     @Suppress("UnsafeProtectedBroadcastReceiver")

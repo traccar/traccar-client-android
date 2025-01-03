@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.ui
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -24,7 +24,13 @@ import android.content.Intent
 import android.widget.RemoteViews
 
 import androidx.preference.PreferenceManager
+import org.traccar.client.R
+import org.traccar.client.trailblazer.service.TrackingService
 
+/**
+ * The StatusWidget class is an AppWidgetProvider that manages the state and behavior of a widget
+ * displaying the status of a service (likely related to tracking, given the use of TrackingService).
+ */
 class StatusWidget : AppWidgetProvider() {
 
     override fun onReceive(context: Context, intent: Intent) {

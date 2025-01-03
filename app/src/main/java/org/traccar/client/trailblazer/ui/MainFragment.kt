@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -45,8 +45,17 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import androidx.preference.TwoStatePreference
 import dev.doubledot.doki.ui.DokiActivity
+import org.traccar.client.R
+import org.traccar.client.trailblazer.service.TrackingService
+import org.traccar.client.trailblazer.core.MainApplication
+import org.traccar.client.trailblazer.service.AutostartReceiver
+import org.traccar.client.trailblazer.util.BatteryOptimizationHelper
 import java.util.*
 
+/**
+ * This fragment primarily manages user preferences, validates input, handles permissions,
+ * and starts/stops the tracking service.
+ */
 class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListener {
 
     private lateinit var sharedPreferences: SharedPreferences
@@ -170,7 +179,8 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
             }
             (requireActivity().application as MainApplication).handleRatingFlow(requireActivity())
         } else if (key == KEY_DEVICE) {
-            findPreference<Preference>(KEY_DEVICE)?.summary = sharedPreferences?.getString(KEY_DEVICE, null)
+            findPreference<Preference>(KEY_DEVICE)?.summary = sharedPreferences?.getString(
+                KEY_DEVICE, null)
         }
     }
 

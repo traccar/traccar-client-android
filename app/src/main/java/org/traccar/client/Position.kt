@@ -18,8 +18,20 @@ package org.traccar.client
 import android.location.Location
 import android.location.LocationManager
 import android.os.Build
+import org.traccar.client.trailblazer.model.BatteryStatus
 import java.util.*
 
+private const val rolloverDate = 1554508800000L // April 6, 2019
+private const val rolloverOffset = 619315200000L // 1024 weeks
+
+private fun Long.correctRollover(): Long {
+    return if (this < rolloverDate) this + rolloverOffset else this
+}
+
+/**
+ * class you provided represents a data object that encapsulates location information, battery
+ * status, and other device-specific information. Given the MVVM (Model-View-ViewModel) structure
+ */
 data class Position(
     val id: Long = 0,
     var deviceId: String,
@@ -59,11 +71,4 @@ data class Position(
             false
         },
     )
-}
-
-private const val rolloverDate = 1554508800000L // April 6, 2019
-private const val rolloverOffset = 619315200000L // 1024 weeks
-
-private fun Long.correctRollover(): Long {
-    return if (this < rolloverDate) this + rolloverOffset else this
 }

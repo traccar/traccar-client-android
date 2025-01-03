@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 @file:Suppress("DEPRECATION")
-package org.traccar.client
+package org.traccar.client.trailblazer.network
 
 import android.os.AsyncTask
 import android.util.Log
@@ -23,6 +23,12 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
+/**
+ * The RequestManager class is responsible for sending HTTP requests and handling the response.
+ * It contains methods for synchronous and asynchronous network requests. It uses the
+ * HttpURLConnection class for the network communication and provides a callback mechanism for
+ * the asynchronous request.
+ */
 object RequestManager {
 
     private const val TIMEOUT = 5 * 1000

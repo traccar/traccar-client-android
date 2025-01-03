@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.service
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -22,7 +22,12 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
+import org.traccar.client.Position
 
+/**
+ * The AndroidPositionProvider class is responsible for obtaining location updates and handling location-related operations,
+ * integrating Android's LocationManager and LocationListener.
+ */
 class AndroidPositionProvider(context: Context, listener: PositionListener) : PositionProvider(context, listener), LocationListener {
 
     private val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager

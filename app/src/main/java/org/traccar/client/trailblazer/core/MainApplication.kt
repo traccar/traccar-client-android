@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.core
 
 import androidx.multidex.MultiDexApplication
 import android.annotation.TargetApi
@@ -23,7 +23,13 @@ import android.app.Notification
 import android.graphics.Color
 import android.os.Build
 import android.app.Activity
+import org.traccar.client.R
 
+/**
+ *
+ * The MainApplication class is the application's entry point for initializing global
+ * configurations, services, and resources
+ */
 open class MainApplication : MultiDexApplication() {
 
     override fun onCreate() {

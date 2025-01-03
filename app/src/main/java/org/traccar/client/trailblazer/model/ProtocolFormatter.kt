@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.model
 
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
 import android.net.Uri
+import org.traccar.client.Position
 
+/**
+ * class is responsible for formatting position data into a URL request string with various query
+ * parameters. It uses the provided Position object and optionally includes additional information
+ * like an alarm.
+ */
 object ProtocolFormatter {
 
     fun formatRequest(url: String, position: Position, alarm: String? = null): String {

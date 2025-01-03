@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 @file:Suppress("DEPRECATION", "StaticFieldLeak")
-package org.traccar.client
+package org.traccar.client.trailblazer.data.database
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
@@ -23,8 +23,14 @@ import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.os.AsyncTask
+import org.traccar.client.Position
 import java.sql.Date
 
+/**
+ * The DatabaseHelper class is a utility for managing an SQLite database in an Android application.
+ * It includes functions for creating, upgrading, and interacting with the database. Based on its
+ * role and functionality:
+ */
 class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     interface DatabaseHandler<T> {

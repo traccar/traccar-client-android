@@ -13,18 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.service
 
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.SharedPreferences
 import android.location.Location
 import android.os.BatteryManager
-import androidx.preference.PreferenceManager
 import android.util.Log
+import org.traccar.client.trailblazer.model.BatteryStatus
+import org.traccar.client.Position
 import kotlin.math.abs
 
+/**
+ * class that handles the logic for obtaining position updates, processing the location data,
+ * and managing battery status. It also defines the methods for starting and stopping location
+ * updates, which are implemented by its subclasses.
+ */
 abstract class PositionProvider(
     protected val context: Context,
     protected val listener: PositionListener,

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/eight_dp"
     android:orientation="vertical"
-    tools:context=".Trailblazer">
+    tools:context=".trailblazer.ui.Trailblazer">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

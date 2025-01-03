@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.util
 
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
@@ -26,7 +26,12 @@ import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.PreferenceManager
 import com.judemanutd.autostarter.AutoStartPermissionHelper
+import org.traccar.client.R
 
+/**
+ * The BatteryOptimizationHelper class is responsible for handling battery optimization exceptions
+ * and requesting vendor-specific permissions to allow the app to run seamlessly in the background.
+ */
 class BatteryOptimizationHelper {
 
     private fun showDialog(context: Context, onSuccess: () -> Unit) {

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.service
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -32,8 +32,19 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
+import org.traccar.client.R
+import org.traccar.client.trailblazer.ui.Trailblazer
+import org.traccar.client.trailblazer.util.WakefulBroadcastReceiver
+import org.traccar.client.trailblazer.core.MainApplication
+import org.traccar.client.trailblazer.ui.MainFragment
+import org.traccar.client.trailblazer.ui.StatusActivity
 import java.lang.RuntimeException
 
+/**
+ * it is designed to manage background service-related tasks for tracking, including handling wake
+ * locks, starting and stopping the TrackingController, and interacting with the system's
+ * notification framework.
+ */
 class TrackingService : Service() {
 
     private var wakeLock: WakeLock? = null

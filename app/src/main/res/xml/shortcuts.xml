@@ -12,7 +12,7 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="org.traccar.client"
-            android:targetClass="org.traccar.client.ShortcutActivity">
+            android:targetClass="org.traccar.client.trailblazer.ui.ShortcutActivity">
             <extra
                 android:name="action"
                 android:value="start" />
@@ -27,7 +27,7 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="org.traccar.client"
-            android:targetClass="org.traccar.client.ShortcutActivity">
+            android:targetClass="org.traccar.client.trailblazer.ui.ShortcutActivity">
             <extra
                 android:name="action"
                 android:value="stop" />
@@ -42,7 +42,7 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="org.traccar.client"
-            android:targetClass="org.traccar.client.ShortcutActivity">
+            android:targetClass="org.traccar.client.trailblazer.ui.ShortcutActivity">
             <extra
                 android:name="action"
                 android:value="sos" />

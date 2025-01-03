@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 @file:Suppress("DEPRECATION")
-package org.traccar.client
+package org.traccar.client.trailblazer.service
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -22,6 +22,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.util.Log
+
+/**
+ * The class NetworkManager manages network-related tasks such as listening for changes in
+ * network connectivity, which could be considered a service-like task in the context of your app.
+ * It's dealing with background tasks and state management, which aligns with the responsibilities
+ * typically handled by services.
+ */
 
 class NetworkManager(private val context: Context, private val handler: NetworkHandler?) : BroadcastReceiver() {
 

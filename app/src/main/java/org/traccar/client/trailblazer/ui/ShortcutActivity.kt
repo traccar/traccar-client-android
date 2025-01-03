@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.traccar.client
+package org.traccar.client.trailblazer.ui
 
 import android.Manifest
 import android.content.Intent
@@ -30,11 +30,21 @@ import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.preference.PreferenceManager
-import org.traccar.client.PositionProvider.PositionListener
-import org.traccar.client.ProtocolFormatter.formatRequest
-import org.traccar.client.RequestManager.RequestHandler
-import org.traccar.client.RequestManager.sendRequestAsync
+import org.traccar.client.Position
+import org.traccar.client.PositionProviderFactory
+import org.traccar.client.R
+import org.traccar.client.trailblazer.service.TrackingService
+import org.traccar.client.trailblazer.service.PositionProvider.PositionListener
+import org.traccar.client.trailblazer.model.ProtocolFormatter.formatRequest
+import org.traccar.client.trailblazer.network.RequestManager.RequestHandler
+import org.traccar.client.trailblazer.network.RequestManager.sendRequestAsync
 
+/**
+ * The ShortcutActivity class is an activity that allows users to perform different actions related
+ * to a shortcut, such as starting and stopping tracking services or sending an SOS alarm.
+ * It listens for shortcut actions, manages UI elements, and sends requests based on user interaction.
+ *
+ */
 class ShortcutActivity : AppCompatActivity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,14 +88,27 @@ class ShortcutActivity : AppCompatActivity() {
     private fun sendAlarm() {
         PositionProviderFactory.create(this, object : PositionListener {
             override fun onPositionUpdate(position: Position) {
-                val preferences = PreferenceManager.getDefaultSharedPreferences(this@ShortcutActivity)
-                val request = formatRequest(preferences.getString(MainFragment.KEY_URL, null)!!, position, ALARM_SOS)
+                val preferences =
+                    PreferenceManager.getDefaultSharedPreferences(this@ShortcutActivity)
+                val request = formatRequest(
+                    preferences.getString(MainFragment.KEY_URL, null)!!,
+                    position,
+                    ALARM_SOS
+                )
                 sendRequestAsync(request, object : RequestHandler {
                     override fun onComplete(success: Boolean) {
                         if (success) {
-                            Toast.makeText(this@ShortcutActivity, R.string.status_send_success, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@ShortcutActivity,
+                                R.string.status_send_success,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         } else {
-                            Toast.makeText(this@ShortcutActivity, R.string.status_send_fail, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@ShortcutActivity,
+                                R.string.status_send_fail,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 })
@@ -106,12 +129,14 @@ class ShortcutActivity : AppCompatActivity() {
         if (action != null) {
             when (action) {
                 ACTION_START -> {
-                    PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean(MainFragment.KEY_STATUS, true).apply()
+                    PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean(
+                        MainFragment.KEY_STATUS, true).apply()
                     ContextCompat.startForegroundService(this, Intent(this, TrackingService::class.java))
                     Toast.makeText(this, R.string.status_service_create, Toast.LENGTH_SHORT).show()
                 }
                 ACTION_STOP -> {
-                    PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean(MainFragment.KEY_STATUS, false).apply()
+                    PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean(
+                        MainFragment.KEY_STATUS, false).apply()
                     stopService(Intent(this, TrackingService::class.java))
                     Toast.makeText(this, R.string.status_service_destroy, Toast.LENGTH_SHORT).show()
                 }
