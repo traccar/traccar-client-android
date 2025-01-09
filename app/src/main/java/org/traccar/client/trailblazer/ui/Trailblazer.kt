@@ -1,6 +1,7 @@
 package org.traccar.client.trailblazer.ui
 
 import android.Manifest
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -13,7 +14,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.animation.LinearInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
@@ -29,30 +32,31 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import com.google.android.material.snackbar.Snackbar
 import org.traccar.client.Position
 import org.traccar.client.PositionProviderFactory
 import org.traccar.client.R
-import org.traccar.client.trailblazer.service.PositionProvider.PositionListener
 import org.traccar.client.trailblazer.model.ProtocolFormatter.formatRequest
 import org.traccar.client.trailblazer.network.RequestManager.RequestHandler
 import org.traccar.client.trailblazer.network.RequestManager.sendRequestAsync
+import org.traccar.client.trailblazer.service.AutostartReceiver
+import org.traccar.client.trailblazer.service.PositionProvider
+import org.traccar.client.trailblazer.service.PositionProvider.PositionListener
+import org.traccar.client.trailblazer.service.TrackingService
 import org.traccar.client.trailblazer.ui.Trailblazer.Server_Details.device_id
 import org.traccar.client.trailblazer.ui.Trailblazer.Server_Details.location_accuracy
 import org.traccar.client.trailblazer.ui.Trailblazer.Server_Details.server_url
-import org.traccar.client.trailblazer.service.AutostartReceiver
-import org.traccar.client.trailblazer.service.PositionProvider
-import org.traccar.client.trailblazer.service.TrackingService
 import org.traccar.client.trailblazer.util.BatteryOptimizationHelper
 
 
 class Trailblazer : AppCompatActivity(), PositionListener {
 
-    private lateinit var connectionStatus: TextView;
+    private lateinit var connectionStatus: TextView
     private lateinit var sosButton: ImageButton
-    private lateinit var deviceId: TextView;
-    private lateinit var clockInImage: ImageView;
-    private lateinit var clockInText: TextView;
-    private lateinit var settingsButton: ImageButton;
+    private lateinit var deviceId: TextView
+    private lateinit var clockInImage: ImageView
+    private lateinit var clockInText: TextView
+    private lateinit var settingsButton: ImageButton
 
     private lateinit var cardView: CardView
     private lateinit var deviceIdText: EditText
@@ -65,6 +69,9 @@ class Trailblazer : AppCompatActivity(), PositionListener {
     private var requestingPermissions: Boolean = false
     private lateinit var positionProvider: PositionProvider // = PositionProviderFactory.create(this, this)
     private val handler = Handler(Looper.getMainLooper())
+    private var isLongPressed = false
+    private var longPressRunnable: Runnable? = null
+    private var pulsateAnimator: ObjectAnimator? = null
 
     private var onlineStatus = false
 
@@ -80,8 +87,45 @@ class Trailblazer : AppCompatActivity(), PositionListener {
         }
 
         setupView()
+        longPressSosButtonSetup()
+
+
+
         setupPreferences()
     }
+
+    private fun longPressSosButtonSetup() {
+        sosButton.setOnTouchListener { view, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    isLongPressed = false // Reset state
+                    longPressRunnable = Runnable {
+                        isLongPressed = true
+                        startPulsatingAnimation(view)
+                    }
+                    handler.postDelayed(longPressRunnable!!, 2000) // 2 seconds delay
+                }
+
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    handler.removeCallbacks(longPressRunnable!!)
+                    if (isLongPressed) {
+                        stopPulsatingAnimation(view)
+                    } else {
+                        // Call performClick for accessibility
+                        view.performClick()
+                    }
+                }
+            }
+            true
+        }
+
+        sosButton.setOnClickListener {
+            // Show Snackbar to guide users to long press
+            Snackbar.make(it, "Please long press for 2s to activate SOS", Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+
 
     private fun setupView() {
         connectionStatus = findViewById<TextView>(R.id.connection_status)
@@ -103,7 +147,7 @@ class Trailblazer : AppCompatActivity(), PositionListener {
         updateConnectionOffline()
     }
 
-    public final fun clockInAndOut(view: View) {
+    fun clockInAndOut(view: View) {
         if (deviceId.text.toString().trim().isNotEmpty() && deviceId.text.toString().trim().isNotBlank()) {
             if (this.onlineStatus) {
                 disconnectUser()
@@ -115,7 +159,28 @@ class Trailblazer : AppCompatActivity(), PositionListener {
         }
     }
 
-    public final fun settingsClicked(view: View) {
+    private fun startPulsatingAnimation(view: View) {
+        pulsateAnimator = ObjectAnimator.ofFloat(view, "scaleX", 1f, 1.2f, 1f).apply {
+            duration = 600
+            interpolator = LinearInterpolator()
+            repeatCount = ObjectAnimator.INFINITE
+            start()
+        }
+        ObjectAnimator.ofFloat(view, "scaleY", 1f, 1.2f, 1f).apply {
+            duration = 600
+            interpolator = LinearInterpolator()
+            repeatCount = ObjectAnimator.INFINITE
+            start()
+        }
+    }
+
+    private fun stopPulsatingAnimation(view: View) {
+        pulsateAnimator?.cancel()
+        view.scaleX = 1f
+        view.scaleY = 1f
+    }
+
+    fun settingsClicked(view: View) {
         disconnectUser()
         showCardView()
     }
@@ -141,12 +206,12 @@ class Trailblazer : AppCompatActivity(), PositionListener {
         cardView.isVisible = true
     }
 
-    public final fun cancelSettingsClicked(view: View) {
+    fun cancelSettingsClicked(view: View) {
         hideKeyboard()
         cardView.isVisible = false
     }
 
-    public final fun saveSettingsClicked(view: View) {
+    fun saveSettingsClicked(view: View) {
         hideKeyboard()
         if (deviceIdText.text.toString().trim().isNotEmpty() && deviceIdText.text.toString().trim().isNotBlank()) {
             sharedPreferences.edit().putString(KEY_DEVICE, deviceIdText.text.toString()).apply()
@@ -202,7 +267,7 @@ class Trailblazer : AppCompatActivity(), PositionListener {
             deviceId.text = sharedPreferences.getString(KEY_DEVICE, "")
         } else {
             sharedPreferences.edit().putString(KEY_DEVICE, "").apply()
-            deviceId.setText("")
+            deviceId.text = ""
         }
 
         device_id = deviceId.text.toString()
@@ -319,8 +384,8 @@ class Trailblazer : AppCompatActivity(), PositionListener {
     }
 
     private fun send(position: Position) {
-        position.deviceId = Server_Details.device_id.replace("\\s".toRegex(), "").uppercase()
-        val serverUrl: String = Server_Details.server_url
+        position.deviceId = device_id.replace("\\s".toRegex(), "").uppercase()
+        val serverUrl: String = server_url
         val request = formatRequest(serverUrl, position)
         Log.d(TAG, "Server:$position")
         sendRequestAsync(request, object : RequestHandler {

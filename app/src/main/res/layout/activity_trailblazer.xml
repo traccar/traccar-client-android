@@ -35,6 +35,7 @@
             <ImageButton
                 android:id="@+id/sos"
                 android:layout_width="60dp"
+                android:padding="@dimen/six_dp"
                 android:layout_height="60dp"
                 android:layout_gravity="end"
                 android:background="@android:color/transparent"

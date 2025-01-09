@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#00542A" /> <!-- Green Color -->
+    <corners android:radius="360dp" /> <!-- Adjust for a perfect circle -->
+</shape>
