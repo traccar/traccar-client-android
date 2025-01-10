@@ -88,9 +88,6 @@ class Trailblazer : AppCompatActivity(), PositionListener {
 
         setupView()
         longPressSosButtonSetup()
-
-
-
         setupPreferences()
     }
 
@@ -103,7 +100,7 @@ class Trailblazer : AppCompatActivity(), PositionListener {
                         isLongPressed = true
                         startPulsatingAnimation(view)
                     }
-                    handler.postDelayed(longPressRunnable!!, 2000) // 2 seconds delay
+                    handler.postDelayed(longPressRunnable!!, 5000) // 5 seconds delay
                 }
 
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
