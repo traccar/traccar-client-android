@@ -64,4 +64,6 @@
     <string name="request_background_option">Allow all the time</string>
     <string name="widget_description">Shows the service status</string>
     <string name="widget_label">Status widget</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

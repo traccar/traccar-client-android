@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/linContent"
         android:orientation="vertical">
 
         <!-- Connection Status Section -->
@@ -103,6 +104,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 tools:ignore="NestedWeights"/>
+
         </LinearLayout>
 
         <!-- Bottom Controls Section -->
@@ -136,6 +138,18 @@
                     android:textColor="@color/white"/>
             </LinearLayout>
 
+            <ImageButton
+                android:id="@+id/btn_Logs"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="@dimen/twelve_dp"
+                android:visibility="gone"
+                android:onClick="settingsClicked"
+                android:src="@drawable/ic_thumb"
+                android:scaleType="fitCenter"
+                android:background="@drawable/round_outline"
+                android:layout_margin="@dimen/eight_dp"
+                tools:ignore="ContentDescription,UsingOnClickInXml"/>
             <!-- Settings Button -->
             <ImageButton
                 android:id="@+id/settings_button"

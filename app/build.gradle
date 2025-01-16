@@ -90,6 +90,7 @@ dependencies {
     implementation 'androidx.activity:activity:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation("androidx.cardview:cardview:1.0.0")
+    implementation 'com.google.firebase:firebase-config-ktx:22.0.1'
     testImplementation 'androidx.test:core:1.6.1'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.7.3'
@@ -98,6 +99,10 @@ dependencies {
     googleImplementation 'com.google.firebase:firebase-crashlytics'
     googleImplementation 'com.google.android.gms:play-services-location:21.3.0'
     googleImplementation 'com.google.android.play:review:2.0.1'
+
+    implementation platform('com.google.firebase:firebase-bom:32.0.0') // Firebase BoM
+    implementation 'com.google.firebase:firebase-analytics-ktx' // Example Firebase service
+
 }
 
 tasks.register('copyFirebaseConfig', Copy) {
