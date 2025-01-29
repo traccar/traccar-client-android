@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -32,6 +33,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import org.traccar.client.Position
 import org.traccar.client.PositionProviderFactory
@@ -74,6 +76,7 @@ class Trailblazer : AppCompatActivity(), PositionListener {
     private var pulsateAnimator: ObjectAnimator? = null
 
     private var onlineStatus = false
+    private var isSosAlarmSent = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,17 +101,18 @@ class Trailblazer : AppCompatActivity(), PositionListener {
                     isLongPressed = false // Reset state
                     longPressRunnable = Runnable {
                         isLongPressed = true
-                        startPulsatingAnimation(view)
+                        sendSosAlarm() // Send SOS alarm after long press
+                        startPulsatingAnimation(view) // Start animation when long pressed
                     }
-                    handler.postDelayed(longPressRunnable!!, 5000) // 5 seconds delay
+                    handler.postDelayed(longPressRunnable!!, 2000) // 2 seconds delay
                 }
 
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     handler.removeCallbacks(longPressRunnable!!)
                     if (isLongPressed) {
-                        stopPulsatingAnimation(view)
+                        stopPulsatingAnimation(view) // Stop animation if long pressed
                     } else {
-                        // Call performClick for accessibility
+                        // Handle regular click
                         view.performClick()
                     }
                 }
@@ -116,11 +120,112 @@ class Trailblazer : AppCompatActivity(), PositionListener {
             true
         }
 
+
         sosButton.setOnClickListener {
-            // Show Snackbar to guide users to long press
-            Snackbar.make(it, "Please long press for 2s to activate SOS", Snackbar.LENGTH_SHORT).show()
+            if (!isLongPressed) {
+                Snackbar.make(it, "Please long press for 2s to activate SOS", Snackbar.LENGTH_SHORT).show()
+                stopPulsatingAnimation(sosButton)
+            }
         }
     }
+
+
+
+    private fun sendSosAlarm() {
+        Log.d(TAG, "sendSosAlarm() called")
+
+        //  Check if location permission is granted
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.e(TAG, "Location permission is missing!")
+            Toast.makeText(this, "Location permission is required", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        //  Check if GPS is enabled
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+        if (!isGpsEnabled) {
+            Log.e(TAG, "GPS is disabled!")
+            Toast.makeText(this, "Please enable GPS", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
+
+        // 🔹 Create the PositionProvider
+        val positionProvider = PositionProviderFactory.create(this, object : PositionListener {
+            override fun onPositionUpdate(position: Position) {
+                Log.d(TAG, "Position update received: $position")
+
+                val preferences = PreferenceManager.getDefaultSharedPreferences(this@Trailblazer)
+                val url = preferences.getString(MainFragment.KEY_URL, null)
+
+                if (url.isNullOrEmpty()) {
+                    Log.e(TAG, "SOS Alarm failed: URL is null or empty")
+                    Toast.makeText(this@Trailblazer, "SOS URL is missing", Toast.LENGTH_SHORT).show()
+                    return
+                }
+
+                Log.e(TAG, "URL: $url")
+
+                position.deviceId = device_id.replace("\\s".toRegex(), "").uppercase()
+
+                val request = formatRequest(url, position, "sos")
+                Log.d(TAG, "Formatted request: $request")
+
+                sendRequestAsync(request, object : RequestHandler {
+                    override fun onComplete(success: Boolean) {
+                        runOnUiThread {
+                            if (success) {
+                                Log.d(TAG, "SOS alarm sent successfully")
+                                showSuccessModal()
+                                startPulsatingAnimation(sosButton)
+                            } else {
+                                Log.e(TAG, "SOS alarm failed to send")
+                                Toast.makeText(this@Trailblazer, "SOS alarm failed to send", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                })
+            }
+
+            override fun onPositionError(error: Throwable) {
+                Log.e(TAG, "Position update failed: ${error.message}")
+                //Toast.makeText(this@Trailblazer, "Failed to get location: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        // 🔹 If the provider is null, log error
+        if (positionProvider == null) {
+            Log.e(TAG, "PositionProviderFactory.create() returned null")
+            Toast.makeText(this, "Failed to initialize position provider", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // 🔹 Start Position Updates
+        positionProvider.startUpdates()
+        Log.d(TAG, "Position updates started")
+
+
+        // 🔹 Set a timeout in case position update never arrives
+        Handler(Looper.getMainLooper()).postDelayed({
+            Log.e(TAG, "Position update timeout! Something went wrong.")
+            Toast.makeText(this, "Failed to get location. Try again.", Toast.LENGTH_SHORT).show()
+        }, 10000) // 10 seconds timeout
+    }
+
+
+
+
+    private fun showSuccessModal() {
+        AlertDialog.Builder(this)
+            .setTitle("SOS Alert")
+            .setMessage("SOS alarm has been sent successfully")
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+
 
 
 
