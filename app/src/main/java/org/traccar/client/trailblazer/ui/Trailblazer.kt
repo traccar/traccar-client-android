@@ -1,10 +1,12 @@
 package org.traccar.client.trailblazer.ui
 
 import android.Manifest
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,6 +16,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -73,10 +77,9 @@ class Trailblazer : AppCompatActivity(), PositionListener {
     private val handler = Handler(Looper.getMainLooper())
     private var isLongPressed = false
     private var longPressRunnable: Runnable? = null
-    private var pulsateAnimator: ObjectAnimator? = null
+    private var pulsateAnimator: AnimatorSet? = null
 
     private var onlineStatus = false
-    private var isSosAlarmSent = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,14 +98,23 @@ class Trailblazer : AppCompatActivity(), PositionListener {
     }
 
     private fun longPressSosButtonSetup() {
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
         sosButton.setOnTouchListener { view, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     isLongPressed = false // Reset state
                     longPressRunnable = Runnable {
                         isLongPressed = true
-                        sendSosAlarm() // Send SOS alarm after long press
+                        sendAlarm() // Send SOS alarm after long press
                         startPulsatingAnimation(view) // Start animation when long pressed
+
+                        // Add vibration
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
+                        } else {
+                            vibrator.vibrate(500) // Fallback for older devices
+                        }
                     }
                     handler.postDelayed(longPressRunnable!!, 2000) // 2 seconds delay
                 }
@@ -120,102 +132,69 @@ class Trailblazer : AppCompatActivity(), PositionListener {
             true
         }
 
-
         sosButton.setOnClickListener {
+            stopPulsatingAnimation(sosButton)
             if (!isLongPressed) {
-                Snackbar.make(it, "Please long press for 2s to activate SOS", Snackbar.LENGTH_SHORT).show()
-                stopPulsatingAnimation(sosButton)
+                Toast.makeText(
+                    this@Trailblazer,
+                    "Please long press for 2s to Activate SOS",
+                    Toast.LENGTH_SHORT
+                ).show()
+
             }
         }
     }
 
 
 
-    private fun sendSosAlarm() {
-        Log.d(TAG, "sendSosAlarm() called")
-
-        //  Check if location permission is granted
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.e(TAG, "Location permission is missing!")
-            Toast.makeText(this, "Location permission is required", Toast.LENGTH_SHORT).show()
-            return
+    private fun sendAlarm() {
+        val progressDialog = ProgressDialog(this@Trailblazer).apply {
+            setMessage("Sending SOS...")
+            setCancelable(false)
+            show()
         }
-
-        //  Check if GPS is enabled
-        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-
-        if (!isGpsEnabled) {
-            Log.e(TAG, "GPS is disabled!")
-            Toast.makeText(this, "Please enable GPS", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-
-
-        // 🔹 Create the PositionProvider
-        val positionProvider = PositionProviderFactory.create(this, object : PositionListener {
+        Toast.makeText(
+            this@Trailblazer,
+            "Now sending SOS to the team...",
+            Toast.LENGTH_SHORT
+        ).show()
+        //stopPulsatingAnimation(sosButton)
+        PositionProviderFactory.create(this, object : PositionListener {
             override fun onPositionUpdate(position: Position) {
-                Log.d(TAG, "Position update received: $position")
-
-                val preferences = PreferenceManager.getDefaultSharedPreferences(this@Trailblazer)
-                val url = preferences.getString(MainFragment.KEY_URL, null)
-
-                if (url.isNullOrEmpty()) {
-                    Log.e(TAG, "SOS Alarm failed: URL is null or empty")
-                    Toast.makeText(this@Trailblazer, "SOS URL is missing", Toast.LENGTH_SHORT).show()
-                    return
-                }
-
-                Log.e(TAG, "URL: $url")
+                val preferences =
+                    PreferenceManager.getDefaultSharedPreferences(this@Trailblazer)
 
                 position.deviceId = device_id.replace("\\s".toRegex(), "").uppercase()
 
-                val request = formatRequest(url, position, "sos")
-                Log.d(TAG, "Formatted request: $request")
 
+
+                val request = formatRequest(
+                    preferences.getString(MainFragment.KEY_URL, null)!!,
+                    position,
+                    ShortcutActivity.ALARM_SOS
+                )
                 sendRequestAsync(request, object : RequestHandler {
                     override fun onComplete(success: Boolean) {
-                        runOnUiThread {
-                            if (success) {
-                                Log.d(TAG, "SOS alarm sent successfully")
-                                showSuccessModal()
-                                startPulsatingAnimation(sosButton)
-                            } else {
-                                Log.e(TAG, "SOS alarm failed to send")
-                                Toast.makeText(this@Trailblazer, "SOS alarm failed to send", Toast.LENGTH_SHORT).show()
-                            }
+                        progressDialog.dismiss()
+                        if (success) {
+                            showSuccessModal()
+                        } else {
+                            Toast.makeText(
+                                this@Trailblazer,
+                                R.string.status_send_fail,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 })
             }
 
             override fun onPositionError(error: Throwable) {
-                Log.e(TAG, "Position update failed: ${error.message}")
-                //Toast.makeText(this@Trailblazer, "Failed to get location: ${error.message}", Toast.LENGTH_SHORT).show()
+                progressDialog.dismiss()
+                Toast.makeText(this@Trailblazer, error.message, Toast.LENGTH_LONG).show()
             }
-        })
-
-        // 🔹 If the provider is null, log error
-        if (positionProvider == null) {
-            Log.e(TAG, "PositionProviderFactory.create() returned null")
-            Toast.makeText(this, "Failed to initialize position provider", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        // 🔹 Start Position Updates
-        positionProvider.startUpdates()
-        Log.d(TAG, "Position updates started")
-
-
-        // 🔹 Set a timeout in case position update never arrives
-        Handler(Looper.getMainLooper()).postDelayed({
-            Log.e(TAG, "Position update timeout! Something went wrong.")
-            Toast.makeText(this, "Failed to get location. Try again.", Toast.LENGTH_SHORT).show()
-        }, 10000) // 10 seconds timeout
+        }).requestSingleLocation()
     }
-
-
 
 
     private fun showSuccessModal() {
@@ -225,8 +204,6 @@ class Trailblazer : AppCompatActivity(), PositionListener {
             .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
     }
-
-
 
 
     private fun setupView() {
@@ -262,28 +239,35 @@ class Trailblazer : AppCompatActivity(), PositionListener {
     }
 
     private fun startPulsatingAnimation(view: View) {
-        pulsateAnimator = ObjectAnimator.ofFloat(view, "scaleX", 1f, 1.2f, 1f).apply {
+        val scaleXAnimator = ObjectAnimator.ofFloat(view, "scaleX", 1f, 1.2f, 1f).apply {
             duration = 600
             interpolator = LinearInterpolator()
             repeatCount = ObjectAnimator.INFINITE
-            start()
         }
-        ObjectAnimator.ofFloat(view, "scaleY", 1f, 1.2f, 1f).apply {
+
+        val scaleYAnimator = ObjectAnimator.ofFloat(view, "scaleY", 1f, 1.2f, 1f).apply {
             duration = 600
             interpolator = LinearInterpolator()
             repeatCount = ObjectAnimator.INFINITE
+        }
+
+        pulsateAnimator = AnimatorSet().apply {
+            playTogether(scaleXAnimator, scaleYAnimator)
             start()
         }
     }
 
     private fun stopPulsatingAnimation(view: View) {
-        pulsateAnimator?.cancel()
-        view.scaleX = 1f
+        pulsateAnimator?.end()  // Stop and remove all running animations
+        pulsateAnimator = null  // Clear reference
+
+        view.scaleX = 1f  // Reset to normal
         view.scaleY = 1f
     }
 
+
     fun settingsClicked(view: View) {
-        disconnectUser()
+        //disconnectUser()
         showCardView()
     }
 

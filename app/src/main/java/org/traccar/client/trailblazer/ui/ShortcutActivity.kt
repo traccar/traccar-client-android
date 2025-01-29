@@ -158,6 +158,6 @@ class ShortcutActivity : AppCompatActivity() {
         const val ACTION_START = "start"
         const val ACTION_STOP = "stop"
         const val ACTION_SOS = "sos"
-        private const val ALARM_SOS = "sos"
+        public const val ALARM_SOS = "sos"
     }
 }

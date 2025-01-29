@@ -31,30 +31,38 @@ import java.net.URL
  */
 object RequestManager {
 
-    private const val TIMEOUT = 5 * 1000
+    private const val TIMEOUT = 10 * 1000
 
     fun sendRequest(request: String?): Boolean {
         var inputStream: InputStream? = null
         return try {
+            Log.d("RequestManager", "Sending request to: $request")
             val url = URL(request)
             val connection = url.openConnection() as HttpURLConnection
             connection.readTimeout = TIMEOUT
             connection.connectTimeout = TIMEOUT
             connection.requestMethod = "POST"
             connection.connect()
+
+            Log.d("RequestManager", "Connection established, waiting for response...")
             inputStream = connection.inputStream
             while (inputStream.read() != -1) {}
+
+            Log.d("RequestManager", "Request sent successfully")
             true
         } catch (error: IOException) {
+            Log.e("RequestManager", "IOException occurred: ${error.message}")
             false
         } finally {
             try {
                 inputStream?.close()
+                Log.d("RequestManager", "InputStream closed successfully")
             } catch (secondError: IOException) {
-                Log.w(RequestManager::class.java.simpleName, secondError)
+                Log.w("RequestManager", "Error closing InputStream: ${secondError.message}")
             }
         }
     }
+
 
     fun sendRequestAsync(request: String, handler: RequestHandler) {
         RequestAsyncTask(handler).execute(request)
