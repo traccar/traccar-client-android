@@ -11,8 +11,8 @@ android {
         applicationId 'org.traccar.client'
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 89
-        versionName '7.8'
+        versionCode 90
+        versionName '7.9'
         multiDexEnabled true
     }
     namespace 'org.traccar.client'
