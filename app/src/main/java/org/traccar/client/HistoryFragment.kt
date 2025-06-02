@@ -30,7 +30,7 @@ class HistoryFragment : Fragment() {
         recyclerView.adapter = adapter
 
         val db = DatabaseHelper(requireContext())
-        db.selectAllFormSubmissionsAsync(object : DatabaseHelper.DatabaseHandler<List<FormSubmission>> {
+        db.selectAllFormSubmissionsAsync(object : DatabaseHelper.DatabaseHandler<List<FormSubmission>?> {
             override fun onComplete(success: Boolean, result: List<FormSubmission>?) {
                 if (success && result != null) {
                     activity?.runOnUiThread { adapter.submitList(result) }

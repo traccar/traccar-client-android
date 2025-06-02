@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceManager
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpException
+import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +32,22 @@ interface ApiService {
 }
 
 data class LoginRequest(val username: String, val password: String)
-data class LoginResponse(val deviceId: String)
+data class LoginResponse(
+    @SerializedName("data") val data: UserData?,
+    @SerializedName("message") val message: String,
+    @SerializedName("requiresPasswordChange") val requiresPasswordChange: Boolean? = null,
+    @SerializedName("status") val status: Int? = null,
+    @SerializedName("error") val error: Any? = null,
+    @SerializedName("stack") val stack: String? = null
+)
+
+data class UserData(
+    @SerializedName("id") val id: Long,
+    @SerializedName("phone") val phone: String?,
+    @SerializedName("firstName") val firstName: String?,
+    @SerializedName("lastName") val lastName: String?,
+    @SerializedName("password") val password: String?
+)
 
 class LoginActivity : AppCompatActivity() {
     private val retrofit = Retrofit.Builder()
@@ -42,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val usernameInput = findViewById<EditText>(R.id.username)
+        val usernameInput = findViewById<EditText>(R.id.phone)
         val passwordInput = findViewById<EditText>(R.id.password)
         val loginButton = findViewById<Button>(R.id.login_button)
 
@@ -58,11 +76,44 @@ class LoginActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
                         val response = apiService.login(LoginRequest(username, password))
-                        PreferenceManager.getDefaultSharedPreferences(this@LoginActivity).edit()
-                            .putString(MainFragment.KEY_DEVICE, response.deviceId)
-                            .apply()
-                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                        finish()
+                        if (response.data != null) {
+                            val userData = response.data
+                            val user = User(
+                                id = userData.id,
+                                phone = userData.phone,
+                                firstName = userData.firstName,
+                                lastName = userData.lastName,
+                                password = userData.password
+                            )
+                            // Save to database
+                            val db = DatabaseHelper(this@LoginActivity)
+                            db.insertUserAsync(user, object : DatabaseHelper.DatabaseHandler<Unit?> {
+                                override fun onComplete(success: Boolean, result: Unit?) {
+                                    if (success) {
+                                        // Save device ID to SharedPreferences
+                                        PreferenceManager.getDefaultSharedPreferences(this@LoginActivity).edit()
+                                            .putString(MainFragment.KEY_DEVICE, user.id.toString())
+                                            .apply()
+                                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                                        finish()
+                                    } else {
+                                        runOnUiThread {
+                                            Toast.makeText(this@LoginActivity, "Failed to save user data", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                }
+                            })
+                        } else {
+                            runOnUiThread {
+                                Toast.makeText(this@LoginActivity, "Login failed: ${response.message}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } catch (e: HttpException) {
+//                        val errorBody = e.response()?.errorBody()?.string()
+//                        val errorResponse = errorBody?.let { Gson().fromJson(it, ErrorResponse::class.java) }
+                        runOnUiThread {
+                            Toast.makeText(this@LoginActivity, "Incorrect Credentials", Toast.LENGTH_SHORT).show()
+                        }
                     } catch (e: Exception) {
                         runOnUiThread {
                             Toast.makeText(this@LoginActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()

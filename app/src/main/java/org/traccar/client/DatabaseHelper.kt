@@ -33,6 +33,14 @@ data class FormSubmission(
     val timestamp: Long
 )
 
+data class User(
+    val id: Long,
+    val phone: String?,
+    val firstName: String?,
+    val lastName: String?,
+    val password: String?
+)
+
 
 class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -86,17 +94,27 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
                     "deviceId TEXT," +
                     "timestamp INTEGER)"
         )
+        db.execSQL(
+            "CREATE TABLE user (" +
+                    "id INTEGER PRIMARY KEY," +
+                    "phone TEXT," +
+                    "firstName TEXT," +
+                    "lastName TEXT," +
+                    "password TEXT)"
+        )
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS position;")
         db.execSQL("DROP TABLE IF EXISTS form_submissions;")
+        db.execSQL("DROP TABLE IF EXISTS user;")
         onCreate(db)
     }
 
     override fun onDowngrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS position;")
         db.execSQL("DROP TABLE IF EXISTS form_submissions;")
+        db.execSQL("DROP TABLE IF EXISTS user;")
         onCreate(db)
     }
 
@@ -206,7 +224,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         return submissions
     }
 
-    fun selectAllFormSubmissionsAsync(handler: DatabaseHandler<List<FormSubmission>>) {
+    fun selectAllFormSubmissionsAsync(handler: DatabaseHandler<List<FormSubmission>?>) {
         object : DatabaseAsyncTask<List<FormSubmission>>(handler) {
             override fun executeMethod(): List<FormSubmission> {
                 return selectAllFormSubmissions()
@@ -228,6 +246,51 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         }.execute()
     }
 
+
+    // User methods
+    fun insertUser(user: User) {
+        val values = ContentValues()
+        values.put("id", user.id)
+        values.put("phone", user.phone)
+        values.put("firstName", user.firstName)
+        values.put("lastName", user.lastName)
+        values.put("password", user.password)
+        db.insertOrThrow("user", null, values)
+    }
+
+    fun insertUserAsync(user: User, handler: DatabaseHandler<Unit?>) {
+        object : DatabaseAsyncTask<Unit?>(handler) {
+            override fun executeMethod(): Unit? {
+                insertUser(user)
+                return null
+            }
+        }.execute()
+    }
+
+    @SuppressLint("Range")
+    fun selectUser(): User? {
+        db.rawQuery("SELECT * FROM user LIMIT 1", null).use { cursor ->
+            if (cursor.count > 0) {
+                cursor.moveToFirst()
+                return User(
+                    id = cursor.getLong(cursor.getColumnIndex("id")),
+                    phone = cursor.getString(cursor.getColumnIndex("phone")),
+                    firstName = cursor.getString(cursor.getColumnIndex("firstName")),
+                    lastName = cursor.getString(cursor.getColumnIndex("lastName")),
+                    password = cursor.getString(cursor.getColumnIndex("password"))
+                )
+            }
+        }
+        return null
+    }
+
+    fun selectUserAsync(handler: DatabaseHandler<User?>) {
+        object : DatabaseAsyncTask<User?>(handler) {
+            override fun executeMethod(): User? {
+                return selectUser()
+            }
+        }.execute()
+    }
 
     companion object {
         const val DATABASE_VERSION = 4
